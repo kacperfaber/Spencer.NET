@@ -4,8 +4,11 @@ namespace Odie.Engine
 {
     public class Model
     {
+        public Model()
+        {
+            Properties = new List<Property>();
+        }
         
-        
-        public List<Property> Properties { get; set; } = null; // TODO
+        public List<Property> Properties { get; set; }
     }
 }

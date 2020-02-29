@@ -2,7 +2,7 @@
 {
     public class ModelBuilder : Builder<Model, ModelBuilder>
     {
-        public ModelBuilder(Model o) : base(o)
+        public ModelBuilder(Model o = default) : base(o)
         {
         }
 

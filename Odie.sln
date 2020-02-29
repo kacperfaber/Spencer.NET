@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odie.Engine", "odie.engine\Odie.Engine.csproj", "{C96100DB-A5F3-48E0-A8CA-EFD2434A58C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odie.Engine.Tests", "odie.engine.tests\Odie.Engine.Tests.csproj", "{CFDE5721-F3F6-4992-864E-335C27004DAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{C96100DB-A5F3-48E0-A8CA-EFD2434A58C7}.Release|x64.Build.0 = Release|Any CPU
 		{C96100DB-A5F3-48E0-A8CA-EFD2434A58C7}.Release|x86.ActiveCfg = Release|Any CPU
 		{C96100DB-A5F3-48E0-A8CA-EFD2434A58C7}.Release|x86.Build.0 = Release|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Debug|x64.Build.0 = Debug|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Debug|x86.Build.0 = Debug|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Release|x64.ActiveCfg = Release|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Release|x64.Build.0 = Release|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Release|x86.ActiveCfg = Release|Any CPU
+		{CFDE5721-F3F6-4992-864E-335C27004DAC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
