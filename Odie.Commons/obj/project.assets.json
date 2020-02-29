@@ -25,16 +25,6 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
-      },
-      "Odie.Commons/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "compile": {
-          "bin/placeholder/Odie.Commons.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Odie.Commons.dll": {}
-        }
       }
     }
   },
@@ -182,17 +172,11 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
-    },
-    "Odie.Commons/1.0.0": {
-      "type": "project",
-      "path": "../Odie.commons/Odie.Commons.csproj",
-      "msbuildProject": "../Odie.commons/Odie.Commons.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "NETStandard.Library >= 2.0.3",
-      "Odie.Commons >= 1.0.0"
+      "NETStandard.Library >= 2.0.3"
     ]
   },
   "packageFolders": {
@@ -203,11 +187,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.engine\\Odie.Engine.csproj",
-      "projectName": "Odie.Engine",
-      "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.engine\\Odie.Engine.csproj",
+      "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj",
+      "projectName": "Odie.Commons",
+      "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj",
       "packagesPath": "C:\\Users\\Kacpii\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.engine\\obj\\",
+      "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet",
@@ -228,11 +212,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {
-            "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj": {
-              "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

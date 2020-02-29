@@ -8,8 +8,13 @@ namespace Odie.Engine
         
         public Type ExceptedType { get; set; }
 
-        public IFieldGenerator FieldGenerator { get; set; }
+        public IValueGenerator ValueGenerator { get; set; }
+        
+        public Type ValueGeneratorType { get; set; }
 
-        public GeneratorParameters GeneratorParameters { get; set; }
+        public object Parameters { get; set; }
+
+        public Type ParametersType { get; set; }
+        
     }
 }

@@ -8,4 +8,8 @@
     <Folder Include="Types" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Odie.commons\Odie.Commons.csproj" />
+  </ItemGroup>
+
 </Project>
