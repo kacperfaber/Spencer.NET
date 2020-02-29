@@ -6,3 +6,6 @@ C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.As
 C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.AssemblyInfo.cs
 C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.dll
 C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.pdb
+C:\Users\Kacpii\Desktop\Odie\odie.engine\bin\Debug\netstandard2.0\Odie.Commons.dll
+C:\Users\Kacpii\Desktop\Odie\odie.engine\bin\Debug\netstandard2.0\Odie.Commons.pdb
+C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.csproj.CopyComplete

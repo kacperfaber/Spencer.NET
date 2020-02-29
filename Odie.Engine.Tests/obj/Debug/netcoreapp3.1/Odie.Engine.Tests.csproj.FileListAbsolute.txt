@@ -94,3 +94,5 @@ C:\Users\Kacpii\Desktop\Odie\odie.engine.tests\obj\Debug\netcoreapp3.1\Odie.Engi
 C:\Users\Kacpii\Desktop\Odie\odie.engine.tests\obj\Debug\netcoreapp3.1\Odie.Engine.Tests.csproj.CopyComplete
 C:\Users\Kacpii\Desktop\Odie\odie.engine.tests\obj\Debug\netcoreapp3.1\Odie.Engine.Tests.dll
 C:\Users\Kacpii\Desktop\Odie\odie.engine.tests\obj\Debug\netcoreapp3.1\Odie.Engine.Tests.pdb
+C:\Users\Kacpii\Desktop\Odie\odie.engine.tests\bin\Debug\netcoreapp3.1\Odie.Commons.dll
+C:\Users\Kacpii\Desktop\Odie\odie.engine.tests\bin\Debug\netcoreapp3.1\Odie.Commons.pdb
