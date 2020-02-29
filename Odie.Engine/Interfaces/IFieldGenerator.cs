@@ -2,7 +2,7 @@
 
 namespace Odie.Engine
 {
-    public interface IGenerator
+    public interface IFieldGenerator
     {
         Field Generate(Property property);
     }

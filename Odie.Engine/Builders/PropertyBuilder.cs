@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Odie.Engine.Builders
+namespace Odie.Engine
 {
     public class PropertyBuilder : Builder<Property, PropertyBuilder>
     {
@@ -13,9 +13,9 @@ namespace Odie.Engine.Builders
             return Update(x => x.Name = name);
         }
 
-        public PropertyBuilder AddGenerator(IGenerator generator)
+        public PropertyBuilder AddGenerator(IFieldGenerator fieldGenerator)
         {
-            return Update(x => x.Generator = generator);
+            return Update(x => x.FieldGenerator = fieldGenerator);
         }
 
         public PropertyBuilder AddExceptedType(Type type)

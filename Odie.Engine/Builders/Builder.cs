@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Odie.Engine.Builders
+namespace Odie.Engine
 {
     public class Builder <TOut, TBuilder>
     {
