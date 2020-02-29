@@ -1,0 +1,27 @@
+﻿using System;
+using Odie.Commons;
+
+namespace Odie.Engine
+{
+    public class IntegerGenerator : IValueGenerator
+    {
+        public ITypeChanger TypeChanger;
+        public IRandomGenerator RandomGenerator;
+
+        public IntegerGenerator(IRandomGenerator randomGenerator, ITypeChanger typeChanger)
+        {
+            RandomGenerator = randomGenerator;
+            TypeChanger = typeChanger;
+        }
+
+        public object Generate(object parameters, Type parametersType, Type exceptedType, ref Type valueType)
+        {
+            IntegerParameters @params = TypeChanger.ChangeType<IntegerParameters>(parameters);
+
+            int result = RandomGenerator.GenerateInt(@params.Min, @params.Max);
+            valueType = result.GetType();
+
+            return result;
+        }
+    }
+}

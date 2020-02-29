@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Odie.Engine.Builders
+namespace Odie.Engine
 {
     public class PropertyBuilder : Builder<Property, PropertyBuilder>
     {
@@ -13,9 +13,28 @@ namespace Odie.Engine.Builders
             return Update(x => x.Name = name);
         }
 
-        public PropertyBuilder AddGenerator(IGenerator generator)
+        public PropertyBuilder AddValueGeneratorWithType(IValueGenerator valueGenerator)
         {
-            return Update(x => x.Generator = generator);
+            return Update(x =>
+            {
+                x.ValueGenerator = valueGenerator;
+                x.ValueGeneratorType = valueGenerator.GetType();
+            });
+        }
+
+        public PropertyBuilder AddValueGenerator(IValueGenerator valueGenerator)
+        {
+            return Update(x => x.ValueGenerator = valueGenerator);
+        }
+
+        public PropertyBuilder AddValueGeneratorType(Type type)
+        {
+            return Update(x => x.ValueGeneratorType = type);
+        }
+
+        public PropertyBuilder AddValueGeneratorType<T>()
+        {
+            return Update(x => x.ValueGeneratorType = typeof(T));
         }
 
         public PropertyBuilder AddExceptedType(Type type)
@@ -28,9 +47,28 @@ namespace Odie.Engine.Builders
             return Update(x => x.ExceptedType = typeof(T));
         }
 
-        public PropertyBuilder AddGeneratorParameters(GeneratorParameters parameters)
+        public PropertyBuilder AddParametersWithType(object parameters)
         {
-            return Update(x => x.GeneratorParameters = parameters);
+            return Update(x =>
+            {
+                x.Parameters = parameters;
+                x.ParametersType = parameters.GetType();
+            });
+        }
+
+        public PropertyBuilder AddParameters(object parameters)
+        {
+            return Update(x => x.Parameters = parameters);
+        }
+
+        public PropertyBuilder AddParametersType(Type type)
+        {
+            return Update(x => x.ParametersType = type);
+        }
+        
+        public PropertyBuilder AddParametersType<T>()
+        {
+            return Update(x => x.ParametersType = typeof(T));
         }
     }
 }

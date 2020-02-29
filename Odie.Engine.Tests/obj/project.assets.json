@@ -1226,9 +1226,22 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
+      "Odie.Commons/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Odie.Commons.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Odie.Commons.dll": {}
+        }
+      },
       "Odie.Engine/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Odie.Commons": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Odie.Engine.dll": {}
         },
@@ -4616,6 +4629,11 @@
         "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xmldocument.nuspec"
       ]
+    },
+    "Odie.Commons/1.0.0": {
+      "type": "project",
+      "path": "../Odie.commons/Odie.Commons.csproj",
+      "msbuildProject": "../Odie.commons/Odie.Commons.csproj"
     },
     "Odie.Engine/1.0.0": {
       "type": "project",

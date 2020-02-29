@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Types" />
+    <ProjectReference Include="..\Odie.commons\Odie.Commons.csproj" />
   </ItemGroup>
 
 </Project>

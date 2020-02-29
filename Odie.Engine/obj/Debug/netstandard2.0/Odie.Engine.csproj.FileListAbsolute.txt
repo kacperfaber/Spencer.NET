@@ -1,8 +1,0 @@
-C:\Users\Kacpii\Desktop\Odie\odie.engine\bin\Debug\netstandard2.0\Odie.Engine.deps.json
-C:\Users\Kacpii\Desktop\Odie\odie.engine\bin\Debug\netstandard2.0\Odie.Engine.dll
-C:\Users\Kacpii\Desktop\Odie\odie.engine\bin\Debug\netstandard2.0\Odie.Engine.pdb
-C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.csprojAssemblyReference.cache
-C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.AssemblyInfoInputs.cache
-C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.AssemblyInfo.cs
-C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.dll
-C:\Users\Kacpii\Desktop\Odie\odie.engine\obj\Debug\netstandard2.0\Odie.Engine.pdb

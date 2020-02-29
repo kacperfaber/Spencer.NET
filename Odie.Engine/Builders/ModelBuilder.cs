@@ -1,4 +1,4 @@
-﻿namespace Odie.Engine.Builders
+﻿namespace Odie.Engine
 {
     public class ModelBuilder : Builder<Model, ModelBuilder>
     {
