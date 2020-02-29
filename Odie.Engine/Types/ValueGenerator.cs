@@ -13,7 +13,7 @@ namespace Odie.Engine
             Extensions = new List<ValueGeneratorExtension>();
         }
 
-        public object Generate(object parameters, Type parametersType, Type exceptedType, ref Type valueType)
+        public object Generate(object parameters, Type parametersType, Type exceptedType, out Type valueType)
         {
             ValueGeneratorExtension ext = Extensions.SingleOrDefault(x => x.ActivationType == exceptedType);
 
