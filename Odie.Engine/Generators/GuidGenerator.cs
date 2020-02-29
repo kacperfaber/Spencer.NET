@@ -2,23 +2,21 @@
 
 namespace Odie.Engine
 {
-    public class GuidGenerator : IValueGenerator
+    public class GuidGenerator : ValueGenerator
     {
-        public object Generate(object parameters, Type parametersType, Type exceptedType, ref Type valueType)
+        public GuidGenerator()
         {
-            if (exceptedType == typeof(Guid))
+            Extensions.Add(new ValueGeneratorExtension()
             {
-                valueType = typeof(Guid);
-                return Guid.NewGuid();
-            }
-
-            else if (exceptedType == typeof(string))
-            {
-                valueType = typeof(string);
-                return Guid.NewGuid().ToString();
-            }
+                Function = (parameters, type) => Guid.NewGuid().ToString(),
+                ActivationType = typeof(string)
+            });
             
-            throw new ArgumentException($"{GetType().Name} supports output type: {typeof(Guid)}, {typeof(string)}");
+            Extensions.Add(new ValueGeneratorExtension()
+            {
+                Function = (parameters, type) => Guid.NewGuid(),
+                ActivationType = typeof(Guid)
+            });
         }
     }
 }
