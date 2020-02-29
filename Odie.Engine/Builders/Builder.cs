@@ -27,6 +27,11 @@ namespace Odie.Engine
 
             return NewBuilder(Object);
         }
+
+        public TBuilder Clear()
+        {
+            return NewBuilder(NewOut());
+        }
         
         public TOut Build()
         {

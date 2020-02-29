@@ -1,7 +1,12 @@
-﻿namespace Odie.Engine
+﻿using System;
+using System.Collections.Generic;
+
+namespace Odie.Engine
 {
     public class ModelBuilder : Builder<Model, ModelBuilder>
     {
+        public IPropertiesGenerator PropertiesGenerator;
+        
         public ModelBuilder(Model o = default) : base(o)
         {
         }
@@ -13,6 +18,13 @@
 
         public ModelBuilder AddProperties(params Property[] properties)
         {
+            return Update(x => x.Properties.AddRange(properties));
+        }
+
+        public ModelBuilder LoadClass<T>() where T : class
+        {
+            IEnumerable<Property> properties = PropertiesGenerator.GenerateProperties(typeof(T));
+
             return Update(x => x.Properties.AddRange(properties));
         }
     }

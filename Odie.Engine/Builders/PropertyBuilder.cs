@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Reflection;
 
 namespace Odie.Engine
 {
-    public class PropertyBuilder : Builder<Property, PropertyBuilder>
+    public class PropertyBuilder : Builder<Property, PropertyBuilder>, IDisposable
     {
+        public IDefaultValueGeneratorsProvider ValueGeneratorsProvider;
+        
         public PropertyBuilder(Property o = default) : base(o)
         {
         }
@@ -65,10 +68,30 @@ namespace Odie.Engine
         {
             return Update(x => x.ParametersType = type);
         }
-        
+
         public PropertyBuilder AddParametersType<T>()
         {
             return Update(x => x.ParametersType = typeof(T));
+        }
+
+        public PropertyBuilder LoadFrom(PropertyInfo propertyInfo)
+        {
+            // NEED TO ADD ARGUMENTS ATTR HERE .::. TODO
+            
+            Type exceptedType = propertyInfo.PropertyType;
+            IValueGenerator valueGenerator = ValueGeneratorsProvider.ProvideGenerator(exceptedType);
+
+            return Update(x =>
+            {
+                x.Name = propertyInfo.Name;
+                x.ExceptedType = exceptedType;
+                x.ValueGenerator = valueGenerator;
+                x.ValueGeneratorType = valueGenerator.GetType();
+            });
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
