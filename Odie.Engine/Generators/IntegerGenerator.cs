@@ -14,11 +14,14 @@ namespace Odie.Engine
             TypeChanger = typeChanger;
         }
 
-        public object Generate(object parameters, Type parametersType, Type exceptedType)
+        public object Generate(object parameters, Type parametersType, Type exceptedType, ref Type valueType)
         {
             IntegerParameters @params = TypeChanger.ChangeType<IntegerParameters>(parameters);
 
-            return RandomGenerator.GenerateInt(@params.Min, @params.Max);
+            int result = RandomGenerator.GenerateInt(@params.Min, @params.Max);
+            valueType = result.GetType();
+
+            return result;
         }
     }
 }
