@@ -8,24 +8,11 @@ namespace Odie.Engine
     public class PropertiesGenerator : IPropertiesGenerator
     {
         public IPropertyInfosGetter PropertyInfosGetter;
-        public IPropertyInfosFilter PropertyInfosFilter;
+        public object PropertyInfosFilter;
 
-        public IEnumerable<Property> GenerateProperties(Type type)
+        public IEnumerable<Property> GenerateProperties(IEnumerable<ReflectionField> fields)
         {
-            using (PropertyBuilder builder = new PropertyBuilder())
-            {
-                IEnumerable<PropertyInfo> propertyInfos = PropertyInfosGetter.GetAll(type);
-                IEnumerable<PropertyInfo> filteredPropertyInfos = PropertyInfosFilter.Filter(propertyInfos);
-
-                foreach (PropertyInfo propertyInfo in filteredPropertyInfos)
-                {
-                    yield return builder
-                        .LoadFrom(propertyInfo)
-                        .Build();
-
-                    builder.Clear();
-                }
-            }
+            throw new NotImplementedException();
         }
     }
 }

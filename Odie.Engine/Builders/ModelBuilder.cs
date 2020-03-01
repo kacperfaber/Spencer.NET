@@ -5,6 +5,7 @@ namespace Odie.Engine
 {
     public class ModelBuilder : Builder<Model, ModelBuilder>
     {
+        public IReflectionFieldsGetter ReflectionFieldsGetter;
         public IPropertiesGenerator PropertiesGenerator;
         
         public ModelBuilder(Model o = default) : base(o)
@@ -23,7 +24,8 @@ namespace Odie.Engine
 
         public ModelBuilder LoadClass<T>() where T : class
         {
-            IEnumerable<Property> properties = PropertiesGenerator.GenerateProperties(typeof(T));
+            IEnumerable<ReflectionField> reflectionFields = ReflectionFieldsGetter.Get(typeof(T));
+            IEnumerable<Property> properties = PropertiesGenerator.GenerateProperties(null);
 
             return Update(x => x.Properties.AddRange(properties));
         }

@@ -5,6 +5,6 @@ namespace Odie.Engine
 {
     public interface IPropertiesGenerator
     {
-        IEnumerable<Property> GenerateProperties(Type type);
+        IEnumerable<Property> GenerateProperties(IEnumerable<ReflectionField> fields);
     }
 }
