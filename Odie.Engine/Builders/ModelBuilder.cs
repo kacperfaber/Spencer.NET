@@ -25,7 +25,7 @@ namespace Odie.Engine
         public ModelBuilder LoadClass<T>() where T : class
         {
             IEnumerable<ReflectionField> reflectionFields = ReflectionFieldsGetter.Get(typeof(T));
-            IEnumerable<Property> properties = PropertiesGenerator.GenerateProperties(null);
+            IEnumerable<Property> properties = PropertiesGenerator.GenerateProperties(reflectionFields);
 
             return Update(x => x.Properties.AddRange(properties));
         }

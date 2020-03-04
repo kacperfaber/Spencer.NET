@@ -12,7 +12,11 @@ namespace Odie.Engine
 
         public IEnumerable<Property> GenerateProperties(IEnumerable<ReflectionField> fields)
         {
-            throw new NotImplementedException();
+            foreach (ReflectionField field in fields)
+            {
+                PropertyBuilder builder = new PropertyBuilder();
+                builder.
+            }
         }
     }
 }

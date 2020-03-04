@@ -90,6 +90,11 @@ namespace Odie.Engine
             });
         }
 
+        public PropertyBuilder LoadFrom(FieldInfo fieldInfo)
+        {
+            
+        }
+
         public void Dispose()
         {
         }
