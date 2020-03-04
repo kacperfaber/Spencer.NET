@@ -74,8 +74,23 @@ namespace Odie.Engine
             return Update(x => x.ParametersType = typeof(T));
         }
 
-        public PropertyBuilder LoadFrom(PropertyInfo propertyInfo)
+        public PropertyBuilder LoadFrom(ReflectionField field)
         {
+            if (field.MemberType == MemberType.FIELD)
+            {
+                return LoadFrom((FieldInfo) field.Instance);
+            }
+
+            else if (field.MemberType == MemberType.PROPERTY)
+            {
+                return LoadFrom((PropertyInfo) field.Instance);
+            }
+            
+            throw new ArgumentException($"{field.GetType().FullName}.{field.MemberType.GetType().Name} cannot be an {MemberType.UNSIGNED.GetType().Name}");
+        }
+
+        public PropertyBuilder LoadFrom(PropertyInfo propertyInfo)
+        {   
             // NEED TO ADD ARGUMENTS ATTR HERE .::. TODO
             
             Type exceptedType = propertyInfo.PropertyType;
@@ -92,7 +107,18 @@ namespace Odie.Engine
 
         public PropertyBuilder LoadFrom(FieldInfo fieldInfo)
         {
-            
+            // TODO argument attrs
+
+            Type exceptedType = fieldInfo.FieldType;
+            IValueGenerator generator = ValueGeneratorsProvider.ProvideGenerator(exceptedType);
+
+            return Update(x =>
+            {
+                x.Name = fieldInfo.Name;
+                x.ExceptedType = exceptedType;
+                x.ValueGenerator = generator;
+                x.ValueGeneratorType = generator.GetType();
+            });
         }
 
         public void Dispose()
