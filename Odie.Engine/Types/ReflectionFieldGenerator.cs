@@ -9,8 +9,8 @@ namespace Odie.Engine
             return new ReflectionField()
             {
                 Instance = propertyInfo,
+                MemberType = MemberType.PROPERTY,
                 Type = propertyInfo.GetType(),
-                MemberType = MemberType.PROPERTY
             };
         }
 

@@ -9,12 +9,14 @@ namespace Odie.Engine.Tests
 {
     public class reflectionattributesfilter_filter_tests
     {
+        private const string AuthorName = "KACPER FABER";
+        
         class MyAttribute : Attribute
         {
         }
 
         [My]
-        [Author("KACPER FABER")]
+        [Author(AuthorName)]
         class Test
         {
         }
@@ -23,15 +25,10 @@ namespace Odie.Engine.Tests
         {
             public IEnumerable<Attribute> Filter(IEnumerable<Attribute> enumerable)
             {
-                Console.WriteLine("I AM GOIND!!!");
-                
                 foreach (Attribute attribute in enumerable)
                 {
-                    string? fullName = attribute.GetType().FullName;
-                    if (fullName.Contains("Tests"))
-                    {
+                    if (attribute.GetType().FullName.Contains("Odie"))
                         yield return attribute;
-                    }
                 }
             }
         }
@@ -42,8 +39,8 @@ namespace Odie.Engine.Tests
             {
                 foreach (Attribute attribute in enumerable)
                 {
-                    if (attribute is AuthorAttribute) continue;
-                    else yield return attribute;
+                    if (attribute is AuthorAttribute)
+                        yield return attribute;
                 }
             }
         }
@@ -68,7 +65,6 @@ namespace Odie.Engine.Tests
         public void returns_2_attributes_when_applied_is_any_filter()
         {
             int len = exec<Test>().Count();
-            Console.WriteLine(len);
 
             Assert.IsTrue(len == 2);
         }
@@ -78,9 +74,32 @@ namespace Odie.Engine.Tests
         {
             int len = exec<Test>(new ns_filter()).Count();
 
-            Console.WriteLine(len);
-            
             Assert.IsTrue(len == 1);
+        }
+
+        [Test]
+        public void returns_MyAttribute_as_first_if_given_filter_is_ns_filter()
+        {
+            Attribute attrib = exec<Test>(new ns_filter())
+                .SingleOrDefault(x => x is MyAttribute);
+            
+            Assert.NotNull(attrib);
+        }
+
+        [Test]
+        public void returns_AuthorAttribute_as_first_if_given_filter_is_author_filter()
+        {
+            AuthorAttribute author = (AuthorAttribute) exec<Test>(new author_filter()).SingleOrDefault(x => x is AuthorAttribute);
+            
+            Assert.NotNull(author);
+        }
+
+        [Test]
+        public void returns_0_if_both_filters_was_applied()
+        {
+            int len = exec<Test>(new author_filter(), new ns_filter()).Count();
+            
+            Assert.IsTrue(len == 0);
         }
     }
 }

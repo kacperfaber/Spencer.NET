@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Odie.Commons;
 
 namespace Odie.Engine
@@ -17,7 +18,7 @@ namespace Odie.Engine
         {
             foreach (IFilter<Attribute> filter in Filters)
             {
-                filter.Filter(attributes);
+                attributes = filter.Filter(attributes);
             }
 
             return attributes;
