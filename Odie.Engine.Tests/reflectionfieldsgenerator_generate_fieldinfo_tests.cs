@@ -6,18 +6,19 @@ namespace Odie.Engine.Tests
 {
     public class reflectionfieldsgenerator_generate_fieldinfo_tests
     {
-
         class Test
         {
+#pragma warning disable
             public string Hello;
             public int World;
+#pragma warning restore
         }
 
         FieldInfo get_field(string name)
         {
             return typeof(Test).GetField(name);
         }
-        
+
         ReflectionField exec(FieldInfo info)
         {
             return new ReflectionFieldGenerator().Generate(info);
@@ -46,7 +47,7 @@ namespace Odie.Engine.Tests
         {
             ReflectionField field = exec(get_field("Hello"));
             Type instanceType = field.Instance.GetType();
-            
+
             Assert.IsTrue(typeof(FieldInfo).IsAssignableFrom(instanceType));
         }
 

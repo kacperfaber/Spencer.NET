@@ -7,9 +7,21 @@ namespace Odie.Engine
     {
         public IReflectionFieldsGetter ReflectionFieldsGetter;
         public IPropertiesGenerator PropertiesGenerator;
-        
+
         public ModelBuilder(Model o = default) : base(o)
         {
+            ReflectionFieldsGetter = new ReflectionFieldsGetter(new ReflectionFieldGenerator());
+            PropertiesGenerator = new PropertiesGenerator();
+        }
+
+        public ModelBuilder(IPropertiesGenerator propertiesGenerator, IReflectionFieldsGetter reflectionFieldsGetter, Model o = null) : base(o)
+        {
+            // there have to a empty ctor.
+            // Factory method are bad idea for it.
+            // TODO
+            
+            PropertiesGenerator = propertiesGenerator;
+            ReflectionFieldsGetter = reflectionFieldsGetter;
         }
 
         public ModelBuilder AddProperty(Property property)
