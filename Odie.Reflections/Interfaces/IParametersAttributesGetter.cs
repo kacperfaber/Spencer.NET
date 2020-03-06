@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
-using Odie.Engine.Attributes;
 
-namespace Odie.Engine
+namespace Odie.Reflections
 {
     public interface IParametersAttributesGetter
     {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Odie.Commons;
 
-namespace Odie.Engine
+namespace Odie.Reflections
 {
     public class ReflectionAttributesFilter : IReflectionAttributesFilter
     {

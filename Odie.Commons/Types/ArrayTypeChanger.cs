@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Odie.Engine
+namespace Odie.Commons
 {
     public class ArrayTypeChanger : IArrayTypeChanger
     {

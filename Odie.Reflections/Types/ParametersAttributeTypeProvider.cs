@@ -1,7 +1,6 @@
 ﻿using System;
-using Odie.Engine.Attributes;
 
-namespace Odie.Engine
+namespace Odie.Reflections
 {
     public class ParametersAttributeTypeProvider : IParametersAttributeTypeProvider
     {

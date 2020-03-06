@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Odie.Commons;
-using Odie.Engine.Attributes;
 
-namespace Odie.Engine
+namespace Odie.Reflections
 {
     public class ParametersAttributeGetter : IParametersAttributesGetter
     {

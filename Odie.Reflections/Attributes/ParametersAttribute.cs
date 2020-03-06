@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Odie.Engine.Attributes
+namespace Odie.Reflections
 {
     public class ParametersAttribute : Attribute
     {
