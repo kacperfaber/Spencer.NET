@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Odie.Engine.Tests
+namespace Odie.Tests
 {
     public class modelbuilder_build_tests
     {

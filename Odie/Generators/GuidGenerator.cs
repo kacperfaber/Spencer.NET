@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Odie.Engine
+namespace Odie
 {
     public class GuidGenerator : ValueGenerator
     {

@@ -9,3 +9,5 @@ C:\Users\Kacpii\Desktop\Odie\Odie\obj\Debug\netstandard2.0\Odie.AssemblyInfo.cs
 C:\Users\Kacpii\Desktop\Odie\Odie\obj\Debug\netstandard2.0\Odie.csproj.CopyComplete
 C:\Users\Kacpii\Desktop\Odie\Odie\obj\Debug\netstandard2.0\Odie.dll
 C:\Users\Kacpii\Desktop\Odie\Odie\obj\Debug\netstandard2.0\Odie.pdb
+C:\Users\Kacpii\Desktop\Odie\Odie\bin\Debug\netstandard2.0\Odie.Base.dll
+C:\Users\Kacpii\Desktop\Odie\Odie\bin\Debug\netstandard2.0\Odie.Base.pdb

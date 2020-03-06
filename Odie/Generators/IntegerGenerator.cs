@@ -1,7 +1,7 @@
 ﻿using System;
 using Odie.Commons;
 
-namespace Odie.Engine
+namespace Odie
 {
     public class IntegerGenerator : IValueGenerator
     {

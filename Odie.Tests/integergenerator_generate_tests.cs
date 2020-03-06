@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Odie.Commons;
 
-namespace Odie.Engine.Tests
+namespace Odie.Tests
 {
     public class integergenerator_generate_tests
     {

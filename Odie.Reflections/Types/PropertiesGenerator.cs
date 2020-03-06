@@ -9,15 +9,15 @@ namespace Odie.Reflections
 
         public IEnumerable<Property> GenerateProperties(IEnumerable<ReflectionField> fields)
         {
-            using PropertyBuilder builder = new PropertyBuilder();
+            using PropertyBuilder builderExtension = new PropertyBuilder();
             
             foreach (ReflectionField field in fields)
             {
-                yield return builder
+                yield return builderExtension
                     .LoadFrom(field)
                     .Build();
 
-                builder.Clear();
+                builderExtension.Clear();
             }
         }
     }

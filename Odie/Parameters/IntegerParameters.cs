@@ -1,4 +1,4 @@
-﻿namespace Odie.Engine
+﻿namespace Odie
 {
     public class IntegerParameters
     {

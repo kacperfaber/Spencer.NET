@@ -7,7 +7,7 @@
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
-    <RootNamespace>Odie.Engine.Tests</RootNamespace>
+    <RootNamespace>Odie.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
