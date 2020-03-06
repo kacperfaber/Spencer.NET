@@ -12,6 +12,12 @@ namespace Odie.Reflections.Tests
             public string X { get; set; }
 
             public string Y { get; set; }
+            
+#pragma warning disable
+
+            public string Z;
+
+#pragma warning restore
         }
 
         IEnumerable<ReflectionField> exec<T>(MemberType type)
@@ -37,7 +43,8 @@ namespace Odie.Reflections.Tests
         [Test]
         public void returns_len_equals_to_1_if_target_is_field()
         {
-            Assert.IsTrue(exec<Test>(MemberType.FIELD).Count() == 1);
+            IEnumerable<ReflectionField> fields = exec<Test>(MemberType.FIELD);
+            Assert.IsTrue(fields.Count() == 1);
         }
 
         [Test]
@@ -45,11 +52,6 @@ namespace Odie.Reflections.Tests
         {
             IEnumerable<ReflectionField> fields = exec<Test>(MemberType.PROPERTY | MemberType.FIELD);
 
-            foreach (ReflectionField field in fields)
-            {
-                Console.WriteLine(field.MemberType);
-            }
-            
             Assert.IsTrue(fields.Count() == 3);
         }
     }

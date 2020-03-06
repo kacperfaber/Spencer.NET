@@ -2,6 +2,10 @@
 {
     public class ModelBuilder : Builder<Model, ModelBuilder>
     {
+        public ModelBuilder(Model model = null) : base(model)
+        {
+        }
+
         public ModelBuilder AddProperty(Property property)
         {
             return Update(x => x.Properties.Add(property));

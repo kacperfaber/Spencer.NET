@@ -5,3 +5,4 @@ C:\Users\Kacpii\Desktop\Odie\odie.base\obj\Debug\netstandard2.0\Odie.Base.Assemb
 C:\Users\Kacpii\Desktop\Odie\odie.base\obj\Debug\netstandard2.0\Odie.Base.AssemblyInfo.cs
 C:\Users\Kacpii\Desktop\Odie\odie.base\obj\Debug\netstandard2.0\Odie.Base.dll
 C:\Users\Kacpii\Desktop\Odie\odie.base\obj\Debug\netstandard2.0\Odie.Base.pdb
+C:\Users\Kacpii\Desktop\Odie\odie.base\obj\Debug\netstandard2.0\Odie.Base.csprojAssemblyReference.cache
