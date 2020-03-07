@@ -22,7 +22,7 @@ namespace Odie.Reflections.Tests
 
         IEnumerable<ReflectionField> exec<T>(MemberType type)
         {
-            ReflectionFieldsGetter getter = new ReflectionFieldsGetter(new ReflectionFieldGenerator());
+            ReflectionFieldsGetter getter = new ReflectionFieldsGetter(new ReflectionFieldGenerator(new FlagsGenerator(new FlagGenerator(), new FlagAttributeTypeProvider())));
             IEnumerable<ReflectionField> fields = getter.Get(typeof(T), type);
 
             return fields;

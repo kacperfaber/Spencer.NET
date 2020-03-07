@@ -5,7 +5,7 @@ namespace Odie
     public partial class PropertyBuilder : Builder<Property, PropertyBuilder>, IDisposable
     {
         public IDefaultValueGeneratorsProvider ValueGeneratorsProvider;
-        
+
         public PropertyBuilder(Property o = default) : base(o)
         {
         }
@@ -53,29 +53,31 @@ namespace Odie
         {
             return Update(x =>
             {
-                x.Parameters = parameters;
-                x.ParametersType = parameters.GetType();
+                x.Parameters = new object[] {parameters};
+                x.ParametersType = new Type[]
+                {
+                    parameters.GetType()
+                };
             });
         }
 
         public PropertyBuilder AddParameters(object parameters)
         {
-            return Update(x => x.Parameters = parameters);
+            return Update(x => x.Parameters[0] = parameters);
         }
 
         public PropertyBuilder AddParametersType(Type type)
         {
-            return Update(x => x.ParametersType = type);
+            return Update(x => x.ParametersType[0] = type);
         }
 
         public PropertyBuilder AddParametersType<T>()
         {
-            return Update(x => x.ParametersType = typeof(T));
+            return Update(x => x.ParametersType[0] = typeof(T));
         }
 
         // TODO PARTIAL to REFLECTIONS 
-        
-        
+
 
         public void Dispose()
         {

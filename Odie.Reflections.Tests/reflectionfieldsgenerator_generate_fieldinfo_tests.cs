@@ -21,7 +21,7 @@ namespace Odie.Reflections.Tests
 
         ReflectionField exec(FieldInfo info)
         {
-            return new ReflectionFieldGenerator().Generate(info);
+            return new ReflectionFieldGenerator(new FlagsGenerator(new FlagGenerator(), new FlagAttributeTypeProvider())).Generate(info);
         }
 
         [Test]

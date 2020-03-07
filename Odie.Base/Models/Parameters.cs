@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Odie
 {
     public class Parameters
     {
-        public Type Type { get; set; }
+        public IEnumerable<Type> Types { get; set; }
 
-        public object Value { get; set; }
+        public IEnumerable<object> Values { get; set; }
     }
 }

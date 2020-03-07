@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Odie
@@ -22,17 +23,21 @@ namespace Odie
 
         public static PropertyBuilder LoadFrom(this PropertyBuilder builder, PropertyInfo propertyInfo,
             IDefaultValueGeneratorsProvider defaultValueGeneratorsProvider = null,
-            IParametersAttributesGetter parametersAttributesGetter = null)
+            IParametersGenerator parametersGenerator = null,
+            IFlagsGenerator flagsGenerator = null)
         {
-            // NEED TO ADD ARGUMENTS ATTR HERE .::. TODO
-            
-            
+            // container HERE!!! TODO
+            Parameters parameters = parametersGenerator.GenerateParameters(propertyInfo);
+            Flags flags = flagsGenerator.GenerateFlags(propertyInfo);
 
             Type exceptedType = propertyInfo.PropertyType;
             IValueGenerator valueGenerator = defaultValueGeneratorsProvider.ProvideGenerator(exceptedType);
 
             return builder.Update(x =>
             {
+                x.Flags = flags;
+                x.Parameters = parameters.Values.ToArray();
+                x.ParametersType = parameters.Types.ToArray();
                 x.Name = propertyInfo.Name;
                 x.ExceptedType = exceptedType;
                 x.ValueGenerator = valueGenerator;
@@ -43,7 +48,8 @@ namespace Odie
         public static PropertyBuilder LoadFrom(this PropertyBuilder builder, FieldInfo fieldInfo,
             IDefaultValueGeneratorsProvider defaultValueGeneratorsProvider = null)
         {
-            // TODO argument attrs
+            // TODO 
+            // i have to copy LoadFrom (propertyinfo), when container will be ready.
 
             Type exceptedType = fieldInfo.FieldType;
             IValueGenerator generator = defaultValueGeneratorsProvider.ProvideGenerator(exceptedType);
