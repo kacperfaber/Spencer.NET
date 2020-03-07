@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Odie.Commons;
 
-namespace Odie.Reflections
+namespace Odie
 {
     public class ReflectionAttributesFilter : IReflectionAttributesFilter
     {

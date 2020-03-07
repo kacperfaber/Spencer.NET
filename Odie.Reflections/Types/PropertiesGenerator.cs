@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Odie.Commons;
 
-namespace Odie.Reflections
+namespace Odie
 {
     public class PropertiesGenerator : IPropertiesGenerator
     {
@@ -9,15 +9,15 @@ namespace Odie.Reflections
 
         public IEnumerable<Property> GenerateProperties(IEnumerable<ReflectionField> fields)
         {
-            using PropertyBuilder builderExtension = new PropertyBuilder();
+            using PropertyBuilder builder = new PropertyBuilder();
             
             foreach (ReflectionField field in fields)
             {
-                yield return builderExtension
+                yield return builder
                     .LoadFrom(field)
                     .Build();
 
-                builderExtension.Clear();
+                builder.Clear();
             }
         }
     }

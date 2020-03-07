@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Odie.Reflections
+namespace Odie
 {
     public interface IReflectionFieldsGetter
     {

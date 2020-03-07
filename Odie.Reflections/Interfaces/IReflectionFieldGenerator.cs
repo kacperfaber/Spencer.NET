@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Odie.Reflections
+namespace Odie
 {
     public interface IReflectionFieldGenerator
     {

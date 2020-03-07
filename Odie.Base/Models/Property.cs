@@ -15,6 +15,5 @@ namespace Odie
         public object Parameters { get; set; }
 
         public Type ParametersType { get; set; }
-        
     }
 }

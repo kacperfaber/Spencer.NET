@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Odie.Reflections
+namespace Odie
 {
     public class ReflectionFieldsGetter : IReflectionFieldsGetter
     {

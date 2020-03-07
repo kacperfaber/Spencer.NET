@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Odie.Reflections
+namespace Odie
 {
     [Flags]
     public enum MemberType

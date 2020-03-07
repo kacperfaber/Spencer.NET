@@ -2,7 +2,7 @@
 using System.Reflection;
 using Odie.Commons;
 
-namespace Odie.Reflections
+namespace Odie
 {
     public class ParametersAttributeGetter : IParametersAttributesGetter
     {
