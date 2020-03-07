@@ -21,9 +21,12 @@ namespace Odie
         }
 
         public static PropertyBuilder LoadFrom(this PropertyBuilder builder, PropertyInfo propertyInfo,
-            IDefaultValueGeneratorsProvider defaultValueGeneratorsProvider = null)
+            IDefaultValueGeneratorsProvider defaultValueGeneratorsProvider = null,
+            IParametersAttributesGetter parametersAttributesGetter = null)
         {
             // NEED TO ADD ARGUMENTS ATTR HERE .::. TODO
+            
+            
 
             Type exceptedType = propertyInfo.PropertyType;
             IValueGenerator valueGenerator = defaultValueGeneratorsProvider.ProvideGenerator(exceptedType);

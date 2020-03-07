@@ -1,0 +1,2 @@
+FlagAttribute - information to generator. sample [Ignore]
+ParametersAttribute - parameters for ValueGenerator [Range(0, 1)]

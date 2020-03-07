@@ -6,6 +6,9 @@ namespace Odie
     {
         public string Name { get; set; }
         
+
+        public Flags Flags { get; set; }
+        
         public Type ExceptedType { get; set; }
 
         public IValueGenerator ValueGenerator { get; set; }
