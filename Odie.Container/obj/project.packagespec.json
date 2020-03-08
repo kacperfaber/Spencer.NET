@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\Odie.Base.csproj",
-    "projectName": "Odie.Base",
-    "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\Odie.Base.csproj",
-    "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\obj\\",
+    "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj",
+    "projectName": "Odie.Container",
+    "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj",
+    "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "C:\\Microsoft\\Xamarin\\NuGet",
@@ -19,11 +19,7 @@
     },
     "frameworks": {
       "netstandard2.0": {
-        "projectReferences": {
-          "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj": {
-            "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj"
-          }
-        }
+        "projectReferences": {}
       }
     },
     "warningProperties": {

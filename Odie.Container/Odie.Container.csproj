@@ -5,8 +5,4 @@
     <RootNamespace>Odie</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\odie.container\Odie.Container.csproj" />
-  </ItemGroup>
-
 </Project>
