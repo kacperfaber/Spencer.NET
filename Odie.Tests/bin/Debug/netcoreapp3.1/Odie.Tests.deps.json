@@ -876,6 +876,9 @@
         }
       },
       "Odie.Base/1.0.0": {
+        "dependencies": {
+          "Odie.Container": "1.0.0"
+        },
         "runtime": {
           "Odie.Base.dll": {}
         }
@@ -883,6 +886,11 @@
       "Odie.Commons/1.0.0": {
         "runtime": {
           "Odie.Commons.dll": {}
+        }
+      },
+      "Odie.Container/1.0.0": {
+        "runtime": {
+          "Odie.Container.dll": {}
         }
       }
     }
@@ -1345,6 +1353,11 @@
       "sha512": ""
     },
     "Odie.Commons/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Odie.Container/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

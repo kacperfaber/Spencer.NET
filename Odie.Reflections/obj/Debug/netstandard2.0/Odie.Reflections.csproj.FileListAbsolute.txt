@@ -11,3 +11,5 @@ C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Refl
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.csproj.CopyComplete
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.dll
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.pdb
+C:\Users\Kacpii\Desktop\Odie\odie.reflections\bin\Debug\netstandard2.0\Odie.Container.dll
+C:\Users\Kacpii\Desktop\Odie\odie.reflections\bin\Debug\netstandard2.0\Odie.Container.pdb

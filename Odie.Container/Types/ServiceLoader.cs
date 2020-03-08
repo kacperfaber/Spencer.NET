@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Odie
 {
@@ -15,8 +16,8 @@ namespace Odie
         public void Register<T>()
         {
             Type type = typeof(T);
-            
-            object instance = InstancesCreator.Current.CreateInstance(type);
+
+            object instance = InstancesCreator.Current.CreateInstance(type, this);
             Dictionary.Add(type, instance);
 
             foreach (Type @interface in type.GetInterfaces())
@@ -27,7 +28,7 @@ namespace Odie
 
         public void Register<TKey, TValue>()
         {
-            Dictionary.Add(typeof(TKey), InstancesCreator.Current.CreateInstance(typeof(TValue)));
+            Dictionary.Add(typeof(TKey), InstancesCreator.Current.CreateInstance(typeof(TValue), this));
         }
 
         public void RegisterAs(Type type, object instance)
@@ -38,15 +39,15 @@ namespace Odie
         public void RegisterType<T>()
         {
             Type type = typeof(T);
-            object instance = InstancesCreator.Current.CreateInstance(type);
-            
+            object instance = InstancesCreator.Current.CreateInstance(type, this);
+
             RegisterAs(type, instance);
         }
 
         public void RegisterType(Type type)
         {
-            object instance = InstancesCreator.Current.CreateInstance(type);
-            
+            object instance = InstancesCreator.Current.CreateInstance(type, this);
+
             RegisterAs(type, instance);
         }
 
@@ -62,7 +63,7 @@ namespace Odie
 
         public void RegisterInterfaces<T>()
         {
-            object instance = InstancesCreator.Current.CreateInstance(typeof(T));
+            object instance = InstancesCreator.Current.CreateInstance(typeof(T), this);
 
             foreach (Type @interface in typeof(T).GetInterfaces())
             {
@@ -72,12 +73,33 @@ namespace Odie
 
         public void RegisterInterfaces(Type type)
         {
-            object instance = InstancesCreator.Current.CreateInstance(type);
+            object instance = InstancesCreator.Current.CreateInstance(type, this);
 
             foreach (Type @interface in type.GetInterfaces())
             {
                 Dictionary.Add(@interface, instance);
             }
+        }
+    }
+
+    public partial class ServiceLoader
+    {
+        public bool Has(Type infoType)
+        {
+            return Dictionary.Keys.Contains(infoType);
+        }
+    }
+
+    public partial class ServiceLoader
+    {
+        public T Resolve<T>()
+        {
+            return (T) Dictionary[typeof(T)];
+        }
+
+        public object Resolve(Type type)
+        {
+            return Dictionary[type];
         }
     }
 

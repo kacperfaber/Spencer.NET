@@ -98,3 +98,5 @@ C:\Users\Kacpii\Desktop\Odie\odie.reflections.tests\obj\Debug\netcoreapp3.1\Odie
 C:\Users\Kacpii\Desktop\Odie\odie.reflections.tests\obj\Debug\netcoreapp3.1\Odie.Reflections.Tests.csproj.CopyComplete
 C:\Users\Kacpii\Desktop\Odie\odie.reflections.tests\obj\Debug\netcoreapp3.1\Odie.Reflections.Tests.dll
 C:\Users\Kacpii\Desktop\Odie\odie.reflections.tests\obj\Debug\netcoreapp3.1\Odie.Reflections.Tests.pdb
+C:\Users\Kacpii\Desktop\Odie\odie.reflections.tests\bin\Debug\netcoreapp3.1\Odie.Container.dll
+C:\Users\Kacpii\Desktop\Odie\odie.reflections.tests\bin\Debug\netcoreapp3.1\Odie.Container.pdb

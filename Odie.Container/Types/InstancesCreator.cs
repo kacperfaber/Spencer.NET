@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace Odie
 {
@@ -6,9 +7,12 @@ namespace Odie
     {
         public static InstancesCreator Current = new InstancesCreator();
         
-        public object CreateInstance(Type type)
+        public object CreateInstance(Type type, ServiceLoader loader)
         {
-            
+            ConstructorInfo ctor = ConstructorFinder.Current.GetConstructor(type);
+            object[] parameters = ConstructorParametersGenerator.Current.GenerateParameters(ctor.GetParameters(), loader);
+
+            return ctor.Invoke(parameters);
         }
     }
 }
