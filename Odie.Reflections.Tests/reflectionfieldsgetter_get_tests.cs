@@ -12,7 +12,7 @@ namespace Odie.Reflections.Tests
             public string X { get; set; }
 
             public string Y { get; set; }
-            
+
 #pragma warning disable
 
             public string Z;
@@ -22,7 +22,8 @@ namespace Odie.Reflections.Tests
 
         IEnumerable<ReflectionField> exec<T>(MemberType type)
         {
-            ReflectionFieldsGetter getter = new ReflectionFieldsGetter(new ReflectionFieldGenerator(new FlagsGenerator(new FlagGenerator(), new FlagAttributeTypeProvider())));
+            ReflectionFieldsGetter getter =
+                new ReflectionFieldsGetter(new ReflectionFieldGenerator(new FlagsGenerator(new FlagGenerator(), new FlagAttributeTypeProvider())));
             IEnumerable<ReflectionField> fields = getter.Get(typeof(T), type);
 
             return fields;

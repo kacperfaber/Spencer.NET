@@ -5,9 +5,9 @@ C:\Users\Kacpii\Desktop\Odie\odie.reflections\bin\Debug\netstandard2.0\Odie.Base
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\bin\Debug\netstandard2.0\Odie.Commons.dll
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\bin\Debug\netstandard2.0\Odie.Base.pdb
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\bin\Debug\netstandard2.0\Odie.Commons.pdb
+C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.csprojAssemblyReference.cache
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.AssemblyInfoInputs.cache
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.AssemblyInfo.cs
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.csproj.CopyComplete
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.dll
 C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.pdb
-C:\Users\Kacpii\Desktop\Odie\odie.reflections\obj\Debug\netstandard2.0\Odie.Reflections.csprojAssemblyReference.cache
