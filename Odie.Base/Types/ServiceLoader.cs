@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
 
@@ -28,6 +29,12 @@ namespace Odie
 
         public void Register(Type type)
         {
+            if (Dictionary.Keys.Contains(type))
+            {
+                Console.WriteLine(type.FullName + " is already added.");
+                return;
+            }
+                
             ConstructorInfo ctor = type.GetConstructors().OrderBy(x => x.GetParameters()).First();
             ParameterInfo[] parameters = ctor.GetParameters();
             List<object> objectParameters = new List<object>();
