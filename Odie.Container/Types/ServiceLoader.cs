@@ -17,12 +17,11 @@ namespace Odie
         {
             Type type = typeof(T);
 
-            object instance = InstancesCreator.Current.CreateInstance(type, this);
-            Dictionary.Add(type, instance);
+            Dictionary.Add(type, null);
 
             foreach (Type @interface in type.GetInterfaces())
             {
-                Dictionary.Add(@interface, instance);
+                Dictionary.Add(@interface, null);
             }
         }
 
@@ -39,16 +38,13 @@ namespace Odie
         public void RegisterType<T>()
         {
             Type type = typeof(T);
-            object instance = InstancesCreator.Current.CreateInstance(type, this);
 
-            RegisterAs(type, instance);
+            RegisterAs(type, null);
         }
 
         public void RegisterType(Type type)
         {
-            object instance = InstancesCreator.Current.CreateInstance(type, this);
-
-            RegisterAs(type, instance);
+            RegisterAs(type, null);
         }
 
         public void RegisterValue(Type type, object value)
@@ -63,21 +59,17 @@ namespace Odie
 
         public void RegisterInterfaces<T>()
         {
-            object instance = InstancesCreator.Current.CreateInstance(typeof(T), this);
-
             foreach (Type @interface in typeof(T).GetInterfaces())
             {
-                Dictionary.Add(@interface, instance);
+                Dictionary.Add(@interface, null);
             }
         }
 
         public void RegisterInterfaces(Type type)
         {
-            object instance = InstancesCreator.Current.CreateInstance(type, this);
-
             foreach (Type @interface in type.GetInterfaces())
             {
-                Dictionary.Add(@interface, instance);
+                Dictionary.Add(@interface, null);
             }
         }
     }
@@ -88,18 +80,43 @@ namespace Odie
         {
             return Dictionary.Keys.Contains(infoType);
         }
+
+        public bool HasValue(Type infoType)
+        {
+            return Dictionary[infoType] != null;
+        }
     }
 
     public partial class ServiceLoader
     {
         public T Resolve<T>()
         {
-            return (T) Dictionary[typeof(T)];
+            Type infoType = typeof(T);
+            
+            if (HasValue(infoType))
+            {
+                return (T) Dictionary[infoType];
+            }
+
+            object instance = InstancesCreator.Current.CreateInstance(infoType, this);
+
+            Dictionary[infoType] = instance;
+
+            return (T) instance;
         }
 
         public object Resolve(Type type)
         {
-            return Dictionary[type];
+            if (HasValue(type))
+            {
+                return Dictionary[type];
+            }
+
+            object instance = InstancesCreator.Current.CreateInstance(type, this);
+
+            Dictionary[type] = instance;
+
+            return instance;
         }
     }
 
