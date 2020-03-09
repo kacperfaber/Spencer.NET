@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Odie
 {
     public partial class ServiceLoader
     {
         public Dictionary<Type, object> Dictionary;
+        public List<Assembly> Assemblies;
 
         public ServiceLoader()
         {
             Dictionary = new Dictionary<Type, object>();
+            Assemblies = new List<Assembly>();
         }
 
         public void Register<T>()
@@ -92,18 +95,7 @@ namespace Odie
     {
         public T Resolve<T>()
         {
-            Type infoType = typeof(T);
-            
-            if (HasValue(infoType))
-            {
-                return (T) Dictionary[infoType];
-            }
-
-            object instance = InstancesCreator.Current.CreateInstance(infoType, this);
-
-            Dictionary[infoType] = instance;
-
-            return (T) instance;
+            return (T) Resolve(typeof(T));
         }
 
         public object Resolve(Type type)
@@ -113,11 +105,21 @@ namespace Odie
                 return Dictionary[type];
             }
 
-            object instance = InstancesCreator.Current.CreateInstance(type, this);
+            Assembly typeAssembly = type.Assembly;
+            
+            if (!Assemblies.Contains(typeAssembly))
+            {
+                Current.RegisterAssembly(typeAssembly);
+            }
 
-            Dictionary[type] = instance;
+            if (!HasValue(type))
+            {
+                object instance = InstancesCreator.Current.CreateInstance(type, this);
+                Dictionary[type] = instance;
+                return instance;
+            }
 
-            return instance;
+            return Dictionary[type];
         }
     }
 

@@ -9,9 +9,6 @@ namespace Odie
     {
         public object Generate(object parameters, Type parametersType, Type exceptedType, out Type valueType)
         {
-            ServiceLoader.Current.RegisterAssembly(GetType().Assembly);
-            ServiceLoader.Current.RegisterAssembly(typeof(RandomGenerator).Assembly);
-            
             if (parametersType == typeof(float))
             {
                 int p = Convert.ToInt32((float) parameters * 100);
@@ -23,7 +20,7 @@ namespace Odie
                 return result < p;
             }
             
-            else if (parametersType == typeof(int))
+            if (parametersType == typeof(int))
             {
                 int p = (int) parameters;
                 

@@ -15,6 +15,8 @@ namespace Odie
                 loader.RegisterInterfaces(type);
                 loader.RegisterType(type);
             }
+            
+            loader.Assemblies.Add(assembly);
         }
 
         public static void RegisterAssemblies(this ServiceLoader loader, Assembly[] assemblies)
