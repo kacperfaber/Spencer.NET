@@ -24,6 +24,20 @@ namespace Odie
             });
         }
 
+        public PropertyBuilder UseValueGenerator<T>()
+        {
+            IValueGenerator generator = (IValueGenerator) ServiceLoader.Current.Resolve<T>();
+
+            return AddValueGeneratorWithType(generator);
+        }
+        
+        public PropertyBuilder UseValueGenerator(Type type)
+        {
+            IValueGenerator generator = (IValueGenerator) ServiceLoader.Current.Resolve(type);
+
+            return AddValueGeneratorWithType(generator);
+        }
+
         public PropertyBuilder AddValueGenerator(IValueGenerator valueGenerator)
         {
             return Update(x => x.ValueGenerator = valueGenerator);

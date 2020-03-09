@@ -17,6 +17,28 @@ namespace Odie
             }
         }
 
+        public static void RegisterAssemblies(this ServiceLoader loader, Assembly[] assemblies)
+        {
+            foreach (Assembly assembly in assemblies)
+            {
+                loader.RegisterAssemblyTypes(assembly);
+            }
+        }
+        
+        public static void RegisterAssemblies(this ServiceLoader loader, AssemblyName[] assemblyNames)
+        {
+            foreach (AssemblyName assembly in assemblyNames)
+            {
+                loader.RegisterAssemblyTypes(Assembly.Load(assembly));
+            }
+        }
+
+        public static void RegisterAssembly(this ServiceLoader loader, Assembly assembly)
+        {
+            loader.RegisterAssemblyTypes(assembly);
+            loader.RegisterAssemblies(assembly.GetReferencedAssemblies());
+        }
+
         public static void ScanAssembly(this ServiceLoader loader, params Assembly[] assemblies)
         {
             foreach (Assembly assembly in assemblies)

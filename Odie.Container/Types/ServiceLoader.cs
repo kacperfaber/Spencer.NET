@@ -32,7 +32,8 @@ namespace Odie
 
         public void RegisterAs(Type type, object instance)
         {
-            Dictionary.Add(type, instance);
+            if (!Has(type))
+                Dictionary.Add(type, instance);
         }
 
         public void RegisterType<T>()
@@ -61,7 +62,7 @@ namespace Odie
         {
             foreach (Type @interface in typeof(T).GetInterfaces())
             {
-                Dictionary.Add(@interface, null);
+                RegisterAs(@interface, null);
             }
         }
 
@@ -69,7 +70,7 @@ namespace Odie
         {
             foreach (Type @interface in type.GetInterfaces())
             {
-                Dictionary.Add(@interface, null);
+                RegisterAs(@interface, null);
             }
         }
     }
@@ -83,7 +84,7 @@ namespace Odie
 
         public bool HasValue(Type infoType)
         {
-            return Dictionary[infoType] != null;
+            return Has(infoType) && Dictionary[infoType] != null;
         }
     }
 
