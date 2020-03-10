@@ -23,6 +23,11 @@ namespace Odie
 
                 else
                 {
+                    if (info.HasDefaultValue)
+                    {
+                        outParameters.Add(info.DefaultValue);    
+                    }
+                    
                     if (loader.Has(infoType))
                     {
                         loader.Resolve(infoType);

@@ -1,22 +1,29 @@
 ﻿using System;
+using System.Linq;
 
 namespace Odie
 {
-    public class GuidGenerator : ValueGenerator
+    public class GuidGenerator : IValueGenerator
     {
         public GuidGenerator()
         {
-            Extensions.Add(new ValueGeneratorExtension()
+        }
+
+        public object Generate(object parameters, Type parametersType, Type[] exceptedType, out Type valueType)
+        {
+            if (exceptedType.First() == typeof(string))
             {
-                Function = (parameters, type) => Guid.NewGuid().ToString(),
-                ActivationType = typeof(string)
-            });
+                valueType = typeof(string);
+                return Guid.NewGuid().ToString();
+            }
             
-            Extensions.Add(new ValueGeneratorExtension()
+            if (exceptedType.First() == typeof(Guid))
             {
-                Function = (parameters, type) => Guid.NewGuid(),
-                ActivationType = typeof(Guid)
-            });
+                valueType = typeof(Guid);
+                return Guid.NewGuid();
+            }
+            
+            throw new ArgumentException();
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Odie
         public List<Assembly> Assemblies;
         
         // options like AUTO_VALUES TODO
+        
+        // mulitinstance
 
         public ServiceLoader()
         {

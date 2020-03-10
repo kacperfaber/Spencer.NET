@@ -96,3 +96,5 @@ C:\Users\Kacpii\Desktop\Odie\odie.base.tests\obj\Debug\netcoreapp3.1\Odie.Base.T
 C:\Users\Kacpii\Desktop\Odie\odie.base.tests\obj\Debug\netcoreapp3.1\Odie.Base.Tests.pdb
 C:\Users\Kacpii\Desktop\Odie\odie.base.tests\bin\Debug\netcoreapp3.1\Odie.Container.dll
 C:\Users\Kacpii\Desktop\Odie\odie.base.tests\bin\Debug\netcoreapp3.1\Odie.Container.pdb
+C:\Users\Kacpii\Desktop\Odie\odie.base.tests\bin\Debug\netcoreapp3.1\Odie.Commons.dll
+C:\Users\Kacpii\Desktop\Odie\odie.base.tests\bin\Debug\netcoreapp3.1\Odie.Commons.pdb

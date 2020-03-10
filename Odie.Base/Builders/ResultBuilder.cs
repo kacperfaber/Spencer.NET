@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Odie
 {
@@ -23,6 +24,11 @@ namespace Odie
         }
 
         public ResultBuilder AddFields(params Field[] fields)
+        {
+            return Update(x => x.Fields.AddRange(fields));
+        }
+        
+        public ResultBuilder AddFields(IEnumerable<Field> fields)
         {
             return Update(x => x.Fields.AddRange(fields));
         }
