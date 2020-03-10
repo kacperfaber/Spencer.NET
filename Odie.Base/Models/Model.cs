@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Odie
 {
@@ -10,5 +11,7 @@ namespace Odie
         }
         
         public List<Property> Properties { get; set; }
+        
+        public Type ExceptedType { get; set; }
     }
 }

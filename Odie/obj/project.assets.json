@@ -30,6 +30,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Odie.Commons": "1.0.0",
           "Odie.Container": "1.0.0"
         },
         "compile": {

@@ -1,9 +1,21 @@
-﻿namespace Odie
+﻿using System;
+
+namespace Odie
 {
     public class ModelBuilder : Builder<Model, ModelBuilder>
     {
         public ModelBuilder(Model model = null) : base(model)
         {
+        }
+
+        public ModelBuilder AddExceptedType<T>()
+        {
+            return Update(x => x.ExceptedType = typeof(T));
+        }
+
+        public ModelBuilder AddExceptedType(Type type)
+        {
+            return Update(x => x.ExceptedType = type);
         }
 
         public ModelBuilder AddProperty(Property property)

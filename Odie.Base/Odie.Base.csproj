@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Odie.commons\Odie.Commons.csproj" />
     <ProjectReference Include="..\odie.container\Odie.Container.csproj" />
   </ItemGroup>
 

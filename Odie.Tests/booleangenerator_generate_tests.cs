@@ -4,10 +4,9 @@ namespace Odie.Tests
 {
     public class booleangenerator_generate_tests
     {
-
         bool exec<TArg>(TArg @true)
         {
-            return 
+            return
                 (bool) new BooleanGenerator().Generate(@true, typeof(TArg), typeof(bool), out _);
         }
 
