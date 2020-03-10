@@ -9,6 +9,10 @@ namespace Odie
     {
         public Dictionary<Type, object> Dictionary;
         public List<Assembly> Assemblies;
+        
+        // options like AUTO_VALUES TODO
+        
+        // mulitinstance
 
         public ServiceLoader()
         {

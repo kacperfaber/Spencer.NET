@@ -10,7 +10,7 @@ namespace Odie.Tests
         {
             IntegerParameters parameters = new IntegerParameters() {Max = max, Min = min};
 
-            return new IntegerGenerator(new RandomGenerator(), new TypeChanger()).Generate(parameters, parameters.GetType(), typeof(int), out type);
+            return new IntegerGenerator(new RandomGenerator(), new TypeChanger()).Generate(parameters, parameters.GetType(), new[] {typeof(int)}, out type);
         }
 
         [Test]

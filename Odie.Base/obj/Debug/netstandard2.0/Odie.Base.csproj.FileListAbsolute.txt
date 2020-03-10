@@ -9,3 +9,5 @@ C:\Users\Kacpii\Desktop\Odie\odie.base\obj\Debug\netstandard2.0\Odie.Base.csproj
 C:\Users\Kacpii\Desktop\Odie\odie.base\bin\Debug\netstandard2.0\Odie.Container.dll
 C:\Users\Kacpii\Desktop\Odie\odie.base\bin\Debug\netstandard2.0\Odie.Container.pdb
 C:\Users\Kacpii\Desktop\Odie\odie.base\obj\Debug\netstandard2.0\Odie.Base.csproj.CopyComplete
+C:\Users\Kacpii\Desktop\Odie\odie.base\bin\Debug\netstandard2.0\Odie.Commons.dll
+C:\Users\Kacpii\Desktop\Odie\odie.base\bin\Debug\netstandard2.0\Odie.Commons.pdb

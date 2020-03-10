@@ -868,10 +868,16 @@
       },
       "Odie.Base/1.0.0": {
         "dependencies": {
+          "Odie.Commons": "1.0.0",
           "Odie.Container": "1.0.0"
         },
         "runtime": {
           "Odie.Base.dll": {}
+        }
+      },
+      "Odie.Commons/1.0.0": {
+        "runtime": {
+          "Odie.Commons.dll": {}
         }
       },
       "Odie.Container/1.0.0": {
@@ -1329,6 +1335,11 @@
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
     },
     "Odie.Base/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Odie.Commons/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

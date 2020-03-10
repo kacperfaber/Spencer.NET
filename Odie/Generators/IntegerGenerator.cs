@@ -14,7 +14,7 @@ namespace Odie
             TypeChanger = typeChanger;
         }
 
-        public object Generate(object parameters, Type parametersType, Type exceptedType, out Type valueType)
+        public object Generate(object parameters, Type parametersType, Type[] exceptedType, out Type valueType)
         {
             IntegerParameters @params = TypeChanger.ChangeType<IntegerParameters>(parameters);
 

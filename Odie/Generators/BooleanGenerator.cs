@@ -3,11 +3,9 @@ using Odie.Commons;
 
 namespace Odie
 {
-    // TODO default with value in container. XD
-    // attr
     public class BooleanGenerator : IValueGenerator
     {
-        public object Generate(object parameters, Type parametersType, Type exceptedType, out Type valueType)
+        public object Generate(object parameters, Type parametersType, Type[] exceptedType, out Type valueType)
         {
             if (parametersType == typeof(float))
             {
