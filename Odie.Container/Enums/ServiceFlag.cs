@@ -6,10 +6,9 @@ namespace Odie
     public enum ServiceFlag
     {
         AUTO_VALUE,
+        CONSTRCUTOR,
+        FACTORY,
         MULTI_INSTANCE,
-        SINGLE_INSTANCE,
-        NEVER_REGISTER,
-        HAS_DEFAULT_CONSTRUCTOR,
-        HAS_DEFAULT_FACTORY
+        SINGLE_INSTANCE
     }
 }

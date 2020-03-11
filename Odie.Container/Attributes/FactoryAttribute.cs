@@ -3,7 +3,7 @@
 namespace Odie
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class DefaultFactoryAttribute : Attribute
+    public class FactoryAttribute : Attribute
     {
     }
 }

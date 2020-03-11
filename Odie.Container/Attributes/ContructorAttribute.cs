@@ -3,7 +3,7 @@
 namespace Odie
 {
     [AttributeUsage(AttributeTargets.Constructor)]
-    public class DefaultConstructorAttribute : Attribute
+    public class ContructorAttribute : Attribute
     {
         
     }
