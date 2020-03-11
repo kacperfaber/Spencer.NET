@@ -5,9 +5,10 @@ namespace Odie
     [Flags]
     public enum ServiceFlag
     {
+        EMPTY,
         AUTO_VALUE,
-        CONSTRCUTOR,
-        FACTORY,
+        HAS_CONSTRUCTOR,
+        HAS_FACTORY,
         MULTI_INSTANCE,
         SINGLE_INSTANCE
     }

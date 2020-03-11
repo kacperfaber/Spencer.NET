@@ -3,7 +3,10 @@
 namespace Odie
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class FactoryAttribute : Attribute
+    public class FactoryAttribute : ServiceFlagAttribute
     {
+        public FactoryAttribute() : base(ServiceFlag.HAS_FACTORY)
+        {
+        }
     }
 }

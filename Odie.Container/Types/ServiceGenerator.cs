@@ -6,11 +6,7 @@ namespace Odie
     {
         public Service Generate(Type type)
         {
-            Service service = new Service()
-            {
-                Assembly = type.Assembly,
-                Attributes = Attribute.GetCustomAttributes(type)
-            }; // todo
+            throw new NotImplementedException();
         }
     }
 }

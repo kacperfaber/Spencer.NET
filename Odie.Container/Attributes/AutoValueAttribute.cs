@@ -3,8 +3,10 @@
 namespace Odie
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class AutoValueAttribute : Attribute
+    public class AutoValueAttribute : ServiceFlagAttribute
     {
-        
+        public AutoValueAttribute() : base(ServiceFlag.AUTO_VALUE)
+        {
+        }
     }
 }
