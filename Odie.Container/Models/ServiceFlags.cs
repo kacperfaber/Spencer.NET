@@ -14,5 +14,12 @@ namespace Odie
         {
             return this.SingleOrDefault(x => x == flag) != null;
         }
+
+        public bool HasFlag(string name, object value)
+        {
+            return this.Where(x => x.Name == name).SingleOrDefault(x => x.Value == value) != null;
+        }
+        
+        public static ServiceFlags CreateNew() => new ServiceFlags();
     }
 }

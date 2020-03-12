@@ -5,14 +5,25 @@ namespace Odie
     public class ServiceGenerator : IServiceGenerator
     {
         public IServiceFlagsGenerator FlagsGenerator;
-        
+        public IServiceRegistrationGenerator RegistrationGenerator;
+
+        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator)
+        {
+            FlagsGenerator = flagsGenerator;
+        }
+
         public Service GenerateService(Type type)
         {
-            using ServiceBuilder builder = new ServiceBuilder();
+            using (ServiceBuilder builder = new ServiceBuilder())
+            {
+                ServiceFlags flags = FlagsGenerator.GenerateFlags(type);
 
-            ServiceFlags flags = FlagsGenerator.GenerateFlags(type);
+                builder
+                    .AddFlags(flags)
+                    .AddRegistration(RegistrationGenerator.Generate(flags));
+            }
 
-            throw new NotImplementedException(); //todo
+            // TODO
         }
     }
 }

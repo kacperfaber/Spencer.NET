@@ -7,8 +7,6 @@ namespace Odie
     {
         ServiceFlags Flags { get; set; }
         
-        Type Type { get; set; }
-        
-        List<Type> RegisteredAs { get; set; }
+        IServiceRegistration Registration { get; set; }
     }
 }

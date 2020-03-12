@@ -34,14 +34,9 @@ namespace Odie
             return Update(x => x.Flags.AddRange(flags));
         }
 
-        public ServiceBuilder AddType<T>()
+        public ServiceBuilder AddRegistration(IServiceRegistration registration)
         {
-            return Update(x => x.Type = typeof(T));
-        }
-
-        public ServiceBuilder AddType(Type type)
-        {
-            return Update(x => x.Type = type);
+            return Update(x => x.Registration = registration);
         }
 
         public ServiceBuilder FromType(Type type)
