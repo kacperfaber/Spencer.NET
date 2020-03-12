@@ -7,6 +7,7 @@ namespace Odie
     public class ServiceFlagsGenerator : IServiceFlagsGenerator
     {
         public IAttributesFinder AttributesFinder;
+        
 
         public ServiceFlagsGenerator(IAttributesFinder attributesFinder)
         {

@@ -19,6 +19,11 @@ namespace Odie
         {
             return this.Where(x => x.Name == name).SingleOrDefault(x => x.Value == value) != null;
         }
+
+        public ServiceFlag GetFlag(string name)
+        {
+            return this.Single(x => x.Name == name);
+        }
         
         public static ServiceFlags CreateNew() => new ServiceFlags();
     }

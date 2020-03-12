@@ -18,9 +18,10 @@ namespace Odie
             {
                 ServiceFlags flags = FlagsGenerator.GenerateFlags(type);
 
-                builder
+                return builder
                     .AddFlags(flags)
-                    .AddRegistration(RegistrationGenerator.Generate(flags));
+                    .AddRegistration(RegistrationGenerator.Generate(flags, type))
+                    .Build();
             }
 
             // TODO
