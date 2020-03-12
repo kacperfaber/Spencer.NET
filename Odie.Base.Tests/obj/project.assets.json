@@ -1239,9 +1239,22 @@
           "bin/placeholder/Odie.Base.dll": {}
         }
       },
+      "Odie.Commons/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Odie.Commons.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Odie.Commons.dll": {}
+        }
+      },
       "Odie.Container/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Odie.Commons": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Odie.Container.dll": {}
         },
@@ -4634,6 +4647,11 @@
       "type": "project",
       "path": "../odie.base/Odie.Base.csproj",
       "msbuildProject": "../odie.base/Odie.Base.csproj"
+    },
+    "Odie.Commons/1.0.0": {
+      "type": "project",
+      "path": "../Odie.commons/Odie.Commons.csproj",
+      "msbuildProject": "../Odie.commons/Odie.Commons.csproj"
     },
     "Odie.Container/1.0.0": {
       "type": "project",

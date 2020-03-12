@@ -26,9 +26,22 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "Odie.Commons/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Odie.Commons.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Odie.Commons.dll": {}
+        }
+      },
       "Odie.Container/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Odie.Commons": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Odie.Container.dll": {}
         },
@@ -182,6 +195,11 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "Odie.Commons/1.0.0": {
+      "type": "project",
+      "path": "../Odie.commons/Odie.Commons.csproj",
+      "msbuildProject": "../Odie.commons/Odie.Commons.csproj"
     },
     "Odie.Container/1.0.0": {
       "type": "project",
