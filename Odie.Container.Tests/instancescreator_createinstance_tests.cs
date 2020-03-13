@@ -36,6 +36,11 @@ namespace Odie.Container.Tests
                 throw new ArgumentException();
             }
 
+            public T Resolve<T>()
+            {
+                throw new NotImplementedException();
+            }
+
             public bool Has(Type key)
             {
                 if (key == typeof(Dep1))
@@ -50,7 +55,7 @@ namespace Odie.Container.Tests
         object exec<T>()
         {
             ServiceGenerator generator = new ServiceGenerator(new ServiceFlagsGenerator(new AttributesFinder()),
-                new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()));
+                new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()),new ServiceInfoGenerator());
             Service service = generator.GenerateService(typeof(T));
 
             InstancesCreator creator = new InstancesCreator(new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),

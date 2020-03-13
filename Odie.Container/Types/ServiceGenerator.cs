@@ -8,10 +8,11 @@ namespace Odie
         public IServiceRegistrationGenerator RegistrationGenerator;
         public IServiceInfoGenerator InfoGenerator;
 
-        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator)
+        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator, IServiceInfoGenerator infoGenerator)
         {
             FlagsGenerator = flagsGenerator;
             RegistrationGenerator = registrationGenerator;
+            InfoGenerator = infoGenerator;
         }
 
         public Service GenerateService(Type type)

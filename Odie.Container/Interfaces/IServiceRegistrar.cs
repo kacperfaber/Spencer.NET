@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IServiceRegistrar
     {
-        void Register(IEnumerable<Service> services, Service service);
+        void Register(ref IEnumerable<Service> services, Service service, IContainerResolver resolver, IContainerRegistrar registrar);
     }
 }

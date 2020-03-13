@@ -41,7 +41,7 @@ namespace Odie
 
         public ServiceBuilder AddInfo(IServiceInfo serviceInfo)
         {
-            return Update(x => x.ServiceInfo = serviceInfo);
+            return Update(x => x.Info = serviceInfo);
         }
 
         public ServiceBuilder FromType(Type type)

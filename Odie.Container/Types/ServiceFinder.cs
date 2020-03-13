@@ -9,7 +9,7 @@ namespace Odie
         public Service Find(IEnumerable<Service> services, Type typeKey)
         {
             return services
-                .Where(x => typeKey.IsAssignableFrom(x.Registration.TargetType))
+                .Where(x => typeKey.IsAssignableFrom(x.Registration.TargetType) || typeKey == x.Registration.TargetType)
                 .FirstOrDefault();
         }
     }

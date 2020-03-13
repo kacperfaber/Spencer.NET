@@ -9,6 +9,6 @@ namespace Odie
         
         IServiceRegistration Registration { get; set; }
         
-        IServiceInfo ServiceInfo { get; set; }
+        IServiceInfo Info { get; set; }
     }
 }

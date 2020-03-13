@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Odie.Commons;
 
-namespace Odie
+namespace Odie.Container
 {
     public class Container : IContainer
     {
-        private List<Service> Services = new List<Service>();
+        public IEnumerable<Service> Services = new List<Service>();
 
-        public IServiceResolver ServiceResolver;
-        public IServiceRegistrar ServiceRegistrar;
-        public IServiceGenerator ServiceGenerator;
-        public IServiceFinder ServiceFinder;
-        public IServiceInitializer ServiceInitializer;
-        public IServiceIsAutoValueChecker ServiceIsAutoValueChecker;
-        
+        public IServiceResolver ServiceResolver = new ServiceResolver(new InstancesCreator(
+            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
+            new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(),
+                new TypeIsValueTypeChecker())));
+        public IServiceRegistrar ServiceRegistrar = new ServiceRegistrar(new ServiceInstanceProvider(new InstancesCreator(new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()), new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(), new TypeIsValueTypeChecker())), new ServiceIsAutoValueChecker()));
+        public IServiceGenerator ServiceGenerator = new ServiceGenerator(new ServiceFlagsGenerator(new AttributesFinder()),
+            new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()), new ServiceInfoGenerator());
+        public IServiceFinder ServiceFinder = new ServiceFinder();
+        public IServiceInitializer ServiceInitializer = new ServiceInitializer(new InstancesCreator(
+            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
+            new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(),
+                new TypeIsValueTypeChecker())));
+        public IServiceIsAutoValueChecker ServiceIsAutoValueChecker = new ServiceIsAutoValueChecker();
+
         public object Resolve(Type key)
         {
             Service service = ServiceFinder.Find(Services, key);
@@ -23,9 +31,17 @@ namespace Odie
             return result;
         }
 
+        public T Resolve<T>()
+        {
+            Service service = ServiceFinder.Find(Services, typeof(T));
+            return (T) ServiceResolver.Resolve(service, this, this);
+        }
+
         public bool Has(Type key)
         {
-            throw new NotImplementedException();
+            Service service = ServiceFinder.Find(Services, key);
+
+            return service != null;
         }
 
         public void Register(Type type)
@@ -36,8 +52,20 @@ namespace Odie
             {
                 ServiceInitializer.Initialize(service, this, this);
             }
-            
-            ServiceRegistrar.Register(Services, service);
+
+            ServiceRegistrar.Register(ref Services, service, this, this);
+        }
+
+        public void Register<T>()
+        {
+            Service service = ServiceGenerator.GenerateService(typeof(T));
+
+            if (ServiceIsAutoValueChecker.Check(service))
+            {
+                ServiceInitializer.Initialize(service, this, this);
+            }
+
+            ServiceRegistrar.Register(ref Services, service, this, this);
         }
     }
 }
