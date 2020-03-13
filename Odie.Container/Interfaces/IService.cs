@@ -8,5 +8,7 @@ namespace Odie
         ServiceFlags Flags { get; set; }
         
         IServiceRegistration Registration { get; set; }
+        
+        IServiceInfo ServiceInfo { get; set; }
     }
 }

@@ -8,6 +8,8 @@ namespace Odie
         public ServiceFlags Flags { get; set; }
 
         public IServiceRegistration Registration { get; set; }
+        
+        public IServiceInfo ServiceInfo { get; set; }
 
         public Service()
         {

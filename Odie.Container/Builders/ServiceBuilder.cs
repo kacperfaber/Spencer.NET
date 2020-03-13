@@ -39,6 +39,11 @@ namespace Odie
             return Update(x => x.Registration = registration);
         }
 
+        public ServiceBuilder AddInfo(IServiceInfo serviceInfo)
+        {
+            return Update(x => x.ServiceInfo = serviceInfo);
+        }
+
         public ServiceBuilder FromType(Type type)
         {
             throw new NotImplementedException();
