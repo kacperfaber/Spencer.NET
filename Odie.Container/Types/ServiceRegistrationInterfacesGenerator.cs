@@ -11,7 +11,7 @@ namespace Odie
 
             foreach (Type i in interfaces)
             {
-                if (!flags.HasFlag(ServiceFlagConstants.IncludeType, i))
+                if (!flags.HasFlag(ServiceFlagConstants.ExcludeType, i))
                 {
                     yield return i;
                 }

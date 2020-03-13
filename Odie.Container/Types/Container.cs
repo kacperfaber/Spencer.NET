@@ -12,6 +12,8 @@ namespace Odie
         public IServiceRegistrar ServiceRegistrar;
         public IServiceGenerator ServiceGenerator;
         public IServiceFinder ServiceFinder;
+        public IServiceInitializer ServiceInitializer;
+        public IServiceIsAutoValueChecker ServiceIsAutoValueChecker;
         
         public object Resolve(Type key)
         {
@@ -29,6 +31,12 @@ namespace Odie
         public void Register(Type type)
         {
             Service service = ServiceGenerator.GenerateService(type);
+
+            if (ServiceIsAutoValueChecker.Check(service))
+            {
+                ServiceInitializer.Initialize(service, this, this);
+            }
+            
             ServiceRegistrar.Register(Services, service);
         }
     }
