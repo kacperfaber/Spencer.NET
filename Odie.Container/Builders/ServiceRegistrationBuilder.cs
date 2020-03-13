@@ -5,6 +5,10 @@ namespace Odie
 {
     public class ServiceRegistrationBuilder : Builder<ServiceRegistration, ServiceRegistrationBuilder>
     {
+        public ServiceRegistrationBuilder(ServiceRegistration o = default) : base(o)
+        {
+        }
+
         public ServiceRegistrationBuilder AddType(Type type)
         {
             return Update(x => x.TargetType = type);

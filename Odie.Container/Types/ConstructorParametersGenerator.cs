@@ -6,12 +6,12 @@ namespace Odie
 {
     public class ConstructorParametersGenerator : IConstructorParametersGenerator
     {
-        public IParameterInfoIsValueTypeChecker ValueTypeChecker;
+        public ITypeIsValueTypeChecker ValueTypeChecker;
         public IValueTypeActivator ValueTypeActivator;
         public IParameterInfoHasDefaultValueChecker DefaultValueChecker;
         public IParameterInfoDefaultValueProvider DefaultValueProvider;
 
-        public ConstructorParametersGenerator(IParameterInfoDefaultValueProvider defaultValueProvider, IParameterInfoHasDefaultValueChecker defaultValueChecker, IValueTypeActivator valueTypeActivator, IParameterInfoIsValueTypeChecker valueTypeChecker)
+        public ConstructorParametersGenerator(IParameterInfoDefaultValueProvider defaultValueProvider, IParameterInfoHasDefaultValueChecker defaultValueChecker, IValueTypeActivator valueTypeActivator, ITypeIsValueTypeChecker valueTypeChecker)
         {
             DefaultValueProvider = defaultValueProvider;
             DefaultValueChecker = defaultValueChecker;
@@ -32,7 +32,7 @@ namespace Odie
                     yield return DefaultValueProvider.Provide(parameter);
                 }
                 
-                if (ValueTypeChecker.Check(parameter))
+                if (ValueTypeChecker.Check(parameterType))
                 {
                     yield return ValueTypeActivator.ActivateInstance(parameterType);
                 }

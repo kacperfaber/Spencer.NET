@@ -1,7 +1,6 @@
 ﻿namespace Odie
 {
-    public interface IContainer
+    public interface IContainer : IContainerResolver, IContainerRegistrar
     {
-        
     }
 }

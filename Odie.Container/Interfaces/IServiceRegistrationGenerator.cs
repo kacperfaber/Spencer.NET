@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IServiceRegistrationGenerator
     {
-        IServiceRegistration Generate(ServiceFlags flags, Type type)
+        IServiceRegistration Generate(ServiceFlags flags, Type type);
     }
 }

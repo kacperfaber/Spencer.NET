@@ -7,9 +7,10 @@ namespace Odie
         public IServiceFlagsGenerator FlagsGenerator;
         public IServiceRegistrationGenerator RegistrationGenerator;
 
-        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator)
+        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator)
         {
             FlagsGenerator = flagsGenerator;
+            RegistrationGenerator = registrationGenerator;
         }
 
         public Service GenerateService(Type type)
@@ -17,14 +18,13 @@ namespace Odie
             using (ServiceBuilder builder = new ServiceBuilder())
             {
                 ServiceFlags flags = FlagsGenerator.GenerateFlags(type);
+                IServiceRegistration registration = RegistrationGenerator.Generate(flags, type);
 
                 return builder
                     .AddFlags(flags)
-                    .AddRegistration(RegistrationGenerator.Generate(flags, type))
+                    .AddRegistration(registration)
                     .Build();
             }
-
-            // TODO
         }
     }
 }
