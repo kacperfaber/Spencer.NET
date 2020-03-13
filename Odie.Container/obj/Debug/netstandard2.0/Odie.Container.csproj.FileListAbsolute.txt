@@ -1,8 +1,0 @@
-C:\Users\Kacpii\Desktop\Odie\odie.container\bin\Debug\netstandard2.0\Odie.Container.deps.json
-C:\Users\Kacpii\Desktop\Odie\odie.container\bin\Debug\netstandard2.0\Odie.Container.dll
-C:\Users\Kacpii\Desktop\Odie\odie.container\bin\Debug\netstandard2.0\Odie.Container.pdb
-C:\Users\Kacpii\Desktop\Odie\odie.container\obj\Debug\netstandard2.0\Odie.Container.AssemblyInfoInputs.cache
-C:\Users\Kacpii\Desktop\Odie\odie.container\obj\Debug\netstandard2.0\Odie.Container.AssemblyInfo.cs
-C:\Users\Kacpii\Desktop\Odie\odie.container\obj\Debug\netstandard2.0\Odie.Container.dll
-C:\Users\Kacpii\Desktop\Odie\odie.container\obj\Debug\netstandard2.0\Odie.Container.pdb
-C:\Users\Kacpii\Desktop\Odie\odie.container\obj\Debug\netstandard2.0\Odie.Container.csprojAssemblyReference.cache

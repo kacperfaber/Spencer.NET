@@ -25,6 +25,16 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "Odie.Commons/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Odie.Commons.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Odie.Commons.dll": {}
+        }
       }
     }
   },
@@ -172,11 +182,17 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "Odie.Commons/1.0.0": {
+      "type": "project",
+      "path": "../Odie.commons/Odie.Commons.csproj",
+      "msbuildProject": "../Odie.commons/Odie.Commons.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "NETStandard.Library >= 2.0.3"
+      "NETStandard.Library >= 2.0.3",
+      "Odie.Commons >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -211,7 +227,11 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj": {
+              "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

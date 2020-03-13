@@ -1,8 +1,0 @@
-C:\Users\Kacpii\Desktop\Odie\Odie.commons\bin\Debug\netstandard2.0\Odie.Commons.deps.json
-C:\Users\Kacpii\Desktop\Odie\Odie.commons\bin\Debug\netstandard2.0\Odie.Commons.dll
-C:\Users\Kacpii\Desktop\Odie\Odie.commons\bin\Debug\netstandard2.0\Odie.Commons.pdb
-C:\Users\Kacpii\Desktop\Odie\Odie.commons\obj\Debug\netstandard2.0\Odie.Commons.csprojAssemblyReference.cache
-C:\Users\Kacpii\Desktop\Odie\Odie.commons\obj\Debug\netstandard2.0\Odie.Commons.AssemblyInfoInputs.cache
-C:\Users\Kacpii\Desktop\Odie\Odie.commons\obj\Debug\netstandard2.0\Odie.Commons.AssemblyInfo.cs
-C:\Users\Kacpii\Desktop\Odie\Odie.commons\obj\Debug\netstandard2.0\Odie.Commons.dll
-C:\Users\Kacpii\Desktop\Odie\Odie.commons\obj\Debug\netstandard2.0\Odie.Commons.pdb

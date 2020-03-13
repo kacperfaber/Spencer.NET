@@ -11,7 +11,7 @@ namespace Odie
             {
                 int p = Convert.ToInt32((float) parameters * 100);
 
-                RandomGenerator random = ServiceLoader.Current.Resolve<RandomGenerator>();
+                RandomGenerator random = Container.Current.Resolve<RandomGenerator>();
                 int result = random.GenerateInt(0, 100);
 
                 valueType = typeof(bool);
@@ -21,8 +21,8 @@ namespace Odie
             if (parametersType == typeof(int))
             {
                 int p = (int) parameters;
-                
-                RandomGenerator random = ServiceLoader.Current.Resolve<RandomGenerator>();
+
+                RandomGenerator random = Container.Current.Resolve<RandomGenerator>();
                 int result = random.GenerateInt(0, 100);
 
                 valueType = typeof(bool);

@@ -4,44 +4,53 @@ using System.Reflection;
 
 namespace Odie
 {
-    public class ConstructorParametersGenerator
+    public class ConstructorParametersGenerator : IConstructorParametersGenerator
     {
-        public static ConstructorParametersGenerator Current = new ConstructorParametersGenerator();
+        public ITypeIsValueTypeChecker ValueTypeChecker;
+        public IValueTypeActivator ValueTypeActivator;
+        public IParameterInfoHasDefaultValueChecker DefaultValueChecker;
+        public IParameterInfoDefaultValueProvider DefaultValueProvider;
 
-        public object[] GenerateParameters(ParameterInfo[] parameters, ServiceLoader loader)
+        public ConstructorParametersGenerator(IParameterInfoDefaultValueProvider defaultValueProvider, IParameterInfoHasDefaultValueChecker defaultValueChecker,
+            IValueTypeActivator valueTypeActivator, ITypeIsValueTypeChecker valueTypeChecker)
         {
-            List<object> outParameters = new List<object>();
-            
-            foreach (ParameterInfo info in parameters)
-            {
-                Type infoType = info.ParameterType;
+            DefaultValueProvider = defaultValueProvider;
+            DefaultValueChecker = defaultValueChecker;
+            ValueTypeActivator = valueTypeActivator;
+            ValueTypeChecker = valueTypeChecker;
+        }
 
-                if (infoType.IsValueType)
+        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, ServiceFlags flags, IContainerResolver resolver,
+            IContainerRegistrar registrar)
+        {
+            ParameterInfo[] parameters = constructor.GetParameters();
+
+            foreach (ParameterInfo parameter in parameters)
+            {
+                Type parameterType = parameter.ParameterType;
+
+                if (DefaultValueChecker.Check(parameter))
                 {
-                    outParameters.Add(Activator.CreateInstance(infoType));
+                    yield return DefaultValueProvider.Provide(parameter);
+                }
+
+                if (ValueTypeChecker.Check(parameterType))
+                {
+                    yield return ValueTypeActivator.ActivateInstance(parameterType);
+                }
+
+                if (resolver.Has(parameterType))
+                {
+                    yield return resolver.Resolve(parameterType);
                 }
 
                 else
                 {
-                    if (info.HasDefaultValue)
-                    {
-                        outParameters.Add(info.DefaultValue);    
-                    }
-                    
-                    if (loader.Has(infoType))
-                    {
-                        loader.Resolve(infoType);
-                    }
+                    registrar.Register(parameterType);
 
-                    else
-                    {
-                        loader.RegisterType(infoType);
-                        outParameters.Add(loader.Resolve(infoType));
-                    }
+                    yield return resolver.Resolve(parameterType);
                 }
             }
-
-            return outParameters.ToArray();
         }
     }
 }
