@@ -24,6 +24,16 @@ namespace Odie
         {
             return this.Single(x => x.Name == name);
         }
+
+        public void AddFlag(string name, object value)
+        {
+            Add(new ServiceFlag(name, value));
+        }
+
+        public void RemoveFlag(string name)
+        {
+            Remove(this.Single(x => x.Name == name));
+        }
         
         public static ServiceFlags CreateNew() => new ServiceFlags();
     }

@@ -13,7 +13,7 @@ namespace Odie
             new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(),
                 new TypeIsValueTypeChecker())));
         public IServiceRegistrar ServiceRegistrar = new ServiceRegistrar(new ServiceInstanceProvider(new InstancesCreator(new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()), new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(), new TypeIsValueTypeChecker())), new ServiceIsAutoValueChecker()));
-        public IServiceGenerator ServiceGenerator = new ServiceGenerator(new ServiceFlagsGenerator(new AttributesFinder()),
+        public IServiceGenerator ServiceGenerator = new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()),new ServiceFlagsIssuesResolver()),
             new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()), new ServiceInfoGenerator());
         public IServiceFinder ServiceFinder = new ServiceFinder();
         public IServiceInitializer ServiceInitializer = new ServiceInitializer(new InstancesCreator(

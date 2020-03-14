@@ -25,7 +25,7 @@ namespace Odie.Container.Tests
 
         Service exec<TKey>()
         {
-            ServiceGenerator generator = new ServiceGenerator(new ServiceFlagsGenerator(new AttributesFinder()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()),new ServiceInfoGenerator());
+            ServiceGenerator generator = new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()),new ServiceInfoGenerator());
 
             Service test1 = generator.GenerateService(typeof(Test1));
             Service test2 = generator.GenerateService(typeof(Test2));

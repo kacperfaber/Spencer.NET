@@ -6,23 +6,19 @@ namespace Odie
 {
     public class ServiceFlagsGenerator : IServiceFlagsGenerator
     {
-        public IAttributesFinder AttributesFinder;
-        
+        public IServiceFlagsProvider FlagsProvider;
+        public IServiceFlagsIssuesResolver IssuesResolver;
 
-        public ServiceFlagsGenerator(IAttributesFinder attributesFinder)
+        public ServiceFlagsGenerator(IServiceFlagsProvider flagsProvider, IServiceFlagsIssuesResolver issuesResolver)
         {
-            AttributesFinder = attributesFinder;
+            FlagsProvider = flagsProvider;
+            IssuesResolver = issuesResolver;
         }
 
         public ServiceFlags GenerateFlags(Type type)
         {
-            ServiceFlags flags = ServiceFlags.CreateNew();
-            IEnumerable<ServiceFlagAttribute> flagAttributes = AttributesFinder.FindAttributes<ServiceFlagAttribute>(type);
-
-            foreach (ServiceFlagAttribute attribute in flagAttributes)
-            {
-                flags.Add(attribute.ServiceFlag);
-            }
+            ServiceFlags flags = FlagsProvider.ProvideFlags(type);
+            IssuesResolver.ResolveIssues(flags);
 
             return flags;
         }

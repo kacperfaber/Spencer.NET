@@ -54,7 +54,7 @@ namespace Odie.Container.Tests
 
         object exec<T>()
         {
-            ServiceGenerator generator = new ServiceGenerator(new ServiceFlagsGenerator(new AttributesFinder()),
+            ServiceGenerator generator = new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
                 new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()),new ServiceInfoGenerator());
             Service service = generator.GenerateService(typeof(T));
 
