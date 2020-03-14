@@ -9,32 +9,36 @@ namespace Odie
     {
         public ServicesList Services = new ServicesList();
 
-        public IServiceResolver ServiceResolver = new ServiceResolver(new InstancesCreator(
-            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
-            new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(),
-                new TypeIsValueTypeChecker())));
+        public IServiceResolver ServiceResolver;
+        public IServiceRegistrar ServiceRegistrar;
+        public IServiceGenerator ServiceGenerator;
+        public IServiceFinder ServiceFinder;
+        public IServiceInitializer ServiceInitializer;
+        public ITypeExisterChecker TypeExisterChecker;
+        public IServiceIsAutoValueChecker ServiceIsAutoValueChecker;
+        public ITypeGetter TypeGetter;
+        
+        public FallbackConfiguration FallbackConfiguration = new FallbackConfiguration();
 
-        public IServiceRegistrar ServiceRegistrar = new ServiceRegistrar(new ServiceInstanceProvider(
-            new InstancesCreator(new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
-                new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(),
-                    new TypeIsValueTypeChecker())), new ServiceIsAutoValueChecker()),new ServiceInstanceChecker());
-
-        public IServiceGenerator ServiceGenerator = new ServiceGenerator(
-            new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
-            new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()), new ServiceInfoGenerator());
-
-        public IServiceFinder ServiceFinder = new ServiceFinder();
-
-        public IServiceInitializer ServiceInitializer = new ServiceInitializer(new InstancesCreator(
-            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
-            new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(),
-                new TypeIsValueTypeChecker())));
-
-        public IServiceIsAutoValueChecker ServiceIsAutoValueChecker = new ServiceIsAutoValueChecker();
-        public ITypeGetter TypeGetter = new TypeGetter();
+        public Container(IServiceResolver serviceResolver, IServiceRegistrar serviceRegistrar, IServiceGenerator serviceGenerator, IServiceFinder serviceFinder, IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker, ITypeGetter typeGetter)
+        {
+            ServiceResolver = serviceResolver;
+            ServiceRegistrar = serviceRegistrar;
+            ServiceGenerator = serviceGenerator;
+            ServiceFinder = serviceFinder;
+            ServiceInitializer = serviceInitializer;
+            TypeExisterChecker = typeExisterChecker;
+            ServiceIsAutoValueChecker = serviceIsAutoValueChecker;
+            TypeGetter = typeGetter;
+        }
 
         public object Resolve(Type key)
         {
+            if (!TypeExisterChecker.Check(Services, key))
+            {
+                FallbackConfiguration.TypeNotRegistered(key, this);
+            }
+            
             Service service = ServiceFinder.Find(Services, key);
             object result = ServiceResolver.Resolve(service, this);
 
@@ -43,7 +47,14 @@ namespace Odie
 
         public T Resolve<T>()
         {
-            Service service = ServiceFinder.Find(Services, typeof(T));
+            Type type = typeof(T);
+            
+            if (!TypeExisterChecker.Check(Services, type))
+            {
+                FallbackConfiguration.TypeNotRegistered(type, this);
+            }
+            
+            Service service = ServiceFinder.Find(Services, type);
             return (T) ServiceResolver.Resolve(service, this);
         }
 
