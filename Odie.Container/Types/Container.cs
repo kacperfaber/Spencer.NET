@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Odie.Commons;
 
 namespace Odie
@@ -81,6 +82,33 @@ namespace Odie
         {
             Service service = ServiceGenerator.GenerateService(targetType, instance);
             ServiceRegistrar.Register(ref Services, service, this, this);
+        }
+
+        public void RegisterAssembly(Assembly assembly)
+        {
+            foreach (Type type in assembly.GetTypes())
+            {
+                ServiceRegistrar.Register(ref Services, ServiceGenerator.GenerateService(type), this, this);
+            }
+        }
+
+        public void RegisterAssembly<T>()
+        {
+            foreach (Type type in typeof(T).Assembly.GetTypes())
+            {
+                ServiceRegistrar.Register(ref Services, ServiceGenerator.GenerateService(type), this, this);
+            }
+        }
+
+        public void RegisterAssemblies(params Assembly[] assemblies)
+        {
+            foreach (Assembly assembly in assemblies)
+            {
+                foreach (Type type in assembly.GetTypes())
+                {
+                    ServiceRegistrar.Register(ref Services, ServiceGenerator.GenerateService(type), this, this);
+                }
+            }
         }
 
         public void Register<T>()

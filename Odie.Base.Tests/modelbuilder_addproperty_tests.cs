@@ -37,21 +37,5 @@ namespace Odie.Base.Tests
 
             Assert.IsTrue(b.Build().Properties.Count == times);
         }
-
-        interface ITest
-        {
-            string Name { get; set; }
-        }
-
-        class Test : ITest
-        {
-            public string Name { get; set; } = "KacpiiToZiomal";
-        }
-
-        [Test]
-        public void xxx()
-        {
-            
-        }
     }
 }
