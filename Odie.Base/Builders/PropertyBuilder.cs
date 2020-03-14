@@ -26,14 +26,14 @@ namespace Odie
 
         public PropertyBuilder UseValueGenerator<T>()
         {
-            IValueGenerator generator = Container.Current.Resolve<IValueGenerator>();
+            IValueGenerator generator = StaticContainer.Current.Resolve<IValueGenerator>();
 
             return AddValueGeneratorWithType(generator);
         }
         
         public PropertyBuilder UseValueGenerator(Type type)
         {
-            IValueGenerator generator = Container.Current.Resolve<IValueGenerator>();
+            IValueGenerator generator = StaticContainer.Current.Resolve<IValueGenerator>();
 
             return AddValueGeneratorWithType(generator);
         }

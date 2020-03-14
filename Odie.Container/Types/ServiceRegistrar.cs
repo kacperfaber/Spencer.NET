@@ -7,30 +7,23 @@ namespace Odie
     public class ServiceRegistrar : IServiceRegistrar
     {
         public IServiceInstanceProvider InstanceProvider;
+        public IServiceInstanceChecker InstanceChecker;
 
-        public ServiceRegistrar(IServiceInstanceProvider instanceProvider)
+        public ServiceRegistrar(IServiceInstanceProvider instanceProvider, IServiceInstanceChecker instanceChecker)
         {
             InstanceProvider = instanceProvider;
+            InstanceChecker = instanceChecker;
         }
 
         public void Register(ref IEnumerable<Service> services, Service service, IContainerResolver resolver, IContainerRegistrar registrar)
         {
-            if (service.Info.IsClass)
-            {
+            if (!InstanceChecker.Check(service))
                 InstanceProvider.ProvideInstance(service, resolver, registrar);
+            
+            List<Service> servicesList = services.ToList();
+            servicesList.Add(service);
 
-                Console.WriteLine($"type {service.Registration.TargetType} : {service.Registration.BaseType}\nimplementing {service.Registration.Interfaces.Count} interfaces\nwas registered.");
-
-                List<Service> servicesList = services.ToList();
-                servicesList.Add(service);
-
-                services = servicesList;
-            }
-
-            else if (service.Info.IsInterface)
-            {
-                throw new NotImplementedException();
-            }
+            services = servicesList;
         }
     }
 }

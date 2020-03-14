@@ -11,7 +11,7 @@ namespace Odie
             {
                 int p = Convert.ToInt32((float) parameters * 100);
 
-                RandomGenerator random = Container.Current.Resolve<RandomGenerator>();
+                RandomGenerator random = StaticContainer.Current.Resolve<RandomGenerator>();
                 int result = random.GenerateInt(0, 100);
 
                 valueType = typeof(bool);
@@ -22,7 +22,7 @@ namespace Odie
             {
                 int p = (int) parameters;
 
-                RandomGenerator random = Container.Current.Resolve<RandomGenerator>();
+                RandomGenerator random = StaticContainer.Current.Resolve<RandomGenerator>();
                 int result = random.GenerateInt(0, 100);
 
                 valueType = typeof(bool);
