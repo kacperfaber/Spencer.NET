@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Odie
 {
+    [MultiInstance]
     public class ResultBuilder : Builder<Result, ResultBuilder>
     {
         public ResultBuilder(Result o = null) : base(o)

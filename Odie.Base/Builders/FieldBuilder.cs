@@ -2,6 +2,7 @@
 
 namespace Odie
 {
+    [MultiInstance]
     public class FieldBuilder : Builder<Field, FieldBuilder>
     {
         public FieldBuilder(Field o = null) : base(o)

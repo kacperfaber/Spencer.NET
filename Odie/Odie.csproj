@@ -12,8 +12,4 @@
     <ProjectReference Include="..\Odie.commons\Odie.Commons.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Types" />
-  </ItemGroup>
-
 </Project>

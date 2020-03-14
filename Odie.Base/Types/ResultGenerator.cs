@@ -17,7 +17,6 @@
 
             return Builder
                 .AddFields(FieldGenerator.Generate(model.Properties))
-                .AddExceptedType(model.ExceptedType)
                 .Build();
         }
     }

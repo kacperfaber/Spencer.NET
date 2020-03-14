@@ -2,7 +2,8 @@
 
 namespace Odie
 {
-    public partial class PropertyBuilder : Builder<Property, PropertyBuilder>, IDisposable
+    [MultiInstance]
+    public class PropertyBuilder : Builder<Property, PropertyBuilder>, IDisposable
     {
         public IDefaultValueGeneratorsProvider ValueGeneratorsProvider;
 

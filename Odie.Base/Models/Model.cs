@@ -11,7 +11,5 @@ namespace Odie
         }
         
         public List<Property> Properties { get; set; }
-        
-        public Type ExceptedType { get; set; }
     }
 }
