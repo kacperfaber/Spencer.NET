@@ -15,15 +15,12 @@ namespace Odie
             InstanceChecker = instanceChecker;
         }
 
-        public void Register(ref IEnumerable<Service> services, Service service, IContainerResolver resolver, IContainerRegistrar registrar)
+        public void Register(ServicesList list, Service service, IContainer container)
         {
             if (!InstanceChecker.Check(service))
-                InstanceProvider.ProvideInstance(service, resolver, registrar);
+                InstanceProvider.ProvideInstance(service, container);
             
-            List<Service> servicesList = services.ToList();
-            servicesList.Add(service);
-
-            services = servicesList;
+            list.AddService(service);
         }
     }
 }

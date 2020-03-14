@@ -25,15 +25,21 @@ namespace Odie.Container.Tests
 
         Service exec<TKey>()
         {
-            ServiceGenerator generator = new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()),new ServiceInfoGenerator());
+            ServiceGenerator generator =
+                new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
+                    new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()), new ServiceInfoGenerator());
 
             Service test1 = generator.GenerateService(typeof(Test1));
             Service test2 = generator.GenerateService(typeof(Test2));
 
-            List<Service> services = new List<Service>() {test1, test2};
-            
+            ServicesList list = new ServicesList()
+            {
+                Services = new List<Service>()
+                    {test1, test2}
+            };
+
             ServiceFinder finder = new ServiceFinder();
-            return finder.Find(services, typeof(TKey));
+            return finder.Find(list, typeof(TKey));
         }
 
         [Test]
@@ -47,7 +53,7 @@ namespace Odie.Container.Tests
         {
             Assert.AreEqual(typeof(Test1), exec<ITest1>().Registration.TargetType);
         }
-        
+
         [Test]
         public void returns_service_test2_if_gived_key_is_itest2()
         {

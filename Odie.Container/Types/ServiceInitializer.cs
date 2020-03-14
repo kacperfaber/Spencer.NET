@@ -9,9 +9,9 @@
             InstanceCreator = instanceCreator;
         }
 
-        public void Initialize(Service service, IContainerResolver resolver, IContainerRegistrar registrar)
+        public void Initialize(Service service, IContainer container)
         {
-            object instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, resolver, registrar);
+            object instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, container);
             service.Registration.Instance = instance;
         }
     }

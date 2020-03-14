@@ -2,6 +2,6 @@
 {
     public interface IServiceInitializer
     {
-        void Initialize(Service service, IContainerResolver resolver, IContainerRegistrar registrar);
+        void Initialize(Service service, IContainer container);
     }
 }

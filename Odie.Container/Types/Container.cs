@@ -7,7 +7,7 @@ namespace Odie
 {
     public class Container : IContainer
     {
-        public IEnumerable<Service> Services = new List<Service>();
+        public ServicesList Services = new ServicesList();
 
         public IServiceResolver ServiceResolver = new ServiceResolver(new InstancesCreator(
             new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
@@ -36,7 +36,7 @@ namespace Odie
         public object Resolve(Type key)
         {
             Service service = ServiceFinder.Find(Services, key);
-            object result = ServiceResolver.Resolve(service, this, this);
+            object result = ServiceResolver.Resolve(service, this);
 
             return result;
         }
@@ -44,7 +44,7 @@ namespace Odie
         public T Resolve<T>()
         {
             Service service = ServiceFinder.Find(Services, typeof(T));
-            return (T) ServiceResolver.Resolve(service, this, this);
+            return (T) ServiceResolver.Resolve(service, this);
         }
 
         public bool Has(Type key)
@@ -60,35 +60,35 @@ namespace Odie
 
             if (ServiceIsAutoValueChecker.Check(service))
             {
-                ServiceInitializer.Initialize(service, this, this);
+                ServiceInitializer.Initialize(service, this);
             }
 
-            ServiceRegistrar.Register(ref Services, service, this, this);
+            ServiceRegistrar.Register(Services, service, this);
         }
 
         public void RegisterObject(object instance)
         {
             Service service = ServiceGenerator.GenerateService(TypeGetter.GetType(instance), instance);
-            ServiceRegistrar.Register(ref Services, service, this, this);
+            ServiceRegistrar.Register(Services, service, this);
         }
 
         public void RegisterObject<TKey>(object instance)
         {
             Service service = ServiceGenerator.GenerateService(typeof(TKey), instance);
-            ServiceRegistrar.Register(ref Services, service, this, this);
+            ServiceRegistrar.Register(Services, service, this);
         }
 
         public void RegisterObject(object instance, Type targetType)
         {
             Service service = ServiceGenerator.GenerateService(targetType, instance);
-            ServiceRegistrar.Register(ref Services, service, this, this);
+            ServiceRegistrar.Register(Services, service, this);
         }
 
         public void RegisterAssembly(Assembly assembly)
         {
             foreach (Type type in assembly.GetTypes())
             {
-                ServiceRegistrar.Register(ref Services, ServiceGenerator.GenerateService(type), this, this);
+                ServiceRegistrar.Register(Services, ServiceGenerator.GenerateService(type), this);
             }
         }
 
@@ -96,7 +96,7 @@ namespace Odie
         {
             foreach (Type type in typeof(T).Assembly.GetTypes())
             {
-                ServiceRegistrar.Register(ref Services, ServiceGenerator.GenerateService(type), this, this);
+                ServiceRegistrar.Register(Services, ServiceGenerator.GenerateService(type), this);
             }
         }
 
@@ -106,7 +106,7 @@ namespace Odie
             {
                 foreach (Type type in assembly.GetTypes())
                 {
-                    ServiceRegistrar.Register(ref Services, ServiceGenerator.GenerateService(type), this, this);
+                    ServiceRegistrar.Register(Services, ServiceGenerator.GenerateService(type), this);
                 }
             }
         }
@@ -117,10 +117,10 @@ namespace Odie
 
             if (ServiceIsAutoValueChecker.Check(service))
             {
-                ServiceInitializer.Initialize(service, this, this);
+                ServiceInitializer.Initialize(service, this);
             }
 
-            ServiceRegistrar.Register(ref Services, service, this, this);
+            ServiceRegistrar.Register(Services, service, this);
         }
     }
 }

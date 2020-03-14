@@ -6,9 +6,10 @@ namespace Odie
 {
     public class ServiceFinder : IServiceFinder
     {
-        public Service Find(IEnumerable<Service> services, Type typeKey)
+        public Service Find(ServicesList list, Type typeKey)
         {
-            return services
+            return list
+                .GetServices()
                 .Where(x => typeKey.IsAssignableFrom(x.Registration.TargetType) || typeKey == x.Registration.TargetType)
                 .FirstOrDefault();
         }

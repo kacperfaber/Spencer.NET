@@ -2,6 +2,6 @@
 {
     public interface IServiceInstanceProvider
     {
-        void ProvideInstance(Service service, IContainerResolver resolver, IContainerRegistrar registrar);
+        void ProvideInstance(Service service, IContainer container);
     }
 }

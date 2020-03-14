@@ -16,10 +16,10 @@ namespace Odie
             ParametersGenerator = parametersGenerator;
         }
 
-        public object CreateInstance(ServiceFlags flags, Type type, IContainerResolver resolver, IContainerRegistrar registrar)
+        public object CreateInstance(ServiceFlags flags, Type type,IContainer container)
         {
             ConstructorInfo constructor = ConstructorProvider.ProvideConstructor(type, flags);
-            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, flags, resolver, registrar);
+            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, flags, container);
             object instance = constructor.Invoke(parameters.ToArray());
 
             return instance;

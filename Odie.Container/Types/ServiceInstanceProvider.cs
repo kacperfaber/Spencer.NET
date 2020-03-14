@@ -11,11 +11,11 @@
             AutoValueChecker = autoValueChecker;
         }
 
-        public void ProvideInstance(Service service, IContainerResolver resolver, IContainerRegistrar registrar)
+        public void ProvideInstance(Service service, IContainer container)
         {
             if (AutoValueChecker.Check(service))
             {
-                service.Registration.Instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, resolver, registrar);
+                service.Registration.Instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, container);
             }
 
             else if (!AutoValueChecker.Check(service))

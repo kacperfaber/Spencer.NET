@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IInstanceCreator
     {
-        object CreateInstance(ServiceFlags flags, Type type, IContainerResolver resolver, IContainerRegistrar registrar);
+        object CreateInstance(ServiceFlags flags, Type type, IContainer container);
     }
 }

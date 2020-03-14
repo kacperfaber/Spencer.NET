@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using NUnit.Framework;
 using Odie.Commons;
 
@@ -24,7 +25,7 @@ namespace Odie.Container.Tests
             }
         }
 
-        class Resolver : IContainerResolver
+        class TestContainer : IContainer
         {
             public object Resolve(Type key)
             {
@@ -50,6 +51,46 @@ namespace Odie.Container.Tests
 
                 return false;
             }
+
+            public void Register(Type type)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Register<T>()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RegisterObject(object instance)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RegisterObject<TKey>(object instance)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RegisterObject(object instance, Type targetType)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RegisterAssembly(Assembly assembly)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RegisterAssembly<T>()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RegisterAssemblies(params Assembly[] assemblies)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         object exec<T>()
@@ -62,7 +103,7 @@ namespace Odie.Container.Tests
                 new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(),
                     new TypeIsValueTypeChecker()));
 
-            object instance = creator.CreateInstance(service.Flags, service.Registration.TargetType, new Resolver(), null);
+            object instance = creator.CreateInstance(service.Flags, service.Registration.TargetType, new TestContainer());
 
             return instance;
         }

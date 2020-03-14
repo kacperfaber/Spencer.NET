@@ -20,8 +20,7 @@ namespace Odie
             ValueTypeChecker = valueTypeChecker;
         }
 
-        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, ServiceFlags flags, IContainerResolver resolver,
-            IContainerRegistrar registrar)
+        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, ServiceFlags flags, IContainer container)
         {
             ParameterInfo[] parameters = constructor.GetParameters();
 
@@ -39,16 +38,16 @@ namespace Odie
                     yield return ValueTypeActivator.ActivateInstance(parameterType);
                 }
 
-                if (resolver.Has(parameterType))
+                if (container.Has(parameterType))
                 {
-                    yield return resolver.Resolve(parameterType);
+                    yield return container.Resolve(parameterType);
                 }
 
                 else
                 {
-                    registrar.Register(parameterType);
+                    container.Register(parameterType);
 
-                    yield return resolver.Resolve(parameterType);
+                    yield return container.Resolve(parameterType);
                 }
             }
         }
