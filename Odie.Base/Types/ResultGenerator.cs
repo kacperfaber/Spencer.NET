@@ -13,8 +13,6 @@
 
         public Result Generate(Model model)
         {
-            Builder.Clear();
-
             return Builder
                 .AddFields(FieldGenerator.Generate(model.Properties))
                 .Build();

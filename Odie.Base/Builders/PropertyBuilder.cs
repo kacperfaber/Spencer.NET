@@ -5,8 +5,6 @@ namespace Odie
     [MultiInstance]
     public class PropertyBuilder : Builder<Property, PropertyBuilder>, IDisposable
     {
-        public IDefaultValueGeneratorsProvider ValueGeneratorsProvider;
-
         public PropertyBuilder(Property o = default) : base(o)
         {
         }
@@ -25,16 +23,17 @@ namespace Odie
             });
         }
 
-        public PropertyBuilder UseValueGenerator<T>()
+        public PropertyBuilder InjectValueGenerator<T>()
         {
-            IValueGenerator generator = StaticContainer.Current.Resolve<IValueGenerator>();
+            T resolved = StaticContainer.Current.Resolve<T>();
+            IValueGenerator valueGenerator = resolved as IValueGenerator;
 
-            return AddValueGeneratorWithType(generator);
+            return AddValueGenerator(valueGenerator).AddValueGeneratorType(valueGenerator.GetType());
         }
         
-        public PropertyBuilder UseValueGenerator(Type type)
+        public PropertyBuilder InjectValueGenerator(Type type)
         {
-            IValueGenerator generator = StaticContainer.Current.Resolve<IValueGenerator>();
+            IValueGenerator generator = StaticContainer.Current.Resolve(type) as IValueGenerator;
 
             return AddValueGeneratorWithType(generator);
         }
@@ -90,9 +89,6 @@ namespace Odie
         {
             return Update(x => x.ParametersType[0] = typeof(T));
         }
-
-        // TODO PARTIAL to REFLECTIONS 
-
 
         public void Dispose()
         {

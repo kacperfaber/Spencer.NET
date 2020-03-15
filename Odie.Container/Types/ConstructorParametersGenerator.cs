@@ -31,16 +31,19 @@ namespace Odie
                 if (DefaultValueChecker.Check(parameter))
                 {
                     yield return DefaultValueProvider.Provide(parameter);
+                    continue;
                 }
 
                 if (ValueTypeChecker.Check(parameterType))
                 {
                     yield return ValueTypeActivator.ActivateInstance(parameterType);
+                    continue;
                 }
 
                 if (container.Has(parameterType))
                 {
                     yield return container.Resolve(parameterType);
+                    continue;
                 }
 
                 else
@@ -48,6 +51,7 @@ namespace Odie
                     container.Register(parameterType);
 
                     yield return container.Resolve(parameterType);
+                    continue;
                 }
             }
         }

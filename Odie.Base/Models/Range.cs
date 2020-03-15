@@ -12,4 +12,15 @@
             To = to;
         }
     }
+
+    public class Range<T>
+    {
+        public T From, To;
+
+        public Range(T @from, T to)
+        {
+            From = @from;
+            To = to;
+        }
+    }
 }

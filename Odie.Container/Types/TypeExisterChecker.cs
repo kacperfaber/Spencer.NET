@@ -7,7 +7,7 @@ namespace Odie
     {
         public bool Check(ServicesList list, Type type)
         {
-            return list.Services.SingleOrDefault(x => type.IsAssignableFrom(x.Registration.TargetType)) != null;
+            return list.Services.Where(x => type.IsAssignableFrom(x.Registration.TargetType)).FirstOrDefault() != null;
         }
     }
 }
