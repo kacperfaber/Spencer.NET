@@ -37,5 +37,33 @@ namespace Odie.Base.Tests
 
             Assert.IsTrue(b.Build().Properties.Count == times);
         }
+
+        interface IGeneric
+        {
+        }
+
+        interface IContainerItem
+        {
+        }
+
+        class GenericClass<T1, T2> : IGeneric, IContainerItem
+        {
+            public T1 t1;
+            public T2 Arg2;
+        }
+
+        [Test]
+        public void generic()
+        {
+            StaticContainer.Current.RegisterObject(new GenericClass<int, int>() {t1 = 0, Arg2 = 5});
+            StaticContainer.Current.RegisterObject(new GenericClass<string, string>() {t1 = "kacpii", Arg2 = "toziomal"});
+
+            GenericClass<int, int> ints = StaticContainer.Current.Resolve<GenericClass<int, int>>();
+            GenericClass<string, string> strings = StaticContainer.Current.Resolve<GenericClass<string, string>>();
+
+            StaticContainer.Current.Resolve<IGeneric>();
+
+            Console.WriteLine("");
+        }
     }
 }

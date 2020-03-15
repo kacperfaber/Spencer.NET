@@ -26,13 +26,13 @@ namespace Odie.Container.Tests
         {
             ServiceGenerator generator =
                 new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
-                    new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()), new ServiceInfoGenerator());
+                    new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(),new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator());
             Service test1Service = generator.GenerateService(typeof(Test1));
 
             ServicesList list = new ServicesList();
             list.AddService(test1Service);
 
-            TypeExisterChecker checker = new TypeExisterChecker();
+            TypeExisterChecker checker = new TypeExisterChecker(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker());
             return checker.Check(list, typeof(T));
         }
 

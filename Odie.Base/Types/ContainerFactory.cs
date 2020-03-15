@@ -17,10 +17,10 @@ namespace Odie
                                 new ValueTypeActivator(), new TypeIsValueTypeChecker())), new ServiceIsAutoValueChecker()), new ServiceInstanceChecker()),
                 new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
                     new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(),new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator()),
-                new ServiceFinder(),
+                new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeGenericParametersProvider())),
                 new ServiceInitializer(new InstancesCreator(new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
                     new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
-                        new ValueTypeActivator(), new TypeIsValueTypeChecker()))), new TypeExisterChecker(), new ServiceIsAutoValueChecker(), new TypeGetter());
+                        new ValueTypeActivator(), new TypeIsValueTypeChecker()))), new TypeExisterChecker(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new ServiceIsAutoValueChecker(), new TypeGetter());
         }
 
         public static IContainer CreateContainer(FallbackConfiguration fallbackConfiguration)

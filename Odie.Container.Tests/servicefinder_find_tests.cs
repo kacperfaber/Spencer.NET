@@ -27,7 +27,7 @@ namespace Odie.Container.Tests
         {
             ServiceGenerator generator =
                 new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
-                    new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()), new ServiceInfoGenerator());
+                    new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(),new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator());
 
             Service test1 = generator.GenerateService(typeof(Test1));
             Service test2 = generator.GenerateService(typeof(Test2));
@@ -38,7 +38,7 @@ namespace Odie.Container.Tests
                     {test1, test2}
             };
 
-            ServiceFinder finder = new ServiceFinder();
+            ServiceFinder finder = new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeGenericParametersProvider()));
             return finder.Find(list, typeof(TKey));
         }
 
