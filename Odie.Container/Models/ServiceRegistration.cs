@@ -9,5 +9,7 @@ namespace Odie
         public Type BaseType { get; set; }
         public List<Type> Interfaces { get; set; }
         public object Instance { get; set; }
+        public bool HasGenericParameters { get; set; }
+        public List<Type> GenericParameters { get; set; }
     }
 }

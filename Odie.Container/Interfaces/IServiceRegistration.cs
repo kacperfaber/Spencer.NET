@@ -12,5 +12,9 @@ namespace Odie
         List<Type> Interfaces { get; set; }
         
         object Instance { get; set; }
+
+        bool HasGenericParameters { get; set; }
+        
+        List<Type> GenericParameters { get; set; }
     }
 }
