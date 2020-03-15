@@ -16,7 +16,7 @@ namespace Odie
                             new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
                                 new ValueTypeActivator(), new TypeIsValueTypeChecker())), new ServiceIsAutoValueChecker()), new ServiceInstanceChecker()),
                 new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
-                    new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()), new ServiceInfoGenerator()),
+                    new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(),new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator()),
                 new ServiceFinder(),
                 new ServiceInitializer(new InstancesCreator(new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
                     new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
@@ -25,22 +25,8 @@ namespace Odie
 
         public static IContainer CreateContainer(FallbackConfiguration fallbackConfiguration)
         {
-            Container container = new Container(
-                new ServiceResolver(new InstancesCreator(new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
-                    new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
-                        new ValueTypeActivator(), new TypeIsValueTypeChecker()))),
-                new ServiceRegistrar(
-                    new ServiceInstanceProvider(
-                        new InstancesCreator(new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
-                            new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
-                                new ValueTypeActivator(), new TypeIsValueTypeChecker())), new ServiceIsAutoValueChecker()), new ServiceInstanceChecker()),
-                new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
-                    new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator()), new ServiceInfoGenerator()),
-                new ServiceFinder(),
-                new ServiceInitializer(new InstancesCreator(new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),
-                    new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
-                        new ValueTypeActivator(), new TypeIsValueTypeChecker()))), new TypeExisterChecker(), new ServiceIsAutoValueChecker(),
-                new TypeGetter()) {FallbackConfiguration = fallbackConfiguration};
+            Container container = (Container) CreateContainer();
+            container.FallbackConfiguration = fallbackConfiguration;
 
             return container;
         }

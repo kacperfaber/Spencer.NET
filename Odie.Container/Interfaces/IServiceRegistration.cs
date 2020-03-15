@@ -13,8 +13,6 @@ namespace Odie
         
         object Instance { get; set; }
 
-        bool HasGenericParameters { get; set; }
-        
-        List<Type> GenericParameters { get; set; }
+        IServiceGenericRegistration GenericRegistration { get; set; }
     }
 }

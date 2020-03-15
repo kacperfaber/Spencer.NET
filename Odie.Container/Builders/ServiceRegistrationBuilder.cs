@@ -29,14 +29,9 @@ namespace Odie
             return Update(x => x.Instance = instance);
         }
 
-        public ServiceRegistrationBuilder SetHasGenericParameters(bool hasGenericParameters)
+        public ServiceRegistrationBuilder AddGenericRegistration(IServiceGenericRegistration genericRegistration)
         {
-            return Update(x => x.HasGenericParameters = hasGenericParameters);
-        }
-
-        public ServiceRegistrationBuilder SetGenericParameters(IEnumerable<Type> parameters)
-        {
-            return Update(x => x.GenericParameters = new List<Type>(parameters));
+            return Update(x => x.GenericRegistration = genericRegistration);
         }
     }
 }
