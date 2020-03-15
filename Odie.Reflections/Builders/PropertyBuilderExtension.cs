@@ -21,17 +21,13 @@ namespace Odie
             throw new ArgumentException($"{field.GetType().FullName}.{field.MemberType.GetType().Name} cannot be an {MemberType.UNSIGNED.GetType().Name}");
         }
 
-        public static PropertyBuilder LoadFrom(this PropertyBuilder builder, PropertyInfo propertyInfo,
-            IDefaultValueGeneratorsProvider defaultValueGeneratorsProvider = null,
-            IParametersGenerator parametersGenerator = null,
-            IFlagsGenerator flagsGenerator = null)
+        public static PropertyBuilder LoadFrom(this PropertyBuilder builder, PropertyInfo propertyInfo)
         {
-            // container HERE!!! TODO
-            Parameters parameters = parametersGenerator.GenerateParameters(propertyInfo);
-            Flags flags = flagsGenerator.GenerateFlags(propertyInfo);
+            Parameters parameters = StaticContainer.Current.Resolve<IParametersGenerator>().GenerateParameters(propertyInfo);
+            Flags flags = StaticContainer.Current.Resolve<IFlagsGenerator>().GenerateFlags(propertyInfo);
 
             Type exceptedType = propertyInfo.PropertyType;
-            IValueGenerator valueGenerator = defaultValueGeneratorsProvider.ProvideGenerator(exceptedType);
+            IValueGenerator valueGenerator = StaticContainer.Current.Resolve<IDefaultValueGeneratorsProvider>().ProvideGenerator(exceptedType);
 
             return builder.Update(x =>
             {
