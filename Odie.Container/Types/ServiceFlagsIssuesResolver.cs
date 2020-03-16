@@ -4,6 +4,8 @@
     {
         public void ResolveIssues(ServiceFlags flags)
         {
+            // add resolving probles with multiple creation methods like ctors and factors later TODO
+            
             if (flags.HasFlag(ServiceFlagConstants.MultiInstance) && flags.HasFlag(ServiceFlagConstants.SingleInstance))
             {
                 flags.RemoveFlag(ServiceFlagConstants.MultiInstance);
