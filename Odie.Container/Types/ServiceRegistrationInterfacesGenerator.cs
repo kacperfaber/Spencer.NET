@@ -5,9 +5,16 @@ namespace Odie
 {
     public class ServiceRegistrationInterfacesGenerator : IServiceRegistrationInterfacesGenerator
     {
+        public IRegistrationInterfacesFilter Filter; 
+
+        public ServiceRegistrationInterfacesGenerator(IRegistrationInterfacesFilter filter)
+        {
+            Filter = filter;
+        }
+
         public IEnumerable<Type> GenerateInterfaces(ServiceFlags flags, Type type)
         {
-            Type[] interfaces = type.GetInterfaces();
+            IEnumerable<Type> interfaces = Filter.Filter(type.GetInterfaces());
 
             foreach (Type i in interfaces)
             {
