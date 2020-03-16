@@ -7,22 +7,16 @@ namespace Odie
 {
     public class InstancesCreator : IInstanceCreator
     {
-        public IConstructorProvider ConstructorProvider;
-        public IConstructorParametersGenerator ParametersGenerator;
+        public IConstructorInstanceCreator CtorInstanceCreator;
 
-        public InstancesCreator(IConstructorProvider constructorProvider, IConstructorParametersGenerator parametersGenerator)
+        public InstancesCreator(IConstructorInstanceCreator ctorInstanceCreator)
         {
-            ConstructorProvider = constructorProvider;
-            ParametersGenerator = parametersGenerator;
+            CtorInstanceCreator = ctorInstanceCreator;
         }
 
-        public object CreateInstance(ServiceFlags flags, Type type,IContainer container)
+        public object CreateInstance(ServiceFlags flags, Type type, IContainer container)
         {
-            ConstructorInfo constructor = ConstructorProvider.ProvideConstructor(type, flags);
-            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, flags, container);
-            object instance = constructor.Invoke(parameters.ToArray());
-
-            return instance;
+            return CtorInstanceCreator.CreateInstance(flags, type, container);
         }
     }
 }

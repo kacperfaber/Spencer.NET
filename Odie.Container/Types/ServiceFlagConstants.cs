@@ -8,6 +8,7 @@
         public const string AlwaysNew = "always_new";
         public const string ExcludeType = "exclude_type";
         public const string ServiceCtor = "service_constructor";
+        public const string ServiceFactory = "service_factory";
 
         public ServiceFlagConstants()
         {

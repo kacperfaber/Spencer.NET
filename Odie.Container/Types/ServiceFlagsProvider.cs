@@ -21,7 +21,10 @@ namespace Odie
                 ServiceFlagAttribute flagAttr = (ServiceFlagAttribute) attr;
                 ServiceFlag sflag = flagAttr.ServiceFlag;
 
-                return new ServiceFlagAttribute(sflag.Name, sflag.Value, member);
+                return new ServiceFlagAttribute() {ServiceFlag = new ServiceFlag(sflag.Name, sflag.Value)
+                {
+                    Parent = member
+                }};
             });
 
             foreach (ServiceFlagAttribute attribute in flagAttributes)
