@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Odie
 {
@@ -28,6 +29,11 @@ namespace Odie
         public void AddFlag(string name, object value)
         {
             Add(new ServiceFlag(name, value));
+        }
+
+        public void AddFlag(string name, object value, MemberInfo parent)
+        {
+            Add(new ServiceFlag(name, value) {Parent = parent});
         }
 
         public void RemoveFlag(string name)

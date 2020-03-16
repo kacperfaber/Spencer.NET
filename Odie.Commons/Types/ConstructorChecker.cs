@@ -6,7 +6,7 @@ namespace Odie.Commons
     {
         public bool Check(MemberInfo member)
         {
-            return member.MemberType == MemberTypes.Constructor;
+            return member?.MemberType == MemberTypes.Constructor;
         }
     }
 }

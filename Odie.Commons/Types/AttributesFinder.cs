@@ -39,6 +39,31 @@ namespace Odie.Commons
                     yield return func(member, attribute);
                 }
             }
+
+            foreach (Attribute attr in Attribute.GetCustomAttributes(type, typeof(TAttr)))
+            {
+                yield return func(type, attr);
+            }
+        }
+
+        public IEnumerable<TAttr> FindAttributesEverywhere<TAttr>(Type type) where TAttr : class
+        {
+            MemberInfo[] members = type.GetMembers();
+
+            foreach (MemberInfo member in members)
+            {
+                Attribute[] attributes = Attribute.GetCustomAttributes(member, typeof(TAttr));
+
+                foreach (Attribute attribute in attributes)
+                {
+                    yield return attribute as TAttr;
+                }
+            }
+
+            foreach (Attribute attr in Attribute.GetCustomAttributes(type, typeof(TAttr)))
+            {
+                yield return attr as TAttr;
+            }
         }
     }
 }
