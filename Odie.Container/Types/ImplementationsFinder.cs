@@ -13,7 +13,7 @@ namespace Odie
         {
             foreach (Assembly assembly in assemblies)
             {
-                foreach (Type type in assembly.GetTypes().Where(x => x.GetInterfaces().Length > 0))
+                foreach (Type type in assembly.GetTypes().Where(x => x.GetInterfaces().Length > 0).Where(x => x.IsClass))
                 {
                     if (@interface.IsAssignableFrom(type) && RegisteredTypes.SingleOrDefault(x => x == type) == null)
                     {
