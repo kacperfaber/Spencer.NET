@@ -18,21 +18,18 @@ namespace Odie
 
         public IEnumerable<Service> GenerateServices(Type type, AssemblyList assemblies, object instance = null)
         {
-            using (ServiceBuilder builder = new ServiceBuilder())
+            if (TypeIsClassValidator.Validate(type))
             {
-                if (TypeIsClassValidator.Validate(type))
-                {
-                    yield return TypeServiceGenerator.GenerateService(type);
-                }
+                yield return TypeServiceGenerator.GenerateService(type);
+            }
 
-                else
-                {
-                    IEnumerable<Type> types = ImplementationsFinder.FindImplementations(assemblies, type);
+            else
+            {
+                IEnumerable<Type> types = ImplementationsFinder.FindImplementations(assemblies, type);
 
-                    foreach (Type @class in types)
-                    {
-                        yield return TypeServiceGenerator.GenerateService(@class);
-                    }
+                foreach (Type @class in types)
+                {
+                    yield return TypeServiceGenerator.GenerateService(@class);
                 }
             }
         }
