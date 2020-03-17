@@ -14,5 +14,13 @@ namespace Odie
         {
             Add(assembly);
         }
+
+        public void AddAssemblies(params AssemblyName[] names)
+        {
+            foreach (AssemblyName assemblyName in names)
+            {
+                Add(Assembly.Load(assemblyName));
+            }
+        }
     }
 }

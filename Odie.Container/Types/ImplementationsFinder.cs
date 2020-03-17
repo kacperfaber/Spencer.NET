@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using Odie.Commons;
 
 namespace Odie
 {
     public class ImplementationsFinder : IImplementationsFinder
     {
-        public IInterfaceChecker InterfaceChecker;
+        public List<Type> RegisteredTypes = new List<Type>();
         
         public IEnumerable<Type> FindImplementations(AssemblyList assemblies, Type @interface)
         {
-            // TODO
-
-            throw new NotImplementedException();
+            foreach (Assembly assembly in assemblies)
+            {
+                foreach (Type type in assembly.GetTypes().Where(x => x.GetInterfaces().Length > 0))
+                {
+                    if (@interface.IsAssignableFrom(type) && RegisteredTypes.SingleOrDefault(x => x == type) == null)
+                    {
+                        RegisteredTypes.Add(type);
+                        yield return type;
+                    }
+                }
+            }
         }
     }
 }
