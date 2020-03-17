@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 
-namespace Odie.Commons
+namespace Odie
 {
     public interface IImplementationsFinder
     {
-        Type[] FindImplementations(Type @interface);
+        IEnumerable<Type> FindImplementations(IEnumerable<Assembly> assemblies, Type @interface);
     }
 }

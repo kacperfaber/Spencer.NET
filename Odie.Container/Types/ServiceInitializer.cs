@@ -3,16 +3,18 @@
     public class ServiceInitializer : IServiceInitializer
     {
         public IInstanceCreator InstanceCreator;
+        public IServiceRegistrationInstanceSetter InstanceSetter;
 
-        public ServiceInitializer(IInstanceCreator instanceCreator)
+        public ServiceInitializer(IInstanceCreator instanceCreator, IServiceRegistrationInstanceSetter instanceSetter)
         {
             InstanceCreator = instanceCreator;
+            InstanceSetter = instanceSetter;
         }
 
         public void Initialize(Service service, IContainer container)
         {
             object instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, container);
-            service.Registration.Instance = instance;
+            InstanceSetter.SetInstance(service.Registration, instance);
         }
     }
 }

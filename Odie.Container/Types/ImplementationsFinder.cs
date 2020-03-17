@@ -9,12 +9,11 @@ namespace Odie
     {
         public IInterfaceChecker InterfaceChecker;
         
-        public Type[] FindImplementations(IEnumerable<Assembly> assemblies, Type @interface)
+        public IEnumerable<Type> FindImplementations(IEnumerable<Assembly> assemblies, Type @interface)
         {
-            if (InterfaceChecker.IsInterface(@interface))
-            {
-                
-            }
+            // TODO
+
+            throw new NotImplementedException();
         }
     }
 }
