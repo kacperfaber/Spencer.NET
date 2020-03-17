@@ -21,6 +21,12 @@ namespace Odie
         public IServiceRegistration Generate(ServiceFlags flags, Type type, object instance = null)
         {
             IEnumerable<Type> interfaces = InterfacesGenerator.GenerateInterfaces(flags, type);
+            
+            foreach (Type @interface in interfaces)
+            {
+                Console.WriteLine($"{type.Name} has interface " + @interface.Name);
+            }
+            
             Type baseType = BaseTypeFinder.GetBaseType(type);
             IServiceGenericRegistration genericRegistration = ServiceGenericRegistrationGenerator.Generate(type);
             

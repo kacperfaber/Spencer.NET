@@ -6,8 +6,9 @@ namespace Odie
     {
         public override void TypeNotRegistered(Type type, IContainer container)
         {
-            container.Register(type);
             container.RegisterAssembly(type.Assembly);
+            container.Register(type);
+            
 
             Console.WriteLine("not found " + type.FullName);
             Console.WriteLine("registering type and assembly " + type.Assembly.FullName);

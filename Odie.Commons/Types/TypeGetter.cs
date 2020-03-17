@@ -8,5 +8,10 @@ namespace Odie.Commons
         {
             return instance.GetType();
         }
+
+        public Type GetType<T>()
+        {
+            return typeof(T);
+        }
     }
 }

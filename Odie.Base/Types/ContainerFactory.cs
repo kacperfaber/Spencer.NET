@@ -25,7 +25,7 @@ namespace Odie
                         new ValueTypeActivator(), new TypeIsValueTypeChecker()),
                     new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()))), new ServiceRegistrationInstanceSetter()),
                 new TypeExisterChecker(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new ServiceIsAutoValueChecker(),
-                new TypeGetter());
+                new TypeGetter(), new AssemblyRegistrar(new AssemblyListAdder(), new AssemblyListContainsChecker()));
         }
 
         public static IContainer CreateContainer(FallbackConfiguration fallbackConfiguration)

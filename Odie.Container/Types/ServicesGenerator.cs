@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Odie
 {
@@ -29,7 +30,8 @@ namespace Odie
 
                 foreach (Type @class in types)
                 {
-                    yield return TypeServiceGenerator.GenerateService(@class);
+                    Service service = TypeServiceGenerator.GenerateService(@class);
+                    yield return service;
                 }
             }
         }

@@ -19,10 +19,11 @@ namespace Odie
         public ITypeExisterChecker TypeExisterChecker;
         public IServiceIsAutoValueChecker ServiceIsAutoValueChecker;
         public ITypeGetter TypeGetter;
+        public IAssemblyRegistrar AssemblyRegistrar;
         
         public FallbackConfiguration FallbackConfiguration = new FallbackConfiguration();
 
-        public Container(IServiceResolver serviceResolver, IServiceRegistrar serviceRegistrar, IServiceGenerator serviceGenerator, IServiceFinder serviceFinder, IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker, ITypeGetter typeGetter)
+        public Container(IServiceResolver serviceResolver, IServiceRegistrar serviceRegistrar, IServiceGenerator serviceGenerator, IServiceFinder serviceFinder, IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker, ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar)
         {
             ServiceResolver = serviceResolver;
             ServiceRegistrar = serviceRegistrar;
@@ -32,6 +33,7 @@ namespace Odie
             TypeExisterChecker = typeExisterChecker;
             ServiceIsAutoValueChecker = serviceIsAutoValueChecker;
             TypeGetter = typeGetter;
+            AssemblyRegistrar = assemblyRegistrar;
         }
 
         public object Resolve(Type key)
@@ -49,8 +51,8 @@ namespace Odie
 
         public T Resolve<T>()
         {
-            Type type = typeof(T);
-            
+            Type type = TypeGetter.GetType<T>();
+
             if (!TypeExisterChecker.Check(Services, type))
             {
                 FallbackConfiguration.TypeNotRegistered(type, this);
@@ -69,11 +71,16 @@ namespace Odie
 
         public void Register(Type type)
         {
+            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
+            
             IEnumerable<Service> services = ServiceGenerator.GenerateServices(type, Assemblies);
 
-            if (ServiceIsAutoValueChecker.Check(services.First())) // TODO
+            foreach (Service service in services)
             {
-                ServiceInitializer.Initialize(services.First(), this);
+                if (ServiceIsAutoValueChecker.Check(service))
+                {
+                    ServiceInitializer.Initialize(service, this);
+                }
             }
 
             ServiceRegistrar.Register(Services, services, this);
@@ -81,24 +88,33 @@ namespace Odie
 
         public void RegisterObject(object instance)
         {
-            IEnumerable<Service> services = ServiceGenerator.GenerateServices(TypeGetter.GetType(instance), Assemblies, instance);
+            Type type = TypeGetter.GetType(instance);
+            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
+
+            IEnumerable<Service> services = ServiceGenerator.GenerateServices(type, Assemblies, instance);
             ServiceRegistrar.Register(Services, services, this);
         }
 
         public void RegisterObject<TKey>(object instance)
         {
+            Type type = TypeGetter.GetType();
+            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
+            
             IEnumerable<Service> services = ServiceGenerator.GenerateServices(typeof(TKey), Assemblies, instance);
             ServiceRegistrar.Register(Services, services, this);
         }
 
         public void RegisterObject(object instance, Type targetType)
         {
+            AssemblyRegistrar.RegisterIfNotExist(Assemblies, targetType);
             IEnumerable<Service> services = ServiceGenerator.GenerateServices(targetType, Assemblies, instance);
             ServiceRegistrar.Register(Services, services, this);
         }
 
         public void RegisterAssembly(Assembly assembly)
         {
+            AssemblyRegistrar.RegisterIfNotExist(Assemblies, assembly);
+            
             foreach (Type type in assembly.GetTypes())
             {
                 ServiceRegistrar.Register(Services, ServiceGenerator.GenerateServices(type, Assemblies), this);
@@ -107,7 +123,10 @@ namespace Odie
 
         public void RegisterAssembly<T>()
         {
-            foreach (Type type in typeof(T).Assembly.GetTypes())
+            Type tType = TypeGetter.GetType<T>();
+            AssemblyRegistrar.RegisterIfNotExist(Assemblies, tType);
+            
+            foreach (Type type in tType.Assembly.GetTypes())
             {
                 ServiceRegistrar.Register(Services, ServiceGenerator.GenerateServices(type, Assemblies), this);
             }
@@ -117,6 +136,8 @@ namespace Odie
         {
             foreach (Assembly assembly in assemblies)
             {
+                AssemblyRegistrar.RegisterIfNotExist(Assemblies, assembly);
+                
                 foreach (Type type in assembly.GetTypes())
                 {
                     ServiceRegistrar.Register(Services, ServiceGenerator.GenerateServices(type, Assemblies), this);
@@ -126,15 +147,17 @@ namespace Odie
 
         public void Register<T>()
         {
-            IEnumerable<Service> service = ServiceGenerator.GenerateServices(typeof(T), Assemblies);
+            IEnumerable<Service> services = ServiceGenerator.GenerateServices(typeof(T), Assemblies);
 
-            // TODO First()
-            if (ServiceIsAutoValueChecker.Check(service.First()))
+            foreach (Service service in services)
             {
-                ServiceInitializer.Initialize(service.First(), this);
+                if (ServiceIsAutoValueChecker.Check(service))
+                {
+                    ServiceInitializer.Initialize(service, this);
+                }
             }
-
-            ServiceRegistrar.Register(Services, service, this);
+            
+            ServiceRegistrar.Register(Services, services, this);
         }
     }
 }
