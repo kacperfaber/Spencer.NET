@@ -19,7 +19,7 @@ namespace Odie
         {
             return GenericParametersChecker.Check(typeKey)
                 ? GenericServiceFinder.FindGenericService(list, typeKey)
-                : list.GetServices().SingleOrDefault(x => typeKey.IsAssignableFrom(x.Registration.TargetType));
+                : list.GetServices().FirstOrDefault(x => typeKey.IsAssignableFrom(x.Registration.TargetType));
         }
     }
 }

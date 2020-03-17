@@ -6,7 +6,8 @@ namespace Odie.Tests
     {
         bool exec<TArg>(TArg @true)
         {
-            return (bool) new BooleanGenerator().Generate(@true, typeof(TArg), new[] {typeof(bool)}, out _);
+            return (bool) StaticContainer.Current.Resolve<BooleanGenerator>()
+                .Generate(@true, typeof(TArg), new[] {typeof(bool)}, out _);
         }
 
         [Test]

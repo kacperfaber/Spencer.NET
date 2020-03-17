@@ -7,6 +7,10 @@ namespace Odie
     public class ServiceFlagsProvider : IServiceFlagsProvider
     {
         public IAttributesFinder AttributesFinder;
+        
+        // introduce members of type to array.
+        // then we'll be have better optimalization TODO
+        // and clean
 
         public ServiceFlagsProvider(IAttributesFinder attributesFinder)
         {

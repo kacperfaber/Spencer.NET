@@ -18,9 +18,9 @@ namespace Odie
             ConstructorProvider = constructorProvider;
         }
 
-        public object CreateInstance(ServiceFlags flags, Type type, IContainer container)
+        public object CreateInstance(ServiceFlags flags, Type @class, IContainer container)
         {
-            ConstructorInfo constructor = ConstructorProvider.ProvideConstructor(type, flags);
+            ConstructorInfo constructor = ConstructorProvider.ProvideConstructor(@class, flags);
             IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, flags, container);
             object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
 
