@@ -6,6 +6,6 @@ namespace Odie
 {
     public interface IImplementationsFinder
     {
-        IEnumerable<Type> FindImplementations(IEnumerable<Assembly> assemblies, Type @interface);
+        IEnumerable<Type> FindImplementations(AssemblyList assemblies, Type @interface);
     }
 }

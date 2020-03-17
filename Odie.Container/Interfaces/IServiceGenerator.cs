@@ -5,6 +5,6 @@ namespace Odie
 {
     public interface IServiceGenerator
     {
-        Service GenerateService(Type type, object instance = null);
+        IEnumerable<Service> GenerateServices(Type type, AssemblyList assemblies, object instance = null);
     }
 }

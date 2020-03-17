@@ -9,7 +9,7 @@ namespace Odie
     {
         public IInterfaceChecker InterfaceChecker;
         
-        public IEnumerable<Type> FindImplementations(IEnumerable<Assembly> assemblies, Type @interface)
+        public IEnumerable<Type> FindImplementations(AssemblyList assemblies, Type @interface)
         {
             // TODO
 

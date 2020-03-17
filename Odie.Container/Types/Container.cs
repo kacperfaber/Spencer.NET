@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Odie.Commons;
 
@@ -8,6 +9,7 @@ namespace Odie
     public class Container : IContainer
     {
         public ServicesList Services = new ServicesList();
+        public AssemblyList Assemblies = new AssemblyList();
 
         public IServiceResolver ServiceResolver;
         public IServiceRegistrar ServiceRegistrar;
@@ -67,39 +69,39 @@ namespace Odie
 
         public void Register(Type type)
         {
-            Service service = ServiceGenerator.GenerateService(type);
+            IEnumerable<Service> services = ServiceGenerator.GenerateServices(type, Assemblies);
 
-            if (ServiceIsAutoValueChecker.Check(service))
+            if (ServiceIsAutoValueChecker.Check(services.First())) // TODO
             {
-                ServiceInitializer.Initialize(service, this);
+                ServiceInitializer.Initialize(services.First(), this);
             }
 
-            ServiceRegistrar.Register(Services, service, this);
+            ServiceRegistrar.Register(Services, services, this);
         }
 
         public void RegisterObject(object instance)
         {
-            Service service = ServiceGenerator.GenerateService(TypeGetter.GetType(instance), instance);
-            ServiceRegistrar.Register(Services, service, this);
+            IEnumerable<Service> services = ServiceGenerator.GenerateServices(TypeGetter.GetType(instance), Assemblies, instance);
+            ServiceRegistrar.Register(Services, services, this);
         }
 
         public void RegisterObject<TKey>(object instance)
         {
-            Service service = ServiceGenerator.GenerateService(typeof(TKey), instance);
-            ServiceRegistrar.Register(Services, service, this);
+            IEnumerable<Service> services = ServiceGenerator.GenerateServices(typeof(TKey), Assemblies, instance);
+            ServiceRegistrar.Register(Services, services, this);
         }
 
         public void RegisterObject(object instance, Type targetType)
         {
-            Service service = ServiceGenerator.GenerateService(targetType, instance);
-            ServiceRegistrar.Register(Services, service, this);
+            IEnumerable<Service> services = ServiceGenerator.GenerateServices(targetType, Assemblies, instance);
+            ServiceRegistrar.Register(Services, services, this);
         }
 
         public void RegisterAssembly(Assembly assembly)
         {
             foreach (Type type in assembly.GetTypes())
             {
-                ServiceRegistrar.Register(Services, ServiceGenerator.GenerateService(type), this);
+                ServiceRegistrar.Register(Services, ServiceGenerator.GenerateServices(type, Assemblies), this);
             }
         }
 
@@ -107,7 +109,7 @@ namespace Odie
         {
             foreach (Type type in typeof(T).Assembly.GetTypes())
             {
-                ServiceRegistrar.Register(Services, ServiceGenerator.GenerateService(type), this);
+                ServiceRegistrar.Register(Services, ServiceGenerator.GenerateServices(type, Assemblies), this);
             }
         }
 
@@ -117,18 +119,19 @@ namespace Odie
             {
                 foreach (Type type in assembly.GetTypes())
                 {
-                    ServiceRegistrar.Register(Services, ServiceGenerator.GenerateService(type), this);
+                    ServiceRegistrar.Register(Services, ServiceGenerator.GenerateServices(type, Assemblies), this);
                 }
             }
         }
 
         public void Register<T>()
         {
-            Service service = ServiceGenerator.GenerateService(typeof(T));
+            IEnumerable<Service> service = ServiceGenerator.GenerateServices(typeof(T), Assemblies);
 
-            if (ServiceIsAutoValueChecker.Check(service))
+            // TODO First()
+            if (ServiceIsAutoValueChecker.Check(service.First()))
             {
-                ServiceInitializer.Initialize(service, this);
+                ServiceInitializer.Initialize(service.First(), this);
             }
 
             ServiceRegistrar.Register(Services, service, this);

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
 using Odie.Commons;
@@ -97,11 +99,11 @@ namespace Odie.Container.Tests
         {
             ServiceGenerator generator = new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
                 new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())),new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),new ServiceInfoGenerator());
-            Service service = generator.GenerateService(typeof(T));
+            IEnumerable<Service> service = generator.GenerateServices(typeof(T), new AssemblyList());
 
             InstancesCreator creator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(), new TypeIsValueTypeChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider())));
 
-            object instance = creator.CreateInstance(service.Flags, service.Registration.TargetType, new TestContainer());
+            object instance = creator.CreateInstance(service.First().Flags, service.First().Registration.TargetType, new TestContainer());
 
             return instance;
         }

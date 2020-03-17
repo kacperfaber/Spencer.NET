@@ -2,7 +2,7 @@
 
 namespace Odie
 {
-    public class TypeValidator : ITypeValidator
+    public class TypeIsClassValidator : ITypeIsClassValidator
     {
         public bool Validate(Type type)
         {

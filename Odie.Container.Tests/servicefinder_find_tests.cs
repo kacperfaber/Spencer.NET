@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Odie.Commons;
 
@@ -29,8 +30,9 @@ namespace Odie.Container.Tests
                 new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
                     new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())),new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator());
 
-            Service test1 = generator.GenerateService(typeof(Test1));
-            Service test2 = generator.GenerateService(typeof(Test2));
+            AssemblyList assemblies = new AssemblyList();
+            Service test1 = generator.GenerateServices(typeof(Test1), assemblies).First();
+            Service test2 = generator.GenerateServices(typeof(Test2), assemblies).First();
 
             ServicesList list = new ServicesList()
             {

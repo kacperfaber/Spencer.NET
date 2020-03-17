@@ -27,7 +27,7 @@ namespace Odie
                 new ServiceInitializer(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                     new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
                         new ValueTypeActivator(), new TypeIsValueTypeChecker()),
-                    new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider())))),
+                    new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()))), new ServiceRegistrationInstanceSetter()),
                 new TypeExisterChecker(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new ServiceIsAutoValueChecker(),
                 new TypeGetter());
         }
