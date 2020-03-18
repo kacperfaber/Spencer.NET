@@ -23,17 +23,17 @@ namespace Odie.Container.Tests
         {
         }
 
-        Service exec<TKey>()
+        IService exec<TKey>()
         {
             ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()), new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())), new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator()));
 
             AssemblyList assemblies = new AssemblyList();
-            Service test1 = generator.GenerateServices(typeof(Test1), assemblies, null).First();
-            Service test2 = generator.GenerateServices(typeof(Test2), assemblies, null).First();
+            IService test1 = generator.GenerateServices(typeof(Test1), assemblies, null).First();
+            IService test2 = generator.GenerateServices(typeof(Test2), assemblies, null).First();
 
             ServicesList list = new ServicesList()
             {
-                Services = new List<Service>()
+                Services = new List<IService>()
                     {test1, test2}
             };
 

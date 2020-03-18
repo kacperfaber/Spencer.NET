@@ -20,11 +20,12 @@ namespace Odie
             InfoGenerator = infoGenerator;
         }
 
-        public Service GenerateService(Type @class, IContainer container, object instance = null)
+        public IService GenerateService(Type @class, IContainer container, object instance = null)
         {
             if (ClassHasFactoryChecker.HasFactory(@class))
             {
                 IServiceFactory factory = FactoryProvider.ProvideServiceFactory(@class, container);
+                return FactoryInvoker.Invoke(factory);
             }
             
             ServiceFlags flags = FlagsGenerator.GenerateFlags(@class);

@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IServiceByInterfaceFinder
     {
-        Service FindByInterface(ServicesList list, Type @interface);
+        IService FindByInterface(ServicesList list, Type @interface);
     }
 }

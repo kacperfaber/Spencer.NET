@@ -4,18 +4,18 @@ namespace Odie
 {
     public class ServicesList
     {
-        public List<Service> Services { get; set; }
+        public List<IService> Services { get; set; }
 
         public ServicesList()
         {
-            Services = new List<Service>();
+            Services = new List<IService>();
         }
 
-        public void AddService(Service service)
+        public void AddService(IService service)
         {
             Services.Add(service);
         }
 
-        public List<Service> GetServices() => Services;
+        public List<IService> GetServices() => Services;
     }
 }

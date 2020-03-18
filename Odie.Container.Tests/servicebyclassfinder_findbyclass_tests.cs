@@ -22,7 +22,7 @@ namespace Odie.Container.Tests
         {
         }
         
-        Service exec<T>()
+        IService exec<T>()
         {
             ServicesList list = new ServicesList();
             ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
@@ -32,15 +32,15 @@ namespace Odie.Container.Tests
                         new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                     new ServiceInfoGenerator()));
 
-            IEnumerable<Service> services1 = generator.GenerateServices(typeof(Test1), new AssemblyList(), null);
-            IEnumerable<Service> services2 = generator.GenerateServices(typeof(Test2), new AssemblyList(), null);
+            IEnumerable<IService> services1 = generator.GenerateServices(typeof(Test1), new AssemblyList(), null);
+            IEnumerable<IService> services2 = generator.GenerateServices(typeof(Test2), new AssemblyList(), null);
 
-            foreach (Service service in services1)
+            foreach (IService service in services1)
             {
                 list.AddService(service);
             }
 
-            foreach (Service service in services2)
+            foreach (IService service in services2)
             {
                 list.AddService(service);
             }

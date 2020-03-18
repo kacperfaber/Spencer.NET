@@ -5,7 +5,7 @@ namespace Odie
 {
     public class ServiceByInterfaceFinder : IServiceByInterfaceFinder
     {
-        public Service FindByInterface(ServicesList list, Type @interface)
+        public IService FindByInterface(ServicesList list, Type @interface)
         {
             return list.GetServices()
                 .Where(x => x.Registration.Interfaces.Any())

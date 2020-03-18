@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IServiceByClassFinder
     {
-        Service FindByClass(ServicesList list, Type @class);
+        IService FindByClass(ServicesList list, Type @class);
     }
 }

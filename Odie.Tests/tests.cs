@@ -34,9 +34,9 @@ namespace Odie.Tests
                         new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())),
                         new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                     new ServiceInfoGenerator()));
-            List<Service> services = new List<Service>(generator.GenerateServices(typeof(Service), new AssemblyList(), null));
+            List<IService> services = new List<IService>(generator.GenerateServices(typeof(Service), new AssemblyList(), null));
 
-            foreach (Service service in services)
+            foreach (IService service in services)
             {
                 Console.WriteLine(service.Registration.TargetType.Name);
             }

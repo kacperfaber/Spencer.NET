@@ -21,7 +21,7 @@ namespace Odie
             TypeIsClassValidator = typeIsClassValidator;
         }
 
-        public Service Find(ServicesList list, Type typeKey)
+        public IService Find(ServicesList list, Type typeKey)
         {
             if (GenericParametersChecker.Check(typeKey)) // TODO classgenericparameterschecker and interface...
             {

@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IServiceRegistrar
     {
-        void Register(ServicesList list, IEnumerable<Service> services, IContainer container);
+        void Register(ServicesList list, IEnumerable<IService> services, IContainer container);
     }
 }

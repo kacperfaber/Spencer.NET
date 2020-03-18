@@ -2,6 +2,6 @@
 {
     public interface IServiceInstanceChecker
     {
-        bool Check(Service service);
+        bool Check(IService service);
     }
 }

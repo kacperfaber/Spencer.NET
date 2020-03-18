@@ -25,7 +25,7 @@ namespace Odie.Container.Tests
         bool exec<T>()
         {
             ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()), new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())), new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator()));
-            Service test1Service = generator.GenerateServices(typeof(Test1), new AssemblyList(), null).First();
+            IService test1Service = generator.GenerateServices(typeof(Test1), new AssemblyList(), null).First();
 
             ServicesList list = new ServicesList();
             list.AddService(test1Service);

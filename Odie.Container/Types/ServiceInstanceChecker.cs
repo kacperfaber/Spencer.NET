@@ -2,7 +2,7 @@
 {
     public class ServiceInstanceChecker : IServiceInstanceChecker
     {
-        public bool Check(Service service)
+        public bool Check(IService service)
         {
             return service?.Registration?.Instance != null;
         }

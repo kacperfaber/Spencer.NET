@@ -5,7 +5,7 @@ namespace Odie
 {
     public class ServiceByClassFinder : IServiceByClassFinder
     {
-        public Service FindByClass(ServicesList list, Type @class)
+        public IService FindByClass(ServicesList list, Type @class)
         {
             return list
                 .GetServices()

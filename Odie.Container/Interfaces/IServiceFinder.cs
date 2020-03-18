@@ -5,6 +5,6 @@ namespace Odie
 {
     public interface IServiceFinder
     {
-        Service Find(ServicesList list, Type typeKey);
+        IService Find(ServicesList list, Type typeKey);
     }
 }

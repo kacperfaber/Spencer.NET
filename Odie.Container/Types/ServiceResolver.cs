@@ -11,7 +11,7 @@ namespace Odie
             InstanceCreator = instanceCreator;
         }
 
-        public object Resolve(Service service, IContainer container)
+        public object Resolve(IService service, IContainer container)
         {
             // TODO make it beauty
             bool alwaysNew = service.Flags.HasFlag(ServiceFlagConstants.MultiInstance);

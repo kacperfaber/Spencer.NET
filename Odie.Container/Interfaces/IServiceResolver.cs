@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IServiceResolver
     {
-        object Resolve(Service service, IContainer container);
+        object Resolve(IService service, IContainer container);
     }
 }
