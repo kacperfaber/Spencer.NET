@@ -37,5 +37,27 @@ namespace Odie.Base.Tests
 
             Assert.IsTrue(b.Build().Properties.Count == times);
         }
+
+        interface IOdie
+        {
+            string Name { get; set; }
+        }
+
+        class Odie : IOdie
+        {
+            public string Name { get; set; } = "Hello World!";
+        }
+
+        [Test]
+        public void xxx()
+        {
+            Odie odie = new Odie {Name = "KacpiiToZiomal"};
+            
+            StaticContainer.Current.RegisterObject(odie);
+
+            IOdie resolved = StaticContainer.Current.Resolve<IOdie>();
+
+            Console.WriteLine(resolved.Name);
+        }
     }
 }

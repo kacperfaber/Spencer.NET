@@ -8,21 +8,27 @@ namespace Odie
     {
         public ITypeContainsGenericParametersChecker GenericParametersChecker;
         public IGenericServiceFinder GenericServiceFinder;
+        public ITypeIsClassValidator TypeIsClassValidator;
+        public IServiceByClassFinder ByClassFinder;
+        public IServiceByInterfaceFinder ByInterfaceFinder;
 
-        public ServiceFinder(ITypeContainsGenericParametersChecker genericParametersChecker, IGenericServiceFinder genericServiceFinder)
+        public ServiceFinder(ITypeContainsGenericParametersChecker genericParametersChecker, IGenericServiceFinder genericServiceFinder, IServiceByInterfaceFinder byInterfaceFinder, IServiceByClassFinder byClassFinder, ITypeIsClassValidator typeIsClassValidator)
         {
             GenericParametersChecker = genericParametersChecker;
             GenericServiceFinder = genericServiceFinder;
+            ByInterfaceFinder = byInterfaceFinder;
+            ByClassFinder = byClassFinder;
+            TypeIsClassValidator = typeIsClassValidator;
         }
 
         public Service Find(ServicesList list, Type typeKey)
         {
-            if (GenericParametersChecker.Check(typeKey))
+            if (GenericParametersChecker.Check(typeKey)) // TODO classgenericparameterschecker and interface...
             {
                 return GenericServiceFinder.FindGenericService(list, typeKey);
             }
 
-            throw new NotImplementedException(); // TODO
+            return TypeIsClassValidator.Validate(typeKey) ? ByClassFinder.FindByClass(list, typeKey) : ByInterfaceFinder.FindByInterface(list, typeKey);
         }
     }
 }

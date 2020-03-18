@@ -38,7 +38,7 @@ namespace Odie.Container.Tests
                     {test1, test2}
             };
 
-            ServiceFinder finder = new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeGenericParametersProvider()));
+            ServiceFinder finder = new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeGenericParametersProvider()),new ServiceByInterfaceFinder(), new ServiceByClassFinder(), new TypeIsClassValidator());
             return finder.Find(list, typeof(TKey));
         }
 

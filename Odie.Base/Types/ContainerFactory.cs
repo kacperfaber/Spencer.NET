@@ -19,7 +19,7 @@ namespace Odie
                             new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()))), new ServiceIsAutoValueChecker()),
                     new ServiceInstanceChecker()), new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()), new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())), new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator())), 
                 
-                new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeGenericParametersProvider())),
+                new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeGenericParametersProvider()),new ServiceByInterfaceFinder(), new ServiceByClassFinder(), new TypeIsClassValidator()),
                 new ServiceInitializer(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                     new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
                         new ValueTypeActivator(), new TypeIsValueTypeChecker()),

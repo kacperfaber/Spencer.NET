@@ -21,7 +21,8 @@ namespace Odie
         {
             if (TypeIsClassValidator.Validate(type))
             {
-                yield return TypeServiceGenerator.GenerateService(type);
+                Service service = TypeServiceGenerator.GenerateService(type, instance);
+                yield return service;
             }
 
             else
