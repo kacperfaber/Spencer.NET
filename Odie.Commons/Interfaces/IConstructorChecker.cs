@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Odie.Commons
+namespace Odie
 {
     public interface IConstructorChecker
     {

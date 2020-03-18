@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
-using Odie.Commons;
 
 namespace Odie.Container.Tests
 {

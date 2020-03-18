@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Odie
 {
@@ -14,8 +15,14 @@ namespace Odie
         
         public Type ValueGeneratorType { get; set; }
 
-        public object[] Parameters { get; set; }
+        public List<object> Parameters { get; set; }
 
-        public Type[] ParametersType { get; set; }
+        public List<Type> ParametersType { get; set; }
+
+        public Property()
+        {
+            Parameters = new List<object>();
+            ParametersType = new List<Type>();
+        }
     }
 }

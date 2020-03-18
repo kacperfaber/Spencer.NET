@@ -26,5 +26,14 @@ namespace Odie
 
             return instance;
         }
+
+        public object CreateInstance(Type @class, IContainer container)
+        {
+            ConstructorInfo constructor = ConstructorProvider.ProvideConstructor(@class);
+            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, container);
+            object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
+
+            return instance;
+        }
     }
 }

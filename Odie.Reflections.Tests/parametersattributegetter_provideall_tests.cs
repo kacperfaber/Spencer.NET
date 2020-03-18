@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using Odie.Commons;
 
 namespace Odie.Reflections.Tests
 {

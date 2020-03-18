@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -32,8 +33,8 @@ namespace Odie
             return builder.Update(x =>
             {
                 x.Flags = flags;
-                x.Parameters = parameters.Values.ToArray();
-                x.ParametersType = parameters.Types.ToArray();
+                x.Parameters = new List<object> {parameters.Values};
+                x.ParametersType = new List<Type>(parameters.Types.ToArray());
                 x.Name = propertyInfo.Name;
                 x.ExceptedType = exceptedType;
                 x.ValueGenerator = valueGenerator;

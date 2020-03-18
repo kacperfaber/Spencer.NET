@@ -67,27 +67,24 @@ namespace Odie
         {
             return Update(x =>
             {
-                x.Parameters = new object[] {parameters};
-                x.ParametersType = new Type[]
-                {
-                    parameters.GetType()
-                };
+                x.Parameters.Add(parameters);
+                x.ParametersType.Add(parameters.GetType());
             });
         }
 
         public PropertyBuilder AddParameters(object parameters)
         {
-            return Update(x => x.Parameters[0] = parameters);
+            return Update(x => x.Parameters.Add(parameters));
         }
 
         public PropertyBuilder AddParametersType(Type type)
         {
-            return Update(x => x.ParametersType[0] = type);
+            return Update(x => x.ParametersType.Add(type));
         }
 
         public PropertyBuilder AddParametersType<T>()
         {
-            return Update(x => x.ParametersType[0] = typeof(T));
+            return Update(x => x.ParametersType.Add(typeof(T)));
         }
 
         public void Dispose()

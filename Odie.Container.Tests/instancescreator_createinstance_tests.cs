@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
-using Odie.Commons;
 
 namespace Odie.Container.Tests
 {
@@ -44,9 +43,14 @@ namespace Odie.Container.Tests
                 throw new NotImplementedException();
             }
 
-            public bool Has(Type key)
+            public bool Has<T>()
             {
-                if (key == typeof(Dep1))
+                throw new NotImplementedException();
+            }
+
+            public bool Has(Type type)
+            {
+                if (type == typeof(Dep1))
                 {
                     return true;
                 }

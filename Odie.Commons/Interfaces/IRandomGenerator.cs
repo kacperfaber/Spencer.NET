@@ -1,4 +1,4 @@
-﻿namespace Odie.Commons
+﻿namespace Odie
 {
     public interface IRandomGenerator
     {

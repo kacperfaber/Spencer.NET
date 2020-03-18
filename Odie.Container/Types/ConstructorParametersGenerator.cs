@@ -55,5 +55,13 @@ namespace Odie
                 }
             }
         }
+
+        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IContainer container)
+        {
+            foreach (ParameterInfo parameter in constructor.GetParameters())
+            {
+                yield return container.Resolve(parameter.ParameterType);
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Odie.Commons
+namespace Odie
 {
     public interface ITypeGetter
     {

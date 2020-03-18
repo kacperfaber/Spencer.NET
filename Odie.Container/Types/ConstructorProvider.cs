@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Odie.Commons;
 
 namespace Odie
 {
@@ -30,6 +29,11 @@ namespace Odie
             }
 
             return DefaultConstructorProvider.ProvideDefaultConstructor(type);
+        }
+
+        public ConstructorInfo ProvideConstructor(Type type)
+        {
+            return type.GetConstructors().First();
         }
     }
 }

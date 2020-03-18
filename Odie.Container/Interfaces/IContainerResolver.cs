@@ -9,7 +9,5 @@ namespace Odie
         T Resolve<T>();
         
         // TODO Resolve with action filter like Func<Type[], Type>
-        
-        bool Has(Type key);
     }
 }

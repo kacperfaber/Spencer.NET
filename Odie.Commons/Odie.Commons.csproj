@@ -3,5 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <RootNamespace>Odie</RootNamespace>
+  </PropertyGroup>
 
 </Project>

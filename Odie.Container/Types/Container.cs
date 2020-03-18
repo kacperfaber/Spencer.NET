@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Odie.Commons;
 
 namespace Odie
 {
@@ -62,11 +61,19 @@ namespace Odie
             return (T) ServiceResolver.Resolve(service, this);
         }
 
-        public bool Has(Type key)
+        public bool Has<T>()
         {
-            Service service = ServiceFinder.Find(Services, key);
+            Type type = TypeGetter.GetType<T>();
+            
+            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
+            return ServiceFinder.Find(Services, type) != null;
+        }
 
-            return service != null;
+        public bool Has(Type type)
+        {
+            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
+            
+            return ServiceFinder.Find(Services, TypeGetter.GetType(type)) != null;
         }
 
         public void Register(Type type)
