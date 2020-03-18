@@ -29,6 +29,8 @@ namespace Odie
                     }
                 }
             }
+
+            RegisteredTypes = new List<Type>();
         }
     }
 }
