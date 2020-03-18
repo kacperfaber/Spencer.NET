@@ -32,8 +32,8 @@ namespace Odie.Container.Tests
                         new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                     new ServiceInfoGenerator()));
 
-            IEnumerable<Service> services1 = generator.GenerateServices(typeof(Test1), new AssemblyList());
-            IEnumerable<Service> services2 = generator.GenerateServices(typeof(Test2), new AssemblyList());
+            IEnumerable<Service> services1 = generator.GenerateServices(typeof(Test1), new AssemblyList(), null);
+            IEnumerable<Service> services2 = generator.GenerateServices(typeof(Test2), new AssemblyList(), null);
 
             foreach (Service service in services1)
             {

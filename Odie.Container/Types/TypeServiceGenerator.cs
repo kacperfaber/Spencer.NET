@@ -9,7 +9,8 @@ namespace Odie
         public IServiceInfoGenerator InfoGenerator;
 
         public IClassHasServiceFactoryChecker ClassHasFactoryChecker;
-        public
+        public IServiceFactoryProvider FactoryProvider;
+        public IServiceFactoryInvoker FactoryInvoker;
 
         public TypeServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator,
             IServiceInfoGenerator infoGenerator)
@@ -19,11 +20,11 @@ namespace Odie
             InfoGenerator = infoGenerator;
         }
 
-        public Service GenerateService(Type @class, object instance = null)
+        public Service GenerateService(Type @class, IContainer container, object instance = null)
         {
             if (ClassHasFactoryChecker.HasFactory(@class))
             {
-                
+                IServiceFactory factory = FactoryProvider.ProvideServiceFactory(@class, container);
             }
             
             ServiceFlags flags = FlagsGenerator.GenerateFlags(@class);
