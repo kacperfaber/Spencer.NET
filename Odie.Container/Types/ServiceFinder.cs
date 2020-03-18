@@ -22,12 +22,7 @@ namespace Odie
                 return GenericServiceFinder.FindGenericService(list, typeKey);
             }
 
-            List<Service> services = list.GetServices();
-            
-            return services
-                .FirstOrDefault(x =>
-                    x.Registration.Interfaces.Contains(typeKey) || x.Registration.TargetType.IsAssignableFrom(typeKey) ||
-                    x.Registration.TargetType == typeKey || x.Registration.Interfaces.SingleOrDefault(y => y == typeKey) != null);
+            throw new NotImplementedException(); // TODO
         }
     }
 }
