@@ -4,24 +4,21 @@
     {
         public static IContainer CreateContainer()
         {
-            return new Container(
-                new ServiceResolver(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                    new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
-                        new ValueTypeActivator(), new TypeIsValueTypeChecker()),
-                    new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider())))),
-                new ServiceRegistrar(
-                    new ServiceInstanceProvider(
-                        new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                            new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
-                                new ValueTypeActivator(), new TypeIsValueTypeChecker()),
-                            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()))), new ServiceIsAutoValueChecker()),
-                    new ServiceInstanceChecker()), new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()), new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())), new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator())), 
-                
-                new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeGenericParametersProvider()),new ServiceByInterfaceFinder(), new ServiceByClassFinder(), new TypeIsClassValidator()),
-                new ServiceInitializer(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                    new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
-                        new ValueTypeActivator(), new TypeIsValueTypeChecker()),
-                    new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()))), new ServiceRegistrationInstanceSetter()),
+            InstancesCreator instancesCreator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
+                new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(),
+                    new TypeIsValueTypeChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider())));
+            
+            return new Container(new ServiceResolver(instancesCreator),
+                new ServiceRegistrar(new ServiceInstanceProvider(instancesCreator, new ServiceIsAutoValueChecker()), new ServiceInstanceChecker()),
+                new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
+                    new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
+                        new ServiceRegistrationGenerator(new BaseTypeFinder(),
+                            new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())),
+                            new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
+                        new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(), new ServiceFactoryProvider(instancesCreator),
+                        new ServiceFactoryInvoker())),
+                new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeGenericParametersProvider()),
+                    new ServiceByInterfaceFinder(), new ServiceByClassFinder(), new TypeIsClassValidator()), new ServiceInitializer(instancesCreator,new ServiceRegistrationInstanceSetter()),
                 new TypeExisterChecker(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new ServiceIsAutoValueChecker(),
                 new TypeGetter(), new AssemblyRegistrar(new AssemblyListAdder(), new AssemblyListContainsChecker()));
         }

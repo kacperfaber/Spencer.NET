@@ -13,11 +13,14 @@ namespace Odie
         public IServiceFactoryInvoker FactoryInvoker;
 
         public TypeServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator,
-            IServiceInfoGenerator infoGenerator)
+            IServiceInfoGenerator infoGenerator, IClassHasServiceFactoryChecker classHasFactoryChecker, IServiceFactoryProvider factoryProvider, IServiceFactoryInvoker factoryInvoker)
         {
             FlagsGenerator = flagsGenerator;
             RegistrationGenerator = registrationGenerator;
             InfoGenerator = infoGenerator;
+            ClassHasFactoryChecker = classHasFactoryChecker;
+            FactoryProvider = factoryProvider;
+            FactoryInvoker = factoryInvoker;
         }
 
         public IService GenerateService(Type @class, IContainer container, object instance = null)
