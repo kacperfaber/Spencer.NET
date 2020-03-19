@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Microsoft.VisualBasic;
 using NUnit.Framework;
 
 namespace Odie.Container.Tests
@@ -13,6 +16,12 @@ namespace Odie.Container.Tests
             public TestClass(int x = 0)
             {
             }
+
+            [Inject]
+            public string Name { get; set; }
+
+            [Inject]
+            public string Email;
         }
 
         class Test2
@@ -39,7 +48,9 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_excepted_flags_count()
         {
-            Assert.IsTrue(exec<TestClass>().Count() == 2);
+            int count = exec<TestClass>().Count();
+
+            Assert.IsTrue(count == 4);
         }
 
         [Test]
@@ -71,6 +82,38 @@ namespace Odie.Container.Tests
         public void returns_multiinstance_flag_if_gived_instance_attribute_is_multiinstance()
         {
             Assert.IsTrue(exec<Test3>().HasFlag(ServiceFlagConstants.MultiInstance));
+        }
+
+        [Test]
+        public void returns_object_getflags_inject_returns_count_2()
+        {
+            ServiceFlags flags = exec<TestClass>();
+            IEnumerable<ServiceFlag> injects = flags.GetFlags(ServiceFlagConstants.Inject);
+
+            Assert.IsTrue(injects.Count() == 2);
+        }
+
+        [Test]
+        public void returns_object_getflags_inject_returns_not_null_parent()
+        {
+            ServiceFlags flags = exec<TestClass>();
+            IEnumerable<ServiceFlag> injects = flags.GetFlags(ServiceFlagConstants.Inject);
+
+            foreach (ServiceFlag serviceFlag in injects)
+            {
+                Assert.NotNull(serviceFlag.Parent);
+            }
+        }
+
+        [Test]
+        public void returns_object_getflags_inject_returns_propertyinfo_name_equals_to_Name()
+        {
+            ServiceFlags flags = exec<TestClass>();
+            IEnumerable<ServiceFlag> injects = flags.GetFlags(ServiceFlagConstants.Inject);
+            ServiceFlag inject = injects.First(x => x.Parent.MemberType == MemberTypes.Property);
+            bool result = inject.Parent.Name == "Name";
+            
+            Assert.IsTrue(result);
         }
     }
 }
