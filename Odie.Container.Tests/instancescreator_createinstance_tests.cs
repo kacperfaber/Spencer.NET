@@ -28,9 +28,9 @@ namespace Odie.Container.Tests
 
         class TestContainer : IContainer
         {
-            public object Resolve(Type key)
+            public object Resolve(Type type)
             {
-                if (key == typeof(Dep1))
+                if (type == typeof(Dep1))
                 {
                     return new Dep1();
                 }
@@ -39,6 +39,16 @@ namespace Odie.Container.Tests
             }
 
             public T Resolve<T>()
+            {
+                throw new NotImplementedException();
+            }
+
+            public IEnumerable<T> ResolveMany<T>()
+            {
+                throw new NotImplementedException();
+            }
+
+            public IEnumerable<object> ResolveMany(Type type)
             {
                 throw new NotImplementedException();
             }

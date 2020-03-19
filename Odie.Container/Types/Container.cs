@@ -35,14 +35,14 @@ namespace Odie
             AssemblyRegistrar = assemblyRegistrar;
         }
 
-        public object Resolve(Type key)
+        public object Resolve(Type type)
         {
-            if (!TypeExisterChecker.Check(Services, key))
+            if (!TypeExisterChecker.Check(Services, type))
             {
-                FallbackConfiguration.TypeNotRegistered(key, this);
+                FallbackConfiguration.TypeNotRegistered(type, this);
             }
             
-            IService service = ServiceFinder.Find(Services, key);
+            IService service = ServiceFinder.Find(Services, type);
             object result = ServiceResolver.Resolve(service, this);
 
             return result;
@@ -59,6 +59,28 @@ namespace Odie
             
             IService service = ServiceFinder.Find(Services, type);
             return (T) ServiceResolver.Resolve(service, this);
+        }
+
+        public IEnumerable<T> ResolveMany<T>()
+        {
+            Type type = TypeGetter.GetType<T>();
+
+            IEnumerable<IService> services = ServiceFinder.FindMany(Services, type);
+
+            foreach (IService service in services)
+            {
+                yield return (T) ServiceResolver.Resolve(service, this);
+            }
+        }
+
+        public IEnumerable<object> ResolveMany(Type type)
+        {
+            IEnumerable<IService> services = ServiceFinder.FindMany(Services, type);
+
+            foreach (IService service in services)
+            {
+                yield return ServiceResolver.Resolve(service, this);
+            }
         }
 
         public bool Has<T>()
