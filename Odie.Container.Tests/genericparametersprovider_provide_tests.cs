@@ -14,7 +14,7 @@ namespace Odie.Container.Tests
 
         IServiceGenericRegistration exec<T>()
         {
-            ServiceServiceGenericRegistrationGenerator generator = new ServiceServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker());
+            ServiceGenericRegistrationGenerator generator = new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker());
             return generator.Generate(typeof(T));
         }
 

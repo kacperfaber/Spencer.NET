@@ -27,7 +27,7 @@ namespace Odie
                     return (ConstructorInfo) memberParent;
                 }
             }
-
+            
             return DefaultConstructorProvider.ProvideDefaultConstructor(type);
         }
 

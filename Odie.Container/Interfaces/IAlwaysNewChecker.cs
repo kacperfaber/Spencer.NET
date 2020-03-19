@@ -2,6 +2,6 @@
 {
     public interface IAlwaysNewChecker
     {
-        bool Check(Service service);
+        bool Check(IService service);
     }
 }

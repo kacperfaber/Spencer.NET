@@ -2,7 +2,7 @@
 {
     public class AlwaysNewChecker : IAlwaysNewChecker
     {
-        public bool Check(Service service)
+        public bool Check(IService service)
         {
             return service.Flags.HasFlag(ServiceFlagConstants.MultiInstance);
         }

@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace Odie
 {
-    public class ServiceServiceGenericRegistrationGenerator : IServiceGenericRegistrationGenerator
+    public class ServiceGenericRegistrationGenerator : IServiceGenericRegistrationGenerator
     {
         public ITypeContainsGenericParametersChecker TypeContainsGenericParametersChecker;
         public ITypeGenericParametersProvider ParametersProvider;
 
-        public ServiceServiceGenericRegistrationGenerator(ITypeGenericParametersProvider parametersProvider,
+        public ServiceGenericRegistrationGenerator(ITypeGenericParametersProvider parametersProvider,
             ITypeContainsGenericParametersChecker typeContainsGenericParametersChecker)
         {
             ParametersProvider = parametersProvider;
