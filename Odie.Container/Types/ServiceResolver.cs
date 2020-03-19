@@ -7,17 +7,18 @@ namespace Odie
         public IServiceInstanceResolver InstanceResolver;
         public IMemberValuesInjector ValuesInjector;
         
-        public ServiceResolver(IServiceInstanceResolver instanceResolver)
+        public ServiceResolver(IServiceInstanceResolver instanceResolver, IMemberValuesInjector valuesInjector)
         {
             InstanceResolver = instanceResolver;
+            ValuesInjector = valuesInjector;
         }
 
         public object Resolve(IService service, IContainer container)
         {
             object instance = InstanceResolver.ResolveInstance(service, container);
             ValuesInjector.InjectAll(service, container, instance);
-            
-            throw new NotImplementedException(); //TODO
+
+            return instance;
         }
     }
 }

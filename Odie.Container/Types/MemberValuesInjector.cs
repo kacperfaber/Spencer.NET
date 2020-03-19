@@ -6,10 +6,18 @@ namespace Odie
     {
         public IValueProvider ValueProvider;
         public IMemberValueSetter ValueSetter;
-        
+        public IInjectFlagsProvider InjectsProvider;
+
+        public MemberValuesInjector(IMemberValueSetter valueSetter, IValueProvider valueProvider, IInjectFlagsProvider injectsProvider)
+        {
+            ValueSetter = valueSetter;
+            ValueProvider = valueProvider;
+            InjectsProvider = injectsProvider;
+        }
+
         public void InjectAll(IService service, IContainer container, object instance)
         {
-            IEnumerable<ServiceFlag> injections = service.Flags.GetFlags(ServiceFlagConstants.Inject);
+            IEnumerable<ServiceFlag> injections = InjectsProvider.ProvideFlags(service);
 
             foreach (ServiceFlag injectFlag in injections)
             {
