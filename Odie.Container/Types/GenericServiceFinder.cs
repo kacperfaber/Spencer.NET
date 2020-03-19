@@ -13,15 +13,14 @@ namespace Odie
             GenericParametersProvider = genericParametersProvider;
         }
 
-        public IService FindGenericService(ServicesList list, Type type)
+        public IEnumerable<IService> FindGenericServices(ServicesList list, Type type)
         {
             IEnumerable<Type> keyParameters = GenericParametersProvider.ProvideGenericTypes(type);
 
             return list.GetServices()
                 .Where(x => x.Registration.GenericRegistration.HasGenericParameters)
                 .Where(x => x.Registration.GenericRegistration.GenericParameters.Count() == keyParameters.Count())
-                .Where(x => x.Registration.GenericRegistration.GenericParameters.SequenceEqual(keyParameters))
-                .FirstOrDefault();
+                .Where(x => x.Registration.GenericRegistration.GenericParameters.SequenceEqual(keyParameters));
         }
     }
 }

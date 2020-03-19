@@ -26,7 +26,8 @@ namespace Odie
         {
             if (GenericParametersChecker.Check(typeKey))
             {
-                return GenericServiceFinder.FindGenericService(list, typeKey);
+                return GenericServiceFinder.FindGenericServices(list, typeKey)
+                    .FirstOrDefault();
             }
 
             return TypeIsClassValidator.Validate(typeKey) ? ByClassFinder.FindByClass(list, typeKey) : ByInterfaceFinder.FindByInterface(list, typeKey);
@@ -34,8 +35,12 @@ namespace Odie
 
         public IEnumerable<IService> FindMany(ServicesList list, Type type)
         {
-            // TODO all matching types
-            throw new NotImplementedException();
+            if (GenericParametersChecker.Check(type))
+            {
+                return GenericServiceFinder.FindGenericServices(list, type);
+            }
+
+            return TypeIsClassValidator.Validate(type) ? ByClassFinder.FindManyByClass(list, type) : ByInterfaceFinder.FindManyByInterface(list, type);
         }
     }
 }

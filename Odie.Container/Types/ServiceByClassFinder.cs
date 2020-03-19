@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Odie
@@ -11,6 +12,13 @@ namespace Odie
                 .GetServices()
                 .Where(x => x.Registration.TargetType.IsAssignableFrom(@class))
                 .FirstOrDefault();
+        }
+
+        public IEnumerable<IService> FindManyByClass(ServicesList list, Type @class)
+        {
+            return list
+                .GetServices()
+                .Where(x => x.Registration.TargetType.IsAssignableFrom(@class));
         }
     }
 }

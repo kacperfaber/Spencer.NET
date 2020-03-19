@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Odie
 {
     public interface IGenericServiceFinder
     {
-        IService FindGenericService(ServicesList list, Type type);
+        IEnumerable<IService> FindGenericServices(ServicesList list, Type type);
     }
 }
