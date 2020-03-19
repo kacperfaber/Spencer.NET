@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace Odie
 {
@@ -21,7 +22,7 @@ namespace Odie
 
             foreach (ServiceFlag injectFlag in injections)
             {
-                object value = ValueProvider.ProvideValue(injectFlag.Parent.ReflectedType, container);
+                object value = ValueProvider.ProvideValue(injectFlag.Parent.MemberType == MemberTypes.Property ? ((PropertyInfo) injectFlag.Parent).PropertyType : ((FieldInfo) injectFlag.Parent).FieldType, container);
                 ValueSetter.SetValue(injectFlag.Parent, instance, value);
             }
         }

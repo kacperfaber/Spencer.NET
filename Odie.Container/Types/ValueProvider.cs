@@ -28,11 +28,6 @@ namespace Odie
                 return ValueTypeActivator.ActivateInstance(exceptedType);
             }
 
-            if (container.Has(exceptedType))
-            {
-                return container.Resolve(exceptedType);
-            }
-
             if (IsEnumerableChecker.Check(exceptedType))
             {
                 return EnumerableGenerator.GenerateEnumerable(exceptedType);
@@ -43,7 +38,7 @@ namespace Odie
                 return ArrayGenerator.GenerateArray(exceptedType);
             }
 
-            return null;
+            return container.Resolve(exceptedType); // TODO it dependends to Resolve will be auto-created
         }
     }
 }

@@ -28,7 +28,9 @@ namespace Odie
 
             if  (SingleInstanceChecker.Check(service))
             {
-                if (!InstanceIsNullChecker.Check(service.Registration))
+                bool isNull = InstanceIsNullChecker.Check(service.Registration);
+                
+                if (isNull)
                 {
                     object instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, container);
                     InstanceSetter.SetInstance(service.Registration, instance);
