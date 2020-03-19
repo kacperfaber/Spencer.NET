@@ -26,6 +26,11 @@ namespace Odie
             return this.Single(x => x.Name == name);
         }
 
+        public IEnumerable<ServiceFlag> GetFlags(string name)
+        {
+            return this.Where(x => x.Name == name);
+        }
+
         public void AddFlag(string name, object value)
         {
             Add(new ServiceFlag(name, value));
@@ -40,7 +45,7 @@ namespace Odie
         {
             Remove(this.Single(x => x.Name == name));
         }
-        
+
         public static ServiceFlags CreateNew() => new ServiceFlags();
     }
 }
