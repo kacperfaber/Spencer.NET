@@ -10,6 +10,8 @@ namespace Odie
         public IConstructorProvider ConstructorProvider;
         public IConstructorParametersGenerator ParametersGenerator;
         public IConstructorInvoker ConstructorInvoker;
+        public IConstructorListGenerator ConstructorListGenerator;
+        public IConstructorFinder ConstructorFinder;
 
         public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider)
         {
@@ -31,6 +33,16 @@ namespace Odie
         {
             ConstructorInfo constructor = ConstructorProvider.ProvideConstructor(@class);
             IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, container);
+            object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
+
+            return instance;
+        }
+
+        public object CreateInstance(Type @class, IRegisterParameters registerParameter)
+        {
+            ConstructorInfo[] constructors = ConstructorListGenerator.GenerateList(@class);
+            ConstructorInfo constructor = ConstructorFinder.FindBy(constructors, registerParameter);
+            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, registerParameter);
             object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
 
             return instance;

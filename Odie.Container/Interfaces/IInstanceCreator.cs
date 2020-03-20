@@ -7,5 +7,7 @@ namespace Odie
         object CreateInstance(ServiceFlags flags, Type type, IContainer container);
 
         object CreateInstance(Type type, IContainer container);
+
+        object CreateInstance(Type type, IRegisterParameter registerParameter);
     }
 }

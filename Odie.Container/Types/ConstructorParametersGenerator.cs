@@ -63,5 +63,10 @@ namespace Odie
                 yield return container.Resolve(parameter.ParameterType);
             }
         }
+
+        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IRegisterParameters registerParameter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

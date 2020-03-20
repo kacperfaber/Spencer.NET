@@ -23,5 +23,10 @@ namespace Odie
         {
             return CtorInstanceCreator.CreateInstance(type, container);
         }
+
+        public object CreateInstance(Type type, IRegisterParameter registerParameter)
+        {
+            return CtorInstanceCreator.CreateInstance(type, (IRegisterParameters) registerParameter);
+        }
     }
 }
