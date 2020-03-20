@@ -8,9 +8,13 @@ namespace Odie
     {
         public ConstructorInfo FindBy(ConstructorInfo[] ctors, IRegisterParameters registerParameters)
         {
-            ConstructorInfo ctor = ctors
+            IEnumerable<ConstructorInfo> matching = ctors
                 .Where(x => x.GetParameters()
-                    .All(y => y.HasDefaultValue || registerParameters.Parameters.SingleOrDefault(z => z.Type == y.ParameterType) != null))
+                    .All(y => y.HasDefaultValue || registerParameters.Parameters.SingleOrDefault(z =>
+                    {
+                        return z.Type == y.ParameterType;
+                    }) != null)).ToList();
+            ConstructorInfo ctor = matching
                 .First();
 
             return ctor;
