@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IAssemblyListAdder
     {
-        void Add(AssemblyList list, Assembly assembly);
+        void Add(IAssemblyList list, Assembly assembly);
     }
 }

@@ -5,9 +5,9 @@ namespace Odie
 {
     public class AssemblyListContainsChecker : IAssemblyListContainsChecker
     {
-        public bool Contains(AssemblyList list, Assembly assembly)
+        public bool Contains(IAssemblyList list, Assembly assembly)
         {
-            return list.SingleOrDefault(x => x.Equals(assembly)) != null;
+            return list.Assemblies.SingleOrDefault(x => x.Equals(assembly)) != null;
         }
     }
 }

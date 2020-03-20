@@ -13,7 +13,7 @@ namespace Odie
             GenericParametersProvider = genericParametersProvider;
         }
 
-        public IEnumerable<IService> FindGenericServices(ServicesList list, Type type)
+        public IEnumerable<IService> FindGenericServices(IServiceList list, Type type)
         {
             IEnumerable<Type> keyParameters = GenericParametersProvider.ProvideGenericTypes(type);
 

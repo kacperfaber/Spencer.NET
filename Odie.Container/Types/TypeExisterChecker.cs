@@ -15,7 +15,7 @@ namespace Odie
             GenericParametersChecker = genericParametersChecker;
         }
 
-        public bool Check(ServicesList list, Type type)
+        public bool Check(IServiceList list, Type type)
         {
             if (GenericParametersChecker.Check(type))
             {

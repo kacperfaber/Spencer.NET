@@ -22,7 +22,7 @@ namespace Odie
             TypeIsClassValidator = typeIsClassValidator;
         }
 
-        public IService Find(ServicesList list, Type typeKey)
+        public IService Find(IServiceList list, Type typeKey)
         {
             if (GenericParametersChecker.Check(typeKey))
             {
@@ -33,7 +33,7 @@ namespace Odie
             return TypeIsClassValidator.Validate(typeKey) ? ByClassFinder.FindByClass(list, typeKey) : ByInterfaceFinder.FindByInterface(list, typeKey);
         }
 
-        public IEnumerable<IService> FindMany(ServicesList list, Type type)
+        public IEnumerable<IService> FindMany(IServiceList list, Type type)
         {
             if (GenericParametersChecker.Check(type))
             {

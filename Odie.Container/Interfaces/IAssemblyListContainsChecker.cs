@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IAssemblyListContainsChecker
     {
-        bool Contains(AssemblyList list, Assembly assembly);
+        bool Contains(IAssemblyList list, Assembly assembly);
     }
 }

@@ -15,7 +15,7 @@ namespace Odie
             InstanceChecker = instanceChecker;
         }
 
-        public void Register(ServicesList list, IEnumerable<IService> services, IContainer container)
+        public void Register(IServiceList list, IEnumerable<IService> services, IContainer container)
         {
             foreach (IService service in services)
             {

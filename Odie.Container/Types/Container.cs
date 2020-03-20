@@ -7,9 +7,6 @@ namespace Odie
 {
     public class Container : IContainer
     {
-        public ServicesList Services = new ServicesList();
-        public AssemblyList Assemblies = new AssemblyList();
-
         public IServiceResolver ServiceResolver;
         public IServiceRegistrar ServiceRegistrar;
         public IServiceGenerator ServiceGenerator;
@@ -34,6 +31,10 @@ namespace Odie
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
         }
+        
+        public IServiceList Services { get; set; }
+        
+        public IAssemblyList Assemblies { get; set; }
 
         public object Resolve(Type type)
         {
@@ -188,5 +189,7 @@ namespace Odie
             
             ServiceRegistrar.Register(Services, services, this);
         }
+
+        
     }
 }

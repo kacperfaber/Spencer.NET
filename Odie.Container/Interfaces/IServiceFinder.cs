@@ -5,8 +5,8 @@ namespace Odie
 {
     public interface IServiceFinder
     {
-        IService Find(ServicesList list, Type typeKey);
+        IService Find(IServiceList list, Type typeKey);
 
-        IEnumerable<IService> FindMany(ServicesList list, Type type);
+        IEnumerable<IService> FindMany(IServiceList list, Type type);
     }
 }

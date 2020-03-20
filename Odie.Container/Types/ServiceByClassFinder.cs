@@ -6,7 +6,7 @@ namespace Odie
 {
     public class ServiceByClassFinder : IServiceByClassFinder
     {
-        public IService FindByClass(ServicesList list, Type @class)
+        public IService FindByClass(IServiceList list, Type @class)
         {
             return list
                 .GetServices()
@@ -14,7 +14,7 @@ namespace Odie
                 .FirstOrDefault();
         }
 
-        public IEnumerable<IService> FindManyByClass(ServicesList list, Type @class)
+        public IEnumerable<IService> FindManyByClass(IServiceList list, Type @class)
         {
             return list
                 .GetServices()

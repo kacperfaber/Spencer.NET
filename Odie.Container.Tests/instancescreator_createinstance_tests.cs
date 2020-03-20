@@ -107,6 +107,9 @@ namespace Odie.Container.Tests
             {
                 throw new NotImplementedException();
             }
+
+            public IServiceList Services { get; set; }
+            public IAssemblyList Assemblies { get; set; }
         }
 
         object exec<T>()

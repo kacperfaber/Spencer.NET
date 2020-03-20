@@ -5,8 +5,8 @@ namespace Odie
 {
     public interface IServiceByInterfaceFinder
     {
-        IService FindByInterface(ServicesList list, Type @interface);
+        IService FindByInterface(IServiceList list, Type @interface);
 
-        IEnumerable<IService> FindManyByInterface(ServicesList list, Type @interface);
+        IEnumerable<IService> FindManyByInterface(IServiceList list, Type @interface);
     }
 }

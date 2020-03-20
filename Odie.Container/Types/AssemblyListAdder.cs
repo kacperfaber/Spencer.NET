@@ -4,7 +4,7 @@ namespace Odie
 {
     public class AssemblyListAdder : IAssemblyListAdder
     {
-        public void Add(AssemblyList list, Assembly assembly)
+        public void Add(IAssemblyList list, Assembly assembly)
         {
             list.AddAssembly(assembly);
         }

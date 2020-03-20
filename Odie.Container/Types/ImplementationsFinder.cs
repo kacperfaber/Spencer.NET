@@ -16,9 +16,9 @@ namespace Odie
             Validator = validator;
         }
 
-        public IEnumerable<Type> FindImplementations(AssemblyList assemblies, Type @interface)
+        public IEnumerable<Type> FindImplementations(IAssemblyList assemblies, Type @interface)
         {
-            foreach (Assembly assembly in assemblies)
+            foreach (Assembly assembly in assemblies.Assemblies)
             {
                 foreach (Type type in assembly.GetTypes().Where(x => x.GetInterfaces().Length > 0).Where(x => x.IsClass))
                 {

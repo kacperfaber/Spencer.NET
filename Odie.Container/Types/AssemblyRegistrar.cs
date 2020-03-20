@@ -14,12 +14,12 @@ namespace Odie
             ContainsChecker = containsChecker;
         }
 
-        public void Register(AssemblyList list, Assembly assembly)
+        public void Register(IAssemblyList list, Assembly assembly)
         {
             AssemblyAdder.Add(list, assembly);
         }
 
-        public void RegisterIfNotExist(AssemblyList list, Type type)
+        public void RegisterIfNotExist(IAssemblyList list, Type type)
         {
             Assembly ass = type.Assembly;
             
@@ -29,7 +29,7 @@ namespace Odie
             }
         }
 
-        public void RegisterIfNotExist(AssemblyList list, Assembly assembly)
+        public void RegisterIfNotExist(IAssemblyList list, Assembly assembly)
         {
             if (!ContainsChecker.Contains(list, assembly))
             {

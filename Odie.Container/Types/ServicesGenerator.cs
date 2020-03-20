@@ -17,7 +17,7 @@ namespace Odie
             TypeServiceGenerator = typeServiceGenerator;
         }
 
-        public IEnumerable<IService> GenerateServices(Type type, AssemblyList assemblies, IContainer container, object instance = null)
+        public IEnumerable<IService> GenerateServices(Type type, IAssemblyList assemblies, IContainer container, object instance = null)
         {
             if (TypeIsClassValidator.Validate(type))
             {

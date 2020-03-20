@@ -3,13 +3,15 @@ using System.Reflection;
 
 namespace Odie
 {
-    public class AssemblyList : List<Assembly>
+    public class AssemblyList : List<Assembly>, IAssemblyList
     {
+        public List<Assembly> Assemblies { get; set; }
+        
         public void AddAssembly(AssemblyName assembly)
         {
             Add(Assembly.Load(assembly));
         }
-
+        
         public void AddAssembly(Assembly assembly)
         {
             Add(assembly);

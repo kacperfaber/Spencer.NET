@@ -6,7 +6,7 @@ namespace Odie
 {
     public class ServiceByInterfaceFinder : IServiceByInterfaceFinder
     {
-        public IService FindByInterface(ServicesList list, Type @interface)
+        public IService FindByInterface(IServiceList list, Type @interface)
         {
             return list
                 .GetServices()
@@ -15,7 +15,7 @@ namespace Odie
                 .FirstOrDefault();
         }
 
-        public IEnumerable<IService> FindManyByInterface(ServicesList list, Type @interface)
+        public IEnumerable<IService> FindManyByInterface(IServiceList list, Type @interface)
         {
             return list
                 .GetServices()

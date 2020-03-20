@@ -5,10 +5,10 @@ namespace Odie
 {
     public interface IAssemblyRegistrar
     {
-        void Register(AssemblyList list, Assembly assembly);
+        void Register(IAssemblyList list, Assembly assembly);
 
-        void RegisterIfNotExist(AssemblyList list, Type type);
+        void RegisterIfNotExist(IAssemblyList list, Type type);
 
-        void RegisterIfNotExist(AssemblyList list, Assembly assembly);
+        void RegisterIfNotExist(IAssemblyList list, Assembly assembly);
     }
 }
