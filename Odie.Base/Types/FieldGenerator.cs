@@ -6,18 +6,19 @@ namespace Odie
     public class FieldGenerator : IFieldGenerator
     {
         public FieldBuilder Builder;
+        public IFieldValueGenerator ValueGenerator;
 
-        public FieldGenerator(FieldBuilder builder)
+        public FieldGenerator(FieldBuilder builder, IFieldValueGenerator valueGenerator)
         {
             Builder = builder;
+            ValueGenerator = valueGenerator;
         }
 
         public Field Generate(Property property)
         {
             Builder.Clear();
 
-            object value = property.ValueGenerator.Generate(property.Parameters, property.ParametersType.First(), new[] {property.ExceptedType},
-                out Type outputType);
+            object value = ValueGenerator.GenerateValue(property, out Type outputType);
 
             return Builder
                 .AddName(property.Name)
