@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Odie
@@ -7,7 +8,8 @@ namespace Odie
     {
         public bool Contains(IAssemblyList list, Assembly assembly)
         {
-            return list.Assemblies.SingleOrDefault(x => x.Equals(assembly)) != null;
+            List<Assembly> assemblies = list.GetAssemblies();
+            return assemblies.Contains(assembly);
         }
     }
 }

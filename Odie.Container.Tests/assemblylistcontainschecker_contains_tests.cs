@@ -9,7 +9,7 @@ namespace Odie.Container.Tests
         bool exec(Type t)
         {
             AssemblyList list = new AssemblyList();
-            list.AddAssembly(t.Assembly);
+            list.AddAssembly(GetType().Assembly);
 
             AssemblyListContainsChecker checker = new AssemblyListContainsChecker();
             return checker.Contains(list, t.Assembly);

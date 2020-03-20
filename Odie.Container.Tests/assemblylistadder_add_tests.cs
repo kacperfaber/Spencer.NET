@@ -36,7 +36,7 @@ namespace Odie.Container.Tests
         [TestCase(typeof(assemblylistadder_add_tests))]
         public void returns_params_types_len(params Type[] types)
         {
-            int len = exec(types).Count;
+            int len = exec(types).GetAssemblies().Count();
 
             Assert.IsTrue(len == types.Count());
         }
@@ -47,7 +47,7 @@ namespace Odie.Container.Tests
         {
             AssemblyList list = exec(new List<Type>() {t1, t2}.ToArray());
 
-            Assert.IsTrue(list.Count() == 2);
+            Assert.IsTrue(list.GetAssemblies().Count() == 2);
         }
     }
 }

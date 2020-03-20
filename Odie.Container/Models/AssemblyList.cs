@@ -5,13 +5,15 @@ namespace Odie
 {
     public class AssemblyList : List<Assembly>, IAssemblyList
     {
-        public List<Assembly> Assemblies { get; set; }
-        
+        public AssemblyList() : base()
+        {
+        }
+
         public void AddAssembly(AssemblyName assembly)
         {
             Add(Assembly.Load(assembly));
         }
-        
+
         public void AddAssembly(Assembly assembly)
         {
             Add(assembly);
@@ -24,5 +26,7 @@ namespace Odie
                 Add(Assembly.Load(assemblyName));
             }
         }
+
+        public List<Assembly> GetAssemblies() => this;
     }
 }
