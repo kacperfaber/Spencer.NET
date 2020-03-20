@@ -67,15 +67,15 @@ namespace Odie
 
         public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IRegisterParameters registerParameter)
         {
-            List<int> indexesWas = new List<int>();
-
+            List<IRegisterParameter> list = registerParameter.Parameters.ToList();
             ParameterInfo[] parameters = constructor.GetParameters();
             
             foreach (ParameterInfo parameter in parameters)
             {
-                yield return registerParameter.Parameters.First(x => parameter.ParameterType.IsAssignableFrom(x.Type));
-                indexesWas.Add(Array.IndexOf(parameters,parameter));
-            }
+                IRegisterParameter first = list.First(x => parameter.ParameterType.IsAssignableFrom(x.Type));
+                yield return first.Value;
+                list.Remove(first);
+            } // TODO make it beauty
         }
     }
 }
