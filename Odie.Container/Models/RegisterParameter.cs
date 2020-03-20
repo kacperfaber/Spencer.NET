@@ -2,9 +2,10 @@
 
 namespace Odie
 {
-    public class ResolveParameter : IResolveParameter
+    public class RegisterParameter : IRegisterParameter
     {
         public Type Type { get; set; }
+        
         public object Value { get; set; }
     }
 }

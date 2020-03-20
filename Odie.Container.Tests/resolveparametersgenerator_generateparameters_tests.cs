@@ -17,9 +17,9 @@ namespace Odie.Container.Tests
         {
         }
 
-        IResolveParameters exec(params object[] parameters)
+        IRegisterParameters exec(params object[] parameters)
         {
-            return new ResolveParametersGenerator(new TypeGetter()).GenerateParameters(parameters);
+            return new RegisterParametersGenerator(new TypeGetter()).GenerateParameters(parameters);
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_typeof_ResolveParameters()
         {
-            Assert.IsTrue(exec().GetType() == typeof(ResolveParameters));
+            Assert.IsTrue(exec().GetType() == typeof(RegisterParameters));
         }
 
         [Test]
@@ -49,9 +49,9 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_parameters_instanceof_ResolveParameter()
         {
-            foreach (IResolveParameter parameter in exec(new Test1(), new Test2()).Parameters)
+            foreach (IRegisterParameter parameter in exec(new Test1(), new Test2()).Parameters)
             {
-                Assert.IsTrue(parameter.GetType() == typeof(ResolveParameter));
+                Assert.IsTrue(parameter.GetType() == typeof(RegisterParameter));
             }
         }
 
@@ -59,7 +59,7 @@ namespace Odie.Container.Tests
         public void returns_first_excepted_data()
         {
             Test1 test = new Test1();
-            IResolveParameter p = exec(test, new Test2()).Parameters.First();
+            IRegisterParameter p = exec(test, new Test2()).Parameters.First();
             
             Assert.IsTrue(p.Type == typeof(Test1));
             Assert.AreEqual(test, p.Value);

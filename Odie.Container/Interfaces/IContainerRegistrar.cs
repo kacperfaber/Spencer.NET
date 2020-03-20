@@ -20,5 +20,7 @@ namespace Odie
         void RegisterAssembly<T>();
 
         void RegisterAssemblies(params Assembly[] assemblies);
+
+        void Register<T>(params object[] parameters);
     }
 }

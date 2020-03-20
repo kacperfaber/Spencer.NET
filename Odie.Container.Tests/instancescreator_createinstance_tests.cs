@@ -113,6 +113,11 @@ namespace Odie.Container.Tests
                 throw new NotImplementedException();
             }
 
+            public void Register<T>(params object[] parameters)
+            {
+                throw new NotImplementedException();
+            }
+
             public IServiceList Services { get; set; }
             public IAssemblyList Assemblies { get; set; }
         }
@@ -120,7 +125,7 @@ namespace Odie.Container.Tests
         object exec<T>()
         {
             ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()), new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())), new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator(),new ClassHasServiceFactoryChecker(), new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(), new TypeIsValueTypeChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider())))), new ServiceFactoryInvoker()));
-            IEnumerable<IService> service = generator.GenerateServices(typeof(T), new AssemblyList(), null);
+            IEnumerable<IService> service = generator.GenerateServices(typeof(T), new AssemblyList(), null, null);
 
             InstancesCreator creator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(), new TypeIsValueTypeChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider())));
 

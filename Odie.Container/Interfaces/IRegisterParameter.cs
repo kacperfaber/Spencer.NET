@@ -2,7 +2,7 @@
 
 namespace Odie
 {
-    public interface IResolveParameter
+    public interface IRegisterParameter
     {
         Type Type { get; set; }
 

@@ -10,7 +10,8 @@ namespace Odie
         public IServiceInstanceChecker InstanceChecker;
         public IRegistratedServicesFilter RegistratedServicesFilter;
 
-        public ServiceRegistrar(IServiceInstanceProvider instanceProvider, IServiceInstanceChecker instanceChecker, IRegistratedServicesFilter registratedServicesFilter)
+        public ServiceRegistrar(IServiceInstanceProvider instanceProvider, IServiceInstanceChecker instanceChecker,
+            IRegistratedServicesFilter registratedServicesFilter)
         {
             InstanceProvider = instanceProvider;
             InstanceChecker = instanceChecker;
@@ -25,9 +26,8 @@ namespace Odie
             {
                 if (!InstanceChecker.Check(service))
                     InstanceProvider.ProvideInstance(service, container);
-            
+
                 list.AddService(service);
-                Console.WriteLine("registering type " + service.Registration.TargetType.Name);
             }
         }
     }
