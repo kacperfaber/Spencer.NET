@@ -40,6 +40,7 @@ namespace Odie
 
         public object CreateInstance(Type @class, IRegisterParameters registerParameter)
         {
+            // implement one list of ctors in all of methods. TODO
             ConstructorInfo[] constructors = ConstructorListGenerator.GenerateList(@class);
             ConstructorInfo constructor = ConstructorFinder.FindBy(constructors, registerParameter);
             IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, registerParameter);

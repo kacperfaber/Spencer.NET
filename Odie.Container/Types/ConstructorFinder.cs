@@ -9,7 +9,6 @@ namespace Odie
         public ConstructorInfo FindBy(ConstructorInfo[] ctors, IRegisterParameters registerParameters)
         {
             // TODO make it beauty
-            // TODO he cannot takes 2 same types like int, int
             
             List<ConstructorInfo> matchingLen = ctors
                 .Where(x => x.GetParameters().Length >= registerParameters.Parameters.Count)
