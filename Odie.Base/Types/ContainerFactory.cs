@@ -17,7 +17,7 @@
                             new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(),
                                 new TypeContainsGenericParametersChecker()),
                             new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator())), new InjectFlagsProvider())),
-                new ServiceRegistrar(new ServiceInstanceProvider(instancesCreator, new ServiceIsAutoValueChecker()), new ServiceInstanceChecker()),
+                new ServiceRegistrar(new ServiceInstanceProvider(instancesCreator, new ServiceIsAutoValueChecker()), new ServiceInstanceChecker(),new RegistratedServicesFilter()),
                 new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
                     new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
                         new ServiceRegistrationGenerator(new BaseTypeFinder(),

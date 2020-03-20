@@ -30,6 +30,8 @@ namespace Odie
             ServiceIsAutoValueChecker = serviceIsAutoValueChecker;
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
+            Services = new ServiceList();
+            Assemblies = new AssemblyList();
         }
         
         public IServiceList Services { get; set; }
