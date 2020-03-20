@@ -17,7 +17,7 @@ namespace Odie
             ServiceGenericRegistrationGenerator = serviceGenericRegistrationGenerator;
         }
 
-        public IServiceRegistration Generate(ServiceFlags flags, Type type, object instance = null)
+        public IServiceRegistration Generate(ServiceFlags flags, Type type, object instance = null, IRegisterParameters registerParameters = null)
         {
             IEnumerable<Type> interfaces = InterfacesGenerator.GenerateInterfaces(flags, type);
             
@@ -26,6 +26,7 @@ namespace Odie
             
             return new ServiceRegistrationBuilder()
                 .AddGenericRegistration(genericRegistration)
+                .AddRegisterParameters(registerParameters)
                 .AddType(type)
                 .AddInstance(instance)
                 .AddBaseType(baseType)

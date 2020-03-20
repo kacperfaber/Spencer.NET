@@ -21,7 +21,7 @@ namespace Odie
         {
             if (TypeIsClassValidator.Validate(type))
             {
-                IService service = TypeServiceGenerator.GenerateService(type, container, instance);
+                IService service = TypeServiceGenerator.GenerateService(type, container, instance, registerParameters);
                 yield return service;
             }
 
@@ -31,7 +31,7 @@ namespace Odie
 
                 foreach (Type @class in types)
                 {
-                    IService service = TypeServiceGenerator.GenerateService(@class, container);
+                    IService service = TypeServiceGenerator.GenerateService(@class, container, null, registerParameters);
                     yield return service;
                 }
             }

@@ -23,7 +23,7 @@ namespace Odie
             FactoryInvoker = factoryInvoker;
         }
 
-        public IService GenerateService(Type @class, IContainer container, object instance = null)
+        public IService GenerateService(Type @class, IContainer container, object instance = null, IRegisterParameters registerParameters = null)
         {
             if (ClassHasFactoryChecker.HasFactory(@class))
             {
@@ -33,7 +33,7 @@ namespace Odie
             
             ServiceFlags flags = FlagsGenerator.GenerateFlags(@class);
             ServiceInfo info = InfoGenerator.Generate(@class);
-            IServiceRegistration registration = RegistrationGenerator.Generate(flags, @class, instance);
+            IServiceRegistration registration = RegistrationGenerator.Generate(flags, @class, instance, registerParameters);
             
             return new ServiceBuilder()
                 .AddFlags(flags)

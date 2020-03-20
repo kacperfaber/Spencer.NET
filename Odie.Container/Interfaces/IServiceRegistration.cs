@@ -14,5 +14,7 @@ namespace Odie
         object Instance { get; set; }
 
         IServiceGenericRegistration GenericRegistration { get; set; }
+
+        IRegisterParameters RegisterParameter { get; set; }
     }
 }

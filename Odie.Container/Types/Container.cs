@@ -72,7 +72,7 @@ namespace Odie
             Type type = TypeGetter.GetType<T>();
             IRegisterParameters registerParameters = RegisterParametersGenerator.GenerateParameters(parameters);
 
-            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Assemblies, null);
+            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Assemblies, this, registerParameters);
 
             foreach (IService service in services)
             {
