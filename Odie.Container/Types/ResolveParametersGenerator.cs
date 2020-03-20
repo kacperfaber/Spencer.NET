@@ -17,7 +17,7 @@ namespace Odie
 
             foreach (object p in parameters)
             {
-                resolve.Add(TypeGetter.GetType(p), p);
+                resolve.Add(new ResolveParameter() {Type = TypeGetter.GetType(p), Value = p});
             }
 
             return resolve;

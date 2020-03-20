@@ -43,6 +43,11 @@ namespace Odie.Container.Tests
                 throw new NotImplementedException();
             }
 
+            public T Resolve<T>(params object[] parameters)
+            {
+                throw new NotImplementedException();
+            }
+
             public IEnumerable<T> ResolveMany<T>()
             {
                 throw new NotImplementedException();
