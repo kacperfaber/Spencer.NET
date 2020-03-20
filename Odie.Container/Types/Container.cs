@@ -64,6 +64,11 @@ namespace Odie
             return (T) ServiceResolver.Resolve(service, this);
         }
 
+        public T Resolve<T>(params object[] parameters)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<T> ResolveMany<T>()
         {
             Type type = TypeGetter.GetType<T>();
