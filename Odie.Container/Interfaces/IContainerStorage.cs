@@ -4,8 +4,6 @@ namespace Odie
 {
     public interface IContainerStorage
     {
-        IServiceList Services { get; set; }
-        
-        IAssemblyList Assemblies { get; set; }
+        IStorage Storage { get; set; }
     }
 }

@@ -34,22 +34,18 @@ namespace Odie
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
             ConstructorParametersByObjectsGenerator = constructorParametersByObjectsGenerator;
-            Services = new ServiceList();
-            Assemblies = new AssemblyList();
         }
-
-        public IServiceList Services { get; set; }
-
-        public IAssemblyList Assemblies { get; set; }
+        
+        public IStorage Storage { get; set; }
 
         public object Resolve(Type type)
         {
-            if (!TypeExisterChecker.Check(Services, type))
+            if (!TypeExisterChecker.Check(Storage.Services, type))
             {
                 FallbackConfiguration.TypeNotRegistered(type, this);
             }
 
-            IService service = ServiceFinder.Find(Services, type);
+            IService service = ServiceFinder.Find(Storage.Services, type);
             object result = ServiceResolver.Resolve(service, this);
 
             return result;
@@ -59,12 +55,12 @@ namespace Odie
         {
             Type type = TypeGetter.GetType<T>();
 
-            if (!TypeExisterChecker.Check(Services, type))
+            if (!TypeExisterChecker.Check(Storage.Services, type))
             {
                 FallbackConfiguration.TypeNotRegistered(type, this);
             }
 
-            IService service = ServiceFinder.Find(Services, type);
+            IService service = ServiceFinder.Find(Storage.Services, type);
             return (T) ServiceResolver.Resolve(service, this);
         }
 
@@ -73,7 +69,7 @@ namespace Odie
             Type type = TypeGetter.GetType<T>();
             IConstructorParameters constructorParameters = ConstructorParametersByObjectsGenerator.GenerateParameters(parameters);
 
-            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Assemblies, this, constructorParameters);
+            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Storage.Assemblies, this, constructorParameters);
 
             foreach (IService service in services)
             {
@@ -83,14 +79,14 @@ namespace Odie
                 }
             }
 
-            ServiceRegistrar.Register(Services, services, this);
+            ServiceRegistrar.Register(Storage.Services, services, this);
         }
 
         public IEnumerable<T> ResolveMany<T>()
         {
             Type type = TypeGetter.GetType<T>();
 
-            IEnumerable<IService> services = ServiceFinder.FindMany(Services, type);
+            IEnumerable<IService> services = ServiceFinder.FindMany(Storage.Services, type);
 
             foreach (IService service in services)
             {
@@ -100,7 +96,7 @@ namespace Odie
 
         public IEnumerable<object> ResolveMany(Type type)
         {
-            IEnumerable<IService> services = ServiceFinder.FindMany(Services, type);
+            IEnumerable<IService> services = ServiceFinder.FindMany(Storage.Services, type);
 
             foreach (IService service in services)
             {
@@ -112,22 +108,22 @@ namespace Odie
         {
             Type type = TypeGetter.GetType<T>();
 
-            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
-            return ServiceFinder.Find(Services, type) != null;
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
+            return ServiceFinder.Find(Storage.Services, type) != null;
         }
 
         public bool Has(Type type)
         {
-            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
 
-            return ServiceFinder.Find(Services, TypeGetter.GetType(type)) != null;
+            return ServiceFinder.Find(Storage.Services, TypeGetter.GetType(type)) != null;
         }
 
         public void Register(Type type)
         {
-            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
 
-            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Assemblies, null);
+            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Storage.Assemblies, null);
 
             foreach (IService service in services)
             {
@@ -137,52 +133,52 @@ namespace Odie
                 }
             }
 
-            ServiceRegistrar.Register(Services, services, this);
+            ServiceRegistrar.Register(Storage.Services, services, this);
         }
 
         public void RegisterObject(object instance)
         {
             Type type = TypeGetter.GetType(instance);
-            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
 
-            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Assemblies, null, null, instance);
-            ServiceRegistrar.Register(Services, services, this);
+            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Storage.Assemblies, null, null, instance);
+            ServiceRegistrar.Register(Storage.Services, services, this);
         }
 
         public void RegisterObject<TKey>(object instance)
         {
             Type type = TypeGetter.GetType();
-            AssemblyRegistrar.RegisterIfNotExist(Assemblies, type);
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
 
-            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Assemblies, null, null, instance);
-            ServiceRegistrar.Register(Services, services, this);
+            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Storage.Assemblies, null, null, instance);
+            ServiceRegistrar.Register(Storage.Services, services, this);
         }
 
         public void RegisterObject(object instance, Type targetType)
         {
-            AssemblyRegistrar.RegisterIfNotExist(Assemblies, targetType);
-            IEnumerable<IService> services = ServiceGenerator.GenerateServices(targetType, Assemblies, null, null, instance);
-            ServiceRegistrar.Register(Services, services, this);
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, targetType);
+            IEnumerable<IService> services = ServiceGenerator.GenerateServices(targetType, Storage.Assemblies, null, null, instance);
+            ServiceRegistrar.Register(Storage.Services, services, this);
         }
 
         public void RegisterAssembly(Assembly assembly)
         {
-            AssemblyRegistrar.RegisterIfNotExist(Assemblies, assembly);
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, assembly);
 
             foreach (Type type in assembly.GetTypes())
             {
-                ServiceRegistrar.Register(Services, ServiceGenerator.GenerateServices(type, Assemblies, null), this);
+                ServiceRegistrar.Register(Storage.Services, ServiceGenerator.GenerateServices(type, Storage.Assemblies, null), this);
             }
         }
 
         public void RegisterAssembly<T>()
         {
             Type tType = TypeGetter.GetType<T>();
-            AssemblyRegistrar.RegisterIfNotExist(Assemblies, tType);
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, tType);
 
             foreach (Type type in tType.Assembly.GetTypes())
             {
-                ServiceRegistrar.Register(Services, ServiceGenerator.GenerateServices(type, Assemblies, null), this);
+                ServiceRegistrar.Register(Storage.Services, ServiceGenerator.GenerateServices(type, Storage.Assemblies, null), this);
             }
         }
 
@@ -190,18 +186,18 @@ namespace Odie
         {
             foreach (Assembly assembly in assemblies)
             {
-                AssemblyRegistrar.RegisterIfNotExist(Assemblies, assembly);
+                AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, assembly);
 
                 foreach (Type type in assembly.GetTypes())
                 {
-                    ServiceRegistrar.Register(Services, ServiceGenerator.GenerateServices(type, Assemblies, null), this);
+                    ServiceRegistrar.Register(Storage.Services, ServiceGenerator.GenerateServices(type, Storage.Assemblies, null), this);
                 }
             }
         }
 
         public void Register<T>()
         {
-            IEnumerable<IService> services = ServiceGenerator.GenerateServices(typeof(T), Assemblies, null);
+            IEnumerable<IService> services = ServiceGenerator.GenerateServices(typeof(T), Storage.Assemblies, null);
 
             foreach (IService service in services)
             {
@@ -211,7 +207,9 @@ namespace Odie
                 }
             }
 
-            ServiceRegistrar.Register(Services, services, this);
+            ServiceRegistrar.Register(Storage.Services, services, this);
         }
+
+        
     }
 }
