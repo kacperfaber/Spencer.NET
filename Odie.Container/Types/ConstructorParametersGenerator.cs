@@ -69,11 +69,11 @@ namespace Odie
 
         public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IRegisterParameters registerParameters)
         {
-            ParameterInfo[] paramaters = constructor.GetParameters();
+            ParameterInfo[] parameters = constructor.GetParameters();
 
-            foreach (ParameterInfo parameter in paramaters)
+            foreach (ParameterInfo parameter in parameters)
             {
-                IRegisterParameter registerParameter = RegisterParameterByTypeFinder.FindByType(registerParameters, parameter);
+                IRegisterParameter registerParameter = RegisterParameterByTypeFinder.FindByType(registerParameters, parameter.ParameterType);
 
                 yield return registerParameter.Value;
                 registerParameters.Parameters.Remove(registerParameter);
