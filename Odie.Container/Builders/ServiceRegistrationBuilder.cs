@@ -34,9 +34,9 @@ namespace Odie
             return Update(x => x.GenericRegistration = genericRegistration);
         }
 
-        public ServiceRegistrationBuilder AddRegisterParameters(IRegisterParameters parameters)
+        public ServiceRegistrationBuilder AddRegisterParameters(IConstructorParameters parameters)
         {
-            return Update(x => x.RegisterParameter = parameters);
+            return Update(x => x.ConstructorParameter = parameters);
         }
     }
 }

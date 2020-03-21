@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IConstructorFinder
     {
-        ConstructorInfo FindBy(ConstructorInfo[] ctors, IRegisterParameters registerParameters);
+        ConstructorInfo FindBy(ConstructorInfo[] ctors, IConstructorParameters constructorParameters);
     }
 }

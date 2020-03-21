@@ -40,12 +40,12 @@ namespace Odie
             return instance;
         }
 
-        public object CreateInstance(Type @class, IRegisterParameters registerParameter)
+        public object CreateInstance(Type @class, IConstructorParameters constructorParameter)
         {
             // implement one list of ctors in all of methods. TODO
             ConstructorInfo[] constructors = ConstructorListGenerator.GenerateList(@class);
-            ConstructorInfo constructor = ConstructorFinder.FindBy(constructors, registerParameter);
-            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, registerParameter);
+            ConstructorInfo constructor = ConstructorFinder.FindBy(constructors, constructorParameter);
+            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, constructorParameter);
             object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
 
             return instance;

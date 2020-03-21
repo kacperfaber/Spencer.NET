@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Odie.Container.Tests
 {
-    public class constructorfinder_findby_constructors_registerparameters_tests
+    public class constructorfinder_findby_constructors_constructorparameters_tests
     {
         class Kasia
         {
@@ -57,10 +57,10 @@ namespace Odie.Container.Tests
 
         ConstructorInfo exec<T>(params object[] instances)
         {
-            RegisterParameters parameters = new RegisterParameters();
+            ConstructorParameters parameters = new ConstructorParameters();
             foreach (object instance in instances)
             {
-                parameters.Add(new RegisterParameter()
+                parameters.Add(new ConstructorParameter()
                 {
                     Type = instance.GetType(),
                     Value = instance

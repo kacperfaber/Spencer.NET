@@ -11,16 +11,16 @@ namespace Odie
         public IValueTypeActivator ValueTypeActivator;
         public IParameterInfoHasDefaultValueChecker DefaultValueChecker;
         public IParameterInfoDefaultValueProvider DefaultValueProvider;
-        public IRegisterParameterByTypeFinder RegisterParameterByTypeFinder;
+        public IConstructorParameterByTypeFinder ConstructorParameterByTypeFinder;
 
         public ConstructorParametersGenerator(IParameterInfoDefaultValueProvider defaultValueProvider, IParameterInfoHasDefaultValueChecker defaultValueChecker,
-            IValueTypeActivator valueTypeActivator, ITypeIsValueTypeChecker valueTypeChecker, IRegisterParameterByTypeFinder registerParameterByTypeFinder)
+            IValueTypeActivator valueTypeActivator, ITypeIsValueTypeChecker valueTypeChecker, IConstructorParameterByTypeFinder constructorParameterByTypeFinder)
         {
             DefaultValueProvider = defaultValueProvider;
             DefaultValueChecker = defaultValueChecker;
             ValueTypeActivator = valueTypeActivator;
             ValueTypeChecker = valueTypeChecker;
-            RegisterParameterByTypeFinder = registerParameterByTypeFinder;
+            ConstructorParameterByTypeFinder = constructorParameterByTypeFinder;
         }
 
         public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, ServiceFlags flags, IContainer container)
@@ -67,16 +67,16 @@ namespace Odie
             }
         }
 
-        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IRegisterParameters registerParameters)
+        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IConstructorParameters constructorParameters)
         {
             ParameterInfo[] parameters = constructor.GetParameters();
 
             foreach (ParameterInfo parameter in parameters)
             {
-                IRegisterParameter registerParameter = RegisterParameterByTypeFinder.FindByType(registerParameters, parameter.ParameterType);
+                IConstructorParameter constructorParameter = ConstructorParameterByTypeFinder.FindByType(constructorParameters, parameter.ParameterType);
 
-                yield return registerParameter.Value;
-                registerParameters.Parameters.Remove(registerParameter);
+                yield return constructorParameter.Value;
+                constructorParameters.Parameters.Remove(constructorParameter);
             }
         }
     }

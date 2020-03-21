@@ -2,20 +2,20 @@
 {
     public class ServiceInstanceCreator : IServiceInstanceCreator
     {
-        public IServiceHasRegisterParametersChecker HasRegisterParametersChecker;
+        public IServiceHasConstructorParametersChecker HasConstructorParametersChecker;
         public IInstanceCreator InstanceCreator;
 
-        public ServiceInstanceCreator(IInstanceCreator instanceCreator, IServiceHasRegisterParametersChecker hasRegisterParametersChecker)
+        public ServiceInstanceCreator(IInstanceCreator instanceCreator, IServiceHasConstructorParametersChecker hasConstructorParametersChecker)
         {
             InstanceCreator = instanceCreator;
-            HasRegisterParametersChecker = hasRegisterParametersChecker;
+            HasConstructorParametersChecker = hasConstructorParametersChecker;
         }
 
         public object CreateInstance(IService service, IContainer container)
         {
-            if (HasRegisterParametersChecker.Check(service))
+            if (HasConstructorParametersChecker.Check(service))
             {
-                return InstanceCreator.CreateInstance(service.Registration.TargetType, service.Registration.RegisterParameter);
+                return InstanceCreator.CreateInstance(service.Registration.TargetType, service.Registration.ConstructorParameter);
             }
 
             else

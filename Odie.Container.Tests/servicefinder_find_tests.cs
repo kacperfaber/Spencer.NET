@@ -33,7 +33,7 @@ namespace Odie.Container.Tests
                     new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                         new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
-                            new ValueTypeActivator(), new TypeIsValueTypeChecker(),new RegisterParameterByTypeFinder()),
+                            new ValueTypeActivator(), new TypeIsValueTypeChecker(),new ConstructorParameterByTypeFinder()),
                         new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),new ConstructorListGenerator(), new ConstructorFinder()))), new ServiceFactoryInvoker()));
 
             AssemblyList assemblies = new AssemblyList();

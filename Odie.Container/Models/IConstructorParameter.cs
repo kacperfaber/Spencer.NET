@@ -2,7 +2,7 @@
 
 namespace Odie
 {
-    public class RegisterParameter : IRegisterParameter
+    public class ConstructorParameter : IConstructorParameter
     {
         public Type Type { get; set; }
         

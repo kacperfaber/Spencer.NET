@@ -17,11 +17,11 @@ namespace Odie
             TypeServiceGenerator = typeServiceGenerator;
         }
 
-        public IEnumerable<IService> GenerateServices(Type type, IAssemblyList assemblies, IContainer container, IRegisterParameters registerParameters = null, object instance = null)
+        public IEnumerable<IService> GenerateServices(Type type, IAssemblyList assemblies, IContainer container, IConstructorParameters constructorParameters = null, object instance = null)
         {
             if (TypeIsClassValidator.Validate(type))
             {
-                IService service = TypeServiceGenerator.GenerateService(type, container, instance, registerParameters);
+                IService service = TypeServiceGenerator.GenerateService(type, container, instance, constructorParameters);
                 yield return service;
             }
 
@@ -31,7 +31,7 @@ namespace Odie
 
                 foreach (Type @class in types)
                 {
-                    IService service = TypeServiceGenerator.GenerateService(@class, container, null, registerParameters);
+                    IService service = TypeServiceGenerator.GenerateService(@class, container, null, constructorParameters);
                     yield return service;
                 }
             }

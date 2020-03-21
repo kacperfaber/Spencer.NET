@@ -5,22 +5,22 @@ using NUnit.Framework;
 
 namespace Odie.Container.Tests
 {
-    public class registerparameterstypelistgenerator_generatelist_tests
+    public class constructorparameterstypelistgenerator_generatelist_tests
     {
 
         IEnumerable<Type> exec(params object[] instances)
         {
-            IRegisterParameters parameters = new RegisterParameters();
+            IConstructorParameters parameters = new ConstructorParameters();
             foreach (object instance in instances)
             {
-                parameters.Parameters.Add(new RegisterParameter()
+                parameters.Parameters.Add(new ConstructorParameter()
                 {
                     Type = instance.GetType(),
                     Value = instance
                 });
             }
 
-            return new RegisterParametersTypeListGenerator().GenerateList(parameters);
+            return new ConstructorParametersTypeListGenerator().GenerateList(parameters);
         }
 
         [Test]

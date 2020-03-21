@@ -16,13 +16,13 @@ namespace Odie
         public IServiceIsAutoValueChecker ServiceIsAutoValueChecker;
         public ITypeGetter TypeGetter;
         public IAssemblyRegistrar AssemblyRegistrar;
-        public IRegisterParametersGenerator RegisterParametersGenerator;
+        public IConstructorParametersByObjectsGenerator ConstructorParametersByObjectsGenerator;
 
         public FallbackConfiguration FallbackConfiguration = new FallbackConfiguration();
 
         public Container(IServiceResolver serviceResolver, IServiceRegistrar serviceRegistrar, IServiceGenerator serviceGenerator, IServiceFinder serviceFinder,
             IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker,
-            ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar, IRegisterParametersGenerator registerParametersGenerator)
+            ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar, IConstructorParametersByObjectsGenerator constructorParametersByObjectsGenerator)
         {
             ServiceResolver = serviceResolver;
             ServiceRegistrar = serviceRegistrar;
@@ -33,7 +33,7 @@ namespace Odie
             ServiceIsAutoValueChecker = serviceIsAutoValueChecker;
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
-            RegisterParametersGenerator = registerParametersGenerator;
+            ConstructorParametersByObjectsGenerator = constructorParametersByObjectsGenerator;
             Services = new ServiceList();
             Assemblies = new AssemblyList();
         }
@@ -71,9 +71,9 @@ namespace Odie
         public void Register<T>(params object[] parameters)
         {
             Type type = TypeGetter.GetType<T>();
-            IRegisterParameters registerParameters = RegisterParametersGenerator.GenerateParameters(parameters);
+            IConstructorParameters constructorParameters = ConstructorParametersByObjectsGenerator.GenerateParameters(parameters);
 
-            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Assemblies, this, registerParameters);
+            IEnumerable<IService> services = ServiceGenerator.GenerateServices(type, Assemblies, this, constructorParameters);
 
             foreach (IService service in services)
             {

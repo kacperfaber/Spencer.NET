@@ -1,6 +1,6 @@
 ﻿namespace Odie
 {
-    public interface IServiceHasRegisterParametersChecker
+    public interface IServiceHasConstructorParametersChecker
     {
         bool Check(IService service);
     }

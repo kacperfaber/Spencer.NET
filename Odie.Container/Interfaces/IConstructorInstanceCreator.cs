@@ -8,6 +8,6 @@ namespace Odie
 
         object CreateInstance(Type @class, IContainer container);
         
-        object CreateInstance(Type @class, IRegisterParameters registerParameter);
+        object CreateInstance(Type @class, IConstructorParameters constructorParameter);
     }
 }

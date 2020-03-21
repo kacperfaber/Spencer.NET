@@ -4,9 +4,9 @@ using System.Reflection;
 
 namespace Odie
 {
-    public class RegisterParameterByTypeFinder : IRegisterParameterByTypeFinder
+    public class ConstructorParameterByTypeFinder : IConstructorParameterByTypeFinder
     {
-        public IRegisterParameter FindByType(IRegisterParameters parameters, Type type)
+        public IConstructorParameter FindByType(IConstructorParameters parameters, Type type)
         {
             return parameters.Parameters.First(x => type.IsAssignableFrom(x.Type));
         }

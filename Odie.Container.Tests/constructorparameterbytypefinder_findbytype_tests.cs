@@ -3,18 +3,18 @@ using NUnit.Framework;
 
 namespace Odie.Container.Tests
 {
-    public class registerparameterbytypefinder_findbytype_tests
+    public class constructorparameterbytypefinder_findbytype_tests
     {
 
-        IRegisterParameter exec<T>(params object[] instances)
+        IConstructorParameter exec<T>(params object[] instances)
         {
-            RegisterParameters registerParameters = new RegisterParameters();
+            ConstructorParameters constructorParameters = new ConstructorParameters();
             foreach (object instance in instances)
             {
-                registerParameters.Add(new RegisterParameter() {Type = instance.GetType(), Value = instance});
+                constructorParameters.Add(new ConstructorParameter() {Type = instance.GetType(), Value = instance});
             }
 
-            IRegisterParameter result = new RegisterParameterByTypeFinder().FindByType(registerParameters, typeof(T));
+            IConstructorParameter result = new ConstructorParameterByTypeFinder().FindByType(constructorParameters, typeof(T));
             return result;
         }
 
@@ -33,13 +33,13 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_typeof_registerparameter()
         {
-            Assert.IsTrue(exec<int>(0) is RegisterParameter);
+            Assert.IsTrue(exec<int>(0) is ConstructorParameter);
         }
 
         [Test]
         public void returns_type_is_assignable_of_iregisterparameters()
         {
-            Assert.IsTrue(exec<int>(0) is IRegisterParameter);
+            Assert.IsTrue(exec<int>(0) is IConstructorParameter);
         }
 
         [Test]

@@ -9,6 +9,6 @@ namespace Odie
         
         IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IContainer container);
         
-        IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IRegisterParameters registerParameters);
+        IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IConstructorParameters constructorParameters);
     }
 }

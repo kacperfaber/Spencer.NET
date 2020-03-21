@@ -15,6 +15,6 @@ namespace Odie
 
         IServiceGenericRegistration GenericRegistration { get; set; }
 
-        IRegisterParameters RegisterParameter { get; set; }
+        IConstructorParameters ConstructorParameter { get; set; }
     }
 }

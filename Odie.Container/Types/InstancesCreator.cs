@@ -24,9 +24,9 @@ namespace Odie
             return CtorInstanceCreator.CreateInstance(type, container);
         }
 
-        public object CreateInstance(Type type, IRegisterParameters registerParameter)
+        public object CreateInstance(Type type, IConstructorParameters constructorParameter)
         {
-            return CtorInstanceCreator.CreateInstance(type, registerParameter);
+            return CtorInstanceCreator.CreateInstance(type, constructorParameter);
         }
     }
 }

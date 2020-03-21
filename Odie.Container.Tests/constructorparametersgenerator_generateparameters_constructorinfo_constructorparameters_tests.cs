@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Odie.Container.Tests
 {
-    public class constructorparametersgenerator_generateparameters_constructorinfo_registerparameters_tests
+    public class constructorparametersgenerator_generateparameters_constructorinfo_constructorparameters_tests
     {
         class Kasia
         {
@@ -39,14 +39,14 @@ namespace Odie.Container.Tests
         {
             ConstructorInfo ctor = typeof(Test1).GetConstructors().SingleOrDefault(x => x.GetParameters().Length == parameters);
 
-            RegisterParameters registerParameters = new RegisterParameters();
+            ConstructorParameters constructorParameters = new ConstructorParameters();
             foreach (object instance in instances)
             {
-                registerParameters.Add(new RegisterParameter() {Type = instance.GetType(), Value = instance});
+                constructorParameters.Add(new ConstructorParameter() {Type = instance.GetType(), Value = instance});
             }
 
-            ConstructorParametersGenerator generator = new ConstructorParametersGenerator(null, null, null, null, new RegisterParameterByTypeFinder());
-            object[] result = generator.GenerateParameters(ctor, registerParameters).ToArray();
+            ConstructorParametersGenerator generator = new ConstructorParametersGenerator(null, null, null, null, new ConstructorParameterByTypeFinder());
+            object[] result = generator.GenerateParameters(ctor, constructorParameters).ToArray();
 
             return result;
         }

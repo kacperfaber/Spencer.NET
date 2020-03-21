@@ -17,9 +17,9 @@ namespace Odie.Container.Tests
         {
         }
 
-        IRegisterParameters exec(params object[] parameters)
+        IConstructorParameters exec(params object[] parameters)
         {
-            return new RegisterParametersGenerator(new TypeGetter()).GenerateParameters(parameters);
+            return new ConstructorParametersByObjectsGenerator(new TypeGetter()).GenerateParameters(parameters);
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_typeof_ResolveParameters()
         {
-            Assert.IsTrue(exec().GetType() == typeof(RegisterParameters));
+            Assert.IsTrue(exec().GetType() == typeof(ConstructorParameters));
         }
 
         [Test]
@@ -49,9 +49,9 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_parameters_instanceof_ResolveParameter()
         {
-            foreach (IRegisterParameter parameter in exec(new Test1(), new Test2()).Parameters)
+            foreach (IConstructorParameter parameter in exec(new Test1(), new Test2()).Parameters)
             {
-                Assert.IsTrue(parameter.GetType() == typeof(RegisterParameter));
+                Assert.IsTrue(parameter.GetType() == typeof(ConstructorParameter));
             }
         }
 
@@ -59,7 +59,7 @@ namespace Odie.Container.Tests
         public void returns_first_excepted_data()
         {
             Test1 test = new Test1();
-            IRegisterParameter p = exec(test, new Test2()).Parameters.First();
+            IConstructorParameter p = exec(test, new Test2()).Parameters.First();
             
             Assert.IsTrue(p.Type == typeof(Test1));
             Assert.AreEqual(test, p.Value);
