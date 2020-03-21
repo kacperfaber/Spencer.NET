@@ -34,6 +34,8 @@ namespace Odie
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
             ConstructorParametersByObjectsGenerator = constructorParametersByObjectsGenerator;
+            
+            Storage = new Storage();
         }
         
         public IStorage Storage { get; set; }
