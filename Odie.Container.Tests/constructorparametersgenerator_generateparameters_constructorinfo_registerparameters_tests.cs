@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
@@ -44,8 +45,10 @@ namespace Odie.Container.Tests
                 registerParameters.Add(new RegisterParameter() {Type = instance.GetType(), Value = instance});
             }
 
-            ConstructorParametersGenerator generator = new ConstructorParametersGenerator(null, null, null, null);
-            return generator.GenerateParameters(ctor, registerParameters).ToArray();
+            ConstructorParametersGenerator generator = new ConstructorParametersGenerator(null, null, null, null, new RegisterParameterByTypeFinder());
+            object[] result = generator.GenerateParameters(ctor, registerParameters).ToArray();
+
+            return result;
         }
 
         [Test]
@@ -56,17 +59,33 @@ namespace Odie.Container.Tests
 
         [TestCase(1, 5, 6)]
         [TestCase(0, 5, 10)]
-        [TestCase(0, 0 ,0)]
+        [TestCase(0, 0, 0)]
         [TestCase(100, 500, 250)]
         public void returns_gived_parameters_when_target_is_int_ctor(params object[] parameters)
         {
             object[] result = exec(3, parameters);
 
             bool equals = result.SequenceEqual(parameters);
-            
+
             Assert.IsTrue(equals);
         }
-        
-        // TODO end tests.
+
+        [Test]
+        public void returns_valid_parameters_if_gived_was_in_bad_order()
+        {
+            object[] objects = exec(2, new Lukasz(), new Kasia());
+
+            Assert.IsTrue(objects.First().GetType() == typeof(Kasia));
+            Assert.IsTrue(objects.Last().GetType() == typeof(Lukasz));
+        }
+
+        [Test]
+        public void returns_valid_parameters_sequence_if_gived_was_in_good_order()
+        {
+            object[] objects = exec(2, new Kasia(), new Lukasz());
+
+            Assert.IsTrue(objects.First().GetType() == typeof(Kasia));
+            Assert.IsTrue(objects.Last().GetType() == typeof(Lukasz));
+        }
     }
 }

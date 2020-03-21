@@ -11,14 +11,16 @@ namespace Odie
         public IValueTypeActivator ValueTypeActivator;
         public IParameterInfoHasDefaultValueChecker DefaultValueChecker;
         public IParameterInfoDefaultValueProvider DefaultValueProvider;
+        public IRegisterParameterByTypeFinder RegisterParameterByTypeFinder;
 
         public ConstructorParametersGenerator(IParameterInfoDefaultValueProvider defaultValueProvider, IParameterInfoHasDefaultValueChecker defaultValueChecker,
-            IValueTypeActivator valueTypeActivator, ITypeIsValueTypeChecker valueTypeChecker)
+            IValueTypeActivator valueTypeActivator, ITypeIsValueTypeChecker valueTypeChecker, IRegisterParameterByTypeFinder registerParameterByTypeFinder)
         {
             DefaultValueProvider = defaultValueProvider;
             DefaultValueChecker = defaultValueChecker;
             ValueTypeActivator = valueTypeActivator;
             ValueTypeChecker = valueTypeChecker;
+            RegisterParameterByTypeFinder = registerParameterByTypeFinder;
         }
 
         public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, ServiceFlags flags, IContainer container)
@@ -65,17 +67,17 @@ namespace Odie
             }
         }
 
-        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IRegisterParameters registerParameter)
+        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IRegisterParameters registerParameters)
         {
-            List<IRegisterParameter> list = registerParameter.Parameters.ToList();
-            ParameterInfo[] parameters = constructor.GetParameters();
-            
-            foreach (ParameterInfo parameter in parameters)
+            ParameterInfo[] paramaters = constructor.GetParameters();
+
+            foreach (ParameterInfo parameter in paramaters)
             {
-                IRegisterParameter first = list.First(x => parameter.ParameterType.IsAssignableFrom(x.Type));
-                yield return first.Value;
-                list.Remove(first);
-            } // TODO make it beauty
+                IRegisterParameter registerParameter = RegisterParameterByTypeFinder.FindByType(registerParameters, parameter);
+
+                yield return registerParameter.Value;
+                registerParameters.Parameters.Remove(registerParameter);
+            }
         }
     }
 }
