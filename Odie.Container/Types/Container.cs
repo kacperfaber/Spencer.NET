@@ -22,7 +22,7 @@ namespace Odie
 
         public Container(IServiceResolver serviceResolver, IServiceRegistrar serviceRegistrar, IServiceGenerator serviceGenerator, IServiceFinder serviceFinder,
             IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker,
-            ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar)
+            ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar, IRegisterParametersGenerator registerParametersGenerator)
         {
             ServiceResolver = serviceResolver;
             ServiceRegistrar = serviceRegistrar;
@@ -33,6 +33,7 @@ namespace Odie
             ServiceIsAutoValueChecker = serviceIsAutoValueChecker;
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
+            RegisterParametersGenerator = registerParametersGenerator;
             Services = new ServiceList();
             Assemblies = new AssemblyList();
         }

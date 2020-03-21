@@ -4,35 +4,34 @@ namespace Odie
 {
     public class ServiceInstanceResolver : IServiceInstanceResolver
     {
-        public IInstanceCreator InstanceCreator;
         public IRegistrationInstanceIsNullChecker InstanceIsNullChecker;
         public IAlwaysNewChecker AlwaysNewChecker;
         public ISingleInstanceChecker SingleInstanceChecker;
         public IServiceRegistrationInstanceSetter InstanceSetter;
 
-        public ServiceInstanceResolver(IInstanceCreator instanceCreator, IRegistrationInstanceIsNullChecker instanceIsNullChecker, IAlwaysNewChecker alwaysNewChecker, ISingleInstanceChecker singleInstanceChecker, IServiceRegistrationInstanceSetter instanceSetter)
+        public IServiceInstanceCreator ServiceInstanceCreator;
+
+        public ServiceInstanceResolver(IRegistrationInstanceIsNullChecker instanceIsNullChecker, IAlwaysNewChecker alwaysNewChecker, ISingleInstanceChecker singleInstanceChecker, IServiceRegistrationInstanceSetter instanceSetter, IServiceInstanceCreator serviceInstanceCreator)
         {
-            InstanceCreator = instanceCreator;
             InstanceIsNullChecker = instanceIsNullChecker;
             AlwaysNewChecker = alwaysNewChecker;
             SingleInstanceChecker = singleInstanceChecker;
             InstanceSetter = instanceSetter;
+            ServiceInstanceCreator = serviceInstanceCreator;
         }
 
         public object ResolveInstance(IService service, IContainer container)
         {
             if (AlwaysNewChecker.Check(service))
             {
-                return InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, container);
+                return ServiceInstanceCreator.CreateInstance(service, container);
             }
 
             if  (SingleInstanceChecker.Check(service))
             {
-                bool isNull = InstanceIsNullChecker.Check(service.Registration);
-                
-                if (isNull)
+                if (InstanceIsNullChecker.Check(service.Registration))
                 {
-                    object instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, container);
+                    object instance = ServiceInstanceCreator.CreateInstance(service, container);
                     InstanceSetter.SetInstance(service.Registration, instance);
                 }
 

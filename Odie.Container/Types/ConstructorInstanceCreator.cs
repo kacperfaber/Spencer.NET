@@ -13,11 +13,13 @@ namespace Odie
         public IConstructorListGenerator ConstructorListGenerator;
         public IConstructorFinder ConstructorFinder;
 
-        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider)
+        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider, IConstructorListGenerator constructorListGenerator, IConstructorFinder constructorFinder)
         {
             ConstructorInvoker = constructorInvoker;
             ParametersGenerator = parametersGenerator;
             ConstructorProvider = constructorProvider;
+            ConstructorListGenerator = constructorListGenerator;
+            ConstructorFinder = constructorFinder;
         }
 
         public object CreateInstance(ServiceFlags flags, Type @class, IContainer container)
