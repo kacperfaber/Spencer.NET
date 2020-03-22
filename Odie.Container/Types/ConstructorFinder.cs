@@ -6,20 +6,21 @@ namespace Odie
 {
     public class ConstructorFinder : IConstructorFinder
     {
-        public ConstructorInfo FindBy(ConstructorInfo[] ctors, IConstructorParameters constructorParameters)
+        public IConstructor FindBy(IEnumerable<IConstructor> ctors, IConstructorParameters constructorParameters)
         {
-            // TODO make it beauty
-            
-            List<ConstructorInfo> matchingLen = ctors
-                .Where(x => x.GetParameters().Length >= constructorParameters.Parameters.Count)
+            List<IConstructor> matchingLen = ctors
+                .Where(x => x.Parameters.Length >= constructorParameters.Parameters.Count)
                 .ToList();
 
-            List<ConstructorInfo> matchingParameters = matchingLen.Where(x => x.GetParameters()
-                    .All(z => constructorParameters.Parameters.FirstOrDefault(y => y.Type.IsAssignableFrom(z.ParameterType)) != null))
+            List<IConstructor> matchingParameters = matchingLen.Where(
+                    x => x.Parameters.All(y => constructorParameters.Parameters.FirstOrDefault(z => z.Type.IsAssignableFrom(y.ParameterType)) != null))
                 .ToList();
 
-            List<ConstructorInfo> ordered = matchingParameters.OrderBy(x => x.GetParameters().Length).ToList();
-            return ordered.First();
+            List<IConstructor> ordered = matchingParameters.OrderBy(x => x.Parameters.Length).ToList();
+
+            IConstructor result = ordered.FirstOrDefault();
+
+            return result;
         }
     }
 }

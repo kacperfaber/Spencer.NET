@@ -67,11 +67,9 @@ namespace Odie
             }
         }
 
-        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IConstructorParameters constructorParameters)
+        public IEnumerable<object> GenerateParameters(IConstructor constructor, IConstructorParameters constructorParameters)
         {
-            ParameterInfo[] parameters = constructor.GetParameters();
-
-            foreach (ParameterInfo parameter in parameters)
+            foreach (ParameterInfo parameter in constructor.Parameters)
             {
                 IConstructorParameter constructorParameter = ConstructorParameterByTypeFinder.FindByType(constructorParameters, parameter.ParameterType);
 

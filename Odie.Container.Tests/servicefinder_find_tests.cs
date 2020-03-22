@@ -34,7 +34,7 @@ namespace Odie.Container.Tests
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                         new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
                             new ValueTypeActivator(), new TypeIsValueTypeChecker(),new ConstructorParameterByTypeFinder()),
-                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),new ConstructorListGenerator(), new ConstructorFinder()))), new ServiceFactoryInvoker()));
+                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),new ConstructorInfoListGenerator(), new ConstructorFinder()))), new ServiceFactoryInvoker()));
 
             AssemblyList assemblies = new AssemblyList();
             IService test1 = generator.GenerateServices(typeof(Test1), assemblies, null).First();

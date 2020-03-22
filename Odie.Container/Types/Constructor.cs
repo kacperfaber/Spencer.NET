@@ -6,6 +6,6 @@ namespace Odie
     {
         public ConstructorInfo Instance { get; set; }
         
-        public IConstructorParameters Parameters { get; set; }
+        public ParameterInfo[] Parameters { get; set; }
     }
 }

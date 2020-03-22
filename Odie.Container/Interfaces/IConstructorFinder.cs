@@ -1,9 +1,10 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace Odie
 {
     public interface IConstructorFinder
     {
-        ConstructorInfo FindBy(ConstructorInfo[] ctors, IConstructorParameters constructorParameters);
+        IConstructor FindBy(IEnumerable<IConstructor> ctors, IConstructorParameters constructorParameters);
     }
 }

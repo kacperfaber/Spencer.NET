@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Odie
 {
     public class ConstructorListGenerator : IConstructorListGenerator
     {
-        public ConstructorInfo[] GenerateList(Type @class)
+        public IEnumerable<IConstructor> GenerateList(ConstructorInfo[] constructors)
         {
-            return @class.GetConstructors();
+            return Array.ConvertAll(constructors, c => new ConstructorBuilder().AddInstance(c).AddParameters(c.GetParameters()).Build());
         }
     }
 }

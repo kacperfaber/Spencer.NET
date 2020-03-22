@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Reflection;
 
 namespace Odie
 {
     public interface IConstructorListGenerator
     {
-        ConstructorInfo[] GenerateList(Type @class);
+        IEnumerable<IConstructor> GenerateList(ConstructorInfo[] constructors);
     }
 }

@@ -10,15 +10,16 @@ namespace Odie
         public IConstructorProvider ConstructorProvider;
         public IConstructorParametersGenerator ParametersGenerator;
         public IConstructorInvoker ConstructorInvoker;
-        public IConstructorListGenerator ConstructorListGenerator;
+        public IConstructorInfoListGenerator ConstructorInfoListGenerator;
         public IConstructorFinder ConstructorFinder;
+        public IConstructorListGenerator ConstructorListGenerator;
 
-        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider, IConstructorListGenerator constructorListGenerator, IConstructorFinder constructorFinder)
+        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider, IConstructorInfoListGenerator constructorInfoListGenerator, IConstructorFinder constructorFinder)
         {
             ConstructorInvoker = constructorInvoker;
             ParametersGenerator = parametersGenerator;
             ConstructorProvider = constructorProvider;
-            ConstructorListGenerator = constructorListGenerator;
+            ConstructorInfoListGenerator = constructorInfoListGenerator;
             ConstructorFinder = constructorFinder;
         }
 
@@ -40,12 +41,12 @@ namespace Odie
             return instance;
         }
 
-        public object CreateInstance(Type @class, IConstructorParameters constructorParameter)
+        public object CreateInstance(Type @class, IConstructorParameters constructorParameters)
         {
-            // implement one list of ctors in all of methods. TODO
-            ConstructorInfo[] constructors = ConstructorListGenerator.GenerateList(@class);
-            ConstructorInfo constructor = ConstructorFinder.FindBy(constructors, constructorParameter);
-            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, constructorParameter);
+            ConstructorInfo[] constructorInfos = ConstructorInfoListGenerator.GenerateList(@class);
+            IEnumerable<IConstructor> constructors = ConstructorListGenerator.GenerateList(constructorInfos);
+            IConstructor constructor = ConstructorFinder.FindBy(constructors, constructorParameters);
+            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, constructorParameters);
             object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
 
             return instance;

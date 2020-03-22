@@ -46,7 +46,7 @@ namespace Odie.Container.Tests
             }
 
             ConstructorParametersGenerator generator = new ConstructorParametersGenerator(null, null, null, null, new ConstructorParameterByTypeFinder());
-            object[] result = generator.GenerateParameters(ctor, constructorParameters).ToArray();
+            object[] result = generator.GenerateParameters(new Constructor() {Instance = ctor, Parameters = ctor.GetParameters()}, constructorParameters).ToArray();
 
             return result;
         }
