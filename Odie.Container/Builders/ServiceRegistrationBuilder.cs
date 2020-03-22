@@ -14,9 +14,9 @@ namespace Odie
             return Update(x => x.TargetType = type);
         }
 
-        public ServiceRegistrationBuilder SetInterfaces(IEnumerable<Type> interfaces)
+        public ServiceRegistrationBuilder SetInterfaces(IEnumerable<IInterface> interfaces)
         {
-            return Update(x => x.Interfaces = new List<Type>(interfaces));
+            return Update(x => x.Interfaces = new List<IInterface>(interfaces));
         }
 
         public ServiceRegistrationBuilder AddBaseType(Type baseType)

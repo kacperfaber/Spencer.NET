@@ -9,7 +9,7 @@ namespace Odie
         
         Type BaseType { get; set; }
         
-        List<Type> Interfaces { get; set; }
+        List<IInterface> Interfaces { get; set; }
         
         object Instance { get; set; }
 
