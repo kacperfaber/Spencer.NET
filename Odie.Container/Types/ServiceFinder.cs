@@ -26,7 +26,8 @@ namespace Odie
         {
             if (GenericParametersChecker.Check(typeKey))
             {
-                return GenericServiceFinder.FindGenericServices(list, typeKey)
+                return GenericServiceFinder
+                    .FindGenericServices(list, typeKey)
                     .FirstOrDefault();
             }
 

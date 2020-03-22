@@ -19,7 +19,7 @@ namespace Odie
 
         public IServiceRegistration Generate(ServiceFlags flags, Type type, object instance = null, IConstructorParameters constructorParameters = null)
         {
-            IEnumerable<Type> interfaces = InterfacesGenerator.GenerateInterfaces(flags, type);
+            IEnumerable<IInterface> interfaces = InterfacesGenerator.GenerateInterfaces(flags, type);
             
             Type baseType = BaseTypeFinder.GetBaseType(type);
             IServiceGenericRegistration genericRegistration = ServiceGenericRegistrationGenerator.Generate(type);

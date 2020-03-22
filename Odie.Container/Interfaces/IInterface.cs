@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Odie
 {
@@ -8,6 +9,6 @@ namespace Odie
         
         bool IsGeneric { get; set; }
         
-        Type[] GenericParameters { get; set; }
+        IEnumerable<Type> GenericParameters { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace Odie
             return list
                 .GetServices()
                 .Where(x => x.Registration.Interfaces.Any())
-                .Where(x => x.Registration.Interfaces.SingleOrDefault(y => y == @interface) != null)
+                .Where(x => x.Registration.Interfaces.SingleOrDefault(y => y.Type.FullName == @interface.FullName) != null)
                 .FirstOrDefault();
         }
 
@@ -20,7 +20,7 @@ namespace Odie
             return list
                 .GetServices()
                 .Where(x => x.Registration.Interfaces.Any())
-                .Where(x => x.Registration.Interfaces.SingleOrDefault(y => y == @interface) != null);
+                .Where(x => x.Registration.Interfaces.SingleOrDefault(y => y.Type.FullName == @interface.FullName) != null);
         }
     }
 }
