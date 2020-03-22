@@ -23,9 +23,9 @@ namespace Odie
             ConstructorParameterByTypeFinder = constructorParameterByTypeFinder;
         }
 
-        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, ServiceFlags flags, IContainer container)
+        public IEnumerable<object> GenerateParameters(IConstructor constructor, ServiceFlags flags, IContainer container)
         {
-            ParameterInfo[] parameters = constructor.GetParameters();
+            ParameterInfo[] parameters = constructor.Parameters;
 
             foreach (ParameterInfo parameter in parameters)
             {
@@ -59,9 +59,9 @@ namespace Odie
             }
         }
 
-        public IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IContainer container)
+        public IEnumerable<object> GenerateParameters(IConstructor constructor, IContainer container)
         {
-            foreach (ParameterInfo parameter in constructor.GetParameters())
+            foreach (ParameterInfo parameter in constructor.Parameters)
             {
                 yield return container.Resolve(parameter.ParameterType);
             }

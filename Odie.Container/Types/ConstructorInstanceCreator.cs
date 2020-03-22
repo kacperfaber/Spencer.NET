@@ -14,18 +14,19 @@ namespace Odie
         public IConstructorFinder ConstructorFinder;
         public IConstructorListGenerator ConstructorListGenerator;
 
-        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider, IConstructorInfoListGenerator constructorInfoListGenerator, IConstructorFinder constructorFinder)
+        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider, IConstructorInfoListGenerator constructorInfoListGenerator, IConstructorFinder constructorFinder, IConstructorListGenerator constructorListGenerator)
         {
             ConstructorInvoker = constructorInvoker;
             ParametersGenerator = parametersGenerator;
             ConstructorProvider = constructorProvider;
             ConstructorInfoListGenerator = constructorInfoListGenerator;
             ConstructorFinder = constructorFinder;
+            ConstructorListGenerator = constructorListGenerator;
         }
 
         public object CreateInstance(ServiceFlags flags, Type @class, IContainer container)
         {
-            ConstructorInfo constructor = ConstructorProvider.ProvideConstructor(@class, flags);
+            IConstructor constructor = ConstructorProvider.ProvideConstructor(@class, flags);
             IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, flags, container);
             object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
 
@@ -34,7 +35,7 @@ namespace Odie
 
         public object CreateInstance(Type @class, IContainer container)
         {
-            ConstructorInfo constructor = ConstructorProvider.ProvideConstructor(@class);
+            IConstructor constructor = ConstructorProvider.ProvideConstructor(@class);
             IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, container);
             object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
 

@@ -24,7 +24,17 @@ namespace Odie.Container.Tests
 
         bool exec<T>()
         {
-            ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()), new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())), new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator(),new ClassHasServiceFactoryChecker(), new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(), new ValueTypeActivator(), new TypeIsValueTypeChecker(),new ConstructorParameterByTypeFinder()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider()),new ConstructorInfoListGenerator(), new ConstructorFinder()))), new ServiceFactoryInvoker()));
+            ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
+                new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
+                    new ServiceRegistrationGenerator(new BaseTypeFinder(),
+                        new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator())),
+                        new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
+                    new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
+                    new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
+                        new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
+                            new ValueTypeActivator(), new TypeIsValueTypeChecker(), new ConstructorParameterByTypeFinder()),
+                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator()),
+                        new ConstructorInfoListGenerator(), new ConstructorFinder(), new ConstructorListGenerator()))), new ServiceFactoryInvoker()));
             IService test1Service = generator.GenerateServices(typeof(Test1), new AssemblyList(), null).First();
 
             ServiceList list = new ServiceList();
@@ -51,7 +61,7 @@ namespace Odie.Container.Tests
         {
             Assert.IsFalse(exec<Test2>());
         }
-        
+
         [Test]
         public void returns_true_if_gived_is_interface_of_test1()
         {

@@ -38,9 +38,9 @@ namespace Odie.Container.Tests
 
             ServiceFlags flags = flagsGenerator.GenerateFlags(@class);
 
-            ConstructorProvider provider = new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider());
+            ConstructorProvider provider = new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator());
 
-            return provider.ProvideConstructor(@class, flags);
+            return provider.ProvideConstructor(@class, flags).Instance;
         }
 
         [Test]

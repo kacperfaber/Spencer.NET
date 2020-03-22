@@ -5,9 +5,9 @@ namespace Odie
 {
     public interface IConstructorParametersGenerator
     {
-        IEnumerable<object> GenerateParameters(ConstructorInfo constructor, ServiceFlags flags, IContainer container);
+        IEnumerable<object> GenerateParameters(IConstructor constructor, ServiceFlags flags, IContainer container);
         
-        IEnumerable<object> GenerateParameters(ConstructorInfo constructor, IContainer container);
+        IEnumerable<object> GenerateParameters(IConstructor constructor, IContainer container);
         
         IEnumerable<object> GenerateParameters(IConstructor constructor, IConstructorParameters constructorParameters);
     }

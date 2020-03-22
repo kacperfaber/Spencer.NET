@@ -8,14 +8,16 @@ namespace Odie
     {
         public IConstructorChecker ConstructorChecker;
         public IDefaultConstructorProvider DefaultConstructorProvider;
+        public IConstructorGenerator ConstructorGenerator;
 
-        public ConstructorProvider(IConstructorChecker constructorChecker, IDefaultConstructorProvider defaultConstructorProvider)
+        public ConstructorProvider(IConstructorChecker constructorChecker, IDefaultConstructorProvider defaultConstructorProvider, IConstructorGenerator constructorGenerator)
         {
             ConstructorChecker = constructorChecker;
             DefaultConstructorProvider = defaultConstructorProvider;
+            ConstructorGenerator = constructorGenerator;
         }
 
-        public ConstructorInfo ProvideConstructor(Type type, ServiceFlags flags)
+        public IConstructor ProvideConstructor(Type type, ServiceFlags flags)
         {
             if (flags.HasFlag(ServiceFlagConstants.ServiceCtor))
             {
@@ -24,16 +26,17 @@ namespace Odie
 
                 if (ConstructorChecker.Check(memberParent))
                 {
-                    return (ConstructorInfo) memberParent;
+                    return ConstructorGenerator.GenerateConstructor((ConstructorInfo) memberParent);
                 }
             }
-            
-            return DefaultConstructorProvider.ProvideDefaultConstructor(type);
+
+            ConstructorInfo constructorInfo = DefaultConstructorProvider.ProvideDefaultConstructor(type);
+            return ConstructorGenerator.GenerateConstructor(constructorInfo);
         }
 
-        public ConstructorInfo ProvideConstructor(Type type)
+        public IConstructor ProvideConstructor(Type type)
         {
-            return type.GetConstructors().First();
+            return ConstructorGenerator.GenerateConstructor(type.GetConstructors().First());
         }
     }
 }

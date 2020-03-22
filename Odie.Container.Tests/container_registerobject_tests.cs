@@ -25,6 +25,14 @@ namespace Odie.Container.Tests
             public string Name { get; set; }
         }
 
+        class Factory : IServiceFactory
+        {
+            public IService CreateService()
+            {
+                return null;
+            }
+        }
+
         void exec(IContainerRegistrar registrar, object @object)
         {
             registrar.RegisterObject(@object);
@@ -170,6 +178,14 @@ namespace Odie.Container.Tests
         public void throws_exception_if_gived_instance_is_null()
         {
             Assert.Throws<NullReferenceException>(() => exec(ContainerFactory.CreateContainer(), null));
+        }
+
+        [Test]
+        public void container_storage_services_will_be_have_one_null_service_after_registration_class_with_servicefactory_throws_nullreference()
+        {
+            IContainer container = ContainerFactory.CreateContainer();
+
+            Assert.That(() => exec(container, new Factory()), Throws.TypeOf<NullReferenceException>());
         }
     }
 }
