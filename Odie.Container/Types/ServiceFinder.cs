@@ -31,7 +31,8 @@ namespace Odie
                     .FirstOrDefault();
             }
 
-            return TypeIsClassValidator.Validate(typeKey) ? ByClassFinder.FindByClass(list, typeKey) : ByInterfaceFinder.FindByInterface(list, typeKey);
+            bool isClass = TypeIsClassValidator.Validate(typeKey);
+            return isClass ? ByClassFinder.FindByClass(list, typeKey) : ByInterfaceFinder.FindByInterface(list, typeKey);
         }
 
         public IEnumerable<IService> FindMany(IServiceList list, Type type)

@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Odie
 {
     public class ServiceRegistrationInterfacesGenerator : IServiceRegistrationInterfacesGenerator
     {
         public IRegistrationInterfacesFilter Filter;
-        public ITypeContainsGenericParametersChecker TypeContainsGenericParametersChecker;
-        public ITypeGenericParametersProvider GenericParametersProvider;
+        public IInterfaceGenerator InterfaceGenerator;
 
-        public ServiceRegistrationInterfacesGenerator(IRegistrationInterfacesFilter filter, ITypeContainsGenericParametersChecker typeContainsGenericParametersChecker, ITypeGenericParametersProvider genericParametersProvider)
+        public ServiceRegistrationInterfacesGenerator(IRegistrationInterfacesFilter filter, ITypeContainsGenericParametersChecker typeContainsGenericParametersChecker, ITypeGenericParametersProvider genericParametersProvider, IInterfaceGenerator interfaceGenerator)
         {
             Filter = filter;
-            TypeContainsGenericParametersChecker = typeContainsGenericParametersChecker;
-            GenericParametersProvider = genericParametersProvider;
+            InterfaceGenerator = interfaceGenerator;
         }
 
         public IEnumerable<IInterface> GenerateInterfaces(ServiceFlags flags, Type type)
@@ -22,15 +21,9 @@ namespace Odie
 
             foreach (Type i in interfaces)
             {
-                using InterfaceBuilder builder = new InterfaceBuilder();
-                
                 if (!flags.HasFlag(ServiceFlagConstants.ExcludeType, i))
                 {
-                    yield return builder
-                        .AddType(i)
-                        .AddGenericParameters(GenericParametersProvider.ProvideGenericTypes(i))
-                        .HasGenericArguments(TypeContainsGenericParametersChecker.Check(i))
-                        .Build();
+                    yield return InterfaceGenerator.GenerateInterface(type);
                 }
             }
         }

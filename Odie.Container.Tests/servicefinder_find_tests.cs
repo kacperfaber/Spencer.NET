@@ -28,7 +28,7 @@ namespace Odie.Container.Tests
             ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
                 new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
                     new ServiceRegistrationGenerator(new BaseTypeFinder(),
-                        new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider()),
+                        new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                         new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                     new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
@@ -43,8 +43,9 @@ namespace Odie.Container.Tests
             ServiceList list = new ServiceList();
             list.AddServices(test1, test2);
 
-            ServiceFinder finder = new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()), new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()), new TypeGenericParametersProvider())),
+            ServiceFinder finder = new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()), new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()))),
                 new ServiceByInterfaceFinder(), new ServiceByClassFinder(), new TypeIsClassValidator());
+            
             return finder.Find(list, typeof(TKey));
         }
 
@@ -52,6 +53,12 @@ namespace Odie.Container.Tests
         public void dont_throws_exceptions()
         {
             Assert.DoesNotThrow(() => exec<ITest1>());
+        }
+
+        [Test]
+        public void returns_not_null()
+        {
+            Assert.NotNull(exec<ITest1>());
         }
 
         [Test]
@@ -63,7 +70,8 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_service_test2_if_gived_key_is_itest2()
         {
-            Assert.AreEqual(typeof(Test2), exec<ITest2>().Registration.TargetType);
+            IService service = exec<ITest2>();
+            Assert.AreEqual(typeof(Test2), service.Registration.TargetType);
         }
     }
 }
