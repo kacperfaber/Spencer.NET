@@ -14,9 +14,9 @@ namespace Odie
             return Update(x => x.Type = type);
         }
 
-        public InterfaceBuilder IsGeneric(bool isGeneric)
+        public InterfaceBuilder HasGenericArguments(bool isGeneric)
         {
-            return Update(x => x.IsGeneric = isGeneric);
+            return Update(x => x.HasGenericArguments = isGeneric);
         }
 
         public InterfaceBuilder AddGenericParameters(IEnumerable<Type> parameters)

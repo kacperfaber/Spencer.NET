@@ -6,21 +6,25 @@ namespace Odie
 {
     public class GenericServiceFinder : IGenericServiceFinder
     {
-        public ITypeGenericParametersProvider GenericParametersProvider;
+        public IGenericInterfaceFinder InterfaceFinder;
+        public IGenericClassFinder ClassFinder;
+        public ITypeIsClassValidator IsClassValidator;
 
-        public GenericServiceFinder(ITypeGenericParametersProvider genericParametersProvider)
+        public GenericServiceFinder(ITypeIsClassValidator isClassValidator, IGenericClassFinder classFinder, IGenericInterfaceFinder interfaceFinder)
         {
-            GenericParametersProvider = genericParametersProvider;
+            IsClassValidator = isClassValidator;
+            ClassFinder = classFinder;
+            InterfaceFinder = interfaceFinder;
         }
 
         public IEnumerable<IService> FindGenericServices(IServiceList list, Type type)
         {
-            IEnumerable<Type> keyParameters = GenericParametersProvider.ProvideGenericTypes(type);
+            if (IsClassValidator.Validate(type))
+            {
+                return ClassFinder.FindClasses(list, type);
+            }
 
-            return list.GetServices()
-                .Where(x => x.Registration.GenericRegistration.HasGenericParameters)
-                .Where(x => x.Registration.GenericRegistration.GenericParameters.Count() == keyParameters.Count())
-                .Where(x => x.Registration.GenericRegistration.GenericParameters.SequenceEqual(keyParameters));
+            return InterfaceFinder.FindInterfaces(list, type);
         }
     }
 }

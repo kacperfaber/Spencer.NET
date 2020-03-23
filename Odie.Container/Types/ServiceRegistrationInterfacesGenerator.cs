@@ -29,7 +29,7 @@ namespace Odie
                     yield return builder
                         .AddType(i)
                         .AddGenericParameters(GenericParametersProvider.ProvideGenericTypes(i))
-                        .IsGeneric(TypeContainsGenericParametersChecker.Check(i))
+                        .HasGenericArguments(TypeContainsGenericParametersChecker.Check(i))
                         .Build();
                 }
             }

@@ -31,7 +31,7 @@ namespace Odie
                             new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                         new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(), new ServiceFactoryProvider(instancesCreator),
                         new ServiceFactoryInvoker())),
-                new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeGenericParametersProvider()),
+                new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()), new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()), new TypeGenericParametersProvider())),
                     new ServiceByInterfaceFinder(), new ServiceByClassFinder(), new TypeIsClassValidator()),
                 new ServiceInitializer(instancesCreator, new ServiceRegistrationInstanceSetter()),
                 new TypeExisterChecker(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new ServiceIsAutoValueChecker(),

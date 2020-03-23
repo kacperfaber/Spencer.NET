@@ -7,7 +7,7 @@ namespace Odie
     {
         Type Type { get; set; }
         
-        bool IsGeneric { get; set; }
+        bool HasGenericArguments { get; set; }
         
         IEnumerable<Type> GenericParameters { get; set; }
     }

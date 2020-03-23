@@ -30,9 +30,9 @@ namespace Odie.Container.Tests
         }
 
         [Test]
-        public void returns_true_if_gived_type_was_the_other_and_arguments_was_the_same()
+        public void returns_false_if_gived_type_was_the_other_and_arguments_was_the_same()
         {
-            Assert.IsTrue(exec<Test1<int, int>, Test2<int, int>>());
+            Assert.IsFalse(exec<Test1<int, int>, Test2<int, int>>());
         }
 
         [Test]
