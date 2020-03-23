@@ -6,34 +6,16 @@ namespace Odie
 {
     public class TypeExisterChecker : ITypeExisterChecker
     {
-        public ITypeContainsGenericParametersChecker GenericParametersChecker;
-        public ITypeGenericParametersProvider GenericParametersProvider;
+        public IServiceFinder Finder;
 
-        public TypeExisterChecker(ITypeGenericParametersProvider genericParametersProvider, ITypeContainsGenericParametersChecker genericParametersChecker)
+        public TypeExisterChecker(IServiceFinder finder)
         {
-            GenericParametersProvider = genericParametersProvider;
-            GenericParametersChecker = genericParametersChecker;
+            Finder = finder;
         }
 
         public bool Check(IServiceList list, Type type)
         {
-            return true; // TODO
-            
-            if (GenericParametersChecker.Check(type))
-            {
-                IEnumerable<Type> keyParameters = GenericParametersProvider.ProvideGenericTypes(type);
-
-                return list.GetServices()
-                    .Where(x => x.Registration.GenericRegistration.HasGenericParameters)
-                    .Where(x => x.Registration.GenericRegistration.GenericParameters.Count() == keyParameters.Count())
-                    .Where(x => x.Registration.GenericRegistration.GenericParameters.SequenceEqual(keyParameters))
-                    .FirstOrDefault() != null;
-            }
-
-            else
-            {
-                return list.GetServices().Where(x => type.IsAssignableFrom(x.Registration.TargetType)).FirstOrDefault() != null;
-            }
+            return Finder.Find(list, type) != null;
         }
     }
 }

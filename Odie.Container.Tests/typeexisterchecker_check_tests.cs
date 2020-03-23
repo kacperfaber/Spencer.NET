@@ -40,7 +40,7 @@ namespace Odie.Container.Tests
             ServiceList list = new ServiceList();
             list.AddService(test1Service);
 
-            TypeExisterChecker checker = new TypeExisterChecker(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker());
+            TypeExisterChecker checker = new TypeExisterChecker(new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()), new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()))), new ServiceByInterfaceFinder(), new ServiceByClassFinder(), new TypeIsClassValidator()));
             return checker.Check(list, typeof(T));
         }
 
