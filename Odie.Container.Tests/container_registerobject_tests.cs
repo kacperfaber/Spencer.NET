@@ -14,6 +14,19 @@ namespace Odie.Container.Tests
         {
         }
 
+        interface IGeneric<T1, T2>
+        {
+            int Max { get; set; }
+
+            int Min { get; set; }
+        }
+
+        class Generic : IGeneric<int, int>
+        {
+            public int Max { get; set; }
+            public int Min { get; set; }
+        }
+
         class Single : ISingle
         {
             public string Name { get; set; }
@@ -172,6 +185,24 @@ namespace Odie.Container.Tests
             object instance = container.Resolve(@object.GetType());
 
             Assert.AreNotEqual(@object, instance);
+        }
+
+        [Test]
+        public void container_resolve_generic_interface_returns_excepted_values_gived_in_registerobject_method()
+        {
+            IContainer container = ContainerFactory.CreateContainer();
+            Generic @object = new Generic()
+            {
+                Max = 5,
+                Min = -5
+            };
+
+            exec(container, @object);
+
+            IGeneric<int, int> resolved = container.Resolve<IGeneric<int, int>>();
+
+            Assert.IsTrue(resolved.Max == 5);
+            Assert.IsTrue(resolved.Min == -5);
         }
 
         [Test]

@@ -17,6 +17,8 @@ namespace Odie
 
         public bool Check(IServiceList list, Type type)
         {
+            return true; // TODO
+            
             if (GenericParametersChecker.Check(type))
             {
                 IEnumerable<Type> keyParameters = GenericParametersProvider.ProvideGenericTypes(type);

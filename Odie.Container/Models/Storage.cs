@@ -9,6 +9,7 @@
         }
         
         public IServiceList Services { get; set; }
+        
         public IAssemblyList Assemblies { get; set; }
     }
 }
