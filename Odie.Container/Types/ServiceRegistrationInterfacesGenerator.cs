@@ -23,7 +23,7 @@ namespace Odie
             {
                 if (!flags.HasFlag(ServiceFlagConstants.ExcludeType, i))
                 {
-                    yield return InterfaceGenerator.GenerateInterface(type);
+                    yield return InterfaceGenerator.GenerateInterface(i);
                 }
             }
         }
