@@ -2,7 +2,7 @@
 
 namespace Odie
 {
-    public partial class Builder <TOut, TBuilder>
+    public partial class Builder<TOut, TBuilder>
     {
         private TOut Object;
 
@@ -32,7 +32,17 @@ namespace Odie
         {
             return NewBuilder(NewOut());
         }
-        
+
+        public TBuilder If(bool condition, Action<TOut> action)
+        {
+            if (condition)
+            {
+                return Update(action);
+            }
+
+            return Update(x => { });
+        }
+
         public TOut Build()
         {
             return Object;

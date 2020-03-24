@@ -5,6 +5,11 @@
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileA76CF40F51C5FE4AA2A9FB07F98AA8CF/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileA76CF40F51C5FE4AA2A9FB07F98AA8CF/IsOn/@EntryValue">False</s:Boolean>
 	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileA76CF40F51C5FE4AA2A9FB07F98AA8CF/RelativePriority/@EntryValue">1</s:Double>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=69ad9595_002Dd8d4_002D417c_002D9f19_002Dd11fa3c23372/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="returns" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;::AFB5A826-8C12-449D-AF5C-6CEBDDD8FFB8::.NETCoreApp,Version=v3.1::Odie.Container.Tests.typeisarraychecker_check_tests.returns&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=782f262f_002Db8e7_002D4f30_002Db4f9_002De75ededf2437/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="3" IsLocked="True" Name="everything" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Or&gt;&#xD;
     &lt;Project Location="C:\Users\Kacpii\Desktop\Odie\odie.base.tests" Presentation="&amp;lt;Odie.Base.Tests&amp;gt;" /&gt;&#xD;
