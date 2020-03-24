@@ -21,7 +21,7 @@ namespace Odie
             if (HasFactoryChecker.Check(service))
             {
                 IFactory factory = FactoryProvider.ProvideFactory(service);
-                FactoryInstanceCreator.CreateInstance(factory, service, container);
+                object instance = FactoryInstanceCreator.CreateInstance(factory, service, container);
             }
 
             else

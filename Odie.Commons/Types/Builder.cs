@@ -42,6 +42,16 @@ namespace Odie
 
             return Update(x => { });
         }
+        
+        public TBuilder If(bool condition, Func<TBuilder, TBuilder> func)
+        {
+            if (condition)
+            {
+                return func(NewBuilder(Object));
+            }
+
+            return Update(_ => { });
+        }
 
         public TOut Build()
         {

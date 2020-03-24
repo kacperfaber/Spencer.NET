@@ -16,7 +16,7 @@ namespace Odie
                 {
                     yield return new ParameterBuilder()
                         .AddType(param.ParameterType)
-                        .AddValue(param.DefaultValue)
+                        .If(param.HasDefaultValue, x => x.Value = param.DefaultValue)
                         .Build();
                 }
             }
