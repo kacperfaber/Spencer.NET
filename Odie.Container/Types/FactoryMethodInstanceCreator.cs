@@ -2,9 +2,19 @@
 {
     public class FactoryMethodInstanceCreator : IFactoryMethodInstanceCreator
     {
-        public void CreateInstance(IFactory factory)
+        public IParametersValuesGenerator ValuesGenerator;
+        public IFactoryMethodInvoker MethodInvoker;
+
+        public FactoryMethodInstanceCreator(IParametersValuesGenerator valuesGenerator, IFactoryMethodInvoker methodInvoker)
         {
-            
+            ValuesGenerator = valuesGenerator;
+            MethodInvoker = methodInvoker;
+        }
+
+        public object CreateInstance(IFactory factory, IContainer container)
+        {
+            ValuesGenerator.Generate(factory.MethodParameters, container);
+            return MethodInvoker.InvokeMethod(factory);
         }
     }
 }

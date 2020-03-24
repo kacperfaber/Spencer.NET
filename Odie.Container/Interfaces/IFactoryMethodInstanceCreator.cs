@@ -2,6 +2,6 @@
 {
     public interface IFactoryMethodInstanceCreator
     {
-        void CreateInstance(IFactory factory);
+        object CreateInstance(IFactory factory, IContainer container);
     }
 }
