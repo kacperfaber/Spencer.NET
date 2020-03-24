@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
@@ -30,6 +31,9 @@ namespace Odie.Container.Tests
         {
             List<Factory> factory = new List<Factory>
             {
+                new Factory() {ResultType = typeof(void)},
+                new Factory() {ResultType = typeof(int)},
+                new Factory() {ResultType = typeof(bool)},
                 new Factory() {ResultType = typeof(Test1)},
                 new Factory() {ResultType = typeof(Test2)},
                 new Factory() {ResultType = typeof(Test3)},
@@ -77,6 +81,18 @@ namespace Odie.Container.Tests
         public void returns_list_contains_typeof_Test4_if_gived_Test4()
         {
             Assert.AreEqual(exec<Test4>().First().ResultType, typeof(Test4));
+        }
+
+        [Test]
+        public void returns_not_contains_Valuetype_if_gived_is_object()
+        {
+            Assert.Null(exec<object>().SingleOrDefault(x => typeof(ValueType).IsAssignableFrom(x.ResultType)));
+        }
+
+        [Test]
+        public void returns_not_contains_typeof_void()
+        {
+            Assert.Null(exec<object>().SingleOrDefault(x => x.ResultType == typeof(void)));
         }
     }
 }

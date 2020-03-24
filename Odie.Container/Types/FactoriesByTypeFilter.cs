@@ -15,7 +15,10 @@ namespace Odie
 
         public IEnumerable<IFactory> Filter(Type targetType, IEnumerable<IFactory> factories)
         {
-            return factories.Where(x => AssignableChecker.Check(x.ResultType, targetType));
+            return factories
+                .Where(x => !AssignableChecker.Check(x.ResultType, typeof(ValueType)))
+                .Where(x => x.ResultType != typeof(void))
+                .Where(x => AssignableChecker.Check(x.ResultType, targetType));
         }
     }
 }
