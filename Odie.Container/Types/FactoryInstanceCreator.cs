@@ -15,9 +15,9 @@ namespace Odie
         {
             if (factory.Type == FactoryType.StaticMethod)
             {
-                MethodInstanceCreator.CreateInstance(factory, container);
+                return MethodInstanceCreator.CreateInstance(factory, container);
             }
-
+            
             throw new NotImplementedException("Factory implements only .StaticMethod [0x0]");
         }
     }

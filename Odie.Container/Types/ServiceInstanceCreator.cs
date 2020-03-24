@@ -8,12 +8,15 @@ namespace Odie
         public IInstanceCreator InstanceCreator;
         public IServiceHasFactoryChecker HasFactoryChecker;
         public IFactoryInstanceCreator FactoryInstanceCreator;
-        public IFactoryProvider FactoryProvider; // TODO
+        public IFactoryProvider FactoryProvider;
 
-        public ServiceInstanceCreator(IInstanceCreator instanceCreator, IServiceHasConstructorParametersChecker hasConstructorParametersChecker)
+        public ServiceInstanceCreator(IInstanceCreator instanceCreator, IServiceHasConstructorParametersChecker hasConstructorParametersChecker, IFactoryProvider factoryProvider, IFactoryInstanceCreator factoryInstanceCreator, IServiceHasFactoryChecker hasFactoryChecker)
         {
             InstanceCreator = instanceCreator;
             HasConstructorParametersChecker = hasConstructorParametersChecker;
+            FactoryProvider = factoryProvider;
+            FactoryInstanceCreator = factoryInstanceCreator;
+            HasFactoryChecker = hasFactoryChecker;
         }
 
         public object CreateInstance(IService service, IContainer container)

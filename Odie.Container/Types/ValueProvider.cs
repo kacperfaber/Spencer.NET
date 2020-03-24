@@ -38,7 +38,10 @@ namespace Odie
                 return ArrayGenerator.GenerateArray(exceptedType);
             }
 
-            return container.Resolve(exceptedType); // TODO it dependends to Resolve will be auto-created
+            if (exceptedType.IsInstanceOfType(container))
+                return container;
+
+            return container.Resolve(exceptedType);
         }
     }
 }
