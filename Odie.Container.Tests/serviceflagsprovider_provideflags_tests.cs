@@ -22,6 +22,12 @@ namespace Odie.Container.Tests
 
             [Inject]
             public string Email;
+
+            [Factory]
+            public static TestClass FactoryMethod()
+            {
+                return null;
+            }
         }
 
         class Test2
@@ -50,7 +56,7 @@ namespace Odie.Container.Tests
         {
             int count = exec<TestClass>().Count();
 
-            Assert.IsTrue(count == 4);
+            Assert.IsTrue(count == 5);
         }
 
         [Test]
@@ -94,6 +100,59 @@ namespace Odie.Container.Tests
         }
 
         [Test]
+        public void returns_servicefactory_attribute()
+        {
+            Assert.NotNull(exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory));
+        }
+
+        [Test]
+        public void returns_servicefactory_parent_not_null()
+        {
+            Assert.NotNull(exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent);
+        }
+
+        [Test]
+        public void returns_servicefactory_parent_is_methodinfo()
+        {
+            bool b = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent is MethodInfo;
+            Assert.IsTrue(b);
+        }
+
+        [Test]
+        public void returns_servicefactory_parent_membertype_equals_to_method()
+        {
+            MemberTypes type = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent.MemberType;
+            Assert.IsTrue(type == MemberTypes.Method);
+        }
+
+        [Test]
+        public void returns_servicefactory_cast_to_methodinfo_does_not_throws()
+        {
+            MemberInfo parent = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent;
+            
+            Assert.DoesNotThrow(() =>
+            {
+                _ = (MethodInfo) parent;
+            });
+        }
+
+        [Test]
+        public void return_servicefactory_methodinfo_returntype_equals_to_TestClass()
+        {
+            MethodInfo method = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent as MethodInfo;
+            
+            Assert.IsTrue(method.ReturnType == typeof(TestClass));
+        }
+
+        [Test]
+        public void return_servicefactory_methodinfo_isstatic_returns_true()
+        {
+            MethodInfo method = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent as MethodInfo;
+            
+            Assert.IsTrue(method.IsStatic);
+        }
+
+        [Test]
         public void returns_object_getflags_inject_returns_not_null_parent()
         {
             ServiceFlags flags = exec<TestClass>();
@@ -112,7 +171,7 @@ namespace Odie.Container.Tests
             IEnumerable<ServiceFlag> injects = flags.GetFlags(ServiceFlagConstants.Inject);
             ServiceFlag inject = injects.First(x => x.Parent.MemberType == MemberTypes.Property);
             bool result = inject.Parent.Name == "Name";
-            
+
             Assert.IsTrue(result);
         }
     }
