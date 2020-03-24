@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Odie
@@ -22,6 +23,11 @@ namespace Odie
         public FactoryBuilder AddResultType(Type type)
         {
             return Update(x => x.ResultType = type);
+        }
+
+        public FactoryBuilder AddParameters(IEnumerable<IParameter> parameters)
+        {
+            return Update(x => x.MethodParameters = parameters);
         }
 
         public void Dispose()

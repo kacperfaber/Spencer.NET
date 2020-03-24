@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Odie
 {
@@ -7,13 +8,20 @@ namespace Odie
     {
         public IFactoriesProvider FactoriesProvider;
         public IFactoriesByTypeFilter ByTypeFilter;
-        
+
+        public FactoryProvider(IFactoriesByTypeFilter byTypeFilter, IFactoriesProvider factoriesProvider)
+        {
+            ByTypeFilter = byTypeFilter;
+            FactoriesProvider = factoriesProvider;
+        }
+
         public IFactory ProvideFactory(IService service)
         {
             IEnumerable<IFactory> factories = FactoriesProvider.ProvideFactories(service);
-            IEnumerable<IFactory> byTypeFiltered = ByTypeFilter.Filter(service.Registration.TargetType, factories); // TODO can check ResultType in attr and returntype.. :D
+            IEnumerable<IFactory> byTypeFiltered = ByTypeFilter.Filter(service.Registration.TargetType, factories);
+            IEnumerable<IFactory> orderedByMethodFirsts = byTypeFiltered.OrderBy(x => x.Type == FactoryType.StaticMethod).AsEnumerable();
 
-            throw new NotImplementedException();
+            return orderedByMethodFirsts.First();
         }
     }
 }

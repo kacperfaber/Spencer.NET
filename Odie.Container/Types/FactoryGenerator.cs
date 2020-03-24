@@ -7,9 +7,10 @@ namespace Odie
         public IFactoryTypeGenerator TypeGenerator;
         public IFactoryResultTypeGenerator ResultTypeGenerator;
 
-        public FactoryGenerator(IFactoryTypeGenerator typeGenerator)
+        public FactoryGenerator(IFactoryTypeGenerator typeGenerator, IFactoryResultTypeGenerator resultTypeGenerator)
         {
             TypeGenerator = typeGenerator;
+            ResultTypeGenerator = resultTypeGenerator;
         }
 
         public IFactory GenerateFactory(MemberInfo member)
@@ -18,6 +19,7 @@ namespace Odie
 
             return builder
                 .AddType(TypeGenerator.Generate(member))
+                .AddResultType(ResultTypeGenerator.GenerateResultType(member))
                 .AddMember(member)
                 .Build();
         }
