@@ -22,6 +22,8 @@ namespace Odie
             {
                 IFactory factory = FactoryProvider.ProvideFactory(service);
                 object instance = FactoryInstanceCreator.CreateInstance(factory, service, container);
+
+                return instance;
             }
 
             else
@@ -36,8 +38,6 @@ namespace Odie
                     return InstanceCreator.CreateInstance(service.Registration.TargetType, container);
                 }
             }
-
-            throw new NotImplementedException();
         }
     }
 }

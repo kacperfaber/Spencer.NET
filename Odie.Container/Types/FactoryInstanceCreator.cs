@@ -6,7 +6,7 @@ namespace Odie
     {
         public object CreateInstance(IFactory factory, IService service, IContainer container)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

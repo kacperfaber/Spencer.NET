@@ -17,7 +17,7 @@ namespace Odie
         {
             return Update(x => x.ParameterType = type);
         }
-
+        
         public void Dispose()
         {
         }

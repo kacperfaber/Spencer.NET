@@ -25,6 +25,8 @@ namespace Odie
 
         public IEnumerable<object> GenerateParameters(IConstructor constructor, ServiceFlags flags, IContainer container)
         {
+            // TODO replace with IParameter
+            
             ParameterInfo[] parameters = constructor.Parameters;
 
             foreach (ParameterInfo parameter in parameters)
