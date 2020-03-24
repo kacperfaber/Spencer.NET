@@ -6,10 +6,18 @@ namespace Odie
     public class FactoryResultTypeGenerator : IFactoryResultTypeGenerator
     {
         public IFactoryResultExistChecker ResultExistChecker;
-        public IFactoryResultResultTypeProvider ResultTypeProvider;
+        public IFactoryResultTypeProvider ResultTypeProvider;
         public IMemberDeclarationTypeProvider DeclarationTypeProvider;
         public IAssignableChecker AssignableChecker;
-        
+
+        public FactoryResultTypeGenerator(IFactoryResultExistChecker resultExistChecker, IFactoryResultTypeProvider resultTypeProvider, IMemberDeclarationTypeProvider declarationTypeProvider, IAssignableChecker assignableChecker)
+        {
+            ResultExistChecker = resultExistChecker;
+            ResultTypeProvider = resultTypeProvider;
+            DeclarationTypeProvider = declarationTypeProvider;
+            AssignableChecker = assignableChecker;
+        }
+
         public Type GenerateResultType(MemberInfo member)
         {
             Type returnType = DeclarationTypeProvider.ProvideDeclarartionType(member);

@@ -4,11 +4,11 @@ using System.Reflection;
 
 namespace Odie
 {
-    public class FactoryResultResultTypeProvider : IFactoryResultResultTypeProvider
+    public class FactoryResultTypeProvider : IFactoryResultTypeProvider
     {
         public IAttributesFinder Finder;
 
-        public FactoryResultResultTypeProvider(IAttributesFinder finder)
+        public FactoryResultTypeProvider(IAttributesFinder finder)
         {
             Finder = finder;
         }

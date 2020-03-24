@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Odie
 {
-    public interface IFactoryResultResultTypeProvider
+    public interface IFactoryResultTypeProvider
     {
         Type ProvideResultType(MemberInfo member);
     }
