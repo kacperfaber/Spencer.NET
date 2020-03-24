@@ -38,9 +38,6 @@ namespace Odie
                 return ArrayGenerator.GenerateArray(exceptedType);
             }
 
-            if (exceptedType.IsInstanceOfType(container))
-                return container;
-
             return container.Resolve(exceptedType);
         }
     }
