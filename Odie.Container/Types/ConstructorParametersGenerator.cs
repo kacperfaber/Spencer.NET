@@ -8,9 +8,9 @@ namespace Odie
     public class ConstructorParametersGenerator : IConstructorParametersGenerator
     {
         public IConstructorParameterByTypeFinder ConstructorParameterByTypeFinder;
-        public IParameterValueProvider ValueProvider;
+        public ITypedMemberValueProvider ValueProvider;
 
-        public ConstructorParametersGenerator(IParameterValueProvider valueProvider, IConstructorParameterByTypeFinder constructorParameterByTypeFinder)
+        public ConstructorParametersGenerator(ITypedMemberValueProvider valueProvider, IConstructorParameterByTypeFinder constructorParameterByTypeFinder)
         {
             ValueProvider = valueProvider;
             ConstructorParameterByTypeFinder = constructorParameterByTypeFinder;

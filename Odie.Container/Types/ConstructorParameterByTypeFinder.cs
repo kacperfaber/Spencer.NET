@@ -8,7 +8,10 @@ namespace Odie
     {
         public IConstructorParameter FindByType(IConstructorParameters parameters, Type type)
         {
-            return parameters.Parameters.First(x => type.IsAssignableFrom(x.Type));
+            IConstructorParameter selected = parameters.Parameters.First(x => type.IsAssignableFrom(x.Type));
+            parameters.Parameters.Remove(selected);
+
+            return selected;
         }
     }
 }

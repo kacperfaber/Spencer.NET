@@ -6,18 +6,18 @@ namespace Odie
 {
     public class ParametersValuesGenerator : IParametersValuesGenerator
     {
-        public IParameterValueProvider ParameterValueProvider;
+        public ITypedMemberValueProvider TypedMemberValueProvider;
 
-        public ParametersValuesGenerator(IParameterValueProvider parameterValueProvider)
+        public ParametersValuesGenerator(ITypedMemberValueProvider typedMemberValueProvider)
         {
-            ParameterValueProvider = parameterValueProvider;
+            TypedMemberValueProvider = typedMemberValueProvider;
         }
 
         public void Generate(IEnumerable<IParameter> parameters, IContainer container)
         {
             foreach (IParameter parameter in parameters)
             {
-                object value = ParameterValueProvider.ProvideValue(null, container);
+                object value = TypedMemberValueProvider.ProvideValue(null, container);
                 parameter.Value = value;
             }
         }

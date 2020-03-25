@@ -2,7 +2,7 @@
 
 namespace Odie
 {
-    public interface IParameterValueProvider
+    public interface ITypedMemberValueProvider
     {
         object ProvideValue(ITypedMember member, IContainer container);
     }

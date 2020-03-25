@@ -13,7 +13,8 @@ namespace Odie
 
         public object InvokeConstructor(IConstructor constructor, IEnumerable<object> parameters)
         {
-            return constructor.Instance.Invoke(parameters.ToArray());
+            object[] parametersArr = parameters.ToArray();
+            return constructor.Instance.Invoke(parametersArr);
         }
     }
 }

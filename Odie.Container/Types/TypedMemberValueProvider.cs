@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Reflection;
 
 namespace Odie
 {
-    public class ParameterValueProvider : IParameterValueProvider
+    public class TypedMemberValueProvider : ITypedMemberValueProvider
     {
         public ITypeIsValueTypeChecker IsValueTypeChecker;
         public IValueTypeActivator ValueTypeActivator;
@@ -13,7 +14,7 @@ namespace Odie
         public IParameterHasDefaultValueChecker DefaultValueChecker;
         public IParameterDefaultValueProvider DefaultValueProvider;
 
-        public ParameterValueProvider(ITypeIsValueTypeChecker isValueTypeChecker, IValueTypeActivator valueTypeActivator, ITypeIsArrayChecker isArrayChecker, IArrayGenerator arrayGenerator, IIsEnumerableChecker isEnumerableChecker, IEnumerableGenerator enumerableGenerator, IParameterHasDefaultValueChecker defaultValueChecker, IParameterDefaultValueProvider defaultValueProvider)
+        public TypedMemberValueProvider(ITypeIsValueTypeChecker isValueTypeChecker, IValueTypeActivator valueTypeActivator, ITypeIsArrayChecker isArrayChecker, IArrayGenerator arrayGenerator, IIsEnumerableChecker isEnumerableChecker, IEnumerableGenerator enumerableGenerator, IParameterHasDefaultValueChecker defaultValueChecker, IParameterDefaultValueProvider defaultValueProvider)
         {
             IsValueTypeChecker = isValueTypeChecker;
             ValueTypeActivator = valueTypeActivator;
@@ -50,6 +51,7 @@ namespace Odie
                 return ArrayGenerator.GenerateArray(member.Type);
             }
 
+            container.Register(member.Type);
             return container.Resolve(member.Type);
         }
     }

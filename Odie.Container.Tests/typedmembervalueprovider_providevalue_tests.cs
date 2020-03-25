@@ -2,7 +2,7 @@
 
 namespace Odie.Container.Tests
 {
-    public class valueprovider_providevalue_tests
+    public class typedmembervalueprovider_providevalue_tests
     {
         class Odie
         {
@@ -15,26 +15,34 @@ namespace Odie.Container.Tests
             }
         }
 
-        object exec<T>()
+        object exec<T>(IContainer container)
         {
-            ParameterValueProvider provider = new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(),
+            TypedMemberValueProvider provider = new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(),
+                new ArrayGenerator(),
                 new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
                 new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(),
                 new ParameterDefaultValueProvider());
 
-            return provider.ProvideValue(new TypedMember(typeof(T)), ContainerFactory.CreateContainer());
+
+            return provider.ProvideValue(new TypedMember(typeof(T)), container);
         }
 
         [Test]
         public void dont_throws_exceptions()
         {
-            Assert.DoesNotThrow(() => exec<TestClass>());
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<Odie>();
+            
+            Assert.DoesNotThrow(() => exec<TestClass>(container));
         }
 
         [Test]
         public void returns_not_null()
         {
-            object @class = exec<TestClass>();
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<Odie>();
+
+            object @class = exec<TestClass>(container);
             Assert.NotNull(@class);
         }
     }
