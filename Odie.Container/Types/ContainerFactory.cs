@@ -13,7 +13,7 @@ namespace Odie
             InstancesCreator instancesCreator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                 new ConstructorParametersGenerator(parameterValueProvider,new ConstructorParameterByTypeFinder()),
             new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
-                new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator()));
+                new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())))));
 
 
             return new Container(
