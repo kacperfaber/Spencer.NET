@@ -4,7 +4,7 @@ namespace Odie
 {
     public class ParameterInfoDefaultValueProvider : IParameterInfoDefaultValueProvider
     {
-        public object Provide(ParameterInfo parameter)
+        public object Provide(IParameter parameter)
         {
             return parameter.DefaultValue;
         }

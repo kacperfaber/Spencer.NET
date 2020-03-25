@@ -7,5 +7,9 @@ namespace Odie
         Type ParameterType { get; set; }
         
         object Value { get; set; }
+        
+        bool HasDefaultValue { get; set; }
+        
+        object DefaultValue { get; set; }
     }
 }

@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IParameterInfoDefaultValueProvider
     {
-        object Provide(ParameterInfo parameter);
+        object Provide(IParameter parameter);
     }
 }

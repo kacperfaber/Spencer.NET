@@ -17,6 +17,16 @@ namespace Odie
         {
             return Update(x => x.ParameterType = type);
         }
+
+        public ParameterBuilder HasDefaultValue(bool hasDefaultValue)
+        {
+            return Update(x => x.HasDefaultValue = hasDefaultValue);
+        }
+
+        public ParameterBuilder AddDefaultValue(object value)
+        {
+            return Update(x => x.DefaultValue = value);
+        }
         
         public void Dispose()
         {

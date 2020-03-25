@@ -32,7 +32,7 @@ namespace Odie.Container.Tests
                         new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                     new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                        new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterInfoHasDefaultValueChecker(),
+                        new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterHasDefaultValueChecker(),
                             new ValueTypeActivator(), new TypeIsValueTypeChecker(),new ConstructorParameterByTypeFinder()),
                         new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),new ConstructorGenerator()),new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator()))), new ServiceFactoryInvoker()));
 

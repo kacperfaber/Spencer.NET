@@ -5,14 +5,14 @@ namespace Odie
 {
     public class MemberValuesInjector : IMemberValuesInjector
     {
-        public IValueProvider ValueProvider;
+        public IParameterValueProvider ParameterValueProvider;
         public IMemberValueSetter ValueSetter;
         public IInjectFlagsProvider InjectsProvider;
 
-        public MemberValuesInjector(IMemberValueSetter valueSetter, IValueProvider valueProvider, IInjectFlagsProvider injectsProvider)
+        public MemberValuesInjector(IMemberValueSetter valueSetter, IParameterValueProvider parameterValueProvider, IInjectFlagsProvider injectsProvider)
         {
             ValueSetter = valueSetter;
-            ValueProvider = valueProvider;
+            ParameterValueProvider = parameterValueProvider;
             InjectsProvider = injectsProvider;
         }
 
@@ -22,7 +22,7 @@ namespace Odie
 
             foreach (ServiceFlag injectFlag in injections)
             {
-                object value = ValueProvider.ProvideValue(injectFlag.Parent.MemberType == MemberTypes.Property ? ((PropertyInfo) injectFlag.Parent).PropertyType : ((FieldInfo) injectFlag.Parent).FieldType, container);
+                object value = ParameterValueProvider.ProvideValue(injectFlag.Parent.MemberType == MemberTypes.Property ? ((PropertyInfo) injectFlag.Parent).PropertyType : ((FieldInfo) injectFlag.Parent).FieldType, container);
                 ValueSetter.SetValue(injectFlag.Parent, instance, value);
             }
         }

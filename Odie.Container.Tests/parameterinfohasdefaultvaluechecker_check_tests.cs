@@ -18,7 +18,7 @@ namespace Odie.Container.Tests
             MethodInfo[] methods = typeof(test).GetMethods();
             ParameterInfo[] parameters = methods.Single(x => x.ReturnType == typeof(void) && x.Name == "hello").GetParameters();
             
-            ParameterInfoHasDefaultValueChecker checker = new ParameterInfoHasDefaultValueChecker();
+            ParameterHasDefaultValueChecker checker = new ParameterHasDefaultValueChecker();
             return checker.Check(parameters.Single(x => x.Name == name));
         }
 

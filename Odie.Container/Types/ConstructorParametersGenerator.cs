@@ -9,11 +9,11 @@ namespace Odie
     {
         public ITypeIsValueTypeChecker ValueTypeChecker;
         public IValueTypeActivator ValueTypeActivator;
-        public IParameterInfoHasDefaultValueChecker DefaultValueChecker;
+        public IParameterHasDefaultValueChecker DefaultValueChecker;
         public IParameterInfoDefaultValueProvider DefaultValueProvider;
         public IConstructorParameterByTypeFinder ConstructorParameterByTypeFinder;
 
-        public ConstructorParametersGenerator(IParameterInfoDefaultValueProvider defaultValueProvider, IParameterInfoHasDefaultValueChecker defaultValueChecker,
+        public ConstructorParametersGenerator(IParameterInfoDefaultValueProvider defaultValueProvider, IParameterHasDefaultValueChecker defaultValueChecker,
             IValueTypeActivator valueTypeActivator, ITypeIsValueTypeChecker valueTypeChecker, IConstructorParameterByTypeFinder constructorParameterByTypeFinder)
         {
             DefaultValueProvider = defaultValueProvider;

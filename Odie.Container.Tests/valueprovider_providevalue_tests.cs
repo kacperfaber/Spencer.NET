@@ -17,7 +17,7 @@ namespace Odie.Container.Tests
 
         object exec<T>()
         {
-            ValueProvider provider = new ValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(),
+            ParameterValueProvider provider = new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(),
                 new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
                 new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()));
 
