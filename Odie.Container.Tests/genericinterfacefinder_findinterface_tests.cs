@@ -29,7 +29,7 @@ namespace Odie.Container.Tests
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                         new ConstructorParametersGenerator(typedMemberValueProvider,new ConstructorParameterByTypeFinder()),
                         new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
-                        new ConstructorInfoListGenerator(), new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())))))), new ServiceFactoryInvoker()));
+                        new ConstructorInfoListGenerator(), new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ParametersValuesExtractor()))), new ServiceFactoryInvoker()));
             IService[] services = generator.GenerateServices(typeof(TestClass), new AssemblyList(), null).ToArray();
 
             ServiceList list = new ServiceList();

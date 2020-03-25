@@ -9,11 +9,13 @@ namespace Odie.Container.Tests
         class Odie
         {
             public string Name = "not-assigned";
-            
+
             [Factory]
-            public static Odie FactoryMethod(container_register_generic_tests reg)
+            [FactoryResult(typeof(Odie))]
+            public static Odie FactoryMethod(hello_world world)
             {
-                return new Odie() {Name = "SIEMA"};
+                Console.WriteLine(world);
+                return new Odie() {Name = "world is " + world == null ? "NULL" : "NOT NULL"};
             }
         }
 
@@ -22,10 +24,7 @@ namespace Odie.Container.Tests
         {
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<Odie>();
-            container.RegisterObject(new container_register_generic_tests());
-
-            Odie odie = container.Resolve<Odie>();
-            Console.WriteLine(odie.Name);
+            Odie resolve = container.Resolve<Odie>();
         }
     }
 }

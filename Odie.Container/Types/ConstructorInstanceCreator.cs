@@ -13,8 +13,9 @@ namespace Odie
         public IConstructorInfoListGenerator ConstructorInfoListGenerator;
         public IConstructorFinder ConstructorFinder;
         public IConstructorListGenerator ConstructorListGenerator;
+        public IParametersValuesExtractor ParametersValuesExtractor;
 
-        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider, IConstructorInfoListGenerator constructorInfoListGenerator, IConstructorFinder constructorFinder, IConstructorListGenerator constructorListGenerator)
+        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider, IConstructorInfoListGenerator constructorInfoListGenerator, IConstructorFinder constructorFinder, IConstructorListGenerator constructorListGenerator, IParametersValuesExtractor parametersValuesExtractor)
         {
             ConstructorInvoker = constructorInvoker;
             ParametersGenerator = parametersGenerator;
@@ -22,13 +23,15 @@ namespace Odie
             ConstructorInfoListGenerator = constructorInfoListGenerator;
             ConstructorFinder = constructorFinder;
             ConstructorListGenerator = constructorListGenerator;
+            ParametersValuesExtractor = parametersValuesExtractor;
         }
 
         public object CreateInstance(ServiceFlags flags, Type @class, IContainer container)
         {
             IConstructor constructor = ConstructorProvider.ProvideConstructor(@class, flags);
-            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, flags, container);
-            object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
+            IEnumerable<IParameter> parameters = ParametersGenerator.GenerateParameters(constructor, flags, container);
+            object[] values = ParametersValuesExtractor.ExtractValues(parameters);
+            object instance = ConstructorInvoker.InvokeConstructor(constructor, values);
 
             return instance;
         }
@@ -36,8 +39,9 @@ namespace Odie
         public object CreateInstance(Type @class, IContainer container)
         {
             IConstructor constructor = ConstructorProvider.ProvideConstructor(@class);
-            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, container);
-            object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
+            IEnumerable<IParameter> parameters = ParametersGenerator.GenerateParameters(constructor, container);
+            object[] values = ParametersValuesExtractor.ExtractValues(parameters);
+            object instance = ConstructorInvoker.InvokeConstructor(constructor, values);
 
             return instance;
         }
@@ -47,8 +51,9 @@ namespace Odie
             ConstructorInfo[] constructorInfos = ConstructorInfoListGenerator.GenerateList(@class);
             IEnumerable<IConstructor> constructors = ConstructorListGenerator.GenerateList(constructorInfos);
             IConstructor constructor = ConstructorFinder.FindBy(constructors, constructorParameters);
-            IEnumerable<object> parameters = ParametersGenerator.GenerateParameters(constructor, constructorParameters);
-            object instance = ConstructorInvoker.InvokeConstructor(constructor, parameters);
+            IEnumerable<IParameter> parameters = ParametersGenerator.GenerateParameters(constructor, constructorParameters);
+            object[] values = ParametersValuesExtractor.ExtractValues(parameters);
+            object instance = ConstructorInvoker.InvokeConstructor(constructor, values);
 
             return instance;
         }

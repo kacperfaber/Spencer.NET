@@ -13,7 +13,7 @@
 
         public object CreateInstance(IFactory factory, IContainer container)
         {
-            ValuesGenerator.Generate(factory.MethodParameters, container);
+            factory.MethodParameters = ValuesGenerator.Generate(factory.MethodParameters, container);
             return MethodInvoker.InvokeMethod(factory);
         }
     }
