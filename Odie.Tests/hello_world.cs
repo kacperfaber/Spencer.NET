@@ -1,29 +1,47 @@
 ﻿using System;
+using System.Diagnostics;
 using NUnit.Framework;
 
 namespace Odie.Tests
 {
     public class hello_world
     {
-        class Garfield
+        interface IAnimal
         {
         }
 
-        class Oscar
+        class Garfield : IAnimal
+        {
+            public string Name { get; set; }
+
+            [Factory]
+            [FactoryResult(typeof(Garfield))]
+            public static IAnimal CreateAnimal(Oscar oscar)
+            {
+                return new Garfield()
+                {
+                    Name = "Dog"
+                };
+            }
+        }
+
+        class Oscar : IAnimal
         {
         }
 
-        class Odie
+        [Test]
+        public void hello()
         {
-            public Odie(Garfield garfield, Oscar oscar)
-            {
-                Console.WriteLine("using ctor garfield, oscar");
-            }
+            IContainer container = ContainerFactory.CreateContainer();
 
-            public Odie(string name, string email)
-            {
-                Console.WriteLine($"using string, string ctor where\nname {name}\nemail {email}");
-            }
+            container.Register<Oscar>();
+            container.Register<Garfield>();
+
+            Console.WriteLine("registered Garfield.");
+
+            Garfield garfield = container.Resolve<Garfield>();
+
+            Console.WriteLine("resolved Gardield " + garfield.Name);
         }
     }
 }
