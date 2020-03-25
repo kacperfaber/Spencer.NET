@@ -2,10 +2,8 @@
 
 namespace Odie
 {
-    public interface IParameter
+    public interface IParameter : ITypedMember
     {
-        Type ParameterType { get; set; }
-        
         object Value { get; set; }
         
         bool HasDefaultValue { get; set; }

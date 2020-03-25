@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -45,8 +46,21 @@ namespace Odie.Container.Tests
                 constructorParameters.Add(new ConstructorParameter() {Type = instance.GetType(), Value = instance});
             }
 
-            ConstructorParametersGenerator generator = new ConstructorParametersGenerator(null, null, null, null, new ConstructorParameterByTypeFinder());
-            object[] result = generator.GenerateParameters(new Constructor() {Instance = ctor, Parameters = ctor.GetParameters()}, constructorParameters).ToArray();
+            IEnumerable<IParameter> generateParameters(ConstructorInfo info)
+            {
+                foreach (ParameterInfo parameterInfo in info.GetParameters())
+                {
+                    yield return new ParameterBuilder()
+                        .AddType(parameterInfo.ParameterType)
+                        .AddDefaultValue(parameterInfo.DefaultValue)
+                        .HasDefaultValue(parameterInfo.HasDefaultValue)
+                        .Build();
+                }
+            }
+            
+            ParameterValueProvider parameterValueProvider = new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(), new ParameterDefaultValueProvider());
+            ConstructorParametersGenerator generator = new ConstructorParametersGenerator(parameterValueProvider,new ConstructorParameterByTypeFinder());
+            object[] result = generator.GenerateParameters(new Constructor() {Instance = ctor, Parameters = generateParameters(ctor)}, constructorParameters).ToArray();
 
             return result;
         }

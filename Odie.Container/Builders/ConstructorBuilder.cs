@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace Odie
 {
@@ -13,7 +14,7 @@ namespace Odie
             return Update(x => x.Instance = ctor);
         }
 
-        public ConstructorBuilder AddParameters(ParameterInfo[] parameters)
+        public ConstructorBuilder AddParameters(IEnumerable<IParameter> parameters)
         {
             return Update(x => x.Parameters = parameters);
         }

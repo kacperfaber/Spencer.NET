@@ -31,9 +31,8 @@ namespace Odie.Container.Tests
                         new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                     new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                        new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterHasDefaultValueChecker(),
-                            new ValueTypeActivator(), new TypeIsValueTypeChecker(), new ConstructorParameterByTypeFinder()),
-                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator()),
+                        new ConstructorParametersGenerator(new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(), new ParameterDefaultValueProvider()), new ConstructorParameterByTypeFinder()), 
+                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
                         new ConstructorInfoListGenerator(), new ConstructorFinder(), new ConstructorListGenerator()))), new ServiceFactoryInvoker()));
             IService test1Service = generator.GenerateServices(typeof(Test1), new AssemblyList(), null).First();
 

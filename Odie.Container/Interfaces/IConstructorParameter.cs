@@ -1,11 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Odie
 {
-    public interface IConstructorParameter
+    public interface IConstructorParameter : ITypedMember
     {
-        Type Type { get; set; }
-
         object Value { get; set; }
     }
 }

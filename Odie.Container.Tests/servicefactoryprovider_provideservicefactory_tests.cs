@@ -16,8 +16,7 @@ namespace Odie.Container.Tests
         IServiceFactory exec<T>()
         {
             ServiceFactoryProvider provider = new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterHasDefaultValueChecker(), new ValueTypeActivator(),
-                    new TypeIsValueTypeChecker(),new ConstructorParameterByTypeFinder()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),new ConstructorGenerator()),new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator())));
+                new ConstructorParametersGenerator(new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(), new ParameterDefaultValueProvider()), new ConstructorParameterByTypeFinder()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator())));
 
             return provider.ProvideServiceFactory(typeof(T), null);
         }

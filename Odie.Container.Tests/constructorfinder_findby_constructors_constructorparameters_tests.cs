@@ -69,7 +69,7 @@ namespace Odie.Container.Tests
 
             ConstructorFinder finder = new ConstructorFinder();
             ConstructorInfo[] allCtors = typeof(T).GetConstructors();
-            ConstructorListGenerator generator = new ConstructorListGenerator();
+            ConstructorListGenerator generator = new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())));
             IEnumerable<IConstructor> ctors = generator.GenerateList(allCtors);
             IConstructor ctor = finder.FindBy(ctors, parameters);
 

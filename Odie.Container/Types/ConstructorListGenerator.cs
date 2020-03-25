@@ -6,9 +6,16 @@ namespace Odie
 {
     public class ConstructorListGenerator : IConstructorListGenerator
     {
+        public IConstructorGenerator ConstructorGenerator;
+
+        public ConstructorListGenerator(IConstructorGenerator constructorGenerator)
+        {
+            ConstructorGenerator = constructorGenerator;
+        }
+
         public IEnumerable<IConstructor> GenerateList(ConstructorInfo[] constructors)
         {
-            return Array.ConvertAll(constructors, c => new ConstructorBuilder().AddInstance(c).AddParameters(c.GetParameters()).Build());
+            return Array.ConvertAll(constructors, c => ConstructorGenerator.GenerateConstructor(c));
         }
     }
 }

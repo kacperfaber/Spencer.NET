@@ -18,8 +18,14 @@ namespace Odie.Container.Tests
         {
             ConstructorInfo ctor = typeof(TestClass).GetConstructors().First();
             ParameterInfo p = ctor.GetParameters().SingleOrDefault(x => x.Name.ToLower() == name.ToLower());
-            ParameterInfoDefaultValueProvider provider = new ParameterInfoDefaultValueProvider();
-            return provider.Provide(p);
+            IParameter parameter = new ParameterBuilder()
+                .AddType(p.ParameterType)
+                .AddValue(null)
+                .AddDefaultValue(p.HasDefaultValue)
+                .AddDefaultValue(p.DefaultValue)
+                .Build();
+            ParameterDefaultValueProvider provider = new ParameterDefaultValueProvider();
+            return provider.Provide(parameter);
         }
 
         [Test]
@@ -37,13 +43,13 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_1_if_parameter_name_is_x()
         {
-            Assert.IsTrue((int) exec("x")  == 1);
+            Assert.IsTrue((int) exec("x") == 1);
         }
 
         [Test]
         public void returns_2_if_parameter_name_is_y()
         {
-            Assert.IsTrue((int) exec("y")  == 2);
+            Assert.IsTrue((int) exec("y") == 2);
         }
 
         [Test]

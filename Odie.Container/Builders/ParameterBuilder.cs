@@ -15,7 +15,7 @@ namespace Odie
 
         public ParameterBuilder AddType(Type type)
         {
-            return Update(x => x.ParameterType = type);
+            return Update(x => x.Type = type);
         }
 
         public ParameterBuilder HasDefaultValue(bool hasDefaultValue)

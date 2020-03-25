@@ -8,20 +8,28 @@ namespace Odie
 
         public static IContainer CreateContainer()
         {
+            ParameterValueProvider parameterValueProvider = new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(), new ParameterDefaultValueProvider());
+
             InstancesCreator instancesCreator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterHasDefaultValueChecker(), new ValueTypeActivator(),
-                    new TypeIsValueTypeChecker(), new ConstructorParameterByTypeFinder()),
-                new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),new ConstructorGenerator()), new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator()));
+                new ConstructorParametersGenerator(parameterValueProvider,new ConstructorParameterByTypeFinder()),
+            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
+                new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator()));
+
 
             return new Container(
                 new ServiceResolver(
                     new ServiceInstanceResolver(new RegistrationInstanceIsNullChecker(), new AlwaysNewChecker(), new SingleInstanceChecker(),
-                        new ServiceRegistrationInstanceSetter(), new ServiceInstanceCreator(instancesCreator, new ServiceHasConstructorParametersChecker(),new FactoryProvider(new FactoriesByTypeFilter(new AssignableChecker()), new FactoriesProvider(new FactoryGenerator(new FactoryTypeGenerator(), new FactoryResultTypeGenerator(new FactoryResultExistChecker(new AttributesFinder()), new FactoryResultTypeProvider(new AttributesFinder()), new MemberDeclarationTypeProvider(), new AssignableChecker()), new MethodParametersGenerator()))), new FactoryInstanceCreator(new FactoryMethodInstanceCreator(new ParametersValuesGenerator(new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()))), new FactoryMethodInvoker(new ParametersValuesExtractor()))), new ServiceHasFactoryChecker())),
+                        new ServiceRegistrationInstanceSetter(),
+                        new ServiceInstanceCreator(instancesCreator, new ServiceHasConstructorParametersChecker(),
+                            new FactoryProvider(new FactoriesByTypeFilter(new AssignableChecker()),
+                                new FactoriesProvider(new FactoryGenerator(new FactoryTypeGenerator(),
+                                    new FactoryResultTypeGenerator(new FactoryResultExistChecker(new AttributesFinder()),
+                                        new FactoryResultTypeProvider(new AttributesFinder()), new MemberDeclarationTypeProvider(), new AssignableChecker()),
+                                    new MethodParametersGenerator()))),
+                            new FactoryInstanceCreator(new FactoryMethodInstanceCreator(new ParametersValuesGenerator(parameterValueProvider),
+                                new FactoryMethodInvoker(new ParametersValuesExtractor()))), new ServiceHasFactoryChecker())),
                     new MemberValuesInjector(new MemberValueSetter(),
-                        new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(),
-                            new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(),
-                                new TypeContainsGenericParametersChecker()),
-                            new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator())), new InjectFlagsProvider())),
+                        parameterValueProvider, new InjectFlagsProvider())),
                 new ServiceRegistrar(new ServiceInstanceProvider(instancesCreator, new ServiceIsAutoValueChecker()), new ServiceInstanceChecker(),
                     new RegistratedServicesFilter()),
                 new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),

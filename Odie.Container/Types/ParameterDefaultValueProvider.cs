@@ -2,7 +2,7 @@
 
 namespace Odie
 {
-    public class ParameterInfoDefaultValueProvider : IParameterInfoDefaultValueProvider
+    public class ParameterDefaultValueProvider : IParameterDefaultValueProvider
     {
         public object Provide(IParameter parameter)
         {

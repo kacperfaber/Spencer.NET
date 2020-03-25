@@ -66,7 +66,7 @@ namespace Odie.Container.Tests
         public void returns_excepted_list_if_target_method_is_Method1()
         {
             List<IParameter> parameters = exec(b => b.FirstOrDefault(x => x.Name == "Method1"));
-            List<Type> types = parameters.ConvertAll(x => x.ParameterType);
+            List<Type> types = parameters.ConvertAll(x => x.Type);
 
             Assert.IsTrue(types.SequenceEqual(new List<Type>() {typeof(int), typeof(object), typeof(string)}));
         }
@@ -83,7 +83,7 @@ namespace Odie.Container.Tests
         public void returns_excepted_list_if_target_method_is_Method2()
         {
             List<IParameter> parameters = exec(b => b.FirstOrDefault(x => x.Name == "Method2"));
-            List<Type> types = parameters.ConvertAll(x => x.ParameterType);
+            List<Type> types = parameters.ConvertAll(x => x.Type);
 
             Assert.IsTrue(types.SequenceEqual(new List<Type>() {typeof(TestClass), typeof(TestClass)}));
         }

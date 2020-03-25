@@ -17,9 +17,16 @@ namespace Odie.Container.Tests
         {
             MethodInfo[] methods = typeof(test).GetMethods();
             ParameterInfo[] parameters = methods.Single(x => x.ReturnType == typeof(void) && x.Name == "hello").GetParameters();
-            
+            ParameterInfo parameterInfo = parameters.Single(x => x.Name == name);
+            Parameter parameter = new ParameterBuilder()
+                .AddType(parameterInfo.ParameterType)
+                .AddDefaultValue(parameterInfo.DefaultValue)
+                .HasDefaultValue(parameterInfo.HasDefaultValue)
+                .Build();
+
             ParameterHasDefaultValueChecker checker = new ParameterHasDefaultValueChecker();
-            return checker.Check(parameters.Single(x => x.Name == name));
+            
+            return checker.Check(parameter);
         }
 
         [Test]

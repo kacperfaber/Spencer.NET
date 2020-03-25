@@ -11,9 +11,9 @@ namespace Odie
         public IIsEnumerableChecker IsEnumerableChecker;
         public IEnumerableGenerator EnumerableGenerator;
         public IParameterHasDefaultValueChecker DefaultValueChecker;
-        public IParameterInfoDefaultValueProvider DefaultValueProvider;
+        public IParameterDefaultValueProvider DefaultValueProvider;
 
-        public ParameterValueProvider(ITypeIsValueTypeChecker isValueTypeChecker, IValueTypeActivator valueTypeActivator, ITypeIsArrayChecker isArrayChecker, IArrayGenerator arrayGenerator, IIsEnumerableChecker isEnumerableChecker, IEnumerableGenerator enumerableGenerator, IParameterHasDefaultValueChecker defaultValueChecker, IParameterInfoDefaultValueProvider defaultValueProvider)
+        public ParameterValueProvider(ITypeIsValueTypeChecker isValueTypeChecker, IValueTypeActivator valueTypeActivator, ITypeIsArrayChecker isArrayChecker, IArrayGenerator arrayGenerator, IIsEnumerableChecker isEnumerableChecker, IEnumerableGenerator enumerableGenerator, IParameterHasDefaultValueChecker defaultValueChecker, IParameterDefaultValueProvider defaultValueProvider)
         {
             IsValueTypeChecker = isValueTypeChecker;
             ValueTypeActivator = valueTypeActivator;
@@ -25,29 +25,32 @@ namespace Odie
             DefaultValueProvider = defaultValueProvider;
         }
 
-        public object ProvideValue(IParameter parameter, IContainer container)
+        public object ProvideValue(ITypedMember member, IContainer container)
         {
-            if (DefaultValueChecker.Check(parameter))
+            if (member is IParameter parameter)
             {
-                return DefaultValueProvider.Provide(parameter);
+                if (DefaultValueChecker.Check(parameter))
+                {
+                    return DefaultValueProvider.Provide(parameter);
+                }
             }
             
-            if (IsValueTypeChecker.Check(parameter.ParameterType))
+            if (IsValueTypeChecker.Check(member.Type))
             {
-                return ValueTypeActivator.ActivateInstance(parameter.ParameterType);
+                return ValueTypeActivator.ActivateInstance(member.Type);
             }
 
-            if (IsEnumerableChecker.Check(parameter.ParameterType))
+            if (IsEnumerableChecker.Check(member.Type))
             {
-                return EnumerableGenerator.GenerateEnumerable(parameter.ParameterType);
+                return EnumerableGenerator.GenerateEnumerable(member.Type);
             }
             
-            if (IsArrayChecker.Check(parameter.ParameterType))
+            if (IsArrayChecker.Check(member.Type))
             {
-                return ArrayGenerator.GenerateArray(parameter.ParameterType);
+                return ArrayGenerator.GenerateArray(member.Type);
             }
 
-            return container.Resolve(parameter.ParameterType);
+            return container.Resolve(member.Type);
         }
     }
 }

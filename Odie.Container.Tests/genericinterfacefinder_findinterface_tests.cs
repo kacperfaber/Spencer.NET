@@ -16,6 +16,8 @@ namespace Odie.Container.Tests
 
         IService exec<T>()
         {
+            ParameterValueProvider parameterValueProvider = new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(), new ParameterDefaultValueProvider());
+            
             ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
                 new TypeServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver()),
                     new ServiceRegistrationGenerator(new BaseTypeFinder(),
@@ -25,10 +27,9 @@ namespace Odie.Container.Tests
                         new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                     new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                        new ConstructorParametersGenerator(new ParameterInfoDefaultValueProvider(), new ParameterHasDefaultValueChecker(),
-                            new ValueTypeActivator(), new TypeIsValueTypeChecker(), new ConstructorParameterByTypeFinder()),
-                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator()),
-                        new ConstructorInfoListGenerator(), new ConstructorFinder(), new ConstructorListGenerator()))), new ServiceFactoryInvoker()));
+                        new ConstructorParametersGenerator(parameterValueProvider,new ConstructorParameterByTypeFinder()),
+                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
+                        new ConstructorInfoListGenerator(), new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())))))), new ServiceFactoryInvoker()));
             IService[] services = generator.GenerateServices(typeof(TestClass), new AssemblyList(), null).ToArray();
 
             ServiceList list = new ServiceList();

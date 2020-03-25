@@ -19,9 +19,10 @@ namespace Odie.Container.Tests
         {
             ParameterValueProvider provider = new ParameterValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(),
                 new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
-                new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()));
+                new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(),
+                new ParameterDefaultValueProvider());
 
-            return provider.ProvideValue(typeof(T), ContainerFactory.CreateContainer());
+            return provider.ProvideValue(new TypedMember(typeof(T)), ContainerFactory.CreateContainer());
         }
 
         [Test]

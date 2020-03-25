@@ -7,76 +7,45 @@ namespace Odie
 {
     public class ConstructorParametersGenerator : IConstructorParametersGenerator
     {
-        public ITypeIsValueTypeChecker ValueTypeChecker;
-        public IValueTypeActivator ValueTypeActivator;
-        public IParameterHasDefaultValueChecker DefaultValueChecker;
-        public IParameterInfoDefaultValueProvider DefaultValueProvider;
         public IConstructorParameterByTypeFinder ConstructorParameterByTypeFinder;
+        public IParameterValueProvider ValueProvider;
 
-        public ConstructorParametersGenerator(IParameterInfoDefaultValueProvider defaultValueProvider, IParameterHasDefaultValueChecker defaultValueChecker,
-            IValueTypeActivator valueTypeActivator, ITypeIsValueTypeChecker valueTypeChecker, IConstructorParameterByTypeFinder constructorParameterByTypeFinder)
+        public ConstructorParametersGenerator(IParameterValueProvider valueProvider, IConstructorParameterByTypeFinder constructorParameterByTypeFinder)
         {
-            DefaultValueProvider = defaultValueProvider;
-            DefaultValueChecker = defaultValueChecker;
-            ValueTypeActivator = valueTypeActivator;
-            ValueTypeChecker = valueTypeChecker;
+            ValueProvider = valueProvider;
             ConstructorParameterByTypeFinder = constructorParameterByTypeFinder;
         }
 
-        public IEnumerable<object> GenerateParameters(IConstructor constructor, ServiceFlags flags, IContainer container)
+        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, ServiceFlags flags, IContainer container)
         {
-            // TODO replace with IParameter
-            
-            ParameterInfo[] parameters = constructor.Parameters;
-
-            foreach (ParameterInfo parameter in parameters)
+            foreach (IParameter parameter in constructor.Parameters)
             {
-                Type parameterType = parameter.ParameterType;
+                object val = ValueProvider.ProvideValue(parameter, container);
+                parameter.Value = val;
 
-                if (DefaultValueChecker.Check(parameter))
-                {
-                    yield return DefaultValueProvider.Provide(parameter);
-                    continue;
-                }
-
-                if (ValueTypeChecker.Check(parameterType))
-                {
-                    yield return ValueTypeActivator.ActivateInstance(parameterType);
-                    continue;
-                }
-
-                if (container.Has(parameterType))
-                {
-                    yield return container.Resolve(parameterType);
-                    continue;
-                }
-
-                else
-                {
-                    container.Register(parameterType);
-
-                    yield return container.Resolve(parameterType);
-                    continue;
-                }
+                yield return parameter;
             }
         }
 
-        public IEnumerable<object> GenerateParameters(IConstructor constructor, IContainer container)
+        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IContainer container)
         {
-            foreach (ParameterInfo parameter in constructor.Parameters)
+            foreach (IParameter parameter in constructor.Parameters)
             {
-                yield return container.Resolve(parameter.ParameterType);
+                object val = ValueProvider.ProvideValue(parameter, container);
+                parameter.Value = val;
+
+                yield return parameter;
             }
         }
 
-        public IEnumerable<object> GenerateParameters(IConstructor constructor, IConstructorParameters constructorParameters)
+        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IConstructorParameters constructorParameters)
         {
-            foreach (ParameterInfo parameter in constructor.Parameters)
+            foreach (IParameter parameter in constructor.Parameters)
             {
-                IConstructorParameter constructorParameter = ConstructorParameterByTypeFinder.FindByType(constructorParameters, parameter.ParameterType);
+                IConstructorParameter constructorParameter = ConstructorParameterByTypeFinder.FindByType(constructorParameters, parameter.Type);
+                parameter.Value = constructorParameter.Value;
 
-                yield return constructorParameter.Value;
-                constructorParameters.Parameters.Remove(constructorParameter);
+                yield return parameter;
             }
         }
     }

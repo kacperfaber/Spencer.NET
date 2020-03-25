@@ -22,7 +22,7 @@ namespace Odie
 
             foreach (ServiceFlag injectFlag in injections)
             {
-                object value = ParameterValueProvider.ProvideValue(injectFlag.Parent.MemberType == MemberTypes.Property ? ((PropertyInfo) injectFlag.Parent).PropertyType : ((FieldInfo) injectFlag.Parent).FieldType, container);
+                object value = ParameterValueProvider.ProvideValue(null, container); // TODO TODO TODO
                 ValueSetter.SetValue(injectFlag.Parent, instance, value);
             }
         }

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace Odie
 {
@@ -6,6 +7,6 @@ namespace Odie
     {
         public ConstructorInfo Instance { get; set; }
         
-        public ParameterInfo[] Parameters { get; set; }
+        public IEnumerable<IParameter> Parameters { get; set; }
     }
 }
