@@ -13,12 +13,14 @@ namespace Odie
             TypedMemberValueProvider = typedMemberValueProvider;
         }
 
-        public void Generate(IEnumerable<IParameter> parameters, IContainer container)
+        public IEnumerable<IParameter> Generate(IEnumerable<IParameter> parameters, IContainer container)
         {
             foreach (IParameter parameter in parameters)
             {
-                object value = TypedMemberValueProvider.ProvideValue(null, container);
+                object value = TypedMemberValueProvider.ProvideValue(parameter, container);
                 parameter.Value = value;
+
+                yield return parameter;
             }
         }
     }
