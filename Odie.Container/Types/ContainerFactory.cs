@@ -45,7 +45,7 @@ namespace Odie
                     new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()),
                         new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()))),
                     new ServiceByInterfaceFinder(), new ServiceByClassFinder(), new TypeIsClassValidator()),
-                new ServiceInitializer(instancesCreator, new ServiceRegistrationInstanceSetter()),
+                new ServiceInitializer(new ServiceInstanceCreator(instancesCreator,new ServiceHasConstructorParametersChecker(), new FactoryProvider(new FactoriesByTypeFilter(new AssignableChecker()), new FactoriesProvider(new FactoryGenerator(new FactoryTypeGenerator(), new FactoryResultTypeGenerator(new FactoryResultExistChecker(new AttributesFinder()), new FactoryResultTypeProvider(new AttributesFinder()), new MemberDeclarationTypeProvider(), new AssignableChecker()), new MethodParametersGenerator()))), new FactoryInstanceCreator(new FactoryMethodInstanceCreator(new ParametersValuesGenerator(typedMemberValueProvider), new FactoryMethodInvoker(new ParametersValuesExtractor()))), new ServiceHasFactoryChecker()), new ServiceRegistrationInstanceSetter()),
                 new TypeExisterChecker(new ServiceFinder(new TypeContainsGenericParametersChecker(),
                     new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()),
                         new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()))),

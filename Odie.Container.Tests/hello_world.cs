@@ -19,6 +19,7 @@ namespace Odie.Container.Tests
             }
         }
 
+        [AutoValue]
         class HelloWorld
         {
             [Factory]
@@ -27,7 +28,7 @@ namespace Odie.Container.Tests
             {
                 return new HelloWorld()
                 {
-                    Name = "Odie"
+                    Name = "Odie from factory!!!"
                 };
             }
 
@@ -51,9 +52,7 @@ namespace Odie.Container.Tests
         {
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<HelloWorld>();
-            HelloWorld world = container.Resolve<HelloWorld>();
             
-
             Console.WriteLine(HelloWorld.Instance.Name);
         }
     }
