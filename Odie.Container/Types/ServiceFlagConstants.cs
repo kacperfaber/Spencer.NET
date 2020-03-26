@@ -2,6 +2,7 @@
 {
     public class ServiceFlagConstants
     {
+        public const string Instance = "singleton_instance";
         public const string MultiInstance = "multi_instance";
         public const string AutoValue = "auto_value";
         public const string SingleInstance = "single_instance";

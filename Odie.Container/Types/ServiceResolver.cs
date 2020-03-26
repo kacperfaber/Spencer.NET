@@ -16,6 +16,7 @@ namespace Odie
         public object Resolve(IService service, IContainer container)
         {
             object instance = InstanceResolver.ResolveInstance(service, container);
+            
             ValuesInjector.InjectAll(service, container, instance);
 
             return instance;
