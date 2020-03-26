@@ -6,7 +6,7 @@ namespace Odie
     {
         public string Name;
         public object Value;
-        public MemberInfo Parent;
+        public IMember Parent;
 
         public ServiceFlag(string name, object value)
         {

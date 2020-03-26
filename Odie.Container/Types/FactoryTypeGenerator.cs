@@ -5,9 +5,9 @@ namespace Odie
 {
     public class FactoryTypeGenerator : IFactoryTypeGenerator
     {
-        public int Generate(MemberInfo member)
+        public int Generate(IMember member)
         {
-            return member.MemberType switch
+            return member.Instance.MemberType switch
             {
                 MemberTypes.Field => FactoryType.StaticField,
                 MemberTypes.Property => FactoryType.StaticProperty,

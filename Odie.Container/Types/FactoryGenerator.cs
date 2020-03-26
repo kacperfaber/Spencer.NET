@@ -15,7 +15,7 @@ namespace Odie
             MethodParametersGenerator = methodParametersGenerator;
         }
 
-        public IFactory GenerateFactory(MemberInfo member)
+        public IFactory GenerateFactory(IMember member)
         {
             using FactoryBuilder builder = new FactoryBuilder();
 

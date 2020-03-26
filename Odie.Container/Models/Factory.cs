@@ -6,7 +6,7 @@ namespace Odie
 {
     public class Factory : IFactory
     {
-        public MemberInfo Member { get; set; }
+        public IMember Member { get; set; }
         public int Type { get; set; }
         public Type ResultType { get; set; }
         

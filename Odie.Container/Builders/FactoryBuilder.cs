@@ -15,7 +15,7 @@ namespace Odie
             return Update(x => x.Type = type);
         }
 
-        public FactoryBuilder AddMember(MemberInfo memberInfo)
+        public FactoryBuilder AddMember(IMember memberInfo)
         {
             return Update(x => x.Member = memberInfo);
         }

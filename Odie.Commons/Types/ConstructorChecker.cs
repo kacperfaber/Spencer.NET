@@ -4,7 +4,7 @@ namespace Odie
 {
     public class ConstructorChecker : IConstructorChecker
     {
-        public bool Check(MemberInfo member)
+        public bool Check(IMember member)
         {
             return member?.MemberType == MemberTypes.Constructor;
         }

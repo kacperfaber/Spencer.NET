@@ -18,7 +18,7 @@ namespace Odie
             AssignableChecker = assignableChecker;
         }
 
-        public Type GenerateResultType(MemberInfo member)
+        public Type GenerateResultType(IMember member)
         {
             Type returnType = DeclarationTypeProvider.ProvideDeclarartionType(member);
 

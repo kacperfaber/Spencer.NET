@@ -6,7 +6,7 @@ namespace Odie
 {
     public interface IFactory
     {
-        MemberInfo Member { get; set; }
+        IMember Member { get; set; }
         
         int Type { get; set; }
         

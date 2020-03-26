@@ -22,11 +22,11 @@ namespace Odie
             if (flags.HasFlag(ServiceFlagConstants.ServiceCtor))
             {
                 ServiceFlag flag = flags.GetFlag(ServiceFlagConstants.ServiceCtor);
-                MemberInfo memberParent = flag.Parent;
+                IMember memberParent = flag.Parent;
 
-                if (ConstructorChecker.Check(memberParent))
+                if (ConstructorChecker.Check(memberParent.Instance))
                 {
-                    return ConstructorGenerator.GenerateConstructor((ConstructorInfo) memberParent);
+                    return ConstructorGenerator.GenerateConstructor((ConstructorInfo) memberParent.Instance);
                 }
             }
 

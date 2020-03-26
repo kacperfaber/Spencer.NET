@@ -36,7 +36,7 @@ namespace Odie
             Add(new ServiceFlag(name, value));
         }
 
-        public void AddFlag(string name, object value, MemberInfo parent)
+        public void AddFlag(string name, object value, IMember parent)
         {
             Add(new ServiceFlag(name, value) {Parent = parent});
         }

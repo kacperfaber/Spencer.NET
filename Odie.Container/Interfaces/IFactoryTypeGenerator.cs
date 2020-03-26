@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IFactoryTypeGenerator
     {
-        int Generate(MemberInfo member);
+        int Generate(IMember member);
     }
 }
