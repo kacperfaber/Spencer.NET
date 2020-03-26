@@ -75,7 +75,7 @@ namespace Odie.Container.Tests
         public void returns_serviceconstructor_flag_parent_parameters_lenght_equals_to_1()
         {
             Assert.IsTrue(
-                (exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Parent as ConstructorInfo).GetParameters().Count() == 1);
+                (exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Parent.Instance as ConstructorInfo).GetParameters().Count() == 1);
         }
 
         [Test]

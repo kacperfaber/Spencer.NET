@@ -8,7 +8,7 @@ namespace Odie
     {
         public IEnumerable<IParameter> GenerateParameters(IMember member)
         {
-            if (member is MethodInfo method)
+            if (member.Instance is MethodInfo method)
             {
                 ParameterInfo[] parameters = method.GetParameters();
 

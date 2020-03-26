@@ -15,7 +15,7 @@ namespace Odie
         {
             object[] values = ValuesExtractor.ExtractValues(factory.MethodParameters);
 
-            return (factory.Member as MethodInfo).Invoke(null, values);
+            return (factory.Member.Instance as MethodInfo).Invoke(null, values);
         }
     }
 }

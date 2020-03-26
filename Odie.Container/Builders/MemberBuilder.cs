@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Odie
@@ -22,6 +23,7 @@ namespace Odie
         
         public MemberBuilder AddFlags(IEnumerable<int> flags)
         {
+            List<int> list = flags.ToList();
             return Update(x => x.MemberFlags.AddRange(flags));
         }
 
