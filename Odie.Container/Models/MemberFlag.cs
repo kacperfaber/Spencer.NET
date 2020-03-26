@@ -1,6 +1,6 @@
 ﻿namespace Odie
 {
-    public class MemberType
+    public class MemberFlag
     {
         public const int Field = 0x51;
         public const int Property = 0x85;
@@ -16,6 +16,10 @@
         public const int Parametrized = 0x81452;
         public const int GenericParametrized = 0x0214;
         public const int ValueType = 0x251;
+        public const int ReferenceType = 0x0251;
         public const int ReturnsValue = 0x824;
+        public const int ReturnsVoid = 0x82152;
+        public const int NotParametrized = 0x21481452;
+        public const int NotGenericParametrized = 0x240214;
     }
 }

@@ -22,7 +22,8 @@ namespace Odie.Container.Tests
 
         int exec(MemberInfo member)
         {
-            return new FactoryTypeGenerator().Generate(member);
+            IMember m = new MemberGenerator(new MemberFlagsGenerator()).GenerateMember(member);
+            return new FactoryTypeGenerator().Generate(m);
         }
 
         [Test]

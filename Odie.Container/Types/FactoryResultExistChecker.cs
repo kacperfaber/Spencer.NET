@@ -13,7 +13,7 @@ namespace Odie
             Finder = finder;
         }
 
-        public bool Check(MemberInfo member)
+        public bool Check(IMember member)
         {
             bool any = Finder.FindAttributes<FactoryResult>(member).Any();
 

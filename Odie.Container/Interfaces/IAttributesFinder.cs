@@ -6,9 +6,9 @@ namespace Odie
 {
     public interface IAttributesFinder
     {
-        IEnumerable<TAttr> FindAttributes<TAttr>(MemberInfo member) where TAttr : class;
+        IEnumerable<TAttr> FindAttributes<TAttr>(IMember member) where TAttr : class;
 
-        IEnumerable<Attribute> FindAttributes(MemberInfo member, Type attributeInfo);
+        IEnumerable<Attribute> FindAttributes(IMember member, Type attributeInfo);
 
         IEnumerable<TAttr> FindAttributesEverywhere<TAttr>(Type type, Func<MemberInfo, Attribute, TAttr> func);
         IEnumerable<TAttr> FindAttributesEverywhere<TAttr>(Type type) where TAttr : class;

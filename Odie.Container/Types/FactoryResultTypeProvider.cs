@@ -13,7 +13,7 @@ namespace Odie
             Finder = finder;
         }
 
-        public Type ProvideResultType(MemberInfo member)
+        public Type ProvideResultType(IMember member)
         {
             return Finder.FindAttributes<FactoryResult>(member)
                 .First()

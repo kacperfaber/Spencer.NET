@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
-namespace Odie.Commons.Tests
+namespace Odie.Container.Tests
 {
     public class attributesfinder_findattributes_generic_tests
     {
@@ -27,7 +27,7 @@ namespace Odie.Commons.Tests
         IEnumerable<TAttribute> exec<TType, TAttribute>() where TAttribute : class
         {
             AttributesFinder finder = new AttributesFinder();
-            IEnumerable<TAttribute> attributes = finder.FindAttributes<TAttribute>(typeof(TType));
+            IEnumerable<TAttribute> attributes = finder.FindAttributes<TAttribute>(new Member() {Instance = typeof(TType)});
             return attributes;
         }
 

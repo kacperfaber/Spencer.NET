@@ -23,9 +23,11 @@ namespace Odie.Container.Tests
 
         Type exec(string name)
         {
+            IMember member = new MemberGenerator(new MemberFlagsGenerator()).GenerateMember(typeof(TestClass).GetMembers().Where(x => x.Name.ToLower() == name.ToLower()).First());
+
             return new FactoryResultTypeGenerator(new FactoryResultExistChecker(new AttributesFinder()), new FactoryResultTypeProvider(new AttributesFinder()),
                     new MemberDeclarationTypeProvider(), new AssignableChecker())
-                .GenerateResultType(typeof(TestClass).GetMembers().Where(x => x.Name.ToLower() == name.ToLower()).First());
+                .GenerateResultType(member);
         }
 
         [Test]

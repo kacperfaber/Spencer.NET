@@ -34,7 +34,7 @@ namespace Odie.Container.Tests
         {
             Type @class = typeof(T);
             ServiceFlagsGenerator flagsGenerator =
-                new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder()), new ServiceFlagsIssuesResolver());
+                new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(),new MemberGenerator(new MemberFlagsGenerator())), new ServiceFlagsIssuesResolver());
 
             ServiceFlags flags = flagsGenerator.GenerateFlags(@class);
 

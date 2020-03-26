@@ -6,6 +6,6 @@ namespace Odie
     {
         MemberInfo Instance { get; set; }
 
-        MemberType[] MemberTypes { get; set; }
+        MemberFlags MemberFlags { get; set; }
     }
 }

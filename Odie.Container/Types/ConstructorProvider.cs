@@ -24,7 +24,7 @@ namespace Odie
                 ServiceFlag flag = flags.GetFlag(ServiceFlagConstants.ServiceCtor);
                 IMember memberParent = flag.Parent;
 
-                if (ConstructorChecker.Check(memberParent.Instance))
+                if (ConstructorChecker.Check(memberParent))
                 {
                     return ConstructorGenerator.GenerateConstructor((ConstructorInfo) memberParent.Instance);
                 }

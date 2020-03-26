@@ -6,9 +6,9 @@ namespace Odie
 {
     public class AttributesFinder : IAttributesFinder
     {
-        public IEnumerable<TAttr> FindAttributes<TAttr>(MemberInfo member) where TAttr : class
+        public IEnumerable<TAttr> FindAttributes<TAttr>(IMember member) where TAttr : class
         {
-            Attribute[] attributes = Attribute.GetCustomAttributes(member, typeof(TAttr));
+            Attribute[] attributes = Attribute.GetCustomAttributes(member.Instance, typeof(TAttr));
 
             foreach (Attribute attribute in attributes)
             {
@@ -16,9 +16,9 @@ namespace Odie
             }
         }
 
-        public IEnumerable<Attribute> FindAttributes(MemberInfo member, Type attributeInfo)
+        public IEnumerable<Attribute> FindAttributes(IMember member, Type attributeInfo)
         {
-            Attribute[] attributes = Attribute.GetCustomAttributes(member, attributeInfo);
+            Attribute[] attributes = Attribute.GetCustomAttributes(member.Instance, attributeInfo);
 
             foreach (Attribute attribute in attributes)
             {

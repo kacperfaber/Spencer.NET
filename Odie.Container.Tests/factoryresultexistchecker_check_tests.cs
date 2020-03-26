@@ -20,8 +20,12 @@ namespace Odie.Container.Tests
 
         bool exec(string name)
         {
+            Member member = new MemberBuilder()
+                .AddMemberInfo(typeof(TestClass).GetMembers().Where(x => x.Name.ToLower() == name.ToLower()).First())
+                .Build();
+
             return new FactoryResultExistChecker(new AttributesFinder())
-                .Check(typeof(TestClass).GetMembers().Where(x => x.Name.ToLower() == name.ToLower()).First());
+                .Check(member);
         }
 
         [Test]

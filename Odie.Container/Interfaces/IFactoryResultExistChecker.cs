@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IFactoryResultExistChecker
     {
-        bool Check(MemberInfo member);
+        bool Check(IMember member);
     }
 }

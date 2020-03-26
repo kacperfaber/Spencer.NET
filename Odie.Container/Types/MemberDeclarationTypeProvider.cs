@@ -5,24 +5,15 @@ namespace Odie
 {
     public class MemberDeclarationTypeProvider : IMemberDeclarationTypeProvider
     {
-        public Type ProvideDeclarartionType(MemberInfo member)
+        public Type ProvideDeclarartionType(IMember member)
         {
-            if (member is MethodInfo method)
+            return member.Instance switch
             {
-                return method.ReturnType;
-            }
-
-            else if (member is PropertyInfo property)
-            {
-                return property.PropertyType;
-            }
-
-            else if (member is FieldInfo field)
-            {
-                return field.FieldType;
-            }
-
-            throw new ArgumentException("Gived members can be Fields, Properties and Methods.");
+                MethodInfo method => method.ReturnType,
+                PropertyInfo property => property.PropertyType,
+                FieldInfo field => field.FieldType,
+                _ => throw new ArgumentException("Gived members can be Fields, Properties and Methods.")
+            };
         }
     }
 }

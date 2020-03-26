@@ -5,6 +5,6 @@ namespace Odie
 {
     public interface IFactoryResultTypeProvider
     {
-        Type ProvideResultType(MemberInfo member);
+        Type ProvideResultType(IMember member);
     }
 }

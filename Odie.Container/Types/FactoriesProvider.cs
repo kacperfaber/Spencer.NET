@@ -18,7 +18,7 @@ namespace Odie
 
             foreach (ServiceFlag flag in factoriesFlags)
             {
-                yield return Generator.GenerateFactory(flag.Parent.Instance);
+                yield return Generator.GenerateFactory(flag.Parent);
             }
         }
     }

@@ -5,6 +5,6 @@ namespace Odie
 {
     public interface IMemberDeclarationTypeProvider
     {
-        Type ProvideDeclarartionType(MemberInfo member);
+        Type ProvideDeclarartionType(IMember member);
     }
 }

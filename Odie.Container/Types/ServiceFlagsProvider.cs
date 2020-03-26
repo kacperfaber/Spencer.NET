@@ -6,14 +6,16 @@ namespace Odie
     public class ServiceFlagsProvider : IServiceFlagsProvider
     {
         public IAttributesFinder AttributesFinder;
+        public IMemberGenerator MemberGenerator;
         
         // introduce members of type to array.
         // then we'll be have better optimalization TODO
         // and clean
 
-        public ServiceFlagsProvider(IAttributesFinder attributesFinder)
+        public ServiceFlagsProvider(IAttributesFinder attributesFinder, IMemberGenerator memberGenerator)
         {
             AttributesFinder = attributesFinder;
+            MemberGenerator = memberGenerator;
         }
 
         public ServiceFlags ProvideFlags(Type type)
@@ -26,7 +28,7 @@ namespace Odie
 
                 return new ServiceFlagAttribute() {ServiceFlag = new ServiceFlag(sflag.Name, sflag.Value)
                 {
-                    Parent = member
+                    Parent = MemberGenerator.GenerateMember(member)
                 }};
             });
 

@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IConstructorChecker
     {
-        bool Check(MemberInfo member);
+        bool Check(IMember member);
     }
 }

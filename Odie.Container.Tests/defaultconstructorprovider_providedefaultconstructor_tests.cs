@@ -36,7 +36,7 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_membertype_of_constructor()
         {
-            Assert.IsTrue((exec<Test1>() as MemberInfo).MemberType == MemberTypes.Constructor);
+            Assert.IsTrue(exec<Test1>().MemberType == MemberTypes.Constructor);
         }
 
         [Test]

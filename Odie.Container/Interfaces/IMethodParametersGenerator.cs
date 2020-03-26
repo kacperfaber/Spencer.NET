@@ -5,6 +5,6 @@ namespace Odie
 {
     public interface IMethodParametersGenerator
     {
-        IEnumerable<IParameter> GenerateParameters(MemberInfo member);
+        IEnumerable<IParameter> GenerateParameters(IMember member);
     }
 }

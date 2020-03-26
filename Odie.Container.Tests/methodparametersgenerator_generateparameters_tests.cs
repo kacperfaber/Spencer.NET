@@ -28,7 +28,8 @@ namespace Odie.Container.Tests
         List<IParameter> exec(Func<MemberInfo[], MemberInfo> func)
         {
             MemberInfo member = func(typeof(TestClass).GetMembers());
-            IEnumerable<IParameter> parameters = new MethodParametersGenerator().GenerateParameters(member);
+            IMember m = new MemberGenerator(new MemberFlagsGenerator()).GenerateMember(member);
+            IEnumerable<IParameter> parameters = new MethodParametersGenerator().GenerateParameters(m);
 
             return parameters.ToList();
         }

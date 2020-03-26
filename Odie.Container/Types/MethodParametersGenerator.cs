@@ -6,7 +6,7 @@ namespace Odie
 {
     public class MethodParametersGenerator : IMethodParametersGenerator
     {
-        public IEnumerable<IParameter> GenerateParameters(MemberInfo member)
+        public IEnumerable<IParameter> GenerateParameters(IMember member)
         {
             if (member is MethodInfo method)
             {
