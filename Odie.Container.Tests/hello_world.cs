@@ -19,6 +19,24 @@ namespace Odie.Container.Tests
             }
         }
 
+        class HelloWorld
+        {
+            [Factory]
+            [FactoryResult(typeof(HelloWorld))]
+            public static HelloWorld GetWorld()
+            {
+                return new HelloWorld()
+                {
+                    Name = "Odie"
+                };
+            }
+
+            public string Name { get; set; }
+
+            [Instance]
+            public static HelloWorld Instance;
+        }
+
         [Test]
         public void dont_throws_exceptions()
         {
@@ -26,6 +44,17 @@ namespace Odie.Container.Tests
             container.Register<Odie>();
             
             Odie resolve = container.Resolve<Odie>();
+        }
+
+        [Test]
+        public void rrr()
+        {
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<HelloWorld>();
+            HelloWorld world = container.Resolve<HelloWorld>();
+            
+
+            Console.WriteLine(HelloWorld.Instance.Name);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Odie.Container.Tests
         [SingleInstance]
         class TestClass
         {
+#pragma warning disable
             [ServiceConstructor]
             public TestClass(int x = 0)
             {
@@ -28,6 +29,13 @@ namespace Odie.Container.Tests
             {
                 return null;
             }
+
+            [Instance]
+            public static TestClass FieldInstance;
+
+            [Instance]
+            public static TestClass PropertyInstance { get; set; }
+#pragma warning restore
         }
 
         class Test2
@@ -41,7 +49,7 @@ namespace Odie.Container.Tests
 
         ServiceFlags exec<T>()
         {
-            ServiceFlagsProvider provider = new ServiceFlagsProvider(new AttributesFinder(),new MemberGenerator(new MemberFlagsGenerator()));
+            ServiceFlagsProvider provider = new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator()));
             return provider.ProvideFlags(typeof(T));
         }
 
@@ -56,7 +64,7 @@ namespace Odie.Container.Tests
         {
             int count = exec<TestClass>().Count();
 
-            Assert.IsTrue(count == 5);
+            Assert.IsTrue(count == 7);
         }
 
         [Test]
@@ -68,14 +76,16 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_serviceconstructor_flag_parent_membertype_equals_to_constructor()
         {
-            Assert.IsTrue(exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Parent.Instance.MemberType == MemberTypes.Constructor);
+            Assert.IsTrue(exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Parent.Instance.MemberType ==
+                          MemberTypes.Constructor);
         }
 
         [Test]
         public void returns_serviceconstructor_flag_parent_parameters_lenght_equals_to_1()
         {
             Assert.IsTrue(
-                (exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Parent.Instance as ConstructorInfo).GetParameters().Count() == 1);
+                (exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Parent.Instance as ConstructorInfo).GetParameters()
+                .Count() == 1);
         }
 
         [Test]
@@ -129,18 +139,15 @@ namespace Odie.Container.Tests
         public void returns_servicefactory_cast_to_methodinfo_does_not_throws()
         {
             MemberInfo parent = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent.Instance;
-            
-            Assert.DoesNotThrow(() =>
-            {
-                _ = (MethodInfo) parent;
-            });
+
+            Assert.DoesNotThrow(() => { _ = (MethodInfo) parent; });
         }
 
         [Test]
         public void return_servicefactory_methodinfo_returntype_equals_to_TestClass()
         {
             MethodInfo method = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent.Instance as MethodInfo;
-            
+
             Assert.IsTrue(method.ReturnType == typeof(TestClass));
         }
 
@@ -148,7 +155,7 @@ namespace Odie.Container.Tests
         public void return_servicefactory_methodinfo_isstatic_returns_true()
         {
             MethodInfo method = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent.Instance as MethodInfo;
-            
+
             Assert.IsTrue(method.IsStatic);
         }
 
@@ -173,6 +180,38 @@ namespace Odie.Container.Tests
             bool result = inject.Parent.Instance.Name == "Name";
 
             Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void returns_contains_instance_flag()
+        {
+            Assert.NotNull(exec<TestClass>().FirstOrDefault(x => x.Name == ServiceFlagConstants.Instance));
+        }
+
+        [Test]
+        public void returns_2_instance_flags()
+        {
+            IEnumerable<ServiceFlag> flags = exec<TestClass>().Where(x => x.Name == ServiceFlagConstants.Instance);
+
+            Assert.IsTrue(flags.Count() == 2);
+        }
+
+        [Test]
+        public void returns_one_property_instance_flag()
+        {
+            ServiceFlag flag = exec<TestClass>().Where(x => x.Name == ServiceFlagConstants.Instance)
+                .SingleOrDefault(x => x.Parent.MemberFlags.Is(MemberFlag.Property));
+
+            Assert.NotNull(flag);
+        }
+        
+        [Test]
+        public void returns_one_field_instance_flag()
+        {
+            ServiceFlag flag = exec<TestClass>().Where(x => x.Name == ServiceFlagConstants.Instance)
+                .SingleOrDefault(x => x.Parent.MemberFlags.Is(MemberFlag.Field));
+
+            Assert.NotNull(flag);
         }
     }
 }

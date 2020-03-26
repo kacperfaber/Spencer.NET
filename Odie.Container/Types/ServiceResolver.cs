@@ -6,11 +6,13 @@ namespace Odie
     {
         public IServiceInstanceResolver InstanceResolver;
         public IMemberValuesInjector ValuesInjector;
+        public IInstanceMembersValueInjector InstanceMembersValueInjector;
         
-        public ServiceResolver(IServiceInstanceResolver instanceResolver, IMemberValuesInjector valuesInjector)
+        public ServiceResolver(IServiceInstanceResolver instanceResolver, IMemberValuesInjector valuesInjector, IInstanceMembersValueInjector instanceMembersValueInjector)
         {
             InstanceResolver = instanceResolver;
             ValuesInjector = valuesInjector;
+            InstanceMembersValueInjector = instanceMembersValueInjector;
         }
 
         public object Resolve(IService service, IContainer container)
@@ -18,6 +20,7 @@ namespace Odie
             object instance = InstanceResolver.ResolveInstance(service, container);
             
             ValuesInjector.InjectAll(service, container, instance);
+            InstanceMembersValueInjector.InjectAll(service, instance);
 
             return instance;
         }

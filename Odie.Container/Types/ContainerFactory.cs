@@ -29,7 +29,7 @@ namespace Odie
                             new FactoryInstanceCreator(new FactoryMethodInstanceCreator(new ParametersValuesGenerator(typedMemberValueProvider),
                                 new FactoryMethodInvoker(new ParametersValuesExtractor()))), new ServiceHasFactoryChecker())),
                     new MemberValuesInjector(new MemberValueSetter(),
-                        typedMemberValueProvider, new InjectFlagsProvider())),
+                        typedMemberValueProvider, new InjectFlagsProvider()),new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder())),
                 new ServiceRegistrar(new ServiceInstanceProvider(instancesCreator, new ServiceIsAutoValueChecker()), new ServiceInstanceChecker(),
                     new RegistratedServicesFilter()),
                 new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),

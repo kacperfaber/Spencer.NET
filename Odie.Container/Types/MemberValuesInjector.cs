@@ -25,8 +25,8 @@ namespace Odie
             {
                 throw new NotImplementedException("To generate injection values have to have MemberInfo.");
             
-                object value = TypedMemberValueProvider.ProvideValue(null, container); 
-                ValueSetter.SetValue(injectFlag.Parent.Instance, instance, value);
+                // object value = TypedMemberValueProvider.ProvideValue(null, container); 
+                // ValueSetter.SetValue(injectFlag.Parent.Instance, instance, value);
             }
         }
     }
