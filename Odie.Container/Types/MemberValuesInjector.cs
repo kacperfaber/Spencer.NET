@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Odie
@@ -22,7 +23,9 @@ namespace Odie
 
             foreach (ServiceFlag injectFlag in injections)
             {
-                object value = TypedMemberValueProvider.ProvideValue(null, container); // TODO TODO TODO
+                throw new NotImplementedException("To generate injection values have to have MemberInfo.");
+            
+                object value = TypedMemberValueProvider.ProvideValue(null, container); 
                 ValueSetter.SetValue(injectFlag.Parent, instance, value);
             }
         }
