@@ -22,6 +22,7 @@ namespace Odie.Container.Tests
         [AutoValue]
         class HelloWorld
         {
+#pragma warning disable
             [Factory]
             [FactoryResult(typeof(HelloWorld))]
             public static HelloWorld GetWorld()
@@ -36,6 +37,7 @@ namespace Odie.Container.Tests
 
             [Instance]
             public static HelloWorld Instance;
+#pragma warning restore
         }
 
         [Test]
@@ -43,7 +45,7 @@ namespace Odie.Container.Tests
         {
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<Odie>();
-            
+
             Odie resolve = container.Resolve<Odie>();
         }
 
@@ -52,7 +54,7 @@ namespace Odie.Container.Tests
         {
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<HelloWorld>();
-            
+
             Console.WriteLine(HelloWorld.Instance.Name);
         }
     }
