@@ -27,7 +27,17 @@ namespace Odie
 
             else
             {
-                return ObjectProducer.ProduceObject(service, container);
+                if (service.Flags.HasFlag(ServiceFlagConstants.MultiInstance))
+                {
+                    return ObjectProducer.ProduceObject(service, container);
+                }
+                
+                else if (service.Flags.HasFlag(ServiceFlagConstants.SingleInstance))
+                {
+                    return service.Data.Instance;
+                }
+
+                throw new Exception();
             }
         }
     }

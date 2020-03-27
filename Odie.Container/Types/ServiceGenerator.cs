@@ -38,7 +38,7 @@ namespace Odie
             return new ServiceBuilder()
                 .AddFlags(flags)
                 .AddInfo(info)
-                .AddData(new ServiceData())
+                .AddData(new ServiceData() {Instance = instance})
                 .AddRegistration(registration)
                 .Build();
         }
