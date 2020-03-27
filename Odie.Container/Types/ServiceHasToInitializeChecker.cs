@@ -11,17 +11,9 @@
 
         public bool Check(IService service)
         {
-            bool alwaysNew = AlwaysNewChecker.Check(service);
+            bool singleInstance = !AlwaysNewChecker.Check(service);
 
-            if (alwaysNew)
-            {
-                return false;
-            }
-
-            else
-            {
-                return service.Data.Instance == null;
-            }
+            return singleInstance && service.Data.Instance == null;
         }
     }
 }
