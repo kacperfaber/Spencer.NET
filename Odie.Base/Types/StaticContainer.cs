@@ -2,6 +2,6 @@
 {
     public class StaticContainer
     {
-        public static IContainer Current = ContainerFactory.CreateContainer(new Configuration());
+        public static IContainer Current = ContainerFactory.CreateContainer();
     }
 }

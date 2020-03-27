@@ -11,10 +11,11 @@ namespace Odie
         public ITypedMemberValueProvider ValueProvider;
         public IServiceHasConstructorParametersChecker ServiceHasConstructorParametersChecker;
 
-        public ConstructorParametersGenerator(ITypedMemberValueProvider valueProvider, IConstructorParameterByTypeFinder constructorParameterByTypeFinder)
+        public ConstructorParametersGenerator(ITypedMemberValueProvider valueProvider, IConstructorParameterByTypeFinder constructorParameterByTypeFinder, IServiceHasConstructorParametersChecker serviceHasConstructorParametersChecker)
         {
             ValueProvider = valueProvider;
             ConstructorParameterByTypeFinder = constructorParameterByTypeFinder;
+            ServiceHasConstructorParametersChecker = serviceHasConstructorParametersChecker;
         }
 
         public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, ServiceFlags flags, IContainer container)

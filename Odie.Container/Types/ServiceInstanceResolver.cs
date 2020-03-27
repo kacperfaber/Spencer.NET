@@ -4,41 +4,31 @@ namespace Odie
 {
     public class ServiceInstanceResolver : IServiceInstanceResolver
     {
-        public IServiceDataInstanceIsNullChecker InstanceIsNullChecker;
-        public IAlwaysNewChecker AlwaysNewChecker;
-        public ISingleInstanceChecker SingleInstanceChecker;
-        public IServiceRegistrationInstanceSetter InstanceSetter;
+        public IServiceInstanceSetter InstanceSetter;
+        public IObjectProducer ObjectProducer;
+        public IServiceHasToInitializeChecker HasToInitializeChecker;
 
-        public IServiceInstanceCreator ServiceInstanceCreator;
-
-        public ServiceInstanceResolver(IServiceDataInstanceIsNullChecker instanceIsNullChecker, IAlwaysNewChecker alwaysNewChecker, ISingleInstanceChecker singleInstanceChecker, IServiceRegistrationInstanceSetter instanceSetter, IServiceInstanceCreator serviceInstanceCreator)
+        public ServiceInstanceResolver(IServiceInstanceSetter instanceSetter, IObjectProducer objectProducer, IServiceHasToInitializeChecker hasToInitializeChecker)
         {
-            InstanceIsNullChecker = instanceIsNullChecker;
-            AlwaysNewChecker = alwaysNewChecker;
-            SingleInstanceChecker = singleInstanceChecker;
             InstanceSetter = instanceSetter;
-            ServiceInstanceCreator = serviceInstanceCreator;
+            ObjectProducer = objectProducer;
+            HasToInitializeChecker = hasToInitializeChecker;
         }
 
         public object ResolveInstance(IService service, IContainer container)
         {
-            if (AlwaysNewChecker.Check(service))
+            if (HasToInitializeChecker.Check(service))
             {
-                return ServiceInstanceCreator.CreateInstance(service, container);
+                object instance = ObjectProducer.ProduceObject(service, container);
+                InstanceSetter.SetInstance(service, instance);
+
+                return instance;
             }
 
-            if  (SingleInstanceChecker.Check(service))
+            else
             {
-                if (InstanceIsNullChecker.Check(service))
-                {
-                    object instance = ServiceInstanceCreator.CreateInstance(service, container);
-                    InstanceSetter.SetInstance(service.Data, instance);
-                }
-
-                return service.Data.Instance;
+                return ObjectProducer.ProduceObject(service, container);
             }
-
-            throw new Exception("Service have to be SingleInstance or MultiInstance.");
         }
     }
 }

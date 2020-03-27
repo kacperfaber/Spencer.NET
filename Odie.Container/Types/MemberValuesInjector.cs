@@ -27,6 +27,7 @@ namespace Odie
             {
                 Type type = DeclarationTypeProvider.ProvideDeclarartionType(injectFlag.Member);
                 object value = TypedMemberValueProvider.ProvideValue(type, container);
+                
                 ValueSetter.SetValue(injectFlag.Member, instance, value);
             }
         }

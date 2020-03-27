@@ -64,7 +64,7 @@ namespace Odie.Container.Tests
                 new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
                 new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(),
                 new ParameterDefaultValueProvider());
-            ConstructorParametersGenerator generator = new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder());
+            ConstructorParametersGenerator generator = new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker());
             IEnumerable<IParameter> generatedParameters = generateParameters(ctor);
 
             foreach (IParameter parameter in generatedParameters)

@@ -7,7 +7,6 @@ namespace Odie
 {
     public class Container : IContainer
     {
-        public IServiceResolver ServiceResolver;
         public IServiceRegistrar ServiceRegistrar;
         public IServicesGenerator ServicesGenerator;
         public IServiceFinder ServiceFinder;
@@ -17,14 +16,13 @@ namespace Odie
         public ITypeGetter TypeGetter;
         public IAssemblyRegistrar AssemblyRegistrar;
         public IConstructorParametersByObjectsGenerator ConstructorParametersByObjectsGenerator;
+        public IServiceInstanceResolver ServiceInstanceResolver;
 
-        public FallbackConfiguration FallbackConfiguration = new FallbackConfiguration();
-
-        public Container(IServiceResolver serviceResolver, IServiceRegistrar serviceRegistrar, IServicesGenerator servicesGenerator, IServiceFinder serviceFinder,
+        public Container(IServiceRegistrar serviceRegistrar, IServicesGenerator servicesGenerator, IServiceFinder serviceFinder,
             IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker,
-            ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar, IConstructorParametersByObjectsGenerator constructorParametersByObjectsGenerator)
+            ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar, IConstructorParametersByObjectsGenerator constructorParametersByObjectsGenerator,
+            IServiceInstanceResolver serviceInstanceResolver)
         {
-            ServiceResolver = serviceResolver;
             ServiceRegistrar = serviceRegistrar;
             ServicesGenerator = servicesGenerator;
             ServiceFinder = serviceFinder;
@@ -34,21 +32,17 @@ namespace Odie
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
             ConstructorParametersByObjectsGenerator = constructorParametersByObjectsGenerator;
-            
+            ServiceInstanceResolver = serviceInstanceResolver;
+
             Storage = new Storage();
         }
-        
+
         public IStorage Storage { get; set; }
 
         public object Resolve(Type type)
         {
-            if (!TypeExisterChecker.Check(Storage.Services, type))
-            {
-                FallbackConfiguration.TypeNotRegistered(type, this);
-            }
-
             IService service = ServiceFinder.Find(Storage.Services, type);
-            object result = ServiceResolver.Resolve(service, this);
+            object result = ServiceInstanceResolver.ResolveInstance(service, this);
 
             return result;
         }
@@ -56,14 +50,9 @@ namespace Odie
         public T Resolve<T>()
         {
             Type type = TypeGetter.GetType<T>();
-
-            if (!TypeExisterChecker.Check(Storage.Services, type))
-            {
-                FallbackConfiguration.TypeNotRegistered(type, this);
-            }
-
             IService service = ServiceFinder.Find(Storage.Services, type);
-            return (T) ServiceResolver.Resolve(service, this);
+
+            return (T) ServiceInstanceResolver.ResolveInstance(service, this);
         }
 
         public void Register<T>(params object[] parameters)
@@ -92,7 +81,7 @@ namespace Odie
 
             foreach (IService service in services)
             {
-                yield return (T) ServiceResolver.Resolve(service, this);
+                yield return (T) ServiceInstanceResolver.ResolveInstance(service, this);
             }
         }
 
@@ -102,7 +91,7 @@ namespace Odie
 
             foreach (IService service in services)
             {
-                yield return ServiceResolver.Resolve(service, this);
+                yield return ServiceInstanceResolver.ResolveInstance(service, this);
             }
         }
 
@@ -211,7 +200,5 @@ namespace Odie
 
             ServiceRegistrar.Register(Storage.Services, services, this);
         }
-
-        
     }
 }

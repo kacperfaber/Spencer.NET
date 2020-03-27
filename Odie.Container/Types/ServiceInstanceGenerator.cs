@@ -11,8 +11,9 @@ namespace Odie
         public IConstructorProvider ConstructorProvider;
         public IConstructorParametersGenerator ConstructorParametersGenerator;
         public IConstructorInvoker ConstructorInvoker;
+        public IParametersValuesExtractor ParametersValuesExtractor;
         
-        public ServiceInstanceGenerator(IServiceHasFactoryChecker hasServiceFactoryChecker, IFactoryProvider factoryProvider, IFactoryInstanceCreator factoryInstanceCreator, IConstructorProvider constructorProvider, IConstructorParametersGenerator constructorParametersGenerator, IConstructorInvoker constructorInvoker)
+        public ServiceInstanceGenerator(IServiceHasFactoryChecker hasServiceFactoryChecker, IFactoryProvider factoryProvider, IFactoryInstanceCreator factoryInstanceCreator, IConstructorProvider constructorProvider, IConstructorParametersGenerator constructorParametersGenerator, IConstructorInvoker constructorInvoker, IParametersValuesExtractor parametersValuesExtractor)
         {
             HasServiceFactoryChecker = hasServiceFactoryChecker;
             FactoryProvider = factoryProvider;
@@ -20,6 +21,7 @@ namespace Odie
             ConstructorProvider = constructorProvider;
             ConstructorParametersGenerator = constructorParametersGenerator;
             ConstructorInvoker = constructorInvoker;
+            ParametersValuesExtractor = parametersValuesExtractor;
         }
 
         public object GenerateInstance(IService service, IContainer container)
@@ -32,7 +34,8 @@ namespace Odie
 
             IConstructor constructor = ConstructorProvider.ProvideConstructor(service);
             IEnumerable<IParameter> parameters = ConstructorParametersGenerator.GenerateParameters(constructor, service, container);
-            return ConstructorInvoker.InvokeConstructor(constructor, parameters);
+            object[] parametersValues = ParametersValuesExtractor.ExtractValues(parameters);
+            return ConstructorInvoker.InvokeConstructor(constructor, parametersValues);
         }
     }
 }
