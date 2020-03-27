@@ -8,7 +8,7 @@ namespace Odie
     {
         public IEnumerable<IMember> ProvideMembers(IService service)
         {
-            return Array.ConvertAll(service.Flags.GetFlags(ServiceFlagConstants.Instance).ToArray(), x => x.Parent);
+            return Array.ConvertAll(service.Flags.GetFlags(ServiceFlagConstants.Instance).ToArray(), x => x.Member);
         }
     }
 }

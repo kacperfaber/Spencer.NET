@@ -76,7 +76,7 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_serviceconstructor_flag_parent_membertype_equals_to_constructor()
         {
-            Assert.IsTrue(exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Parent.Instance.MemberType ==
+            Assert.IsTrue(exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Member.Instance.MemberType ==
                           MemberTypes.Constructor);
         }
 
@@ -84,7 +84,7 @@ namespace Odie.Container.Tests
         public void returns_serviceconstructor_flag_parent_parameters_lenght_equals_to_1()
         {
             Assert.IsTrue(
-                (exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Parent.Instance as ConstructorInfo).GetParameters()
+                (exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceCtor).Member.Instance as ConstructorInfo).GetParameters()
                 .Count() == 1);
         }
 
@@ -118,27 +118,27 @@ namespace Odie.Container.Tests
         [Test]
         public void returns_servicefactory_parent_not_null()
         {
-            Assert.NotNull(exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent);
+            Assert.NotNull(exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Member);
         }
 
         [Test]
         public void returns_servicefactory_parent_is_methodinfo()
         {
-            bool b = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent.Instance is MethodInfo;
+            bool b = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Member.Instance is MethodInfo;
             Assert.IsTrue(b);
         }
 
         [Test]
         public void returns_servicefactory_parent_membertype_equals_to_method()
         {
-            MemberTypes memberFlag = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent.Instance.MemberType;
+            MemberTypes memberFlag = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Member.Instance.MemberType;
             Assert.IsTrue(memberFlag == MemberTypes.Method);
         }
 
         [Test]
         public void returns_servicefactory_cast_to_methodinfo_does_not_throws()
         {
-            MemberInfo parent = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent.Instance;
+            MemberInfo parent = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Member.Instance;
 
             Assert.DoesNotThrow(() => { _ = (MethodInfo) parent; });
         }
@@ -146,7 +146,7 @@ namespace Odie.Container.Tests
         [Test]
         public void return_servicefactory_methodinfo_returntype_equals_to_TestClass()
         {
-            MethodInfo method = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent.Instance as MethodInfo;
+            MethodInfo method = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Member.Instance as MethodInfo;
 
             Assert.IsTrue(method.ReturnType == typeof(TestClass));
         }
@@ -154,7 +154,7 @@ namespace Odie.Container.Tests
         [Test]
         public void return_servicefactory_methodinfo_isstatic_returns_true()
         {
-            MethodInfo method = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Parent.Instance as MethodInfo;
+            MethodInfo method = exec<TestClass>().SingleOrDefault(x => x.Name == ServiceFlagConstants.ServiceFactory).Member.Instance as MethodInfo;
 
             Assert.IsTrue(method.IsStatic);
         }
@@ -167,7 +167,7 @@ namespace Odie.Container.Tests
 
             foreach (ServiceFlag serviceFlag in injects)
             {
-                Assert.NotNull(serviceFlag.Parent);
+                Assert.NotNull(serviceFlag.Member);
             }
         }
 
@@ -176,8 +176,8 @@ namespace Odie.Container.Tests
         {
             ServiceFlags flags = exec<TestClass>();
             IEnumerable<ServiceFlag> injects = flags.GetFlags(ServiceFlagConstants.Inject);
-            ServiceFlag inject = injects.First(x => x.Parent.Instance.MemberType == MemberTypes.Property);
-            bool result = inject.Parent.Instance.Name == "Name";
+            ServiceFlag inject = injects.First(x => x.Member.Instance.MemberType == MemberTypes.Property);
+            bool result = inject.Member.Instance.Name == "Name";
 
             Assert.IsTrue(result);
         }
@@ -200,7 +200,7 @@ namespace Odie.Container.Tests
         public void returns_one_property_instance_flag()
         {
             ServiceFlag flag = exec<TestClass>().Where(x => x.Name == ServiceFlagConstants.Instance)
-                .SingleOrDefault(x => x.Parent.MemberFlags.Is(MemberFlag.Property));
+                .SingleOrDefault(x => x.Member.MemberFlags.Is(MemberFlag.Property));
 
             Assert.NotNull(flag);
         }
@@ -209,7 +209,7 @@ namespace Odie.Container.Tests
         public void returns_one_field_instance_flag()
         {
             ServiceFlag flag = exec<TestClass>().Where(x => x.Name == ServiceFlagConstants.Instance)
-                .SingleOrDefault(x => x.Parent.MemberFlags.Is(MemberFlag.Field));
+                .SingleOrDefault(x => x.Member.MemberFlags.Is(MemberFlag.Field));
 
             Assert.NotNull(flag);
         }

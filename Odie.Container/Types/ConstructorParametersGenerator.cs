@@ -21,7 +21,7 @@ namespace Odie
         {
             foreach (IParameter parameter in constructor.Parameters)
             {
-                object val = ValueProvider.ProvideValue(parameter, container);
+                object val = ValueProvider.ProvideValue(parameter.Type, container);
                 parameter.Value = val;
 
                 yield return parameter;
@@ -32,7 +32,7 @@ namespace Odie
         {
             foreach (IParameter parameter in constructor.Parameters)
             {
-                object val = ValueProvider.ProvideValue(parameter, container);
+                object val = ValueProvider.ProvideValue(parameter.Type, container);
                 parameter.Value = val;
 
                 yield return parameter;

@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface ITypedMemberValueProvider
     {
-        object ProvideValue(ITypedMember member, IContainer container);
+        object ProvideValue(Type type, IContainer container);
     }
 }

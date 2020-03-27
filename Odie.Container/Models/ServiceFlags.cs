@@ -38,7 +38,7 @@ namespace Odie
 
         public void AddFlag(string name, object value, IMember parent)
         {
-            Add(new ServiceFlag(name, value) {Parent = parent});
+            Add(new ServiceFlag(name, value) {Member = parent});
         }
 
         public void RemoveFlag(string name)

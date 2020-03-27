@@ -24,13 +24,13 @@ namespace Odie
 
                 return new ServiceFlagAttribute() {ServiceFlag = new ServiceFlag(sflag.Name, sflag.Value)
                 {
-                    Parent = MemberGenerator.GenerateMember(member)
+                    Member = MemberGenerator.GenerateMember(member)
                 }};
             });
 
             foreach (ServiceFlagAttribute attribute in flagAttributes)
             {
-                flags.AddFlag(attribute.ServiceFlag.Name, attribute.ServiceFlag.Value, attribute.ServiceFlag.Parent);
+                flags.AddFlag(attribute.ServiceFlag.Name, attribute.ServiceFlag.Value, attribute.ServiceFlag.Member);
             }
 
             return flags;

@@ -9,7 +9,7 @@ namespace Odie
         public IEnumerable<IMember> FindMembers(IService service)
         {
             return Array.ConvertAll(service.Flags
-                .GetFlags(ServiceFlagConstants.Instance).ToArray(), x => x.Parent);
+                .GetFlags(ServiceFlagConstants.Instance).ToArray(), x => x.Member);
         }
     }
 }

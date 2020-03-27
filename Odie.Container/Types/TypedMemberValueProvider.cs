@@ -26,33 +26,33 @@ namespace Odie
             DefaultValueProvider = defaultValueProvider;
         }
 
-        public object ProvideValue(IMember member, IContainer container)
+        public object ProvideValue(Type type, IContainer container)
         {
-            if (member is IParameter parameter)
-            {
-                if (DefaultValueChecker.Check(parameter))
-                {
-                    return DefaultValueProvider.Provide(parameter);
-                }
-            }
+            // if (type is IParameter parameter)
+            // {
+            //     if (DefaultValueChecker.Check(parameter))
+            //     {
+            //         return DefaultValueProvider.Provide(parameter);
+            //     }
+            // }
             
-            if (IsValueTypeChecker.Check(member.Type))
+            if (IsValueTypeChecker.Check(type))
             {
-                return ValueTypeActivator.ActivateInstance(member.Type);
+                return ValueTypeActivator.ActivateInstance(type);
             }
 
-            if (IsEnumerableChecker.Check(member.Type))
+            if (IsEnumerableChecker.Check(type))
             {
-                return EnumerableGenerator.GenerateEnumerable(member.Type);
+                return EnumerableGenerator.GenerateEnumerable(type);
             }
             
-            if (IsArrayChecker.Check(member.Type))
+            if (IsArrayChecker.Check(type))
             {
-                return ArrayGenerator.GenerateArray(member.Type);
+                return ArrayGenerator.GenerateArray(type);
             }
 
-            container.Register(member.Type);
-            return container.Resolve(member.Type);
+            container.Register(type);
+            return container.Resolve(type);
         }
     }
 }

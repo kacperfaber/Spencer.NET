@@ -17,7 +17,7 @@ namespace Odie
         {
             foreach (IParameter parameter in parameters)
             {
-                object value = TypedMemberValueProvider.ProvideValue(parameter, container);
+                object value = TypedMemberValueProvider.ProvideValue(parameter.Type, container);
                 parameter.Value = value;
 
                 yield return parameter;

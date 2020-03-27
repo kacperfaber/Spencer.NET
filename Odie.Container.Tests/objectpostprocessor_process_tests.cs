@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace Odie.Container.Tests
 {
@@ -7,6 +8,17 @@ namespace Odie.Container.Tests
     {
         class Pet
         {
+            public string Name { get; set; }
+
+            public Pet()
+            {
+                
+            }
+
+            public Pet(string name)
+            {
+                Name = name;
+            }
         }
 
         class TestClass
@@ -36,7 +48,7 @@ namespace Odie.Container.Tests
 
             object instance = Activator.CreateInstance<T>();
             
-            ObjectPostProcessor postProcessor = new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()), new MemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(), new ParameterDefaultValueProvider()), new InjectFlagsProvider()));
+            ObjectPostProcessor postProcessor = new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()), new MemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(), new ParameterDefaultValueProvider()), new InjectFlagsProvider(),new MemberDeclarationTypeProvider()));
             postProcessor.Process(instance, service, container);
 
             return (T) instance;
@@ -58,6 +70,47 @@ namespace Odie.Container.Tests
         public void returns_pet_with_inject_flags_not_null()
         {
             Assert.NotNull(exec<TestClass>(ContainerFactory.CreateContainer()).Pet);
+        }
+
+        [Test]
+        public void returns_pet_with_inject_flag_typeof_Pet()
+        {
+            Assert.IsTrue(exec<TestClass>(ContainerFactory.CreateContainer()).Pet is Pet);
+        }
+
+        [Test]
+        public void returns_pet_with_inject_flag_has_null_name()
+        {
+            Assert.IsNull(exec<TestClass>(ContainerFactory.CreateContainer()).Pet.Name);
+        }
+
+        [TestCase("odie")]
+        [TestCase("florka")]
+        [TestCase("tobis")]
+        public void returns_gived_pet_name_if_pet_was_registered_before_using_constructorparameters(string petName)
+        {
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<Pet>(petName);
+
+            string name = exec<TestClass>(container).Pet.Name;
+            
+            Assert.AreEqual(petName, name);
+        }
+
+        [Test]
+        public void TestClass_Instance_are_not_null_after_invoke_exec_method()
+        {
+            exec<TestClass>(ContainerFactory.CreateContainer());
+            
+            Assert.NotNull(TestClass.Instance);
+        }
+
+        [Test]
+        public void TestClass_Instance_are_equal_to_the_resolved_from_container()
+        {
+            TestClass excepted = exec<TestClass>(ContainerFactory.CreateContainer());
+            
+            Assert.AreEqual(excepted, TestClass.Instance);
         }
     }
 }

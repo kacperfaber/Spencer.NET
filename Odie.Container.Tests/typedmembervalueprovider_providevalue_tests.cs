@@ -24,7 +24,7 @@ namespace Odie.Container.Tests
                 new ParameterDefaultValueProvider());
 
 
-            return provider.ProvideValue(new TypedMember(typeof(T)), container);
+            return provider.ProvideValue(typeof(T), container);
         }
 
         [Test]
