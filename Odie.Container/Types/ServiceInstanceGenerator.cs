@@ -8,20 +8,20 @@ namespace Odie
         public IServiceHasFactoryChecker HasServiceFactoryChecker;
         public IFactoryProvider FactoryProvider;
         public IFactoryInstanceCreator FactoryInstanceCreator;
-        public IConstructorProvider ConstructorProvider;
         public IConstructorParametersGenerator ConstructorParametersGenerator;
         public IConstructorInvoker ConstructorInvoker;
         public IParametersValuesExtractor ParametersValuesExtractor;
-        
-        public ServiceInstanceGenerator(IServiceHasFactoryChecker hasServiceFactoryChecker, IFactoryProvider factoryProvider, IFactoryInstanceCreator factoryInstanceCreator, IConstructorProvider constructorProvider, IConstructorParametersGenerator constructorParametersGenerator, IConstructorInvoker constructorInvoker, IParametersValuesExtractor parametersValuesExtractor)
+        public IServiceConstructorProvider ServiceConstructorProvider;
+
+        public ServiceInstanceGenerator(IServiceHasFactoryChecker hasServiceFactoryChecker, IFactoryProvider factoryProvider, IFactoryInstanceCreator factoryInstanceCreator, IConstructorParametersGenerator constructorParametersGenerator, IConstructorInvoker constructorInvoker, IParametersValuesExtractor parametersValuesExtractor, IServiceConstructorProvider serviceConstructorProvider)
         {
             HasServiceFactoryChecker = hasServiceFactoryChecker;
             FactoryProvider = factoryProvider;
             FactoryInstanceCreator = factoryInstanceCreator;
-            ConstructorProvider = constructorProvider;
             ConstructorParametersGenerator = constructorParametersGenerator;
             ConstructorInvoker = constructorInvoker;
             ParametersValuesExtractor = parametersValuesExtractor;
+            ServiceConstructorProvider = serviceConstructorProvider;
         }
 
         public object GenerateInstance(IService service, IContainer container)
@@ -32,7 +32,7 @@ namespace Odie
                 return FactoryInstanceCreator.CreateInstance(factory, service, container);
             }
 
-            IConstructor constructor = ConstructorProvider.ProvideConstructor(service);
+            IConstructor constructor = ServiceConstructorProvider.ProvideConstructor(service);
             IEnumerable<IParameter> parameters = ConstructorParametersGenerator.GenerateParameters(constructor, service, container);
             object[] parametersValues = ParametersValuesExtractor.ExtractValues(parameters);
             return ConstructorInvoker.InvokeConstructor(constructor, parametersValues);

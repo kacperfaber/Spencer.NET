@@ -8,12 +8,18 @@ namespace Odie
 
         public static IContainer CreateContainer()
         {
-            TypedMemberValueProvider typedMemberValueProvider = new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(), new ParameterDefaultValueProvider());
+            TypedMemberValueProvider typedMemberValueProvider = new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(),
+                new TypeIsArrayChecker(), new ArrayGenerator(),
+                new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
+                new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(),
+                new ParameterDefaultValueProvider());
 
             InstancesCreator instancesCreator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                new ConstructorParametersGenerator(typedMemberValueProvider,new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker()),
-            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
-                new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ParametersValuesExtractor()));
+                new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),
+                    new ServiceHasConstructorParametersChecker()),
+                new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
+                    new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(),
+                new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ParametersValuesExtractor()));
 
 
             return new Container(
@@ -44,9 +50,15 @@ namespace Odie
                                     new MethodParametersGenerator()))),
                             new FactoryInstanceCreator(new FactoryMethodInstanceCreator(new ParametersValuesGenerator(typedMemberValueProvider),
                                 new FactoryMethodInvoker(new ParametersValuesExtractor()))),
-                            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
-                                new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
-                            new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker()), new ConstructorInvoker(),new ParametersValuesExtractor()),
+                            new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),
+                                new ServiceHasConstructorParametersChecker()), new ConstructorInvoker(), new ParametersValuesExtractor(),
+                            new ServiceConstructorProvider(new ConstructorInfoListGenerator(),
+                                new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
+                                new ServiceHasConstructorParametersChecker(), new ConstructorFinder(),
+                                new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),
+                                    new ServiceHasConstructorParametersChecker()),
+                                new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
+                                    new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))))),
                         new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
                             new MemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
                                 new MemberDeclarationTypeProvider()))), new ServiceInstanceSetter()),
@@ -66,9 +78,15 @@ namespace Odie
                                     new MethodParametersGenerator()))),
                             new FactoryInstanceCreator(new FactoryMethodInstanceCreator(new ParametersValuesGenerator(typedMemberValueProvider),
                                 new FactoryMethodInvoker(new ParametersValuesExtractor()))),
-                            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
-                                new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
-                            new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker()), new ConstructorInvoker(),new ParametersValuesExtractor()),
+                            new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),
+                                new ServiceHasConstructorParametersChecker()), new ConstructorInvoker(), new ParametersValuesExtractor(),
+                            new ServiceConstructorProvider(new ConstructorInfoListGenerator(),
+                                new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
+                                new ServiceHasConstructorParametersChecker(), new ConstructorFinder(),
+                                new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),
+                                    new ServiceHasConstructorParametersChecker()),
+                                new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
+                                    new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))))),
                         new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
                             new MemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
                                 new MemberDeclarationTypeProvider()))), new ServiceHasToInitializeChecker(new AlwaysNewChecker())));

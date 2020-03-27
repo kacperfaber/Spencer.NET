@@ -53,6 +53,9 @@ namespace Odie
 
         public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IService service, IContainer container)
         {
+            // TODO another dependency LIKE SMART PARAMETERS GENERATOR in dependent to service ctor parameters.
+            // LIKE
+            
             if (ServiceHasConstructorParametersChecker.Check(service))
             {
                 return GenerateParameters(constructor, service.Registration.ConstructorParameter);
