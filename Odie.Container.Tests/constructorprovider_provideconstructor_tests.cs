@@ -40,7 +40,7 @@ namespace Odie.Container.Tests
 
             ConstructorProvider provider = new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())));
 
-            return provider.ProvideConstructor(@class, flags).Instance;
+            return provider.ProvideConstructor(@class).Instance;
         }
 
         [Test]

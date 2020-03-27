@@ -9,6 +9,7 @@ namespace Odie
     {
         public IConstructorParameterByTypeFinder ConstructorParameterByTypeFinder;
         public ITypedMemberValueProvider ValueProvider;
+        public IServiceHasConstructorParametersChecker ServiceHasConstructorParametersChecker;
 
         public ConstructorParametersGenerator(ITypedMemberValueProvider valueProvider, IConstructorParameterByTypeFinder constructorParameterByTypeFinder)
         {
@@ -46,6 +47,19 @@ namespace Odie
                 parameter.Value = constructorParameter.Value;
 
                 yield return parameter;
+            }
+        }
+
+        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IService service, IContainer container)
+        {
+            if (ServiceHasConstructorParametersChecker.Check(service))
+            {
+                return GenerateParameters(constructor, service.Registration.ConstructorParameter);
+            }
+
+            else
+            {
+                return GenerateParameters(constructor, container);
             }
         }
     }

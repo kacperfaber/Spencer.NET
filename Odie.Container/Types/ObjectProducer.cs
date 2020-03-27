@@ -2,14 +2,21 @@
 {
     public class ObjectProducer : IObjectProducer
     {
-        public IInstanceGenerator InstanceGenerator;
-        public IObjectPostProducer PostProducer;
-        
+        public IServiceInstanceGenerator ServiceInstanceGenerator;
+        public IObjectPostProcessor PostProcessor;
+
+        public ObjectProducer(IServiceInstanceGenerator serviceInstanceGenerator, IObjectPostProcessor postProcessor)
+        {
+            ServiceInstanceGenerator = serviceInstanceGenerator;
+            PostProcessor = postProcessor;
+        }
+
         public object ProduceObject(IService service, IContainer container)
         {
-            object instance = InstanceGenerator.GenerateInstance(service.Registration.TargetType, service.Flags);
+            object instance = ServiceInstanceGenerator.GenerateInstance(service, container);
 
-            PostProducer.Produce(instance, service, container);
+            PostProcessor.Process(instance, service, container);
+            
             return instance;
         }
     }

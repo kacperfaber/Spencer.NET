@@ -26,7 +26,7 @@ namespace Odie
             DefaultValueProvider = defaultValueProvider;
         }
 
-        public object ProvideValue(ITypedMember member, IContainer container)
+        public object ProvideValue(IMember member, IContainer container)
         {
             if (member is IParameter parameter)
             {

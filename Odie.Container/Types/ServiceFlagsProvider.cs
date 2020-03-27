@@ -17,7 +17,7 @@ namespace Odie
         public ServiceFlags ProvideFlags(Type type)
         {
             ServiceFlags flags = ServiceFlags.CreateNew();
-            IEnumerable<ServiceFlagAttribute> flagAttributes = AttributesFinder.FindAttributesEverywhere<ServiceFlagAttribute>(type, (member, attr) =>
+            IEnumerable<ServiceFlagAttribute> flagAttributes = AttributesFinder.FindAttributesEverywhere(type, (member, attr) =>
             {
                 ServiceFlagAttribute flagAttr = (ServiceFlagAttribute) attr;
                 ServiceFlag sflag = flagAttr.ServiceFlag;

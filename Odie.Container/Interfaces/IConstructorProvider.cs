@@ -5,7 +5,7 @@ namespace Odie
 {
     public interface IConstructorProvider
     {
-        IConstructor ProvideConstructor(Type type, ServiceFlags flags);
+        IConstructor ProvideConstructor(IService service);
 
         IConstructor ProvideConstructor(Type type);
     }

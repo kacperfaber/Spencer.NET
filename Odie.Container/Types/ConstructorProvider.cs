@@ -17,11 +17,11 @@ namespace Odie
             ConstructorGenerator = constructorGenerator;
         }
 
-        public IConstructor ProvideConstructor(Type type, ServiceFlags flags)
+        public IConstructor ProvideConstructor(IService service)
         {
-            if (flags.HasFlag(ServiceFlagConstants.ServiceCtor))
+            if (service.Flags.HasFlag(ServiceFlagConstants.ServiceCtor))
             {
-                ServiceFlag flag = flags.GetFlag(ServiceFlagConstants.ServiceCtor);
+                ServiceFlag flag = service.Flags.GetFlag(ServiceFlagConstants.ServiceCtor);
                 IMember memberParent = flag.Parent;
 
                 if (ConstructorChecker.Check(memberParent))
@@ -30,7 +30,7 @@ namespace Odie
                 }
             }
 
-            ConstructorInfo constructorInfo = DefaultConstructorProvider.ProvideDefaultConstructor(type);
+            ConstructorInfo constructorInfo = DefaultConstructorProvider.ProvideDefaultConstructor(service.Registration.TargetType);
             return ConstructorGenerator.GenerateConstructor(constructorInfo);
         }
 

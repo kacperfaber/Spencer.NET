@@ -10,5 +10,7 @@ namespace Odie
         IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IContainer container);
         
         IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IConstructorParameters constructorParameters);
+
+        IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IService service, IContainer container);
     }
 }
