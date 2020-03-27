@@ -4,7 +4,7 @@
     {
         public bool Check(IService service)
         {
-            return service?.Registration?.Instance != null;
+            return service?.Data?.Instance != null;
         }
     }
 }

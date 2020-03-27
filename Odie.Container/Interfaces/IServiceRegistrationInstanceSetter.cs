@@ -2,6 +2,6 @@
 {
     public interface IServiceRegistrationInstanceSetter
     {
-        void SetInstance(IServiceRegistration registration, object instance);
+        void SetInstance(IServiceData data, object instance);
     }
 }

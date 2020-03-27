@@ -36,7 +36,7 @@ namespace Odie.Container.Tests
                 .AddType(typeof(T))
                 .AddBaseType(typeof(T).BaseType)
                 .AddGenericRegistration(new ServiceGenericRegistration() {HasGenericParameters = false})
-                .AddInstance(null).Build();
+                .Build();
 
             ServiceFlags flags = new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())).ProvideFlags(typeof(T));
 

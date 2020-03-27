@@ -10,8 +10,6 @@ namespace Odie
         Type BaseType { get; set; }
         
         List<IInterface> Interfaces { get; set; }
-        
-        object Instance { get; set; }
 
         IServiceGenericRegistration GenericRegistration { get; set; }
 

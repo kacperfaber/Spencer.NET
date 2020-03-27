@@ -18,7 +18,7 @@ namespace Odie
 
             return new Container(
                 new ServiceResolver(
-                    new ServiceInstanceResolver(new RegistrationInstanceIsNullChecker(), new AlwaysNewChecker(), new SingleInstanceChecker(),
+                    new ServiceInstanceResolver(new ServiceDataInstanceIsNullChecker(), new AlwaysNewChecker(), new SingleInstanceChecker(),
                         new ServiceRegistrationInstanceSetter(),
                         new ServiceInstanceCreator(instancesCreator, new ServiceHasConstructorParametersChecker(),
                             new FactoryProvider(new FactoriesByTypeFilter(new AssignableChecker()),

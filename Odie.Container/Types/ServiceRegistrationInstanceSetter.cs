@@ -2,9 +2,9 @@
 {
     public class ServiceRegistrationInstanceSetter : IServiceRegistrationInstanceSetter
     {
-        public void SetInstance(IServiceRegistration registration, object instance)
+        public void SetInstance(IServiceData data, object instance)
         {
-            registration.Instance = instance;
+            data.Instance = instance;
         }
     }
 }

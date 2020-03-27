@@ -15,12 +15,12 @@
         {
             if (AutoValueChecker.Check(service))
             {
-                service.Registration.Instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, container);
+                service.Data.Instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, container);
             }
 
             else if (!AutoValueChecker.Check(service))
             {
-                service.Registration.Instance = null;
+                service.Data.Instance = null;
             }
         }
     }

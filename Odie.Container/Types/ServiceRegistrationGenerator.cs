@@ -28,7 +28,6 @@ namespace Odie
                 .AddGenericRegistration(genericRegistration)
                 .AddRegisterParameters(constructorParameters)
                 .AddType(type)
-                .AddInstance(instance)
                 .AddBaseType(baseType)
                 .SetInterfaces(interfaces)
                 .Build();

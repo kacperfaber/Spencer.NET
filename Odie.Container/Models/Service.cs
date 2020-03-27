@@ -9,6 +9,8 @@ namespace Odie
 
         public IServiceRegistration Registration { get; set; }
         
+        public IServiceData Data { get; set; }
+
         public IServiceInfo Info { get; set; }
 
         public Service()

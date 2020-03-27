@@ -116,7 +116,7 @@ namespace Odie.Container.Tests
             exec(container, @object);
 
             IService service = container.Storage.Services.GetServices().SingleOrDefault(x => x.Registration.TargetType == @object.GetType());
-            bool condition = service.Registration.Instance != null;
+            bool condition = service.Data.Instance != null;
 
             Assert.IsTrue(condition);
         }
@@ -130,7 +130,7 @@ namespace Odie.Container.Tests
             exec(container, @object);
 
             IService service = container.Storage.Services.GetServices().SingleOrDefault(x => x.Registration.TargetType == @object.GetType());
-            bool condition = service.Registration.Instance != null;
+            bool condition = service.Data.Instance != null;
 
             Assert.IsTrue(condition);
         }

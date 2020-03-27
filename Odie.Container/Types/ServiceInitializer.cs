@@ -14,7 +14,7 @@
         public void Initialize(IService service, IContainer container)
         {
             object instance = ServiceInstanceCreator.CreateInstance(service, container);
-            InstanceSetter.SetInstance(service.Registration, instance);
+            InstanceSetter.SetInstance(service.Data, instance);
         }
     }
 }

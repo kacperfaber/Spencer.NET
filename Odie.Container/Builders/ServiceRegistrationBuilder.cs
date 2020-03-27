@@ -24,11 +24,6 @@ namespace Odie
             return Update(x => x.BaseType = baseType);
         }
 
-        public ServiceRegistrationBuilder AddInstance(object instance)
-        {
-            return Update(x => x.Instance = instance);
-        }
-
         public ServiceRegistrationBuilder AddGenericRegistration(IServiceGenericRegistration genericRegistration)
         {
             return Update(x => x.GenericRegistration = genericRegistration);
