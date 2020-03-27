@@ -19,6 +19,11 @@ namespace Odie
             return Update(x => x.Flags.Add(flag));
         }
 
+        public ServiceBuilder AddData(IServiceData data)
+        {
+            return Update(x => x.Data = data);
+        }
+
         public ServiceBuilder RemoveFlag(Func<ServiceFlags, ServiceFlag> func)
         {
             return Update(x => x.Flags.Remove(func(x.Flags)));
@@ -28,7 +33,7 @@ namespace Odie
         {
             return Update(x => x.Flags.AddRange(flags));
         }
-        
+
         public ServiceBuilder AddFlags(IEnumerable<ServiceFlag> flags)
         {
             return Update(x => x.Flags.AddRange(flags));
@@ -41,7 +46,7 @@ namespace Odie
 
         public ServiceBuilder AddInfo(IServiceInfo serviceInfo)
         {
-            return Update(x => {});
+            return Update(x => { });
         }
 
         public ServiceBuilder FromType(Type type)

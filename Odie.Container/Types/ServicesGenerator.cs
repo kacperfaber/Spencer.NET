@@ -4,24 +4,24 @@ using System.Linq;
 
 namespace Odie
 {
-    public class ServicesGenerator : IServiceGenerator
+    public class ServicesGenerator : IServicesGenerator
     {
         public ITypeIsClassValidator TypeIsClassValidator;
         public IImplementationsFinder ImplementationsFinder;
-        public ITypeServiceGenerator TypeServiceGenerator;
+        public IServiceGenerator ServiceGenerator;
 
-        public ServicesGenerator(ITypeIsClassValidator typeIsClassValidator, IImplementationsFinder implementationsFinder, ITypeServiceGenerator typeServiceGenerator)
+        public ServicesGenerator(ITypeIsClassValidator typeIsClassValidator, IImplementationsFinder implementationsFinder, IServiceGenerator serviceGenerator)
         {
             TypeIsClassValidator = typeIsClassValidator;
             ImplementationsFinder = implementationsFinder;
-            TypeServiceGenerator = typeServiceGenerator;
+            ServiceGenerator = serviceGenerator;
         }
 
         public IEnumerable<IService> GenerateServices(Type type, IAssemblyList assemblies, IContainer container, IConstructorParameters constructorParameters = null, object instance = null)
         {
             if (TypeIsClassValidator.Validate(type))
             {
-                IService service = TypeServiceGenerator.GenerateService(type, container, instance, constructorParameters);
+                IService service = ServiceGenerator.GenerateService(type, container, instance, constructorParameters);
                 yield return service;
             }
 
@@ -31,7 +31,7 @@ namespace Odie
 
                 foreach (Type @class in types)
                 {
-                    IService service = TypeServiceGenerator.GenerateService(@class, container, null, constructorParameters);
+                    IService service = ServiceGenerator.GenerateService(@class, container, null, constructorParameters);
                     yield return service;
                 }
             }

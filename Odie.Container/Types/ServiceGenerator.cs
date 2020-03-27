@@ -2,7 +2,7 @@
 
 namespace Odie
 {
-    public class TypeServiceGenerator : ITypeServiceGenerator
+    public class ServiceGenerator : IServiceGenerator
     {
         public IServiceFlagsGenerator FlagsGenerator;
         public IServiceRegistrationGenerator RegistrationGenerator;
@@ -12,7 +12,7 @@ namespace Odie
         public IServiceFactoryProvider FactoryProvider;
         public IServiceFactoryInvoker FactoryInvoker;
 
-        public TypeServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator,
+        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator,
             IServiceInfoGenerator infoGenerator, IClassHasServiceFactoryChecker classHasFactoryChecker, IServiceFactoryProvider factoryProvider, IServiceFactoryInvoker factoryInvoker)
         {
             FlagsGenerator = flagsGenerator;
@@ -38,6 +38,7 @@ namespace Odie
             return new ServiceBuilder()
                 .AddFlags(flags)
                 .AddInfo(info)
+                .AddData(new ServiceData())
                 .AddRegistration(registration)
                 .Build();
         }
