@@ -23,6 +23,7 @@ namespace Odie
             ServiceFinder = serviceFinder;
             ServiceInitializer = serviceInitializer;
             ServiceIsAutoValueChecker = serviceIsAutoValueChecker;
+            ConstructorParametersByObjectsGenerator = constructorParametersByObjectsGenerator;
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
             ServiceInstanceResolver = serviceInstanceResolver;
@@ -120,6 +121,8 @@ namespace Odie
                     ServiceInitializer.Initialize(service, this);
                 }
             }
+
+            ServiceRegistrar.Register(Storage.Services, services, this);
         }
 
         public void Register<T>()
@@ -136,7 +139,5 @@ namespace Odie
 
             ServiceRegistrar.Register(Storage.Services, services, this);
         }
-
-        public IStorage Storage { get; set; }
     }
 }

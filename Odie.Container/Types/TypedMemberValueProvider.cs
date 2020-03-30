@@ -44,11 +44,6 @@ namespace Odie
                 return ArrayGenerator.GenerateArray(type);
             }
             
-            if (!container.Has(type))
-            {
-                throw new ValueGeneratorException(type);
-            }
-
             return container.Resolve(type);
         }
     }

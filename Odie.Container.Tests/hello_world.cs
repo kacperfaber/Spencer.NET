@@ -45,6 +45,8 @@ namespace Odie.Container.Tests
         {
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<Odie>();
+            container.Register<HelloWorld>();
+            container.Register<hello_world>();
 
             Odie resolve = container.Resolve<Odie>();
         }

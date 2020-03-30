@@ -32,6 +32,7 @@ namespace Odie.Container.Tests
         {
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<Odie>();
+            container.Register<TestClass>();
             
             Assert.DoesNotThrow(() => exec<TestClass>(container));
         }
@@ -41,6 +42,7 @@ namespace Odie.Container.Tests
         {
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<Odie>();
+            container.Register<TestClass>();
 
             object @class = exec<TestClass>(container);
             Assert.NotNull(@class);

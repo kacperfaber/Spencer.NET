@@ -16,7 +16,7 @@ namespace Odie
         }
 
         public object ResolveInstance(IService service, IReadOnlyContainer container)
-        {
+        {   
             if (HasToInitializeChecker.Check(service))
             {
                 object instance = ObjectProducer.ProduceObject(service, container);

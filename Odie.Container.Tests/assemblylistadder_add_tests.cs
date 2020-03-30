@@ -49,5 +49,12 @@ namespace Odie.Container.Tests
 
             Assert.IsTrue(list.GetAssemblies().Count() == 2);
         }
+
+        [Test]
+        public void ret()
+        {
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register(GetType());
+        }
     }
 }

@@ -130,7 +130,12 @@ namespace Odie.Container.Tests
 
             InstancesCreator creator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(typedMemberValueProvider,new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ParametersValuesExtractor()));
 
-            object instance = creator.CreateInstance(service.First().Flags, service.First().Registration.TargetType, ContainerFactory.CreateContainer());
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<T>();
+            container.Register<Dep1>();
+            container.Register<TestClass>();
+
+            object instance = creator.CreateInstance(service.First().Flags, service.First().Registration.TargetType, container);
 
             return instance;
         }

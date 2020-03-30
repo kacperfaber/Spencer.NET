@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Odie.Exceptions;
 
 namespace Odie
 {
@@ -22,6 +23,10 @@ namespace Odie
         public object Resolve(Type type)
         {
             IService service = ServiceFinder.Find(Storage.Services, type);
+            
+            if (service == null)
+                throw new ResolveException(type);
+
             object result = ServiceInstanceResolver.ResolveInstance(service, this);
 
             return result;
@@ -32,6 +37,9 @@ namespace Odie
             Type type = TypeGetter.GetType<T>();
             IService service = ServiceFinder.Find(Storage.Services, type);
 
+            if (service == null)
+                throw new ResolveException(type);
+            
             return (T) ServiceInstanceResolver.ResolveInstance(service, this);
         }
 
@@ -72,6 +80,6 @@ namespace Odie
             return ServiceFinder.Find(Storage.Services, TypeGetter.GetType(type)) != null;
         }
 
-        public IStorage Storage { get; set; }
+        public virtual IStorage Storage { get; set; }
     }
 }
