@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.Container.Tests\\Odie.Container.Tests.csproj",
+    "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.Container.Tests\\Odie.Container.Tests.csproj",
     "projectName": "Odie.Container.Tests",
-    "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.Container.Tests\\Odie.Container.Tests.csproj",
-    "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.Container.Tests\\obj\\",
+    "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.Container.Tests\\Odie.Container.Tests.csproj",
+    "outputPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.Container.Tests\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "C:\\Microsoft\\Xamarin\\NuGet",
@@ -20,8 +20,8 @@
     "frameworks": {
       "netcoreapp3.1": {
         "projectReferences": {
-          "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj": {
-            "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj"
+          "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\Odie.Container.csproj": {
+            "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\Odie.Container.csproj"
           }
         }
       }

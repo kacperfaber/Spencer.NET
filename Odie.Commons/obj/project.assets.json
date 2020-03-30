@@ -187,11 +187,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj",
+      "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj",
       "projectName": "Odie.Commons",
-      "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj",
+      "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj",
       "packagesPath": "C:\\Users\\Kacpii\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\obj\\",
+      "outputPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet",

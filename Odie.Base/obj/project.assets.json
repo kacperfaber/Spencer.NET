@@ -222,11 +222,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\Odie.Base.csproj",
+      "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base\\Odie.Base.csproj",
       "projectName": "Odie.Base",
-      "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\Odie.Base.csproj",
+      "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base\\Odie.Base.csproj",
       "packagesPath": "C:\\Users\\Kacpii\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\obj\\",
+      "outputPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet",
@@ -247,11 +247,11 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj": {
-              "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj"
+            "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj": {
+              "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj"
             },
-            "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj": {
-              "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj"
+            "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\Odie.Container.csproj": {
+              "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\Odie.Container.csproj"
             }
           }
         }
@@ -285,13 +285,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\obj\\Odie.Base.csproj.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

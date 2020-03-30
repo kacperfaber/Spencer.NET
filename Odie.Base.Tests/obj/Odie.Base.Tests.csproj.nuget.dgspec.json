@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base.tests\\Odie.Base.Tests.csproj": {}
+    "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base.tests\\Odie.Base.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base.tests\\Odie.Base.Tests.csproj": {
+    "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base.tests\\Odie.Base.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base.tests\\Odie.Base.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base.tests\\Odie.Base.Tests.csproj",
         "projectName": "Odie.Base.Tests",
-        "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base.tests\\Odie.Base.Tests.csproj",
+        "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base.tests\\Odie.Base.Tests.csproj",
         "packagesPath": "C:\\Users\\Kacpii\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base.tests\\obj\\",
+        "outputPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base.tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet",
@@ -32,8 +32,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\Odie.Base.csproj": {
-                "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\Odie.Base.csproj"
+              "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base\\Odie.Base.csproj": {
+                "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base\\Odie.Base.csproj"
               }
             }
           }
@@ -79,14 +79,14 @@
         }
       }
     },
-    "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\Odie.Base.csproj": {
+    "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base\\Odie.Base.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\Odie.Base.csproj",
+        "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base\\Odie.Base.csproj",
         "projectName": "Odie.Base",
-        "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\Odie.Base.csproj",
+        "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base\\Odie.Base.csproj",
         "packagesPath": "C:\\Users\\Kacpii\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.base\\obj\\",
+        "outputPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.base\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet",
@@ -107,11 +107,11 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj": {
-                "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj"
+              "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj": {
+                "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj"
               },
-              "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj": {
-                "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj"
+              "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\Odie.Container.csproj": {
+                "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\Odie.Container.csproj"
               }
             }
           }
@@ -146,14 +146,14 @@
         }
       }
     },
-    "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj": {
+    "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj",
+        "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj",
         "projectName": "Odie.Commons",
-        "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj",
+        "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj",
         "packagesPath": "C:\\Users\\Kacpii\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\obj\\",
+        "outputPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet",
@@ -206,14 +206,14 @@
         }
       }
     },
-    "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj": {
+    "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\Odie.Container.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj",
+        "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\Odie.Container.csproj",
         "projectName": "Odie.Container",
-        "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\Odie.Container.csproj",
+        "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\Odie.Container.csproj",
         "packagesPath": "C:\\Users\\Kacpii\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.container\\obj\\",
+        "outputPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.container\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet",
@@ -234,8 +234,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj": {
-                "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj"
+              "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj": {
+                "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj"
               }
             }
           }
