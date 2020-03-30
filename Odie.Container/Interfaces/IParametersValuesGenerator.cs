@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IParametersValuesGenerator
     {
-        IEnumerable<IParameter> Generate(IEnumerable<IParameter> parameters, IContainer container);
+        IEnumerable<IParameter> Generate(IEnumerable<IParameter> parameters, IReadOnlyContainer container);
     }
 }

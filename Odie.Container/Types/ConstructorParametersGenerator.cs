@@ -18,7 +18,7 @@ namespace Odie
             ServiceHasConstructorParametersChecker = serviceHasConstructorParametersChecker;
         }
 
-        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, ServiceFlags flags, IContainer container)
+        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, ServiceFlags flags, IReadOnlyContainer container)
         {
             foreach (IParameter parameter in constructor.Parameters)
             {
@@ -29,7 +29,7 @@ namespace Odie
             }
         }
 
-        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IContainer container)
+        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IReadOnlyContainer container)
         {
             foreach (IParameter parameter in constructor.Parameters)
             {
@@ -51,7 +51,7 @@ namespace Odie
             }
         }
 
-        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IService service, IContainer container)
+        public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IService service, IReadOnlyContainer container)
         {
             // TODO another dependency LIKE SMART PARAMETERS GENERATOR in dependent to service ctor parameters.
             // LIKE

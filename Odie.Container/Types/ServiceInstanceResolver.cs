@@ -15,7 +15,7 @@ namespace Odie
             HasToInitializeChecker = hasToInitializeChecker;
         }
 
-        public object ResolveInstance(IService service, IContainer container)
+        public object ResolveInstance(IService service, IReadOnlyContainer container)
         {
             if (HasToInitializeChecker.Check(service))
             {

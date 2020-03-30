@@ -19,7 +19,7 @@ namespace Odie
             DeclarationTypeProvider = declarationTypeProvider;
         }
 
-        public void InjectAll(IService service, IContainer container, object instance)
+        public void InjectAll(IService service, IReadOnlyContainer container, object instance)
         {
             IEnumerable<ServiceFlag> injections = InjectsProvider.ProvideFlags(service);
 

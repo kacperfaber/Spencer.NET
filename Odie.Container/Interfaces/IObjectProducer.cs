@@ -2,6 +2,6 @@
 {
     public interface IObjectProducer
     {
-        object ProduceObject(IService service, IContainer container);
+        object ProduceObject(IService service, IReadOnlyContainer container);
     }
 }

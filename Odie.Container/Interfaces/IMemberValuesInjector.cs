@@ -2,6 +2,6 @@
 {
     public interface IMemberValuesInjector
     {
-        void InjectAll(IService service, IContainer container, object instance);
+        void InjectAll(IService service, IReadOnlyContainer container, object instance);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Odie.Exceptions;
 
 namespace Odie
 {
@@ -26,16 +27,8 @@ namespace Odie
             DefaultValueProvider = defaultValueProvider;
         }
 
-        public object ProvideValue(Type type, IContainer container)
+        public object ProvideValue(Type type, IReadOnlyContainer container)
         {
-            // if (type is IParameter parameter)
-            // {
-            //     if (DefaultValueChecker.Check(parameter))
-            //     {
-            //         return DefaultValueProvider.Provide(parameter);
-            //     }
-            // }
-            
             if (IsValueTypeChecker.Check(type))
             {
                 return ValueTypeActivator.ActivateInstance(type);
@@ -50,8 +43,12 @@ namespace Odie
             {
                 return ArrayGenerator.GenerateArray(type);
             }
+            
+            if (!container.Has(type))
+            {
+                throw new ValueGeneratorException(type);
+            }
 
-            container.Register(type);
             return container.Resolve(type);
         }
     }

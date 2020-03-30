@@ -2,6 +2,6 @@
 {
     public interface IObjectPostProcessor
     {
-        void Process(object instance, IService service, IContainer container);
+        void Process(object instance, IService service, IReadOnlyContainer container);
     }
 }

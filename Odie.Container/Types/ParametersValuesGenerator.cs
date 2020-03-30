@@ -13,7 +13,7 @@ namespace Odie
             TypedMemberValueProvider = typedMemberValueProvider;
         }
 
-        public IEnumerable<IParameter> Generate(IEnumerable<IParameter> parameters, IContainer container)
+        public IEnumerable<IParameter> Generate(IEnumerable<IParameter> parameters, IReadOnlyContainer container)
         {
             foreach (IParameter parameter in parameters)
             {

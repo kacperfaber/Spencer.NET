@@ -11,7 +11,7 @@
             MemberValuesInjector = memberValuesInjector;
         }
 
-        public void Process(object instance, IService service, IContainer container)
+        public void Process(object instance, IService service, IReadOnlyContainer container)
         {
             MemberValuesInjector.InjectAll(service, container, instance);
             InstanceMembersValueInjector.InjectAll(service, instance);

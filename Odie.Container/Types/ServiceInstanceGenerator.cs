@@ -24,7 +24,7 @@ namespace Odie
             ServiceConstructorProvider = serviceConstructorProvider;
         }
 
-        public object GenerateInstance(IService service, IContainer container)
+        public object GenerateInstance(IService service, IReadOnlyContainer container)
         {
             if (HasServiceFactoryChecker.Check(service))
             {

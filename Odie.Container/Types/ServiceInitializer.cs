@@ -11,7 +11,7 @@
             InstanceSetter = instanceSetter;
         }
 
-        public void Initialize(IService service, IContainer container)
+        public void Initialize(IService service, IReadOnlyContainer container)
         {
             object instance = ObjectProducer.ProduceObject(service, container);
             InstanceSetter.SetInstance(service, instance);

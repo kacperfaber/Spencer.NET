@@ -5,109 +5,29 @@ using System.Reflection;
 
 namespace Odie
 {
-    public class Container : IContainer
+    public sealed class Container : ReadOnlyContainer, IContainer
     {
         public IServiceRegistrar ServiceRegistrar;
         public IServicesGenerator ServicesGenerator;
-        public IServiceFinder ServiceFinder;
         public IServiceInitializer ServiceInitializer;
-        public ITypeExisterChecker TypeExisterChecker;
         public IServiceIsAutoValueChecker ServiceIsAutoValueChecker;
-        public ITypeGetter TypeGetter;
-        public IAssemblyRegistrar AssemblyRegistrar;
         public IConstructorParametersByObjectsGenerator ConstructorParametersByObjectsGenerator;
-        public IServiceInstanceResolver ServiceInstanceResolver;
 
         public Container(IServiceRegistrar serviceRegistrar, IServicesGenerator servicesGenerator, IServiceFinder serviceFinder,
             IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker,
             ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar, IConstructorParametersByObjectsGenerator constructorParametersByObjectsGenerator,
-            IServiceInstanceResolver serviceInstanceResolver)
+            IServiceInstanceResolver serviceInstanceResolver) : base(serviceFinder, typeGetter, serviceInstanceResolver, assemblyRegistrar)
         {
             ServiceRegistrar = serviceRegistrar;
             ServicesGenerator = servicesGenerator;
             ServiceFinder = serviceFinder;
             ServiceInitializer = serviceInitializer;
-            TypeExisterChecker = typeExisterChecker;
             ServiceIsAutoValueChecker = serviceIsAutoValueChecker;
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
-            ConstructorParametersByObjectsGenerator = constructorParametersByObjectsGenerator;
             ServiceInstanceResolver = serviceInstanceResolver;
 
             Storage = new Storage();
-        }
-
-        public IStorage Storage { get; set; }
-
-        public object Resolve(Type type)
-        {
-            IService service = ServiceFinder.Find(Storage.Services, type);
-            object result = ServiceInstanceResolver.ResolveInstance(service, this);
-
-            return result;
-        }
-
-        public T Resolve<T>()
-        {
-            Type type = TypeGetter.GetType<T>();
-            IService service = ServiceFinder.Find(Storage.Services, type);
-
-            return (T) ServiceInstanceResolver.ResolveInstance(service, this);
-        }
-
-        public void Register<T>(params object[] parameters)
-        {
-            Type type = TypeGetter.GetType<T>();
-            IConstructorParameters constructorParameters = ConstructorParametersByObjectsGenerator.GenerateParameters(parameters);
-
-            IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this, constructorParameters);
-
-            foreach (IService service in services)
-            {
-                if (ServiceIsAutoValueChecker.Check(service))
-                {
-                    ServiceInitializer.Initialize(service, this);
-                }
-            }
-
-            ServiceRegistrar.Register(Storage.Services, services, this);
-        }
-
-        public IEnumerable<T> ResolveMany<T>()
-        {
-            Type type = TypeGetter.GetType<T>();
-
-            IEnumerable<IService> services = ServiceFinder.FindMany(Storage.Services, type);
-
-            foreach (IService service in services)
-            {
-                yield return (T) ServiceInstanceResolver.ResolveInstance(service, this);
-            }
-        }
-
-        public IEnumerable<object> ResolveMany(Type type)
-        {
-            IEnumerable<IService> services = ServiceFinder.FindMany(Storage.Services, type);
-
-            foreach (IService service in services)
-            {
-                yield return ServiceInstanceResolver.ResolveInstance(service, this);
-            }
-        }
-
-        public bool Has<T>()
-        {
-            Type type = TypeGetter.GetType<T>();
-
-            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
-            return ServiceFinder.Find(Storage.Services, type) != null;
-        }
-
-        public bool Has(Type type)
-        {
-            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
-
-            return ServiceFinder.Find(Storage.Services, TypeGetter.GetType(type)) != null;
         }
 
         public void Register(Type type)
@@ -186,6 +106,22 @@ namespace Odie
             }
         }
 
+        public void Register<T>(params object[] parameters)
+        {
+            Type type = TypeGetter.GetType<T>();
+            IConstructorParameters constructorParameters = ConstructorParametersByObjectsGenerator.GenerateParameters(parameters);
+
+            IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this, constructorParameters);
+
+            foreach (IService service in services)
+            {
+                if (ServiceIsAutoValueChecker.Check(service))
+                {
+                    ServiceInitializer.Initialize(service, this);
+                }
+            }
+        }
+
         public void Register<T>()
         {
             IEnumerable<IService> services = ServicesGenerator.GenerateServices(typeof(T), Storage.Assemblies, null);
@@ -200,5 +136,7 @@ namespace Odie
 
             ServiceRegistrar.Register(Storage.Services, services, this);
         }
+
+        public IStorage Storage { get; set; }
     }
 }

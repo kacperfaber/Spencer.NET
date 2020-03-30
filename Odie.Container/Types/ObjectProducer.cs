@@ -11,7 +11,7 @@
             PostProcessor = postProcessor;
         }
 
-        public object ProduceObject(IService service, IContainer container)
+        public object ProduceObject(IService service, IReadOnlyContainer container)
         {
             object instance = ServiceInstanceGenerator.GenerateInstance(service, container);
 
