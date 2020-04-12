@@ -60,6 +60,8 @@ namespace Odie
                 IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this);
 
                 ServiceRegistrar.Register(Storage.Services, services, this);
+
+                return (T) ServiceInstanceResolver.ResolveInstance(ServiceFinder.Find(Storage.Services, type), this);
             }
             
             return (T) ServiceInstanceResolver.ResolveInstance(service, this);
@@ -75,6 +77,8 @@ namespace Odie
                 IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this);
 
                 ServiceRegistrar.Register(Storage.Services, services, this);
+
+                return ServiceInstanceResolver.ResolveInstance(ServiceFinder.Find(Storage.Services, type), this);
             }
             
             return ServiceInstanceResolver.ResolveInstance(service, this);
