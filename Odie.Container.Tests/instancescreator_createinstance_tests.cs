@@ -43,6 +43,16 @@ namespace Odie.Container.Tests
                 throw new NotImplementedException();
             }
 
+            public T ResolveOrDefault<T>()
+            {
+                throw new NotImplementedException();
+            }
+
+            public object ResolveOrDefault(Type type)
+            {
+                throw new NotImplementedException();
+            }
+
             public T Resolve<T>(params object[] parameters)
             {
                 throw new NotImplementedException();

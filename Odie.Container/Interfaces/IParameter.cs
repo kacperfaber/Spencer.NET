@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Odie
+﻿namespace Odie
 {
     public interface IParameter : ITypedMember
     {

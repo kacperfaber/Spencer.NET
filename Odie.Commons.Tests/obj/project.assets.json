@@ -4639,11 +4639,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.commons.tests\\Odie.Commons.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.commons.tests\\Odie.Commons.Tests.csproj",
       "projectName": "Odie.Commons.Tests",
-      "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.commons.tests\\Odie.Commons.Tests.csproj",
+      "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.commons.tests\\Odie.Commons.Tests.csproj",
       "packagesPath": "C:\\Users\\Kacpii\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.commons.tests\\obj\\",
+      "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.commons.tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet",
@@ -4664,8 +4664,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj": {
-              "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\Odie.commons\\Odie.Commons.csproj"
+            "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj": {
+              "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\Odie.commons\\Odie.Commons.csproj"
             }
           }
         }
@@ -4707,7 +4707,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

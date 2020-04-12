@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Odie
+﻿namespace Odie
 {
     public class Service : IService
     {

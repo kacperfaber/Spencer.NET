@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.reflections.tests\\Odie.Reflections.Tests.csproj",
+    "projectUniqueName": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.reflections.tests\\Odie.Reflections.Tests.csproj",
     "projectName": "Odie.Reflections.Tests",
-    "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.reflections.tests\\Odie.Reflections.Tests.csproj",
-    "outputPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.reflections.tests\\obj\\",
+    "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.reflections.tests\\Odie.Reflections.Tests.csproj",
+    "outputPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.reflections.tests\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "C:\\Microsoft\\Xamarin\\NuGet",
@@ -20,8 +20,8 @@
     "frameworks": {
       "netcoreapp3.1": {
         "projectReferences": {
-          "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.reflections\\Odie.Reflections.csproj": {
-            "projectPath": "C:\\Users\\Kacpii\\Desktop\\ReadOnly\\Odie\\odie.reflections\\Odie.Reflections.csproj"
+          "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.reflections\\Odie.Reflections.csproj": {
+            "projectPath": "C:\\Users\\Kacpii\\Desktop\\Odie\\odie.reflections\\Odie.Reflections.csproj"
           }
         }
       }
@@ -63,7 +63,7 @@
           "privateAssets": "all"
         }
       },
-      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
+      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
     }
   }
 }

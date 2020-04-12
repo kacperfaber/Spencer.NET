@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Odie
+﻿namespace Odie
 {
     [MultiInstance]
     public class ModelBuilder : Builder<Model, ModelBuilder>

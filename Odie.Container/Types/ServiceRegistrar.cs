@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Odie
 {
@@ -18,7 +16,7 @@ namespace Odie
             RegistratedServicesFilter = registratedServicesFilter;
         }
 
-        public void Register(IServiceList list, IEnumerable<IService> services, IContainer container)
+        public void Register(IServiceList list, IEnumerable<IService> services, IReadOnlyContainer container)
         {
             IEnumerable<IService> filteredList = RegistratedServicesFilter.Filter(list, services);
 

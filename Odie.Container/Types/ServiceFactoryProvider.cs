@@ -11,7 +11,7 @@ namespace Odie
             InstanceCreator = instanceCreator;
         }
 
-        public IServiceFactory ProvideServiceFactory(Type @class, IContainer container)
+        public IServiceFactory ProvideServiceFactory(Type @class, IReadOnlyContainer container)
         {
             return (IServiceFactory) InstanceCreator.CreateInstance(@class, container);
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Odie
 {
@@ -17,7 +16,8 @@ namespace Odie
             ServiceGenerator = serviceGenerator;
         }
 
-        public IEnumerable<IService> GenerateServices(Type type, IAssemblyList assemblies, IContainer container, IConstructorParameters constructorParameters = null, object instance = null)
+        public IEnumerable<IService> GenerateServices(Type type, IAssemblyList assemblies, IReadOnlyContainer container,
+            IConstructorParameters constructorParameters = null, object instance = null)
         {
             if (TypeIsClassValidator.Validate(type))
             {

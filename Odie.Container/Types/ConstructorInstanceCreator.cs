@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace Odie
@@ -26,7 +25,7 @@ namespace Odie
             ParametersValuesExtractor = parametersValuesExtractor;
         }
 
-        public object CreateInstance(ServiceFlags flags, Type @class, IContainer container)
+        public object CreateInstance(ServiceFlags flags, Type @class, IReadOnlyContainer container)
         {
             IConstructor constructor = ConstructorProvider.ProvideConstructor(@class);
             IEnumerable<IParameter> parameters = ParametersGenerator.GenerateParameters(constructor, flags, container);
@@ -36,7 +35,7 @@ namespace Odie
             return instance;
         }
 
-        public object CreateInstance(Type @class, IContainer container)
+        public object CreateInstance(Type @class, IReadOnlyContainer container)
         {
             IConstructor constructor = ConstructorProvider.ProvideConstructor(@class);
             IEnumerable<IParameter> parameters = ParametersGenerator.GenerateParameters(constructor, container);

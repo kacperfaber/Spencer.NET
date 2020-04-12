@@ -1,6 +1,4 @@
-﻿using System.Runtime.ConstrainedExecution;
-
-namespace Odie
+﻿namespace Odie
 {
     public class ConstructorParametersByObjectsGenerator : IConstructorParametersByObjectsGenerator
     {

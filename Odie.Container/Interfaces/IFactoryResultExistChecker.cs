@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Odie
+﻿namespace Odie
 {
     public interface IFactoryResultExistChecker
     {

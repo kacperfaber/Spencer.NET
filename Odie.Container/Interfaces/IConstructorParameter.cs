@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-
-namespace Odie
+﻿namespace Odie
 {
     public interface IConstructorParameter : ITypedMember
     {

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace Odie
 {
@@ -14,12 +11,12 @@ namespace Odie
             CtorInstanceCreator = ctorInstanceCreator;
         }
 
-        public object CreateInstance(ServiceFlags flags, Type type, IContainer container)
+        public object CreateInstance(ServiceFlags flags, Type type, IReadOnlyContainer container)
         {
             return CtorInstanceCreator.CreateInstance(flags, type, container);
         }
 
-        public object CreateInstance(Type type, IContainer container)
+        public object CreateInstance(Type type, IReadOnlyContainer container)
         {
             return CtorInstanceCreator.CreateInstance(type, container);
         }

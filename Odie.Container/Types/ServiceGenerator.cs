@@ -23,7 +23,7 @@ namespace Odie
             FactoryInvoker = factoryInvoker;
         }
 
-        public IService GenerateService(Type @class, IContainer container, object instance = null, IConstructorParameters constructorParameters = null)
+        public IService GenerateService(Type @class, IReadOnlyContainer container, object instance = null, IConstructorParameters constructorParameters = null)
         {
             if (ClassHasFactoryChecker.HasFactory(@class))
             {

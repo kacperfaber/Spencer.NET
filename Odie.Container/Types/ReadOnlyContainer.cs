@@ -10,13 +10,19 @@ namespace Odie
         public ITypeGetter TypeGetter;
         public IServiceInstanceResolver ServiceInstanceResolver;
         public IAssemblyRegistrar AssemblyRegistrar;
+        public IServiceRegistrar ServiceRegistrar;
+        public IServicesGenerator ServicesGenerator;
 
-        public ReadOnlyContainer(IServiceFinder serviceFinder, ITypeGetter typeGetter, IServiceInstanceResolver serviceInstanceResolver, IAssemblyRegistrar assemblyRegistrar)
+        public ReadOnlyContainer(IServiceFinder serviceFinder, ITypeGetter typeGetter, IServiceInstanceResolver serviceInstanceResolver,
+            IAssemblyRegistrar assemblyRegistrar, IServiceRegistrar serviceRegistrar, IServicesGenerator servicesGenerator)
         {
             ServiceFinder = serviceFinder;
             TypeGetter = typeGetter;
             ServiceInstanceResolver = serviceInstanceResolver;
             AssemblyRegistrar = assemblyRegistrar;
+            ServiceRegistrar = serviceRegistrar;
+            ServicesGenerator = servicesGenerator;
+            
             Storage = new Storage();
         }
 
@@ -41,6 +47,37 @@ namespace Odie
                 throw new ResolveException(type);
             
             return (T) ServiceInstanceResolver.ResolveInstance(service, this);
+        }
+
+        public T ResolveOrDefault<T>()
+        {
+            Type type = TypeGetter.GetType<T>();
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
+            IService service = ServiceFinder.Find(Storage.Services, type);
+
+            if (service == null)
+            {
+                IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this);
+
+                ServiceRegistrar.Register(Storage.Services, services, this);
+            }
+            
+            return (T) ServiceInstanceResolver.ResolveInstance(service, this);
+        }
+
+        public object ResolveOrDefault(Type type)
+        {
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
+            IService service = ServiceFinder.Find(Storage.Services, type);
+
+            if (service == null)
+            {
+                IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this);
+
+                ServiceRegistrar.Register(Storage.Services, services, this);
+            }
+            
+            return ServiceInstanceResolver.ResolveInstance(service, this);
         }
 
         public IEnumerable<T> ResolveMany<T>()

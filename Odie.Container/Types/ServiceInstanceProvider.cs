@@ -11,7 +11,7 @@
             AutoValueChecker = autoValueChecker;
         }
 
-        public void ProvideInstance(IService service, IContainer container)
+        public void ProvideInstance(IService service, IReadOnlyContainer container)
         {
             if (AutoValueChecker.Check(service))
             {

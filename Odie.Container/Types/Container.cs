@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace Odie
 {
     public sealed class Container : ReadOnlyContainer, IContainer
     {
-        public IServiceRegistrar ServiceRegistrar;
         public IServicesGenerator ServicesGenerator;
         public IServiceInitializer ServiceInitializer;
         public IServiceIsAutoValueChecker ServiceIsAutoValueChecker;
@@ -16,9 +14,8 @@ namespace Odie
         public Container(IServiceRegistrar serviceRegistrar, IServicesGenerator servicesGenerator, IServiceFinder serviceFinder,
             IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker,
             ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar, IConstructorParametersByObjectsGenerator constructorParametersByObjectsGenerator,
-            IServiceInstanceResolver serviceInstanceResolver) : base(serviceFinder, typeGetter, serviceInstanceResolver, assemblyRegistrar)
+            IServiceInstanceResolver serviceInstanceResolver) : base(serviceFinder, typeGetter, serviceInstanceResolver, assemblyRegistrar, serviceRegistrar, servicesGenerator)
         {
-            ServiceRegistrar = serviceRegistrar;
             ServicesGenerator = servicesGenerator;
             ServiceFinder = serviceFinder;
             ServiceInitializer = serviceInitializer;

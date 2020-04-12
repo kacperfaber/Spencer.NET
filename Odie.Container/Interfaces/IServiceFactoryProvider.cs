@@ -4,6 +4,6 @@ namespace Odie
 {
     public interface IServiceFactoryProvider
     {
-        IServiceFactory ProvideServiceFactory(Type @class, IContainer container);
+        IServiceFactory ProvideServiceFactory(Type @class, IReadOnlyContainer container);
     }
 }
