@@ -25,7 +25,7 @@ namespace Odie.Container.Tests
         
         T exec<T>(IContainerResolver container)
         {
-            T result = container.ResolveOrDefault<T>();
+            T result = container.ResolveOrAuto<T>();
             return result;
         }
 

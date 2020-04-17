@@ -43,9 +43,19 @@ namespace Odie.Container.Tests
                 throw new NotImplementedException();
             }
 
-            public T ResolveOrDefault<T>()
+            public T ResolveOrAuto<T>()
             {
                 throw new NotImplementedException();
+            }
+
+            public object ResolveOrAuto(Type type)
+            {
+                throw new NotImplementedException();
+            }
+
+            public T ResolveOrDefault<T>()
+            {
+                throw new NotImplementedException();   
             }
 
             public object ResolveOrDefault(Type type)

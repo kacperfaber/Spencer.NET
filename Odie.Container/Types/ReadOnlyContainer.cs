@@ -49,41 +49,6 @@ namespace Odie
             return (T) ServiceInstanceResolver.ResolveInstance(service, this);
         }
 
-        public T ResolveOrDefault<T>()
-        {
-            Type type = TypeGetter.GetType<T>();
-            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
-            IService service = ServiceFinder.Find(Storage.Services, type);
-
-            if (service == null)
-            {
-                IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this);
-
-                ServiceRegistrar.Register(Storage.Services, services, this);
-
-                return (T) ServiceInstanceResolver.ResolveInstance(ServiceFinder.Find(Storage.Services, type), this);
-            }
-            
-            return (T) ServiceInstanceResolver.ResolveInstance(service, this);
-        }
-
-        public object ResolveOrDefault(Type type)
-        {
-            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
-            IService service = ServiceFinder.Find(Storage.Services, type);
-
-            if (service == null)
-            {
-                IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this);
-
-                ServiceRegistrar.Register(Storage.Services, services, this);
-
-                return ServiceInstanceResolver.ResolveInstance(ServiceFinder.Find(Storage.Services, type), this);
-            }
-            
-            return ServiceInstanceResolver.ResolveInstance(service, this);
-        }
-
         public IEnumerable<T> ResolveMany<T>()
         {
             Type type = TypeGetter.GetType<T>();
