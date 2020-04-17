@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Odie.Container.Tests
 {
@@ -23,84 +21,70 @@ namespace Odie.Container.Tests
         {
         }
         
-        T exec<T>(IContainerResolver container)
+        T exec<T>(IContainerResolver resolver)
         {
-            T result = container.ResolveOrAuto<T>();
-            return result;
+            return resolver.ResolveOrDefault<T>();
         }
 
         [Test]
         public void dont_throws_exceptions()
         {
             IContainer container = ContainerFactory.CreateContainer();
+            container.Register<TestClass>();
+            
             Assert.DoesNotThrow(() => exec<TestClass>(container));
         }
 
         [Test]
-        public void returns_not_null()
+        public void returns_null_if_target_was_not_registered_TestClass()
         {
             IContainer container = ContainerFactory.CreateContainer();
+            
+            Assert.Null(exec<TestClass>(container));
+        }
+
+        [Test]
+        public void returns_not_null_if_target_was_registered()
+        {
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<TestClass>();
+            
             Assert.NotNull(exec<TestClass>(container));
         }
 
         [Test]
-        public void returns_instanceof_TestClass_if_target_was_TestClass()
+        public void returns_same_object_if_target_was_registered_as_SingleInstance()
         {
-            IContainer container = ContainerFactory.CreateContainer();
-            TestClass test = exec<TestClass>(container);
-
-            Assert.AreEqual(typeof(TestClass), test.GetType());
-        }
-
-        [Test]
-        public void returns_type_implements_ITestClass()
-        {
-            IContainer container = ContainerFactory.CreateContainer();
-            TestClass test = exec<TestClass>(container);
+            TestClass test = new TestClass();
             
-            Assert.IsTrue(test is ITestClass);
-        }
-
-        [Test]
-        public void returns_type_was_registered_in_container()
-        {
             IContainer container = ContainerFactory.CreateContainer();
-            bool hasBefore = container.Has<TestClass>();
-            _ = exec<TestClass>(container);
-         
-            Assert.IsFalse(hasBefore);
-            Assert.IsTrue(container.Has<TestClass>());
-        }
+            container.RegisterObject(test);
 
-        [Test]
-        public void returns_type_was_registered_as_singleinstance()
-        {
-            IContainer container = ContainerFactory.CreateContainer();
-            TestClass test = exec<TestClass>(container);
-            TestClass test2 = exec<TestClass>(container);
+            TestClass resolved = exec<TestClass>(container);
             
-            Assert.AreEqual(test, test2);
+            Assert.AreEqual(test, resolved);
         }
 
         [Test]
-        public void returns_type_was_registered_if_had_attribute_MultiInstance()
+        public void returns_not_null_if_target_was_registered_as_MultiInstance()
         {
             IContainer container = ContainerFactory.CreateContainer();
-            bool hasBefore = container.Has<MultiInstance>();
-            _ = exec<MultiInstance>(container);
-         
-            Assert.IsFalse(hasBefore);
-            Assert.IsTrue(container.Has<MultiInstance>());
-        }
-        
-        [Test]
-        public void returns_type_was_registered_as_multiinstance_if_had_MultiInstance_attribute()
-        {
-            IContainer container = ContainerFactory.CreateContainer();
-            MultiInstance test = exec<MultiInstance>(container);
-            MultiInstance test2 = exec<MultiInstance>(container);
+            container.Register<MultiInstance>();
             
-            Assert.AreNotEqual(test, test2);
+            Assert.NotNull(exec<MultiInstance>(container));
+        }
+
+        [Test]
+        public void returns_another_instances_if_target_was_registered_as_MultiInstance()
+        {
+            MultiInstance multiInstance = new MultiInstance();
+            
+            IContainer container = ContainerFactory.CreateContainer();
+            container.RegisterObject(multiInstance);
+
+            MultiInstance resolved = exec<MultiInstance>(container);
+            
+            Assert.AreNotEqual(multiInstance, resolved);
         }
     }
 }
