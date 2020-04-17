@@ -23,7 +23,7 @@ namespace Odie.Container.Tests
         {
         }
         
-        T exec<T>(IReadOnlyContainer container)
+        T exec<T>(IContainerResolver container)
         {
             T result = container.ResolveOrDefault<T>();
             return result;
