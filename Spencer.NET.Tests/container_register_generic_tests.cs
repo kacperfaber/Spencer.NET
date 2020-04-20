@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Spencer.NET;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class container_register_generic_tests
     {

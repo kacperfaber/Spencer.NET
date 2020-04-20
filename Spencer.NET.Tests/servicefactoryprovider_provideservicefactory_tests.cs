@@ -1,8 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
-using Spencer.NET;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class servicefactoryprovider_provideservicefactory_tests
     {
@@ -17,11 +16,15 @@ namespace Odie.Container.Tests
         IServiceFactory exec<T>()
         {
             ServiceFactoryProvider provider = new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                new ConstructorParametersGenerator(new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(), new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(), new ParameterDefaultValueProvider()), new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ParametersValuesExtractor())));
+                new ConstructorParametersGenerator(new TypedMemberValueProvider(), new ConstructorParameterByTypeFinder(),
+                    new ServiceHasConstructorParametersChecker()),
+                new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
+                    new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(),
+                new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ParametersValuesExtractor())));
 
             return provider.ProvideServiceFactory(typeof(T), null);
         }
-        
+
         [Test]
         public void returns_not_null()
         {
@@ -41,7 +44,5 @@ namespace Odie.Container.Tests
 
             Assert.AreEqual(typeof(NotImplementedException), exception.GetType());
         }
-
-        
     }
 }

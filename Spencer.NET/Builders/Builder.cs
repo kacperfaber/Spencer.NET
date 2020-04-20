@@ -42,7 +42,7 @@
 
             return Update(x => { });
         }
-        
+
         public TBuilder If(bool condition, Func<TBuilder, TBuilder> func)
         {
             if (condition)

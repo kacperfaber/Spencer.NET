@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
 using NUnit.Framework;
-using Spencer.NET;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class defaultconstructorprovider_providedefaultconstructor_tests
     {

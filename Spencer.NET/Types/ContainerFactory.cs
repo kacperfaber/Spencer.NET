@@ -8,11 +8,7 @@ namespace Spencer.NET
 
         public static IContainer CreateContainer()
         {
-            TypedMemberValueProvider typedMemberValueProvider = new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(),
-                new TypeIsArrayChecker(), new ArrayGenerator(),
-                new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
-                new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(),
-                new ParameterDefaultValueProvider());
+            TypedMemberValueProvider typedMemberValueProvider = new TypedMemberValueProvider();
 
             InstancesCreator instancesCreator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                 new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),

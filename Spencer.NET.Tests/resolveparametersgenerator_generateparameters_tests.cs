@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using Spencer.NET;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class resolveparametersgenerator_generateparameters_tests
     {

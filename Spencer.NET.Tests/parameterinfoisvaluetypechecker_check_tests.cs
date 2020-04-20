@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
-using Spencer.NET;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class parameterinfoisvaluetypechecker_check_tests
     {

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
-using Spencer.NET;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class constructorparametersgenerator_generateparameters_constructorinfo_constructorparameters_tests
     {
@@ -60,11 +58,7 @@ namespace Odie.Container.Tests
                 }
             }
 
-            TypedMemberValueProvider typedMemberValueProvider = new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(),
-                new TypeIsArrayChecker(), new ArrayGenerator(),
-                new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
-                new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(),
-                new ParameterDefaultValueProvider());
+            TypedMemberValueProvider typedMemberValueProvider = new TypedMemberValueProvider();
             ConstructorParametersGenerator generator = new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker());
             IEnumerable<IParameter> generatedParameters = generateParameters(ctor);
 

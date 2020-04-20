@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "cXz7p9/snvKzdM3rVkV+jcu0+d83SHcU1KFMFpZUFQ+il0bs817mMQFpBckD2H7oFm5asIf8s8AgGF59n2xvvQ==",
-  "success": false,
+  "dgSpecHash": "aqEcbs2tAZhx3+Ab298VfUUG/BxreKWYl56YAXKI9BscgzB4nq4x9XRF/gQfEZfyxy3/oLrqE3gMNtnnerjmJg==",
+  "success": true,
   "projectFilePath": "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\Spencer.NET.Tests\\Spencer.NET.Tests.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.codecoverage\\16.4.0\\microsoft.codecoverage.16.4.0.nupkg.sha512",
+    "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.dotnet.internalabstractions\\1.0.0\\microsoft.dotnet.internalabstractions.1.0.0.nupkg.sha512",
-    "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.net.test.sdk\\16.4.0\\microsoft.net.test.sdk.16.4.0.nupkg.sha512",
+    "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.net.test.sdk\\16.5.0\\microsoft.net.test.sdk.16.5.0.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
-    "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.testplatform.objectmodel\\16.4.0\\microsoft.testplatform.objectmodel.16.4.0.nupkg.sha512",
-    "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.testplatform.testhost\\16.4.0\\microsoft.testplatform.testhost.16.4.0.nupkg.sha512",
+    "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.testplatform.objectmodel\\16.5.0\\microsoft.testplatform.objectmodel.16.5.0.nupkg.sha512",
+    "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.testplatform.testhost\\16.5.0\\microsoft.testplatform.testhost.16.5.0.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\microsoft.win32.registry\\4.3.0\\microsoft.win32.registry.4.3.0.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
@@ -68,15 +68,5 @@
     "C:\\Users\\Kacpii\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\odie.container\\Spencer.NET.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\odie.container\\Spencer.NET.csproj",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  "logs": []
 }

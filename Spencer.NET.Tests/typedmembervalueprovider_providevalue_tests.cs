@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
-using Spencer.NET;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class typedmembervalueprovider_providevalue_tests
     {
@@ -18,13 +17,7 @@ namespace Odie.Container.Tests
 
         object exec<T>(IContainer container)
         {
-            TypedMemberValueProvider provider = new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(),
-                new ArrayGenerator(),
-                new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
-                new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(),
-                new ParameterDefaultValueProvider());
-
-
+            TypedMemberValueProvider provider = new TypedMemberValueProvider();
             return provider.ProvideValue(typeof(T), container);
         }
 

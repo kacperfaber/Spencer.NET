@@ -32,9 +32,6 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\odie.container\\Spencer.NET.csproj": {
-                "projectPath": "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\odie.container\\Spencer.NET.csproj"
-              },
               "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\Spencer.NET\\Spencer.NET.csproj": {
                 "projectPath": "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\Spencer.NET\\Spencer.NET.csproj"
               }
@@ -52,7 +49,7 @@
           "dependencies": {
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[16.4.0, )"
+              "version": "[16.5.0, )"
             },
             "NUnit3TestAdapter": {
               "target": "Package",

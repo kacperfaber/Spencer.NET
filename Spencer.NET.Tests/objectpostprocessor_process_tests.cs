@@ -1,9 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
-using Spencer.NET;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class objectpostprocessor_process_tests
     {
@@ -49,11 +47,8 @@ namespace Odie.Container.Tests
             object instance = Activator.CreateInstance<T>();
 
             ObjectPostProcessor postProcessor = new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
-                new MemberValuesInjector(new MemberValueSetter(),
-                    new TypedMemberValueProvider(new TypeIsValueTypeChecker(), new ValueTypeActivator(), new TypeIsArrayChecker(), new ArrayGenerator(),
-                        new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
-                        new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new ParameterHasDefaultValueChecker(),
-                        new ParameterDefaultValueProvider()), new InjectFlagsProvider(), new MemberDeclarationTypeProvider()));
+                new MemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
+                    new MemberDeclarationTypeProvider()));
             
             postProcessor.Process(instance, service, container);
 

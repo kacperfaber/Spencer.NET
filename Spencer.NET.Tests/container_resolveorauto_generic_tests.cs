@@ -1,9 +1,6 @@
-﻿using System;
-using System.Reflection;
-using NUnit.Framework;
-using Spencer.NET;
+﻿using NUnit.Framework;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class container_resolveorauto_generic_tests
     {

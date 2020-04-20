@@ -1,8 +1,6 @@
-﻿using System;
-using NUnit.Framework;
-using Spencer.NET;
+﻿using NUnit.Framework;
 
-namespace Odie.Container.Tests
+namespace Spencer.NET.Tests
 {
     public class typeisarraychecker_check_tests
     {

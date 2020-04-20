@@ -1,0 +1,9 @@
+C:\Users\Kacpii\Desktop\Spencer.NET\Spencer.NET\bin\Debug\netstandard2.0\Spencer.NET.deps.json
+C:\Users\Kacpii\Desktop\Spencer.NET\Spencer.NET\bin\Debug\netstandard2.0\Spencer.NET.dll
+C:\Users\Kacpii\Desktop\Spencer.NET\Spencer.NET\bin\Debug\netstandard2.0\Spencer.NET.pdb
+C:\Users\Kacpii\Desktop\Spencer.NET\Spencer.NET\obj\Debug\netstandard2.0\Spencer.NET.csprojAssemblyReference.cache
+C:\Users\Kacpii\Desktop\Spencer.NET\Spencer.NET\obj\Debug\netstandard2.0\Spencer.NET.csproj.CoreCompileInputs.cache
+C:\Users\Kacpii\Desktop\Spencer.NET\Spencer.NET\obj\Debug\netstandard2.0\Spencer.NET.AssemblyInfoInputs.cache
+C:\Users\Kacpii\Desktop\Spencer.NET\Spencer.NET\obj\Debug\netstandard2.0\Spencer.NET.AssemblyInfo.cs
+C:\Users\Kacpii\Desktop\Spencer.NET\Spencer.NET\obj\Debug\netstandard2.0\Spencer.NET.dll
+C:\Users\Kacpii\Desktop\Spencer.NET\Spencer.NET\obj\Debug\netstandard2.0\Spencer.NET.pdb
