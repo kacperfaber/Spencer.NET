@@ -56,7 +56,7 @@ namespace Spencer.NET
                                 new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
                                     new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))))),
                         new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
-                            new MemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
+                            new InjectMemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
                                 new MemberDeclarationTypeProvider()))), new ServiceInstanceSetter()),
                 new TypeExisterChecker(new ServiceFinder(new TypeContainsGenericParametersChecker(),
                     new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()),
@@ -84,7 +84,7 @@ namespace Spencer.NET
                                 new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
                                     new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))))),
                         new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
-                            new MemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
+                            new InjectMemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
                                 new MemberDeclarationTypeProvider()))), new ServiceHasToInitializeChecker(new AlwaysNewChecker())));
         }
     }

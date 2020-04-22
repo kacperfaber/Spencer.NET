@@ -47,7 +47,7 @@ namespace Spencer.NET.Tests
             object instance = Activator.CreateInstance<T>();
 
             ObjectPostProcessor postProcessor = new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
-                new MemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
+                new InjectMemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
                     new MemberDeclarationTypeProvider()));
             
             postProcessor.Process(instance, service, container);

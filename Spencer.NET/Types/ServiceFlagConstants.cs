@@ -2,6 +2,8 @@
 {
     public class ServiceFlagConstants
     {
+        public const string TryInject = "try_inject";
+        public const string Auto = "auto";
         public const string Instance = "singleton_instance";
         public const string MultiInstance = "multi_instance";
         public const string AutoValue = "auto_value";

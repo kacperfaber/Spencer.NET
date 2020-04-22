@@ -8,6 +8,7 @@ namespace Spencer.NET.Tests
 
         bool exec(Type type, Type assignableTo)
         {
+            int x = 0;
             return new AssignableChecker().Check(type, assignableTo);
         }
 
