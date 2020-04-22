@@ -7,9 +7,5 @@ namespace Spencer.NET
         T ResolveOrAuto<T>();
         
         object ResolveOrAuto(Type type);
-
-        T ResolveOrDefault<T>();
-
-        object ResolveOrDefault(Type type);
     }
 }
