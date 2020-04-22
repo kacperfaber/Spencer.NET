@@ -1,5 +1,4 @@
 ﻿using System;
-using Spencer.NET.Exceptions;
 
 namespace Spencer.NET
 {
