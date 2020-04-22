@@ -82,7 +82,7 @@ namespace Spencer.NET
         {
             AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
 
-            return ServiceFinder.Find(Storage.Services, TypeGetter.GetType(type)) != null;
+            return ServiceFinder.Find(Storage.Services, type) != null;
         }
 
         public virtual IStorage Storage { get; set; }
