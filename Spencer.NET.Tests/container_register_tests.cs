@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Spencer.NET.Tests
@@ -9,12 +10,22 @@ namespace Spencer.NET.Tests
         {
         }
 
+        class Animal
+        {
+        }
+
         class Pet
         {
         }
 
         class TestClass : ITestClass
         {
+            [TryInject]
+            public Animal Animal { get; set; }
+
+            [Auto]
+            public IEnumerable<int> Ints { get; set; }
+
             [Inject]
             public Pet Pet { get; set; }
         }
@@ -52,7 +63,7 @@ namespace Spencer.NET.Tests
         {
             Type type = typeof(TestClass);
             IContainer container = ContainerFactory.CreateContainer();
-            
+
             exec(container, type);
 
             Assert.Throws<InjectException>(() => container.Resolve(typeof(TestClass)));
@@ -87,10 +98,85 @@ namespace Spencer.NET.Tests
         {
             Type type = typeof(TestClass);
             IContainer container = ContainerFactory.CreateContainer();
-            
+
             exec(container, type);
 
             Assert.That(() => container.Resolve(typeof(TestClass)), Throws.Exception);
+        }
+
+        [Test]
+        public void container_resolve_has_not_null_Auto_Ints_property()
+        {
+            Type type = typeof(TestClass);
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<Pet>();
+
+            exec(container, type);
+
+            Assert.NotNull(container.Resolve<TestClass>().Ints);
+        }
+
+        [Test]
+        public void container_resolve_has_empty_Auto_Ints_property()
+        {
+            Type type = typeof(TestClass);
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<Pet>();
+
+            exec(container, type);
+
+            Assert.IsEmpty(container.Resolve<TestClass>().Ints);
+        }
+
+        [Test]
+        public void container_resolve_dont_throws_if_TryInject_was_not_registered()
+        {
+            Type type = typeof(TestClass);
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register(typeof(Pet));
+
+            exec(container, type);
+
+            Assert.DoesNotThrow(() => { _ = container.Resolve<TestClass>(); });
+        }
+
+        [Test]
+        public void container_resolve_has_null_TryInject_if_he_wasnt_registered()
+        {
+            Type type = typeof(TestClass);
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<Pet>();
+
+            exec(container, type);
+
+            Assert.Null(container.Resolve<TestClass>().Animal);
+        }
+
+        [Test]
+        public void container_resolve_has_not_null_TryInject_if_he_was_registered()
+        {
+            Type type = typeof(TestClass);
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<Pet>();
+            container.Register(typeof(Animal));
+
+            exec(container, type);
+
+            Assert.NotNull(container.Resolve<TestClass>().Animal);
+        }
+
+        [Test]
+        public void container_resolve_has_equals_TryInject_if_he_was_registered()
+        {
+            Animal animal = new Animal();
+            Type type = typeof(TestClass);
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<Pet>();
+            container.RegisterObject(animal);
+
+            exec(container, type);
+
+            Assert.AreEqual(animal, container.Resolve<TestClass>().Animal);
         }
     }
 }

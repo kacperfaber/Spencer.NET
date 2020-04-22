@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Spencer.NET.Tests
@@ -58,6 +59,36 @@ namespace Spencer.NET.Tests
             container.Register<HelloWorld>();
 
             Console.WriteLine(HelloWorld.Instance.Name);
+        }
+
+        class Test2
+        {
+        }
+
+        class Test1
+        {
+        }
+
+        class TestClass
+        {
+            [Inject]
+            public Test2 Inject { get; set; }
+            
+            [TryInject]
+            public Test1 TryInject { get; set; }
+
+            [Auto]
+            public IEnumerable<Test1> Tests { get; set; }
+        }
+
+        [Test]
+        public void auto_and_inject()
+        {
+            IContainer container = ContainerFactory.CreateContainer();
+            container.Register<Test2>();
+            container.Register<TestClass>();
+
+            TestClass testClass = container.Resolve<TestClass>();
         }
     }
 }
