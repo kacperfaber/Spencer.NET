@@ -6,6 +6,15 @@ namespace Spencer.NET.Tests
 {
     public class container_register_generic_tests
     {
+        [Test]
+        public void dont_throws_exceptions_when_container_trying_to_resolve_AutoValue_by_generic_class()
+        {
+            IContainer container = ContainerFactory.CreateContainer();
+            exec<AutoValue>(container);
+
+            Assert.DoesNotThrow(() => container.Resolve<AutoValue>());
+        }
+
         interface ITest
         {
         }
@@ -89,12 +98,10 @@ namespace Spencer.NET.Tests
         }
 
         [Test]
-        public void dont_throws_exceptions_when_container_trying_to_resolve_AutoValue_by_generic_class()
+        public void dont_throws_when_trying_to_register_type_implemented_generic_interface()
         {
             IContainer container = ContainerFactory.CreateContainer();
-            exec<AutoValue>(container);
-
-            Assert.DoesNotThrow(() => container.Resolve<AutoValue>());
+            Assert.DoesNotThrow(() => exec<Generic>(container));
         }
 
         [Test]
@@ -104,13 +111,6 @@ namespace Spencer.NET.Tests
             exec<AutoValue>(container);
 
             Assert.DoesNotThrow(() => container.Resolve(typeof(AutoValue)));
-        }
-
-        [Test]
-        public void dont_throws_when_trying_to_register_type_implemented_generic_interface()
-        {
-            IContainer container = ContainerFactory.CreateContainer();
-            Assert.DoesNotThrow(() => exec<Generic>(container));
         }
     }
 }

@@ -7,10 +7,11 @@
         public IAutoMemberValuesInjector AutoMemberValuesInjector;
         public ITryInjectMemberValuesInjector TryInjectMemberValuesInjector;
         
-        public ObjectPostProcessor(IInstanceMembersValueInjector instanceMembersValueInjector, IInjectMemberValuesInjector injectMemberValuesInjector)
+        public ObjectPostProcessor(IInstanceMembersValueInjector instanceMembersValueInjector, IInjectMemberValuesInjector injectMemberValuesInjector, ITryInjectMemberValuesInjector tryInjectMemberValuesInjector)
         {
             InstanceMembersValueInjector = instanceMembersValueInjector;
             InjectMemberValuesInjector = injectMemberValuesInjector;
+            TryInjectMemberValuesInjector = tryInjectMemberValuesInjector;
         }
 
         public void Process(object instance, IService service, IReadOnlyContainer container)

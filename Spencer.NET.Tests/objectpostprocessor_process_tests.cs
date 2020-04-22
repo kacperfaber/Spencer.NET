@@ -48,8 +48,10 @@ namespace Spencer.NET.Tests
 
             ObjectPostProcessor postProcessor = new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
                 new InjectMemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
-                    new MemberDeclarationTypeProvider()));
-            
+                    new MemberDeclarationTypeProvider()),
+                new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(), new TypedMemberValueProvider(),
+                    new MemberValueSetter()));
+
             postProcessor.Process(instance, service, container);
 
             return (T) instance;
@@ -60,7 +62,7 @@ namespace Spencer.NET.Tests
         {
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<Pet>();
-            
+
             Assert.DoesNotThrow(() => exec<TestClass>(container));
         }
 
@@ -69,7 +71,7 @@ namespace Spencer.NET.Tests
         {
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<Pet>();
-            
+
             Assert.NotNull(exec<TestClass>(container));
         }
 
@@ -120,7 +122,7 @@ namespace Spencer.NET.Tests
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<Pet>();
             container.Register<TestClass>();
-            
+
             exec<TestClass>(container);
 
             Assert.NotNull(TestClass.Instance);
@@ -132,7 +134,7 @@ namespace Spencer.NET.Tests
             IContainer container = ContainerFactory.CreateContainer();
             container.Register<Pet>();
             container.Register<TestClass>();
-            
+
             TestClass excepted = exec<TestClass>(container);
 
             Assert.AreEqual(excepted, TestClass.Instance);

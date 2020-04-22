@@ -57,7 +57,9 @@ namespace Spencer.NET
                                     new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))))),
                         new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
                             new InjectMemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
-                                new MemberDeclarationTypeProvider()))), new ServiceInstanceSetter()),
+                                new MemberDeclarationTypeProvider()),
+                            new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(), typedMemberValueProvider,
+                                new MemberValueSetter()))), new ServiceInstanceSetter()),
                 new TypeExisterChecker(new ServiceFinder(new TypeContainsGenericParametersChecker(),
                     new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()),
                         new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()))),
@@ -85,7 +87,9 @@ namespace Spencer.NET
                                     new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))))),
                         new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
                             new InjectMemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
-                                new MemberDeclarationTypeProvider()))), new ServiceHasToInitializeChecker(new AlwaysNewChecker())));
+                                new MemberDeclarationTypeProvider()),
+                            new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(), typedMemberValueProvider,
+                                new MemberValueSetter()))), new ServiceHasToInitializeChecker(new AlwaysNewChecker())));
         }
     }
 }
