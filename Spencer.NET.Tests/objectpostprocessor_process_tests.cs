@@ -50,7 +50,12 @@ namespace Spencer.NET.Tests
                 new InjectMemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
                     new MemberDeclarationTypeProvider()),
                 new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(), new TypedMemberValueProvider(),
-                    new MemberValueSetter()));
+                    new MemberValueSetter()),
+                new AutoMemberValuesInjector(new MemberDeclarationTypeProvider(), new ServiceAttributeProvider(),
+                    new AutoValueGenerator(
+                        new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
+                        new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new TypeIsArrayChecker(),
+                        new ArrayGenerator(), new TypeIsValueTypeChecker(), new ValueTypeActivator()), new MemberValueSetter()));
 
             postProcessor.Process(instance, service, container);
 
