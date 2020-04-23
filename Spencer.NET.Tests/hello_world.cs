@@ -43,7 +43,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Odie>();
             container.Register<HelloWorld>();
             container.Register<hello_world>();
@@ -54,7 +54,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void rrr()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<HelloWorld>();
 
             Console.WriteLine(HelloWorld.Instance.Name);

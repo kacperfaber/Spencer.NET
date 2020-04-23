@@ -24,7 +24,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Odie>();
             container.Register<TestClass>();
             
@@ -34,7 +34,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_not_null()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Odie>();
             container.Register<TestClass>();
 

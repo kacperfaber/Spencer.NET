@@ -53,7 +53,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void ret()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register(GetType());
         }
     }

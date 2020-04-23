@@ -13,7 +13,7 @@ namespace Spencer.NET
         public IServiceRegistrar ServiceRegistrar;
         public IServicesGenerator ServicesGenerator;
 
-        public ReadOnlyContainer(IServiceFinder serviceFinder, ITypeGetter typeGetter, IServiceInstanceResolver serviceInstanceResolver,
+        public ReadOnlyContainer(IStorage storage, IServiceFinder serviceFinder, ITypeGetter typeGetter, IServiceInstanceResolver serviceInstanceResolver,
             IAssemblyRegistrar assemblyRegistrar, IServiceRegistrar serviceRegistrar, IServicesGenerator servicesGenerator)
         {
             ServiceFinder = serviceFinder;

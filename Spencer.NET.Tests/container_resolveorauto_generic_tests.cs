@@ -30,21 +30,21 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             Assert.DoesNotThrow(() => exec<TestClass>(container));
         }
 
         [Test]
         public void returns_not_null()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             Assert.NotNull(exec<TestClass>(container));
         }
 
         [Test]
         public void returns_instanceof_TestClass_if_target_was_TestClass()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             TestClass test = exec<TestClass>(container);
 
             Assert.AreEqual(typeof(TestClass), test.GetType());
@@ -53,7 +53,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_type_implements_ITestClass()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             TestClass test = exec<TestClass>(container);
             
             Assert.IsTrue(test is ITestClass);
@@ -62,7 +62,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_type_was_registered_in_container()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             bool hasBefore = container.Has<TestClass>();
             _ = exec<TestClass>(container);
          
@@ -73,7 +73,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_type_was_registered_as_singleinstance()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             TestClass test = exec<TestClass>(container);
             TestClass test2 = exec<TestClass>(container);
             
@@ -83,7 +83,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_type_was_registered_if_had_attribute_MultiInstance()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             bool hasBefore = container.Has<MultiInstance>();
             _ = exec<MultiInstance>(container);
          
@@ -94,7 +94,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_type_was_registered_as_multiinstance_if_had_MultiInstance_attribute()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             MultiInstance test = exec<MultiInstance>(container);
             MultiInstance test2 = exec<MultiInstance>(container);
             

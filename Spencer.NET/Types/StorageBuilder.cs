@@ -4,13 +4,13 @@ using System.Reflection;
 
 namespace Spencer.NET
 {
-    public class StorageBuilder : Builder<Storage, StorageBuilder, IStorage>
+    public class StorageBuilder : Builder<Storage, StorageBuilder, IStorage>, IDisposable
     {
         private IServicesGenerator ServicesGenerator;
         private IServiceRegistrar ServiceRegistrar;
         private IAssemblyRegistrar AssemblyRegistrar;
 
-        public StorageBuilder()
+        public StorageBuilder(Storage storage = null) : base(storage)
         {
             ServicesGenerator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
                 new ServiceGenerator(
@@ -147,6 +147,10 @@ namespace Spencer.NET
                     }
                 }
             });
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

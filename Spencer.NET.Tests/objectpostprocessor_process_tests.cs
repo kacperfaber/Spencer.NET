@@ -58,7 +58,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
             
             Assert.DoesNotThrow(() => exec<TestClass>(container));
@@ -67,7 +67,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_not_null()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
             
             Assert.NotNull(exec<TestClass>(container));
@@ -76,7 +76,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_pet_with_inject_flags_not_null()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
 
             Assert.NotNull(exec<TestClass>(container).Pet);
@@ -85,7 +85,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_pet_with_inject_flag_typeof_Pet()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
 
             Assert.IsTrue(exec<TestClass>(container).Pet is Pet);
@@ -94,7 +94,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_pet_with_inject_flag_has_null_name()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
 
             Assert.IsNull(exec<TestClass>(container).Pet.Name);
@@ -105,7 +105,7 @@ namespace Spencer.NET.Tests
         [TestCase("tobis")]
         public void returns_gived_pet_name_if_pet_was_registered_before_using_constructorparameters(string petName)
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>(petName);
             container.Register<TestClass>();
 
@@ -117,7 +117,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void TestClass_Instance_are_not_null_after_invoke_exec_method()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
             container.Register<TestClass>();
             
@@ -129,7 +129,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void TestClass_Instance_are_equal_to_the_resolved_from_container()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
             container.Register<TestClass>();
             

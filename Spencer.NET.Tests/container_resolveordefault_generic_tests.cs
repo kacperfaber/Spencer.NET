@@ -29,7 +29,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<TestClass>();
             
             Assert.DoesNotThrow(() => exec<TestClass>(container));
@@ -38,7 +38,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_null_if_target_was_not_registered_TestClass()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             
             Assert.Null(exec<TestClass>(container));
         }
@@ -46,7 +46,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_not_null_if_target_was_registered()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<TestClass>();
             
             Assert.NotNull(exec<TestClass>(container));
@@ -57,7 +57,7 @@ namespace Spencer.NET.Tests
         {
             TestClass test = new TestClass();
             
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.RegisterObject(test);
 
             TestClass resolved = exec<TestClass>(container);
@@ -68,7 +68,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_not_null_if_target_was_registered_as_MultiInstance()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<MultiInstance>();
             
             Assert.NotNull(exec<MultiInstance>(container));
@@ -79,7 +79,7 @@ namespace Spencer.NET.Tests
         {
             MultiInstance multiInstance = new MultiInstance();
             
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.RegisterObject(multiInstance);
 
             MultiInstance resolved = exec<MultiInstance>(container);

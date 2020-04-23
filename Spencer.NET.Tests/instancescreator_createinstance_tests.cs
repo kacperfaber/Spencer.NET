@@ -150,7 +150,7 @@ namespace Spencer.NET.Tests
 
             InstancesCreator creator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(typedMemberValueProvider,new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ParametersValuesExtractor()));
 
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<T>();
             container.Register<Dep1>();
             container.Register<TestClass>();

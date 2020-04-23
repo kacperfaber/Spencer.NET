@@ -36,7 +36,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions_when_gived_was_AutoValue()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
 
             Assert.DoesNotThrow(() => exec<AutoValue>(container));
         }
@@ -44,7 +44,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void container_storage_services_will_be_has_not_null_instance_if_registered_was_AutoValue()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
 
             exec<AutoValue>(container);
 
@@ -56,7 +56,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void container_storage_services_lenght_willnt_be_equals_to_before()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             List<IService> services = container.Storage.Services.GetServices();
 
             int after = services.Count();
@@ -71,7 +71,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void container_storage_services_contains_not_empty_interfaces_list_when_gived_is_AutoValue()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             exec<AutoValue>(container);
 
             IService service = container.Storage.Services.GetServices().FirstOrDefault(x => x.Registration.TargetType == typeof(AutoValue));
@@ -82,7 +82,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void container_can_resolve_AutoValue_class_with_not_null_value()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             exec<AutoValue>(container);
             
             Assert.NotNull(container.Resolve<AutoValue>());
@@ -91,7 +91,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions_when_container_trying_to_resolve_AutoValue_by_generic_class()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             exec<AutoValue>(container);
 
             Assert.DoesNotThrow(() => container.Resolve<AutoValue>());
@@ -100,7 +100,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions_when_container_trying_to_resolve_AutoValue_by_typeof_class()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             exec<AutoValue>(container);
 
             Assert.DoesNotThrow(() => container.Resolve(typeof(AutoValue)));
@@ -109,7 +109,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_when_trying_to_register_type_implemented_generic_interface()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             Assert.DoesNotThrow(() => exec<Generic>(container));
         }
     }

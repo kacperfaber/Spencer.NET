@@ -10,10 +10,10 @@ namespace Spencer.NET
         public IServiceIsAutoValueChecker ServiceIsAutoValueChecker;
         public IConstructorParametersByObjectsGenerator ConstructorParametersByObjectsGenerator;
 
-        public Container(IServiceRegistrar serviceRegistrar, IServicesGenerator servicesGenerator, IServiceFinder serviceFinder,
+        public Container(IStorage storage, IServiceRegistrar serviceRegistrar, IServicesGenerator servicesGenerator, IServiceFinder serviceFinder,
             IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker,
             ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar, IConstructorParametersByObjectsGenerator constructorParametersByObjectsGenerator,
-            IServiceInstanceResolver serviceInstanceResolver) : base(serviceFinder, typeGetter, serviceInstanceResolver, assemblyRegistrar, serviceRegistrar, servicesGenerator)
+            IServiceInstanceResolver serviceInstanceResolver) : base(storage, serviceFinder, typeGetter, serviceInstanceResolver, assemblyRegistrar, serviceRegistrar, servicesGenerator)
         {
             ServicesGenerator = servicesGenerator;
             ServiceFinder = serviceFinder;
@@ -23,8 +23,6 @@ namespace Spencer.NET
             TypeGetter = typeGetter;
             AssemblyRegistrar = assemblyRegistrar;
             ServiceInstanceResolver = serviceInstanceResolver;
-
-            Storage = new Storage();
         }
 
         public void Register(Type type)
