@@ -18,7 +18,7 @@ namespace Spencer.NET.Tests
             MethodInfo[] methods = typeof(test).GetMethods();
             ParameterInfo[] parameters = methods.Single(x => x.ReturnType == typeof(void) && x.Name == "hello").GetParameters();
             ParameterInfo parameterInfo = parameters.Single(x => x.Name == name);
-            Parameter parameter = new ParameterBuilder()
+            IParameter parameter = new ParameterBuilder()
                 .AddType(parameterInfo.ParameterType)
                 .AddDefaultValue(parameterInfo.DefaultValue)
                 .HasDefaultValue(parameterInfo.HasDefaultValue)

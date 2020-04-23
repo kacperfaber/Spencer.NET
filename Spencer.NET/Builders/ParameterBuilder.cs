@@ -2,7 +2,7 @@
 
 namespace Spencer.NET
 {
-    public class ParameterBuilder : Builder<Parameter, ParameterBuilder>, IDisposable
+    public class ParameterBuilder : Builder<Parameter, ParameterBuilder, IParameter>, IDisposable
     {
         public ParameterBuilder(Parameter model = null) : base(model)
         {

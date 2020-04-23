@@ -2,7 +2,7 @@
 
 namespace Spencer.NET
 {
-    public class ServiceDataBuilder : Builder<ServiceData, ServiceDataBuilder>, IDisposable
+    public class ServiceDataBuilder : Builder<ServiceData, ServiceDataBuilder, IServiceData>, IDisposable
     {
         public ServiceDataBuilder(ServiceData model = null) : base(model)
         {

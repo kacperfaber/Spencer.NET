@@ -4,14 +4,13 @@ namespace Spencer.NET.Tests
 {
     public class servicehastonitializechecker_check_tests
     {
-
         bool exec(bool singleInstance, object instance)
         {
-            ServiceData serviceDataBuilder = new ServiceDataBuilder()
+            IServiceData serviceDataBuilder = new ServiceDataBuilder()
                 .AddInstance(instance)
                 .Build();
 
-            Service service = new ServiceBuilder()
+            IService service = new ServiceBuilder()
                 .AddData(serviceDataBuilder)
                 .AddFlag(singleInstance ? ServiceFlagConstants.SingleInstance : ServiceFlagConstants.MultiInstance, null)
                 .AddRegistration(null)

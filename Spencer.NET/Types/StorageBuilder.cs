@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Spencer.NET
 {
-    public class StorageBuilder : Builder<Storage, StorageBuilder>
+    public class StorageBuilder : Builder<Storage, StorageBuilder, IStorage>
     {
         public IServicesGenerator ServicesGenerator;
         public IServiceRegistrar ServiceRegistrar;

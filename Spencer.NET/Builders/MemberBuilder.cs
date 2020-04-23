@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Spencer.NET
 {
-    public class MemberBuilder : Builder<Member, MemberBuilder>, IDisposable
+    public class MemberBuilder : Builder<Member, MemberBuilder, IMember>, IDisposable
     {
         public MemberBuilder(Member model = null) : base(model)
         {

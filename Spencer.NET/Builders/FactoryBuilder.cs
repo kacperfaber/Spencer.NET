@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Spencer.NET
 {
-    public class FactoryBuilder : Builder<Factory, FactoryBuilder>, IDisposable
+    public class FactoryBuilder : Builder<Factory, FactoryBuilder, IFactory>, IDisposable
     {
         public FactoryBuilder(Factory model = null) : base(model)
         {

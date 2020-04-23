@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Spencer.NET
 {
-    public class InterfaceBuilder : Builder<Interface, InterfaceBuilder>, IDisposable
+    public class InterfaceBuilder : Builder<Interface, InterfaceBuilder, IInterface>, IDisposable
     {
         public InterfaceBuilder(Interface o = default) : base(o)
         {

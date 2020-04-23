@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Spencer.NET
 {
-    public class ServiceBuilder : Builder<Service, ServiceBuilder>, IDisposable
+    public class ServiceBuilder : Builder<Service, ServiceBuilder, IService>, IDisposable
     {
         public ServiceBuilder(Service o = null) : base(o)
         {

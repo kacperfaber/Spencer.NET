@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Spencer.NET
 {
-    public class ConstructorBuilder : Builder<Constructor, ConstructorBuilder>
+    public class ConstructorBuilder : Builder<Constructor, ConstructorBuilder, IConstructor>
     {
         public ConstructorBuilder(Constructor o = default) : base(o)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Spencer.NET
 {
-    public class ServiceInfoBuilder : Builder<ServiceInfo, ServiceInfoBuilder>
+    public class ServiceInfoBuilder : Builder<ServiceInfo, ServiceInfoBuilder, IServiceInfo>
     {
         public ServiceInfoBuilder(ServiceInfo o = default) : base(o)
         {

@@ -8,7 +8,7 @@ namespace Spencer.NET
         {
             ServiceInfoBuilder builder = new ServiceInfoBuilder();
 
-            return builder
+            return (ServiceInfo) builder
                 .AddClass(type.IsClass)
                 .AddInterface(type.IsInterface)
                 .Build();

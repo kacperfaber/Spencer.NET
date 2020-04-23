@@ -2,7 +2,7 @@
 
  namespace Spencer.NET
 {
-    public partial class Builder<TOut, TBuilder>
+    public partial class Builder<TOut, TBuilder, TBuildOutput> where TOut : TBuildOutput
     {
         public TOut Object;
 
@@ -53,7 +53,7 @@
             return Update(_ => { });
         }
 
-        public virtual TOut Build()
+        public virtual TBuildOutput Build()
         {
             return Object;
         }

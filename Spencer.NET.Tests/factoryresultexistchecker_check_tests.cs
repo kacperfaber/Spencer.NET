@@ -19,7 +19,7 @@ namespace Spencer.NET.Tests
 
         bool exec(string name)
         {
-            Member member = new MemberBuilder()
+            IMember member = new MemberBuilder()
                 .AddMemberInfo(typeof(TestClass).GetMembers().Where(x => x.Name.ToLower() == name.ToLower()).First())
                 .Build();
 

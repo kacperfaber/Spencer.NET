@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Spencer.NET
 {
-    public class ServiceGenericRegistrationBuilder : Builder<ServiceGenericRegistration, ServiceGenericRegistrationBuilder>
+    public class ServiceGenericRegistrationBuilder : Builder<ServiceGenericRegistration, ServiceGenericRegistrationBuilder, IServiceGenericRegistration>
     {
         public ServiceGenericRegistrationBuilder(ServiceGenericRegistration o = default) : base(o)
         {

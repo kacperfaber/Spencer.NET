@@ -30,7 +30,7 @@ namespace Spencer.NET.Tests
 
         T exec<T>(IReadOnlyContainer container)
         {
-            ServiceRegistration serviceRegistration = new ServiceRegistrationBuilder()
+            IServiceRegistration serviceRegistration = new ServiceRegistrationBuilder()
                 .AddType(typeof(T))
                 .AddBaseType(typeof(T).BaseType)
                 .AddGenericRegistration(new ServiceGenericRegistration() {HasGenericParameters = false})
@@ -38,7 +38,7 @@ namespace Spencer.NET.Tests
 
             ServiceFlags flags = new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())).ProvideFlags(typeof(T));
 
-            Service service = new ServiceBuilder()
+            IService service = new ServiceBuilder()
                 .AddRegistration(serviceRegistration)
                 .AddFlags(flags)
                 .AddInfo(null)

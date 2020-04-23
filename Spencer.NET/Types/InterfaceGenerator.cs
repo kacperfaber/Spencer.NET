@@ -15,7 +15,7 @@ namespace Spencer.NET
 
         public IInterface GenerateInterface(Type type)
         {
-            Interface @interface = new InterfaceBuilder()
+            IInterface @interface = new InterfaceBuilder()
                 .AddType(type)
                 .AddGenericParameters(GenericParametersProvider.ProvideGenericTypes(type))
                 .HasGenericArguments(TypeContainsGenericParametersChecker.Check(type))
