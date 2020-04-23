@@ -9,5 +9,7 @@ namespace Spencer.NET
         object CreateInstance(Type @class, IReadOnlyContainer container);
         
         object CreateInstance(Type @class, IConstructorParameters constructorParameters);
+        
+        object CreateInstance(Type @class);
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IServiceInstanceProvider
     {
-        void ProvideInstance(IService service, IReadOnlyContainer container);
+        void ProvideInstance(IService service);
     }
 }

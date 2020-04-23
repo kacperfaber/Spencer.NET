@@ -11,11 +11,11 @@
             AutoValueChecker = autoValueChecker;
         }
 
-        public void ProvideInstance(IService service, IReadOnlyContainer container)
+        public void ProvideInstance(IService service)
         {
             if (AutoValueChecker.Check(service))
             {
-                service.Data.Instance = InstanceCreator.CreateInstance(service.Flags, service.Registration.TargetType, container);
+                service.Data.Instance = InstanceCreator.CreateInstance(service.Registration.TargetType);
             }
 
             else if (!AutoValueChecker.Check(service))

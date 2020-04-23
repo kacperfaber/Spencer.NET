@@ -11,6 +11,11 @@ namespace Spencer.NET
             CtorInstanceCreator = ctorInstanceCreator;
         }
 
+        public object CreateInstance(Type @class)
+        {
+            return CtorInstanceCreator.CreateInstance(@class);
+        }
+
         public object CreateInstance(ServiceFlags flags, Type type, IReadOnlyContainer container)
         {
             return CtorInstanceCreator.CreateInstance(flags, type, container);

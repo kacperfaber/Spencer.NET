@@ -11,5 +11,6 @@ namespace Spencer.NET
         IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IConstructorParameters constructorParameters);
 
         IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IService service, IReadOnlyContainer container);
+        IEnumerable<object> GenerateParameterValues(IConstructor constructor, IConstructorInstanceCreator instanceCreator);
     }
 }

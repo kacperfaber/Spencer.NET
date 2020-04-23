@@ -41,7 +41,7 @@ namespace Spencer.NET
                 }
             }
 
-            ServiceRegistrar.Register(Storage.Services, services, this);
+            ServiceRegistrar.Register(Storage.Services, services);
         }
 
         public void RegisterObject(object instance)
@@ -50,7 +50,7 @@ namespace Spencer.NET
             AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
 
             IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, null, null, instance);
-            ServiceRegistrar.Register(Storage.Services, services, this);
+            ServiceRegistrar.Register(Storage.Services, services);
         }
 
         public void RegisterObject<TKey>(object instance)
@@ -59,14 +59,14 @@ namespace Spencer.NET
             AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
 
             IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, null, null, instance);
-            ServiceRegistrar.Register(Storage.Services, services, this);
+            ServiceRegistrar.Register(Storage.Services, services);
         }
 
         public void RegisterObject(object instance, Type targetType)
         {
             AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, targetType);
             IEnumerable<IService> services = ServicesGenerator.GenerateServices(targetType, Storage.Assemblies, null, null, instance);
-            ServiceRegistrar.Register(Storage.Services, services, this);
+            ServiceRegistrar.Register(Storage.Services, services);
         }
 
         public void RegisterAssembly(Assembly assembly)
@@ -75,7 +75,7 @@ namespace Spencer.NET
 
             foreach (Type type in assembly.GetTypes())
             {
-                ServiceRegistrar.Register(Storage.Services, ServicesGenerator.GenerateServices(type, Storage.Assemblies, null), this);
+                ServiceRegistrar.Register(Storage.Services, ServicesGenerator.GenerateServices(type, Storage.Assemblies, null));
             }
         }
 
@@ -86,7 +86,7 @@ namespace Spencer.NET
 
             foreach (Type type in tType.Assembly.GetTypes())
             {
-                ServiceRegistrar.Register(Storage.Services, ServicesGenerator.GenerateServices(type, Storage.Assemblies, null), this);
+                ServiceRegistrar.Register(Storage.Services, ServicesGenerator.GenerateServices(type, Storage.Assemblies, null));
             }
         }
 
@@ -98,7 +98,7 @@ namespace Spencer.NET
 
                 foreach (Type type in assembly.GetTypes())
                 {
-                    ServiceRegistrar.Register(Storage.Services, ServicesGenerator.GenerateServices(type, Storage.Assemblies, null), this);
+                    ServiceRegistrar.Register(Storage.Services, ServicesGenerator.GenerateServices(type, Storage.Assemblies, null));
                 }
             }
         }
@@ -118,7 +118,7 @@ namespace Spencer.NET
                 }
             }
 
-            ServiceRegistrar.Register(Storage.Services, services, this);
+            ServiceRegistrar.Register(Storage.Services, services);
         }
 
         public void Register<T>()
@@ -133,7 +133,7 @@ namespace Spencer.NET
                 }
             }
 
-            ServiceRegistrar.Register(Storage.Services, services, this);
+            ServiceRegistrar.Register(Storage.Services, services);
         }
 
         public T ResolveOrAuto<T>()
@@ -146,7 +146,7 @@ namespace Spencer.NET
             {
                 IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this);
 
-                ServiceRegistrar.Register(Storage.Services, services, this);
+                ServiceRegistrar.Register(Storage.Services, services);
 
                 return (T) ServiceInstanceResolver.ResolveInstance(ServiceFinder.Find(Storage.Services, type), this);
             }
@@ -163,7 +163,7 @@ namespace Spencer.NET
             {
                 IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, this);
 
-                ServiceRegistrar.Register(Storage.Services, services, this);
+                ServiceRegistrar.Register(Storage.Services, services);
 
                 return ServiceInstanceResolver.ResolveInstance(ServiceFinder.Find(Storage.Services, type), this);
             }

@@ -11,6 +11,11 @@ namespace Spencer.NET
             InstanceCreator = instanceCreator;
         }
 
+        public IServiceFactory ProvideServiceFactory(Type @class)
+        {
+            return (IServiceFactory) InstanceCreator.CreateInstance(@class);
+        }
+        
         public IServiceFactory ProvideServiceFactory(Type @class, IReadOnlyContainer container)
         {
             return (IServiceFactory) InstanceCreator.CreateInstance(@class, container);

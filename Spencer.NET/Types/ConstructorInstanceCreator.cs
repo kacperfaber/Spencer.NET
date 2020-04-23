@@ -14,7 +14,9 @@ namespace Spencer.NET
         public IConstructorListGenerator ConstructorListGenerator;
         public IParametersValuesExtractor ParametersValuesExtractor;
 
-        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator, IConstructorProvider constructorProvider, IConstructorInfoListGenerator constructorInfoListGenerator, IConstructorFinder constructorFinder, IConstructorListGenerator constructorListGenerator, IParametersValuesExtractor parametersValuesExtractor)
+        public ConstructorInstanceCreator(IConstructorInvoker constructorInvoker, IConstructorParametersGenerator parametersGenerator,
+            IConstructorProvider constructorProvider, IConstructorInfoListGenerator constructorInfoListGenerator, IConstructorFinder constructorFinder,
+            IConstructorListGenerator constructorListGenerator, IParametersValuesExtractor parametersValuesExtractor)
         {
             ConstructorInvoker = constructorInvoker;
             ParametersGenerator = parametersGenerator;
@@ -41,6 +43,15 @@ namespace Spencer.NET
             IEnumerable<IParameter> parameters = ParametersGenerator.GenerateParameters(constructor, container);
             object[] values = ParametersValuesExtractor.ExtractValues(parameters);
             object instance = ConstructorInvoker.InvokeConstructor(constructor, values);
+
+            return instance;
+        }
+
+        public object CreateInstance(Type @class)
+        {
+            IConstructor constructor = ConstructorProvider.ProvideConstructor(@class);
+            IEnumerable<object> values = ParametersGenerator.GenerateParameterValues(constructor, this);
+            object instance = ConstructorInvoker.InvokeConstructor(constructor,values);
 
             return instance;
         }

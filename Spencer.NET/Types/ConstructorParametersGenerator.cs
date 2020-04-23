@@ -8,7 +8,8 @@ namespace Spencer.NET
         public ITypedMemberValueProvider ValueProvider;
         public IServiceHasConstructorParametersChecker ServiceHasConstructorParametersChecker;
 
-        public ConstructorParametersGenerator(ITypedMemberValueProvider valueProvider, IConstructorParameterByTypeFinder constructorParameterByTypeFinder, IServiceHasConstructorParametersChecker serviceHasConstructorParametersChecker)
+        public ConstructorParametersGenerator(ITypedMemberValueProvider valueProvider, IConstructorParameterByTypeFinder constructorParameterByTypeFinder,
+            IServiceHasConstructorParametersChecker serviceHasConstructorParametersChecker)
         {
             ValueProvider = valueProvider;
             ConstructorParameterByTypeFinder = constructorParameterByTypeFinder;
@@ -48,11 +49,19 @@ namespace Spencer.NET
             }
         }
 
+        public IEnumerable<object> GenerateParameterValues(IConstructor constructor, IConstructorInstanceCreator instanceCreator)
+        {
+            foreach (IParameter parameter in constructor.Parameters)
+            {
+                yield return instanceCreator.CreateInstance(parameter.Type);
+            }
+        }
+
         public IEnumerable<IParameter> GenerateParameters(IConstructor constructor, IService service, IReadOnlyContainer container)
         {
             // TODO another dependency LIKE SMART PARAMETERS GENERATOR in dependent to service ctor parameters.
             // LIKE
-            
+
             if (ServiceHasConstructorParametersChecker.Check(service))
             {
                 return GenerateParameters(constructor, service.Registration.ConstructorParameter);

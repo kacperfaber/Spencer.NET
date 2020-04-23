@@ -16,14 +16,14 @@ namespace Spencer.NET
             RegistratedServicesFilter = registratedServicesFilter;
         }
 
-        public void Register(IServiceList list, IEnumerable<IService> services, IReadOnlyContainer container)
+        public void Register(IServiceList list, IEnumerable<IService> services)
         {
             IEnumerable<IService> filteredList = RegistratedServicesFilter.Filter(list, services);
 
             foreach (IService service in filteredList)
             {
                 if (!InstanceChecker.Check(service))
-                    InstanceProvider.ProvideInstance(service, container);
+                    InstanceProvider.ProvideInstance(service);
 
                 list.AddService(service);
             }

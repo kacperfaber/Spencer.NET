@@ -16,6 +16,26 @@ namespace Spencer.NET
             ServiceGenerator = serviceGenerator;
         }
 
+        public IEnumerable<IService> GenerateServices(Type type, IAssemblyList assemblies, object instance = null, IConstructorParameters constructorParameters = null)
+        {
+            if (TypeIsClassValidator.Validate(type))
+            {
+                IService service = ServiceGenerator.GenerateService(type, instance, constructorParameters);
+                yield return service;
+            }
+
+            else
+            {
+                IEnumerable<Type> types = ImplementationsFinder.FindImplementations(assemblies, type);
+
+                foreach (Type @class in types)
+                {
+                    IService service = ServiceGenerator.GenerateService(@class, null, constructorParameters);
+                    yield return service;
+                }
+            }
+        }
+
         public IEnumerable<IService> GenerateServices(Type type, IAssemblyList assemblies, IReadOnlyContainer container,
             IConstructorParameters constructorParameters = null, object instance = null)
         {

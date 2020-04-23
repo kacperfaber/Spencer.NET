@@ -23,6 +23,26 @@ namespace Spencer.NET
             FactoryInvoker = factoryInvoker;
         }
 
+        public IService GenerateService(Type @class, object instance = null, IConstructorParameters constructorParameters = null)
+        {
+            if (ClassHasFactoryChecker.HasFactory(@class))
+            {
+                IServiceFactory factory = FactoryProvider.ProvideServiceFactory(@class);
+                return FactoryInvoker.Invoke(factory);
+            }
+            
+            ServiceFlags flags = FlagsGenerator.GenerateFlags(@class);
+            ServiceInfo info = InfoGenerator.Generate(@class);
+            IServiceRegistration registration = RegistrationGenerator.Generate(flags, @class, instance, constructorParameters);
+            
+            return new ServiceBuilder()
+                .AddFlags(flags)
+                .AddInfo(info)
+                .AddData(new ServiceData() {Instance = instance})
+                .AddRegistration(registration)
+                .Build(); 
+        }
+        
         public IService GenerateService(Type @class, IReadOnlyContainer container, object instance = null, IConstructorParameters constructorParameters = null)
         {
             if (ClassHasFactoryChecker.HasFactory(@class))
