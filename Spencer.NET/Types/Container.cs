@@ -6,7 +6,6 @@ namespace Spencer.NET
 {
     public sealed class Container : ReadOnlyContainer, IContainer
     {
-        public IServicesGenerator ServicesGenerator;
         public IServiceInitializer ServiceInitializer;
         public IServiceIsAutoValueChecker ServiceIsAutoValueChecker;
         public IConstructorParametersByObjectsGenerator ConstructorParametersByObjectsGenerator;

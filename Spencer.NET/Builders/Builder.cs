@@ -4,7 +4,7 @@
 {
     public partial class Builder<TOut, TBuilder>
     {
-        private TOut Object;
+        public TOut Object;
 
         private TBuilder NewBuilder(TOut o)
         {
