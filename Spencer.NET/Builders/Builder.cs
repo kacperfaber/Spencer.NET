@@ -53,7 +53,7 @@
             return Update(_ => { });
         }
 
-        public TOut Build()
+        public virtual TOut Build()
         {
             return Object;
         }
