@@ -59,5 +59,14 @@ namespace Spencer.NET.Tests
 
             Console.WriteLine(HelloWorld.Instance.Name);
         }
+
+        [Test]
+        public void storage_builder()
+        {
+            IStorage storage = new StorageBuilder()
+                .Register<hello_world>()
+                .Register<Factory>()
+                .Build();
+        }
     }
 }

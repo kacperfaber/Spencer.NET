@@ -6,9 +6,42 @@ namespace Spencer.NET
 {
     public class StorageBuilder : Builder<Storage, StorageBuilder, IStorage>
     {
-        public IServicesGenerator ServicesGenerator;
-        public IServiceRegistrar ServiceRegistrar;
-        public IAssemblyRegistrar AssemblyRegistrar;
+        private IServicesGenerator ServicesGenerator;
+        private IServiceRegistrar ServiceRegistrar;
+        private IAssemblyRegistrar AssemblyRegistrar;
+
+        public StorageBuilder()
+        {
+            ServicesGenerator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
+                new ServiceGenerator(
+                    new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())),
+                        new ServiceFlagsIssuesResolver()),
+                    new ServiceRegistrationGenerator(new BaseTypeFinder(),
+                        new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),
+                            new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),
+                            new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
+                        new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
+                    new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
+                    new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
+                        new ConstructorParametersGenerator(new TypedMemberValueProvider(), new ConstructorParameterByTypeFinder(),
+                            new ServiceHasConstructorParametersChecker()),
+                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
+                            new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(),
+                        new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
+                        new ParametersValuesExtractor()))), new ServiceFactoryInvoker()));
+
+            ServiceRegistrar = new ServiceRegistrar(
+                new ServiceInstanceProvider(
+                    new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
+                        new ConstructorParametersGenerator(new TypedMemberValueProvider(), new ConstructorParameterByTypeFinder(),
+                            new ServiceHasConstructorParametersChecker()),
+                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
+                            new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(),
+                        new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
+                        new ParametersValuesExtractor())), new ServiceIsAutoValueChecker()), new ServiceInstanceChecker(), new RegistratedServicesFilter());
+
+            AssemblyRegistrar = new AssemblyRegistrar(new AssemblyListAdder(), new AssemblyListContainsChecker());
+        }
 
         public StorageBuilder Register(Type type)
         {
