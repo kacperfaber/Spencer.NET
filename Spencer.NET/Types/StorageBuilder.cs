@@ -149,6 +149,28 @@ namespace Spencer.NET
             });
         }
 
+        public StorageBuilder RegisterObject(object instance)
+        {
+            return Update(x =>
+            {
+                Type type = instance.GetType();
+                AssemblyRegistrar.RegisterIfNotExist(x.Assemblies, type.Assembly);
+                IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Object.Assemblies, instance: instance);
+                ServiceRegistrar.Register(Object.Services, services);
+            });
+        }
+
+        public StorageBuilder RegisterObject<T>(T instance)
+        {
+            return Update(x =>
+            {
+                Type type = typeof(T);
+                AssemblyRegistrar.RegisterIfNotExist(x.Assemblies, type.Assembly);
+                IEnumerable<IService> services = ServicesGenerator.GenerateServices(typeof(T), Object.Assemblies, instance: instance);
+                ServiceRegistrar.Register(Object.Services, services);
+            });
+        }
+
         public void Dispose()
         {
         }

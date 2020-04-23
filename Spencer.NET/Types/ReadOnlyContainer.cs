@@ -22,8 +22,8 @@ namespace Spencer.NET
             AssemblyRegistrar = assemblyRegistrar;
             ServiceRegistrar = serviceRegistrar;
             ServicesGenerator = servicesGenerator;
-            
-            Storage = new Storage();
+
+            Storage = storage;
         }
 
         public object Resolve(Type type)
