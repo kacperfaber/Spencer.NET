@@ -35,8 +35,14 @@ namespace Spencer.NET
                                 new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
                                     new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))))),
                         new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
-                            new MemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
-                                new MemberDeclarationTypeProvider()))), new ServiceHasToInitializeChecker(new AlwaysNewChecker())),
+                            new InjectMemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
+                                new MemberDeclarationTypeProvider()), new TryInjectMemberValuesInjector(new ServiceAttributeProvider(),
+                                new MemberDeclarationTypeProvider(), new TypedMemberValueProvider(),
+                                new MemberValueSetter()),
+                            new AutoMemberValuesInjector(new MemberDeclarationTypeProvider(), new ServiceAttributeProvider(),
+                                new AutoValueGenerator(new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new TypeIsArrayChecker(), new ArrayGenerator(),
+                                    new TypeIsValueTypeChecker(), new ValueTypeActivator()), new MemberValueSetter()))),
+                    new ServiceHasToInitializeChecker(new AlwaysNewChecker())),
                 new AssemblyRegistrar(new AssemblyListAdder(), new AssemblyListContainsChecker()),
                 new ServiceRegistrar(
                     new ServiceInstanceProvider(
@@ -159,7 +165,11 @@ namespace Spencer.NET
                             new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(), typedMemberValueProvider,
                                 new MemberValueSetter()),
                             new AutoMemberValuesInjector(new MemberDeclarationTypeProvider(), new ServiceAttributeProvider(),
-                                new AutoValueGenerator(new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new TypeIsArrayChecker(), new ArrayGenerator(),
+                                new AutoValueGenerator(
+                                    new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(),
+                                        new TypeContainsGenericParametersChecker()),
+                                    new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new TypeIsArrayChecker(),
+                                    new ArrayGenerator(),
                                     new TypeIsValueTypeChecker(), new ValueTypeActivator()), new MemberValueSetter()))),
                     new ServiceHasToInitializeChecker(new AlwaysNewChecker())));
         }

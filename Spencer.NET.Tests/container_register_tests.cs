@@ -38,7 +38,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions()
         {
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
 
             Assert.DoesNotThrow(() => exec(container, typeof(TestClass)));
         }
@@ -47,7 +47,7 @@ namespace Spencer.NET.Tests
         public void container_has_registered_type_after_registration()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             bool before = container.Has(type);
 
             exec(container, type);
@@ -62,7 +62,7 @@ namespace Spencer.NET.Tests
         public void container_resolve_throws_InjectException_if_injections_was_not_registered()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
 
             exec(container, type);
 
@@ -73,7 +73,7 @@ namespace Spencer.NET.Tests
         public void container_resolve_dont_throws_if_injected_Pet_was_registered()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register(typeof(Pet));
 
             exec(container, type);
@@ -85,7 +85,7 @@ namespace Spencer.NET.Tests
         public void container_resolve_returns_not_null_if_target_and_injection_was_registered()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register(typeof(Pet));
 
             exec(container, type);
@@ -97,7 +97,7 @@ namespace Spencer.NET.Tests
         public void container_resolve_throws_exception_if_injections_was_not_registered()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
 
             exec(container, type);
 
@@ -108,7 +108,7 @@ namespace Spencer.NET.Tests
         public void container_resolve_has_not_null_Auto_Ints_property()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
 
             exec(container, type);
@@ -120,7 +120,7 @@ namespace Spencer.NET.Tests
         public void container_resolve_has_empty_Auto_Ints_property()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
 
             exec(container, type);
@@ -132,7 +132,7 @@ namespace Spencer.NET.Tests
         public void container_resolve_dont_throws_if_TryInject_was_not_registered()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register(typeof(Pet));
 
             exec(container, type);
@@ -144,7 +144,7 @@ namespace Spencer.NET.Tests
         public void container_resolve_has_null_TryInject_if_he_wasnt_registered()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
 
             exec(container, type);
@@ -156,7 +156,7 @@ namespace Spencer.NET.Tests
         public void container_resolve_has_not_null_TryInject_if_he_was_registered()
         {
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
             container.Register(typeof(Animal));
 
@@ -170,7 +170,7 @@ namespace Spencer.NET.Tests
         {
             Animal animal = new Animal();
             Type type = typeof(TestClass);
-            IContainer container = ContainerFactory.CreateContainer();
+            IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
             container.RegisterObject(animal);
 
