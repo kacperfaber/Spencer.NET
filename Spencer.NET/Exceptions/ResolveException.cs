@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Spencer.NET.Exceptions
+namespace Spencer.NET
 {
     public class ResolveException : Exception
     {

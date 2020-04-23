@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Spencer.NET.Exceptions
+namespace Spencer.NET
 {
     public class TypeNotFoundException : Exception
     {

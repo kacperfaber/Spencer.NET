@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Spencer.NET
 {
-    public class MemberValuesInjector : IMemberValuesInjector
+    public class InjectMemberValuesInjector : IInjectMemberValuesInjector
     {
         public ITypedMemberValueProvider TypedMemberValueProvider;
         public IMemberValueSetter ValueSetter;
         public IInjectFlagsProvider InjectsProvider;
         public IMemberDeclarationTypeProvider DeclarationTypeProvider;
 
-        public MemberValuesInjector(IMemberValueSetter valueSetter, ITypedMemberValueProvider typedMemberValueProvider, IInjectFlagsProvider injectsProvider, IMemberDeclarationTypeProvider declarationTypeProvider)
+        public InjectMemberValuesInjector(IMemberValueSetter valueSetter, ITypedMemberValueProvider typedMemberValueProvider, IInjectFlagsProvider injectsProvider, IMemberDeclarationTypeProvider declarationTypeProvider)
         {
             ValueSetter = valueSetter;
             TypedMemberValueProvider = typedMemberValueProvider;
@@ -26,6 +26,11 @@ namespace Spencer.NET
             {
                 Type type = DeclarationTypeProvider.ProvideDeclarartionType(injectFlag.Member);
                 object value = TypedMemberValueProvider.ProvideValue(type, container);
+
+                if (value == null)
+                {
+                    throw new InjectException(type);
+                }
                 
                 ValueSetter.SetValue(injectFlag.Member, instance, value);
             }

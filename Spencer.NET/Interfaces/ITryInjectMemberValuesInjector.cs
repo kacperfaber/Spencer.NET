@@ -1,6 +1,6 @@
 ﻿namespace Spencer.NET
 {
-    public interface IMemberValuesInjector
+    public interface ITryInjectMemberValuesInjector
     {
         void InjectAll(IService service, IReadOnlyContainer container, object instance);
     }

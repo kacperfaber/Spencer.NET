@@ -47,9 +47,16 @@ namespace Spencer.NET.Tests
             object instance = Activator.CreateInstance<T>();
 
             ObjectPostProcessor postProcessor = new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
-                new MemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
-                    new MemberDeclarationTypeProvider()));
-            
+                new InjectMemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
+                    new MemberDeclarationTypeProvider()),
+                new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(), new TypedMemberValueProvider(),
+                    new MemberValueSetter()),
+                new AutoMemberValuesInjector(new MemberDeclarationTypeProvider(), new ServiceAttributeProvider(),
+                    new AutoValueGenerator(
+                        new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
+                        new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new TypeIsArrayChecker(),
+                        new ArrayGenerator(), new TypeIsValueTypeChecker(), new ValueTypeActivator()), new MemberValueSetter()));
+
             postProcessor.Process(instance, service, container);
 
             return (T) instance;
@@ -60,7 +67,7 @@ namespace Spencer.NET.Tests
         {
             IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
-            
+
             Assert.DoesNotThrow(() => exec<TestClass>(container));
         }
 
@@ -69,7 +76,7 @@ namespace Spencer.NET.Tests
         {
             IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
-            
+
             Assert.NotNull(exec<TestClass>(container));
         }
 
@@ -120,7 +127,7 @@ namespace Spencer.NET.Tests
             IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
             container.Register<TestClass>();
-            
+
             exec<TestClass>(container);
 
             Assert.NotNull(TestClass.Instance);
@@ -132,7 +139,7 @@ namespace Spencer.NET.Tests
             IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
             container.Register<TestClass>();
-            
+
             TestClass excepted = exec<TestClass>(container);
 
             Assert.AreEqual(excepted, TestClass.Instance);

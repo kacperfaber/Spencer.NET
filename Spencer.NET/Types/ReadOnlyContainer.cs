@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Spencer.NET.Exceptions;
 
 namespace Spencer.NET
 {
@@ -49,6 +48,33 @@ namespace Spencer.NET
             return (T) ServiceInstanceResolver.ResolveInstance(service, this);
         }
 
+        public T ResolveOrDefault<T>()
+        {
+            Type type = TypeGetter.GetType<T>();
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
+            IService service = ServiceFinder.Find(Storage.Services, type);
+
+            if (service == null)
+            {
+                return default;
+            }
+            
+            return (T) ServiceInstanceResolver.ResolveInstance(service, this);
+        }
+
+        public object ResolveOrDefault(Type type)
+        {
+            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
+            IService service = ServiceFinder.Find(Storage.Services, type);
+
+            if (service == null)
+            {
+                return default;
+            }
+            
+            return ServiceInstanceResolver.ResolveInstance(service, this);
+        } 
+
         public IEnumerable<T> ResolveMany<T>()
         {
             Type type = TypeGetter.GetType<T>();
@@ -83,7 +109,7 @@ namespace Spencer.NET
         {
             AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
 
-            return ServiceFinder.Find(Storage.Services, TypeGetter.GetType(type)) != null;
+            return ServiceFinder.Find(Storage.Services, type) != null;
         }
 
         public virtual IStorage Storage { get; set; }

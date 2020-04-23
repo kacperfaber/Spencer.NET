@@ -5,10 +5,10 @@ namespace Spencer.NET
     public class ServiceResolver : IServiceResolver
     {
         public IServiceInstanceResolver InstanceResolver;
-        public IMemberValuesInjector ValuesInjector;
+        public IInjectMemberValuesInjector ValuesInjector;
         public IInstanceMembersValueInjector InstanceMembersValueInjector;
         
-        public ServiceResolver(IServiceInstanceResolver instanceResolver, IMemberValuesInjector valuesInjector, IInstanceMembersValueInjector instanceMembersValueInjector)
+        public ServiceResolver(IServiceInstanceResolver instanceResolver, IInjectMemberValuesInjector valuesInjector, IInstanceMembersValueInjector instanceMembersValueInjector)
         {
             InstanceResolver = instanceResolver;
             ValuesInjector = valuesInjector;

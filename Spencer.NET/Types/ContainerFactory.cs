@@ -117,8 +117,17 @@ namespace Spencer.NET
                                 new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
                                     new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))))),
                         new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
-                            new MemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
-                                new MemberDeclarationTypeProvider()))), new ServiceInstanceSetter()),
+                            new InjectMemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
+                                new MemberDeclarationTypeProvider()),
+                            new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(), typedMemberValueProvider,
+                                new MemberValueSetter()),
+                            new AutoMemberValuesInjector(new MemberDeclarationTypeProvider(), new ServiceAttributeProvider(),
+                                new AutoValueGenerator(
+                                    new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(),
+                                        new TypeContainsGenericParametersChecker()),
+                                    new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new TypeIsArrayChecker(),
+                                    new ArrayGenerator(),
+                                    new TypeIsValueTypeChecker(), new ValueTypeActivator()), new MemberValueSetter()))), new ServiceInstanceSetter()),
                 new TypeExisterChecker(new ServiceFinder(new TypeContainsGenericParametersChecker(),
                     new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()),
                         new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()))),
@@ -145,8 +154,14 @@ namespace Spencer.NET
                                 new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
                                     new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))))),
                         new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
-                            new MemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
-                                new MemberDeclarationTypeProvider()))), new ServiceHasToInitializeChecker(new AlwaysNewChecker())));
+                            new InjectMemberValuesInjector(new MemberValueSetter(), typedMemberValueProvider, new InjectFlagsProvider(),
+                                new MemberDeclarationTypeProvider()),
+                            new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(), typedMemberValueProvider,
+                                new MemberValueSetter()),
+                            new AutoMemberValuesInjector(new MemberDeclarationTypeProvider(), new ServiceAttributeProvider(),
+                                new AutoValueGenerator(new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()), new EnumerableGenerator(new TypeGenericParametersProvider(), new GenericTypeGenerator()), new TypeIsArrayChecker(), new ArrayGenerator(),
+                                    new TypeIsValueTypeChecker(), new ValueTypeActivator()), new MemberValueSetter()))),
+                    new ServiceHasToInitializeChecker(new AlwaysNewChecker())));
         }
     }
 }

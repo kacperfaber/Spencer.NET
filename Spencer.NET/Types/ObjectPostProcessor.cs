@@ -2,19 +2,25 @@
 {
     public class ObjectPostProcessor : IObjectPostProcessor
     {
-        public IMemberValuesInjector MemberValuesInjector;
+        public IInjectMemberValuesInjector InjectMemberValuesInjector;
         public IInstanceMembersValueInjector InstanceMembersValueInjector;
-
-        public ObjectPostProcessor(IInstanceMembersValueInjector instanceMembersValueInjector, IMemberValuesInjector memberValuesInjector)
+        public IAutoMemberValuesInjector AutoMemberValuesInjector;
+        public ITryInjectMemberValuesInjector TryInjectMemberValuesInjector;
+        
+        public ObjectPostProcessor(IInstanceMembersValueInjector instanceMembersValueInjector, IInjectMemberValuesInjector injectMemberValuesInjector, ITryInjectMemberValuesInjector tryInjectMemberValuesInjector, IAutoMemberValuesInjector autoMemberValuesInjector)
         {
             InstanceMembersValueInjector = instanceMembersValueInjector;
-            MemberValuesInjector = memberValuesInjector;
+            InjectMemberValuesInjector = injectMemberValuesInjector;
+            TryInjectMemberValuesInjector = tryInjectMemberValuesInjector;
+            AutoMemberValuesInjector = autoMemberValuesInjector;
         }
 
         public void Process(object instance, IService service, IReadOnlyContainer container)
         {
-            MemberValuesInjector.InjectAll(service, container, instance);
+            InjectMemberValuesInjector.InjectAll(service, container, instance);
+            TryInjectMemberValuesInjector.InjectAll(service, container, instance);
             InstanceMembersValueInjector.InjectAll(service, instance);
+            AutoMemberValuesInjector.InjectAll(service, instance);
         }
     }
 }
