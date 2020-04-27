@@ -169,3 +169,50 @@ Prefered way is using `StorageBuilder` class.
 >Registering class with instance of gived in parameter.
 ><br>
 >Registration type will be taken from **T**.
+
+<br>
+
+#### Parametrized Constructors
+
+Mechanism for finding constructor always will be picking accessible and 
+<br>
+with the smallest count of parameters he have, or he could have.
+<br>
+You would use `ServiceConstructor` attribute?
+<br>
+If you want dynamically choose constructor you would to use, 
+<br>
+i providing functionality to find constructor by given parameters.
+<br>
+Lets see the sample... :>
+
+``` 
+class Test
+{
+    // #1
+    public Test(int x) {}
+    
+    // #2
+    public Test(int x, int y) {}
+
+    // #3 
+    public Test(string str, bool b) {}
+}
+
+// Container.Register<Test>(0);
+// Will invoke #1 constructor
+// params
+// x = 0
+
+// Container.Register<Test>(1, 2);
+// Will use #2 constructor
+// params
+// x = 1,
+// y = 2
+
+// Container.Register<Test>(true, "Hello World!");
+// Will use #3 constructor
+// params 
+// str = "Hello World!"
+// b = true
+```
