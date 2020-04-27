@@ -69,9 +69,9 @@ writing use it by contributor programmer.
 You can use tested and safely **ContainerFactory** class
 <br>
 > **This container cannot be updated in him lifetime**
-<br>
+>
 > **You should provide instance of Storage class**
-<br>
+>
 > **Prefered way is using StorageBuilder**
 <br>
 
