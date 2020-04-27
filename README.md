@@ -182,7 +182,7 @@ You would use `ServiceConstructor` attribute?
 <br>
 If you want dynamically choose constructor you would to use, 
 <br>
-i providing functionality to find constructor by given parameters.
+i'm providing functionality to find constructor by given parameters.
 <br>
 Lets see the sample... :>
 
@@ -215,4 +215,84 @@ class Test
 // params 
 // str = "Hello World!"
 // b = true
+```
+
+<br>
+
+#### Factories
+Factories is a static methods generating instance of a class.
+<br>
+> They can returns interface, if they will have a `FactoryResult(Type)` attribute,
+<br>
+> which will be pointing to the valid returns type.
+
+> They can take dependencies as their parameters
+
+```
+class Test 
+{
+    Test() {}
+        
+    [Factory]
+    public static Test FactoryMethod() => new Test();
+}
+```
+
+```
+interface ITest 
+{
+}
+
+class Test : ITest
+{
+    Test() {}
+        
+    [Factory]
+    [FactoryResult(typeof(Test))
+    public static ITest FactoryMethod() => new Test();
+}
+```
+
+<br>
+
+#### Injections
+Spencer.NET want to help you. If you want, you cannot inject everything in constructor.
+<br>
+I am providing attributes `Inject`, `TryInject` and `Auto`.
+
+> Inject way is not recommended for good **Dependency Injection**
+<br>
+
+- Injections
+    * `Inject` trying to resolve instance from self Container, 
+    <br>
+    if could not found any matching will throw `ResolveException`
+    
+    * `TryInject` trying to resolve instance from self Container,
+    <br>
+    if could not found any matching set variable to `null`
+    
+- `Auto` initializing simple types 
+    
+```
+class OldWay
+{
+    public IEnumerable<int> Ints { get; set; }
+    public IDep Dep { get; set; }
+    
+    public OldWay(IDep dep)
+    {
+        Dep = dep;
+        Ints = new List<int>();
+    }
+}
+
+class NewWay
+{
+    [Auto]
+    public IEnumerable<int> Ints { get; set; }
+
+    [Inject]
+    public IDep Dep { get; set; } 
+}
 ```
