@@ -19,85 +19,15 @@ Kacper Faber, Poland
 
 <br>
 
-### Containers
-
-- `ReadOnlyContainer : IReadOnlyContainer`
-
-    * `ReadOnlyContainer.Resolve<T>():T`
-    <br>
-   Returns T instance or throws exception.
-   
-    * `ReadOnlyContainer.Resolve(Type):object`
-    <br>
-    Returns instance or throws exception.
-    
-    * `ReadOnlyContainer.ResolveOrDefault(Type):object`
-    <br>
-    Returns instance or null
-    
-    * `ReadOnlyContainer.ResolveOrDefault<T>():T`
-    <br>
-    Returns instance or null.
-    
-    * `ReadOnlyContainer.ResolveMany(Type):IEnumerable<object>`
-    <br>
-    Returns all types of types assignable to parameter type
-    
-    * `ReadOnlyContainer.ResolveMany<T>():IEnumerable<T>`
-    <br>
-    Returns all instances of types assignable to parameter type
-    
-    * `ReadOnlyContainer.Has<T>():bool`
-    <br>
-    Checking is assignable type exist
-    
-    * `ReadOnlyContainer.Has(Type):bool`
-    <br>
-    Checking is assignable type exist
-    
-    <br>
-    
-
-- `Container : ReadOnlyContainer, IContainer`
-
-    * `Container.ResolveOrAuto<T>():T`
-    <br>
-    Returns existing instance or registering new and returns her.
-    
-    * `Container.ResolveOrAuto(Type):object`
-    <br>
-    Returns existing instance or register new and returns her.
-    
-    * `Container.Register<T>():void`
-    <br> 
-    Registering class or implementantions of interface
-    
-    * `Container.Register(Type):void`
-    <br>
-    Register class or implementantions of interface
-    
-    * `Container.RegisterObject(object):void`
-    <br>
-    Registering class with instance
-    <br>
-    He will taken registration type of unboxed instance. 
-   
-    * `Container.RegisterObject<T>(T):void`
-    <br>
-    Registering class with instance.
-    He will taken registration type of generic **T**
-    
-    * `Container.Register<T>(params object[]):void`
-    <br>
-    Registering class using constructor will compatible parameters
-    
-
 ### Usage
 * [Installing package](#installing-package)
 * [Adding using statement](#adding-using)
 * [Creating new Container](#create-container)
 * [Creating new ReadOnlyContainer](#create-readonlycontainer)
 * [Creating Storage](#create-storage)
+* [Using parametrized constructors](#parametrized-constructors)
+* [Factories](#factories)
+* [Inject, TryInject, Auto](#injections)
 
 <br>
 
@@ -138,11 +68,11 @@ writing use it by contributor programmer.
 <br>
 You can use tested and safely **ContainerFactory** class
 <br>
->**This container cannot be updated in him lifetime**
+> **This container cannot be updated in him lifetime**
 <br>
->**You should provide instance of Storage class**
+> **You should provide instance of Storage class**
 <br>
->**Prefered way is using StorageBuilder**
+> **Prefered way is using StorageBuilder**
 <br>
 
 >`IReadOnlyContainer container = ContainerFactory.ReadOnlyContainer(storage);`
