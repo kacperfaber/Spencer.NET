@@ -105,6 +105,12 @@ Prefered way is using `StorageBuilder` class.
 ><br>
 >with compatible parameters
 
+>`StorageBuilder.Register(Type, params object[]):StorageBuilder`
+><br>
+>Registering class or interface using constructor
+><br>
+>with compatible parameters
+
 >`StorageBuilder.RegisterObject(object):StorageBuilder`
 ><br>
 >Registering class with instance gived in parameter.
@@ -117,6 +123,22 @@ Prefered way is using `StorageBuilder` class.
 >Registering class with instance of gived in parameter.
 ><br>
 >Registration type will be taken from **T**.
+
+>`StorageBuilder.RegisterAssembly(Assembly):StorageBuilder`
+><br>
+> Registering assembly types.
+
+>`StorageBuilder.RegisterAssembly(AssemblyName):StorageBuilder`
+><br>
+> Registering assembly types
+
+>`StorageBuilder.RegisterAssemblies(params Assembly[]):StorageBuilder`
+><br>
+> Registering assembly types
+
+>`StorageBuilder.RegisterAssemblies(params AssemblyName[]):StorageBuilder`
+><br>
+> Registering assembly types
 
 <br>
 
