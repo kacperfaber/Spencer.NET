@@ -5,9 +5,13 @@ Open Source project of smart **IoC Container** made by programmer for programmer
 <br>
 <br>
 
-### Requires 
-* **NET STANDARD 2.0** <br>or newest
+### Author
+Kacper Faber, Poland
+
 <br>
+
+### Requires 
+* **NET STANDARD 2.0** <br>or newest<br>
 
 * **.NET CORE 2.0** <br>or newest<br>
 
@@ -16,25 +20,33 @@ Open Source project of smart **IoC Container** made by programmer for programmer
 <br>
 
 ### Containers
+
 - `ReadOnlyContainer : IReadOnlyContainer`
+
     * `ReadOnlyContainer.Resolve<T>():T`
     <br>
    Returns T instance or throws exception.
+   
     * `ReadOnlyContainer.Resolve(Type):object`
     <br>
     Returns instance or throws exception.
+    
     * `ReadOnlyContainer.ResolveOrDefault(Type):object`
     <br>
     Returns instance or null
+    
     * `ReadOnlyContainer.ResolveOrDefault<T>():T`
     <br>
     Returns instance or null.
+    
     * `ReadOnlyContainer.ResolveMany(Type):IEnumerable<object>`
     <br>
     Returns all types of types assignable to parameter type
+    
     * `ReadOnlyContainer.ResolveMany<T>():IEnumerable<T>`
     <br>
     Returns all instances of types assignable to parameter type
+    
     * `ReadOnlyContainer.Has<T>():bool`
     <br>
     Checking is assignable type exist
@@ -47,23 +59,29 @@ Open Source project of smart **IoC Container** made by programmer for programmer
     
 
 - `Container : ReadOnlyContainer, IContainer`
+
     * `Container.ResolveOrAuto<T>():T`
     <br>
     Returns existing instance or registering new and returns her.
+    
     * `Container.ResolveOrAuto(Type):object`
     <br>
     Returns existing instance or register new and returns her.
+    
     * `Container.Register<T>():void`
     <br> 
     Registering class or implementantions of interface
+    
     * `Container.Register(Type):void`
     <br>
     Register class or implementantions of interface
+    
     * `Container.RegisterObject(object):void`
     <br>
     Registering class with instance
     <br>
-    He will taken registration type of unboxed instance.
+    He will taken registration type of unboxed instance. 
+   
     * `Container.RegisterObject<T>(T):void`
     <br>
     Registering class with instance.
