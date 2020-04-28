@@ -4,6 +4,6 @@ namespace Spencer.NET
 {
     public interface IInstanceMembersProvider
     {
-        IEnumerable<IMember> ProvideMembers(IService service);
+        IEnumerable<IMember> ProvideMembers(ServiceFlags serviceFlags);
     }
 }

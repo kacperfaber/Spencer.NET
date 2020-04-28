@@ -6,9 +6,9 @@ namespace Spencer.NET
 {
     public class InstanceMembersProvider : IInstanceMembersProvider
     {
-        public IEnumerable<IMember> ProvideMembers(IService service)
+        public IEnumerable<IMember> ProvideMembers(ServiceFlags serviceFlags)
         {
-            return Array.ConvertAll(service.Flags.GetFlags(ServiceFlagConstants.Instance).ToArray(), x => x.Member);
+            return Array.ConvertAll(serviceFlags.GetFlags(ServiceFlagConstants.Instance).ToArray(), x => x.Member);
         }
     }
 }
