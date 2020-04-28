@@ -9,6 +9,10 @@ namespace Spencer.NET.Tests
         {
         }
         
+        class TestClass2
+        {
+        }
+        
         object exec(StorageBuilder builder)
         {
             return builder.Build();
@@ -57,7 +61,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_excepted_services_count()
         {
-            StorageBuilder builder = new StorageBuilder().Register<Tests.TestClass>().Register<TestClass>();
+            StorageBuilder builder = new StorageBuilder().Register<TestClass2>().Register<TestClass>();
             
             Assert.IsTrue(builder.Build().Services.GetServices().Count() == 2);
         }

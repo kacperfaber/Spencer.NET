@@ -53,7 +53,7 @@ It is it.
 #### Create Container
 Constructors of both of containers are too long to 
 <br> 
-writing use it by contributor programmer.
+writing it by contributor programmer.
 <br>
 You can use tested and safely **ContainerFactory** class
 >`IContainer container = ContainerFactory.Container();`
@@ -64,7 +64,7 @@ You can use tested and safely **ContainerFactory** class
 #### Create ReadOnlyContainer
 Constructors of both of containers are too long to 
 <br> 
-writing use it by contributor programmer.
+writing it by contributor programmer.
 <br>
 You can use tested and safely **ContainerFactory** class
 <br>
