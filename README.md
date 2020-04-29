@@ -172,19 +172,16 @@ service will be instantiate on registering process
 
 * `ServiceConstructor`
 pointing to default constructor for class,
-<br>
 if any constructor will be find automatically
 <br>
 
 * `Factory` 
 pointing to static method, which 
-<br>
 will be used to instantiate new instance of class
 <br>
 
 * `FactoryResult (Type)` 
 expanding factory method for good type 
-<br>
 which actually is producing in this method
 <br>
 
