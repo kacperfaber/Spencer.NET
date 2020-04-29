@@ -3,16 +3,16 @@ using NUnit.Framework;
 
 namespace Spencer.NET.Tests
 {
-    class TestClass : ITestClass
-    {
-    }
-
-    interface ITestClass
-    {
-    }
-
     public class readonlycontainer_resolve_generic_tests
     {
+        interface ITestClass
+        {
+        }
+
+        class TestClass : ITestClass
+        {
+        }
+        
         T exec<T>(IReadOnlyContainer container)
         {
             return container.Resolve<T>();

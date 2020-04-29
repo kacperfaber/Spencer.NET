@@ -53,7 +53,7 @@ namespace Spencer.NET
 
         public void RegisterObject<TKey>(object instance)
         {
-            Type type = TypeGetter.GetType();
+            Type type = TypeGetter.GetType(instance);
             AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
 
             IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Storage.Assemblies, null, null, instance);
