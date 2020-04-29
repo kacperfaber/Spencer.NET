@@ -31,6 +31,7 @@ Kacper Faber, Poland
 * [Creating new Container](#create-container)
 * [Creating new ReadOnlyContainer](#create-readonlycontainer)
 * [Creating Storage](#create-storage)
+* [Attributes](#attributes)
 * [Using parametrized constructors](#parametrized-constructors)
 * [Factories](#factories)
 * [Inject, TryInject, Auto](#injections)
@@ -147,6 +148,49 @@ Prefered way is using `StorageBuilder` class.
 >`StorageBuilder.RegisterAssemblies(params AssemblyName[]):StorageBuilder`
 ><br>
 >Registering assembly types
+
+<br>
+
+#### Attributes
+* `SingleInstance` 
+<br>
+service will using single instance of class
+<br>
+
+* `MultiInstance`
+<br>
+service will create a new instance for each trying to get
+<br>
+
+* `AutoValue` 
+<br>
+service will be instantiate on registering process
+<br>
+
+* `Exclude (Type)` 
+<br>
+ excluding type from registration.
+<br>
+
+* `ServiceConstructor` <br>
+pointing to default constructor for class,
+<br>
+if any constructor will be find automatically
+<br>
+
+* `Factory` 
+<br>
+pointing to static method, which 
+<br>
+will be used to instantiate new instance of class
+<br>
+
+* `FactoryResult (Type)` 
+<br>
+expanding factory method for good type 
+<br>
+which actually is producing in this method
+<br>
 
 <br>
 
