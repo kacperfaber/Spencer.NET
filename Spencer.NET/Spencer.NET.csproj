@@ -8,7 +8,11 @@
     <Title>Spencer.NET</Title>
     <Authors>Kacper Faber</Authors>
     <Description>Spencer.NET is open-source IoC container for .NET made for frameworks and class libraries.</Description>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Copyright>Kacper Faber</Copyright>
+    <PackageLicenseUrl>LICENSE.txt</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/kacperfaber/Spencer.NET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>container,ioc-container,net-container,opensource,open-source,spencer,spencer.net,dependency-injection,solid,ioc</PackageTags>
   </PropertyGroup>
 
 </Project>

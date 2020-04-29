@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>Spencer.NET</id>
+        <version>1.0.0</version>
+        <authors>Kacper Faber</authors>
+        <owners>kacpiitoziomal</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Spencer.NET is open-source IoC container for .NET made for frameworks and class libraries.
+        </description>
+        <copyright>Copyright 2020</copyright>
+        <repository type="git" url="https://github.com/kacperfaber/Spencer.NET"/>
+        <title>Spencer.NET</title>
+        <tags>
+            container,ioc-container,net-container,opensource,open-source,spencer,spencer.net,dependency-injection,solid,ioc
+        </tags>
+        <language>english</language>
+        <license type="expression">MIT</license>
+        <summary>Smart IoC Container</summary>
+    </metadata>
+</package>

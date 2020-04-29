@@ -12,6 +12,7 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Kacper Faber")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("Kacper Faber")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Spencer.NET is open-source IoC container for .NET made for frameworks and class l" +
     "ibraries.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
