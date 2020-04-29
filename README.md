@@ -2,6 +2,7 @@
 
 Open Source project of smart **IoC Container** made by programmer for programmer.
 <br>
+Is made with a view to creating class libraries.
 <br>
 <br>
 
@@ -32,6 +33,7 @@ Kacper Faber, Poland
 * [Creating new ReadOnlyContainer](#create-readonlycontainer)
 * [Creating Storage](#create-storage)
 * [Attributes](#attributes)
+* [Troubleshooting](#troubleshooting)
 * [Using parametrized constructors](#parametrized-constructors)
 * [Factories](#factories)
 * [Inject, TryInject, Auto](#injections)
@@ -191,6 +193,68 @@ expanding factory method for good type
 <br>
 which actually is producing in this method
 <br>
+
+<br>
+
+#### Troubleshooting
+
+```
+[SingleInstance]
+[MultiInstance]
+class Test
+{
+}
+
+// Test will be registered as SingleInstance.
+```
+
+```
+class Test
+{
+}
+
+// Test will be registered as SingleInstance
+// SingleInstance is default
+```
+
+```
+class Test
+{
+}
+
+// Test will be registered as not AutoValue,
+// Class will be instantiate, on first trying to get
+```
+
+```
+[MultiInstance]
+class Test
+{
+}
+
+Test instance = new Test();
+IContainer container = ContainerFactory.Container();
+container.RegisterObject(instance);
+
+// Test will be registered as MultiInstace
+// Given instance will be ever returns using Resolve methods.
+```
+
+```
+class Test
+{
+    [Factory]
+    public static Test FactoryMethod() => new Test();
+
+    [ServiceConstructor]
+    public Test()
+    {
+    }
+}
+
+// Factory always be checked first.
+// In this situation Test will be instantiate using factory
+```
 
 <br>
 

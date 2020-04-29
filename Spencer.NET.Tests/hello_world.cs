@@ -69,4 +69,9 @@ namespace Spencer.NET.Tests
                 .Build();
         }
     }
+
+    [MultiInstance]
+    public class MultiInstanceObject
+    {
+    }
 }
