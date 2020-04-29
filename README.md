@@ -19,6 +19,12 @@ Kacper Faber, Poland
 
 <br>
 
+### Versions
+
+* 1.0 (29.04.2020)
+
+<br>
+
 ### Usage
 * [Installing package](#installing-package)
 * [Adding using statement](#adding-using)
@@ -93,15 +99,17 @@ Prefered way is using `StorageBuilder` class.
 
 >`StorageBuilder.Register<T>():StorageBuilder` 
 ><br>
->Registering class or interface
+>Registering **generic T** as class or interface
 
 >`StorageBuilder.Register(Type):StorageBuilder`
 ><br>
 >Registering class or interface
 
->`StorageBuilder.Register(params object[]):StorageBuilder`
+>`StorageBuilder.Register<T>(params object[]):StorageBuilder`
 ><br>
->Registering class or interface using constructor
+>Registering **generic T** as class or interface with
+><br>
+>given parameters to constructor
 ><br>
 >with compatible parameters
 
@@ -126,19 +134,19 @@ Prefered way is using `StorageBuilder` class.
 
 >`StorageBuilder.RegisterAssembly(Assembly):StorageBuilder`
 ><br>
-> Registering assembly types.
+>Registering assembly types.
 
 >`StorageBuilder.RegisterAssembly(AssemblyName):StorageBuilder`
 ><br>
-> Registering assembly types
+>Registering assembly types
 
 >`StorageBuilder.RegisterAssemblies(params Assembly[]):StorageBuilder`
 ><br>
-> Registering assembly types
+>Registering assembly types
 
 >`StorageBuilder.RegisterAssemblies(params AssemblyName[]):StorageBuilder`
 ><br>
-> Registering assembly types
+>Registering assembly types
 
 <br>
 
