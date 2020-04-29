@@ -155,40 +155,34 @@ Prefered way is using `StorageBuilder` class.
 
 #### Attributes
 * `SingleInstance` 
-<br>
 service will using single instance of class
 <br>
 
 * `MultiInstance`
-<br>
 service will create a new instance for each trying to get
 <br>
 
 * `AutoValue` 
-<br>
 service will be instantiate on registering process
 <br>
 
 * `Exclude (Type)` 
-<br>
  excluding type from registration.
 <br>
 
-* `ServiceConstructor` <br>
+* `ServiceConstructor`
 pointing to default constructor for class,
 <br>
 if any constructor will be find automatically
 <br>
 
 * `Factory` 
-<br>
 pointing to static method, which 
 <br>
 will be used to instantiate new instance of class
 <br>
 
 * `FactoryResult (Type)` 
-<br>
 expanding factory method for good type 
 <br>
 which actually is producing in this method

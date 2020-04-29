@@ -4,6 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Spencer.NET</RootNamespace>
     <LangVersion>8</LangVersion>
+    <PackageVersion>1.0</PackageVersion>
+    <Title>Spencer.NET</Title>
+    <Authors>Kacper Faber</Authors>
+    <Description>Spencer.NET is open-source IoC container for .NET made for frameworks and class libraries.</Description>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
 </Project>

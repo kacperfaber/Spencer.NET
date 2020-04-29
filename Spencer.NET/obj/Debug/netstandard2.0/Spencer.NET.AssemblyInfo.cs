@@ -10,8 +10,10 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Spencer.NET")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Kacper Faber")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("Spencer.NET is open-source IoC container for .NET made for frameworks and class l" +
+    "ibraries.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Spencer.NET")]
