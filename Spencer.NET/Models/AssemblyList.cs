@@ -19,6 +19,8 @@ namespace Spencer.NET
             Add(assembly);
         }
 
+        public void AddAssemblies(params Assembly[] assemblies) => AddRange(assemblies);
+
         public void AddAssemblies(params AssemblyName[] names)
         {
             foreach (AssemblyName assemblyName in names)

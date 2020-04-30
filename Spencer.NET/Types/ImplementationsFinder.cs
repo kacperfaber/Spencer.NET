@@ -20,12 +20,11 @@ namespace Spencer.NET
         {
             foreach (Assembly assembly in assemblies.GetAssemblies())
             {
-                foreach (Type type in assembly.GetTypes().Where(x => x.GetInterfaces().Length > 0).Where(x => x.IsClass))
+                foreach (Type @class in assembly.GetTypes().Where(x => x.IsClass))
                 {
-                    if (Validator.Validate(type, @interface) && RegisteredTypes.SingleOrDefault(x => x == type) == null)
+                    if (@interface.IsAssignableFrom(@class))
                     {
-                        RegisteredTypes.Add(type);
-                        yield return type;
+                        yield return @class;
                     }
                 }
             }

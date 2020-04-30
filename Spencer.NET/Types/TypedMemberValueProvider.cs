@@ -6,7 +6,10 @@ namespace Spencer.NET
     {
         public object ProvideValue(Type type, IReadOnlyContainer container)
         {
-            return container.ResolveOrDefault(type);
+            if (container is IContainer c)
+                return c.ResolveOrAuto(type);
+
+            return container.ResolveOrDefault(type); 
         }
     }
 }
