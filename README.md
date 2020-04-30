@@ -23,6 +23,7 @@ Kacper Faber, Poland
 ### Versions
 
 * 1.0 (29.04.2020)
+* 1.0.1 (30.04.2020)
 
 <br>
 
