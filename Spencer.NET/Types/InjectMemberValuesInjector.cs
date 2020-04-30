@@ -5,17 +5,17 @@ namespace Spencer.NET
 {
     public class InjectMemberValuesInjector : IInjectMemberValuesInjector
     {
-        public ITypedMemberValueProvider TypedMemberValueProvider;
         public IMemberValueSetter ValueSetter;
         public IInjectFlagsProvider InjectsProvider;
         public IMemberDeclarationTypeProvider DeclarationTypeProvider;
-
-        public InjectMemberValuesInjector(IMemberValueSetter valueSetter, ITypedMemberValueProvider typedMemberValueProvider, IInjectFlagsProvider injectsProvider, IMemberDeclarationTypeProvider declarationTypeProvider)
+        public IInjectValueProvider InjectValueProvider;
+        
+        public InjectMemberValuesInjector(IMemberValueSetter valueSetter, IInjectFlagsProvider injectsProvider, IMemberDeclarationTypeProvider declarationTypeProvider, IInjectValueProvider injectValueProvider)
         {
             ValueSetter = valueSetter;
-            TypedMemberValueProvider = typedMemberValueProvider;
             InjectsProvider = injectsProvider;
             DeclarationTypeProvider = declarationTypeProvider;
+            InjectValueProvider = injectValueProvider;
         }
 
         public void InjectAll(IService service, IReadOnlyContainer container, object instance)
@@ -25,7 +25,7 @@ namespace Spencer.NET
             foreach (ServiceFlag injectFlag in injections)
             {
                 Type type = DeclarationTypeProvider.ProvideDeclarartionType(injectFlag.Member);
-                object value = TypedMemberValueProvider.ProvideValue(type, container);
+                object value = InjectValueProvider.ProvideValue(type, container); 
 
                 if (value == null)
                 {

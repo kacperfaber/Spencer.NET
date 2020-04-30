@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>Spencer.NET</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <authors>Kacper Faber</authors>
         <owners>kacpiitoziomal</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -17,5 +17,8 @@
         <language>english</language>
         <license type="expression">MIT</license>
         <summary>Smart IoC Container</summary>
+        <releaseNotes>
+            Constructructor takes interfaces as parameters does work.
+        </releaseNotes>
     </metadata>
 </package>

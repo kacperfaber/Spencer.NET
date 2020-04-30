@@ -47,10 +47,9 @@ namespace Spencer.NET.Tests
             object instance = Activator.CreateInstance<T>();
 
             ObjectPostProcessor postProcessor = new ObjectPostProcessor(new InstanceMembersValueInjector(new MemberValueSetter(), new InstanceMembersFinder()),
-                new InjectMemberValuesInjector(new MemberValueSetter(), new TypedMemberValueProvider(), new InjectFlagsProvider(),
-                    new MemberDeclarationTypeProvider()),
-                new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(), new TypedMemberValueProvider(),
-                    new MemberValueSetter()),
+                new InjectMemberValuesInjector(new MemberValueSetter(), new InjectFlagsProvider(), new MemberDeclarationTypeProvider(), new InjectValueProvider()),
+                new TryInjectMemberValuesInjector(new ServiceAttributeProvider(), new MemberDeclarationTypeProvider(),
+                    new MemberValueSetter(),new InjectValueProvider()),
                 new AutoMemberValuesInjector(new MemberDeclarationTypeProvider(), new ServiceAttributeProvider(),
                     new AutoValueGenerator(
                         new IsEnumerableChecker(new GenericTypeGenerator(), new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker()),
