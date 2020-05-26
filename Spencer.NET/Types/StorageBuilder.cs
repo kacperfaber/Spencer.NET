@@ -9,6 +9,7 @@ namespace Spencer.NET
         private IServicesGenerator ServicesGenerator;
         private IServiceRegistrar ServiceRegistrar;
         private IAssemblyRegistrar AssemblyRegistrar;
+        public IConstructorParametersByObjectsGenerator ConstructorParametersGenerator;
 
         public StorageBuilder(Storage storage = null) : base(storage)
         {
@@ -66,21 +67,25 @@ namespace Spencer.NET
 
         public StorageBuilder Register<T>(params object[] constructorParameters)
         {
+            IConstructorParameters parameters = ConstructorParametersGenerator.GenerateParameters(constructorParameters);
+
             return Update(x =>
             {
                 Type type = typeof(T);
                 AssemblyRegistrar.RegisterIfNotExist(x.Assemblies, type.Assembly);
-                IEnumerable<IService> services = ServicesGenerator.GenerateServices(typeof(T), Object.Assemblies, null);
+                IEnumerable<IService> services = ServicesGenerator.GenerateServices(typeof(T), Object.Assemblies, null, parameters);
                 ServiceRegistrar.Register(Object.Services, services);
             });
         }
 
         public StorageBuilder Register(Type type, params object[] constructorParameters)
         {
+            IConstructorParameters parameters = ConstructorParametersGenerator.GenerateParameters(constructorParameters);
+            
             return Update(x =>
             {
                 AssemblyRegistrar.RegisterIfNotExist(x.Assemblies, type.Assembly);
-                IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Object.Assemblies, null);
+                IEnumerable<IService> services = ServicesGenerator.GenerateServices(type, Object.Assemblies, null, parameters);
                 ServiceRegistrar.Register(Object.Services, services);
             });
         }

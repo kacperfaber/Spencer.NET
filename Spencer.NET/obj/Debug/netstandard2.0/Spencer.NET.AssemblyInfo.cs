@@ -10,12 +10,15 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Odie.Container")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Kacper Faber")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("Kacper Faber")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("Spencer.NET is open-source IoC container for .NET made for frameworks and class l" +
+    "ibraries.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("Odie.Container")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Odie.Container")]
+[assembly: System.Reflection.AssemblyProductAttribute("Spencer.NET")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Spencer.NET")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Wygenerowane przez klasę WriteCodeFragment programu MSBuild.
