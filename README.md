@@ -32,7 +32,7 @@ Instead `FactoryResult(Type)` attribute you can use `Factory(Type)`.
 
 
 FactoryResult class is Obsolete now.
-> Changed README.md
+
 
 <br>
 
