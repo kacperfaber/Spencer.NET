@@ -19,14 +19,22 @@ namespace Spencer.NET.Tests
             public static int World() => 0;
 
             public static string Main() => "";
+
+            [Factory(typeof(string))]
+            public static object FactoryOne() => "MODEL() ADD FIELD(SET NAME=X)";
+
+            [Factory(typeof(object))]
+            public static int FactoryTwo() => 0;
         }
 
         Type exec(string name)
         {
-            IMember member = new MemberGenerator(new MemberFlagsGenerator()).GenerateMember(typeof(TestClass).GetMembers().Where(x => x.Name.ToLower() == name.ToLower()).First());
+            IMember member =
+                new MemberGenerator(new MemberFlagsGenerator()).GenerateMember(typeof(TestClass).GetMembers().Where(x => x.Name.ToLower() == name.ToLower())
+                    .First());
 
-            return new FactoryResultTypeGenerator(new FactoryResultExistChecker(new AttributesFinder()), new FactoryResultTypeProvider(new AttributesFinder()),
-                    new MemberDeclarationTypeProvider(), new AssignableChecker())
+            return new FactoryResultTypeGenerator(new FactoryTypeProvider(new AssignableChecker()), new FactoryResultAttributeProvider(),
+                    new AttributesFinder(), new MemberDeclarationTypeProvider())
                 .GenerateResultType(member);
         }
 
@@ -34,6 +42,24 @@ namespace Spencer.NET.Tests
         public void dont_throws_exceptions()
         {
             Assert.DoesNotThrow(() => exec("hello"));
+        }
+
+        [Test]
+        public void dont_throws_exceptions_if_used_was_FactoryAttribute()
+        {
+            Assert.DoesNotThrow(() => exec("FactoryOne"));
+        }
+
+        [Test]
+        public void returns_String_if_used_was_FactoryOne_with_FactoryAttribute()
+        {
+            Assert.IsTrue(exec("FactoryOne") == typeof(string));
+        }
+
+        [Test]
+        public void returns_int_if_used_was_FactoryAttribute_and_attribute_ResultType_was_object()
+        {
+            Assert.IsTrue(exec("FactoryTwo") == typeof(int));
         }
 
         [Test]

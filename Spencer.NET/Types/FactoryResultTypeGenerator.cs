@@ -5,42 +5,31 @@ namespace Spencer.NET
 {
     public class FactoryResultTypeGenerator : IFactoryResultTypeGenerator
     {
-        public IFactoryResultExistChecker ResultExistChecker;
-        public IFactoryResultTypeProvider ResultTypeProvider;
         public IMemberDeclarationTypeProvider DeclarationTypeProvider;
-        public IAssignableChecker AssignableChecker;
         public IAttributesFinder AttributesFinder;
-        public ITypedFactoryExistChecker TypedFactoryExistChecker;
+        public IFactoryResultAttributeProvider FactoryResultAttributeProvider;
+        public IFactoryTypeProvider FactoryTypeProvider;
 
-        public FactoryResultTypeGenerator(IFactoryResultExistChecker resultExistChecker, IFactoryResultTypeProvider resultTypeProvider, IMemberDeclarationTypeProvider declarationTypeProvider, IAssignableChecker assignableChecker)
+        public FactoryResultTypeGenerator(IFactoryTypeProvider factoryTypeProvider, IFactoryResultAttributeProvider factoryResultAttributeProvider, IAttributesFinder attributesFinder, IMemberDeclarationTypeProvider declarationTypeProvider)
         {
-            ResultExistChecker = resultExistChecker;
-            ResultTypeProvider = resultTypeProvider;
+            FactoryTypeProvider = factoryTypeProvider;
+            FactoryResultAttributeProvider = factoryResultAttributeProvider;
+            AttributesFinder = attributesFinder;
             DeclarationTypeProvider = declarationTypeProvider;
-            AssignableChecker = assignableChecker;
         }
 
         public Type GenerateResultType(IMember member)
         {
-            Type returnType = DeclarationTypeProvider.ProvideDeclarartionType(member);
+            Type declarationType = DeclarationTypeProvider.ProvideDeclarartionType(member);
             IEnumerable<Attribute> attributes = AttributesFinder.FindAttributes<Attribute>(member);
+            Attribute attr = FactoryResultAttributeProvider.ProvideAttributeOrNull(attributes);
 
-            if (ResultExistChecker.Check(member))
+            if (attr == null)
             {
-                Type resultType = ResultTypeProvider.ProvideResultType(member);
-
-                if (AssignableChecker.Check(resultType, returnType))
-                {
-                    return resultType;
-                }
-            }
-            
-            else if (TypedFactoryExistChecker.CheckExist(attributes))
-            {
-                
+                return declarationType;
             }
 
-            return returnType;
+            return FactoryTypeProvider.ProvideType(declarationType, attr);
         }
     }
 }
