@@ -25,14 +25,15 @@ Kacper Faber, Poland
 * 1.0 (29.04.2020)
 * 1.0.1 (30.04.2020)
 * 1.0.2 (26.05.2020)
+* 1.0.2-1 (26.05.2020)
+
+<br>
+
 
 ### Changelog
 
-Instead `FactoryResult(Type)` attribute you can use `Factory(Type)`.
-
-
-FactoryResult class is Obsolete now.
-
+`StorageBuilder.Register<T>(params object[])` and `StorageBuilder.Register(Type, params object[])`
+working now
 
 <br>
 
@@ -118,7 +119,7 @@ Prefered way is using `StorageBuilder` class.
 ><br>
 >Registering class or interface
 
->`StorageBuilder.Register<T>(params object[]):StorageBuilder`
+>`StorageBuilder.Register<T>(params object[]):StorageBuilder` (issue fixed in v1.0.2-1)
 ><br>
 >Registering **generic T** as class or interface with
 ><br>
@@ -126,7 +127,7 @@ Prefered way is using `StorageBuilder` class.
 ><br>
 >with compatible parameters
 
->`StorageBuilder.Register(Type, params object[]):StorageBuilder`
+>`StorageBuilder.Register(Type, params object[]):StorageBuilder` (issue fixed in v1.0.2-1)
 ><br>
 >Registering class or interface using constructor
 ><br>
