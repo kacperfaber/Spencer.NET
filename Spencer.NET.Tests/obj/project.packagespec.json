@@ -6,10 +6,6 @@
     "projectPath": "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\Spencer.NET.Tests\\Spencer.NET.Tests.csproj",
     "outputPath": "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\Spencer.NET.Tests\\obj\\",
     "projectStyle": "PackageReference",
-    "fallbackFolders": [
-      "C:\\Microsoft\\Xamarin\\NuGet",
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-    ],
     "originalTargetFrameworks": [
       "netcoreapp3.1"
     ],

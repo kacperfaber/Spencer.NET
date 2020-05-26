@@ -6,10 +6,6 @@
     "projectPath": "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\Spencer.NET\\Spencer.NET.csproj",
     "outputPath": "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\Spencer.NET\\obj\\",
     "projectStyle": "PackageReference",
-    "fallbackFolders": [
-      "C:\\Microsoft\\Xamarin\\NuGet",
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-    ],
     "originalTargetFrameworks": [
       "netstandard2.0"
     ],

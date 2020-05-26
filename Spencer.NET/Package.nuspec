@@ -12,7 +12,7 @@
         <repository type="git" url="https://github.com/kacperfaber/Spencer.NET"/>
         <title>Spencer.NET</title>
         <tags>
-            container,ioc-container,net-container,opensource,open-source,spencer,spencer.net,dependency-injection,solid,ioc
+            container,ioc-container,net-container,opensource,open-source,spencer,spencer.net,dependency-injection,solid,ioc,spencernet
         </tags>
         <language>english</language>
         <license type="expression">MIT</license>

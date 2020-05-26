@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Spencer.NET
 {
@@ -8,6 +9,8 @@ namespace Spencer.NET
         public IFactoryResultTypeProvider ResultTypeProvider;
         public IMemberDeclarationTypeProvider DeclarationTypeProvider;
         public IAssignableChecker AssignableChecker;
+        public IAttributesFinder AttributesFinder;
+        public ITypedFactoryExistChecker TypedFactoryExistChecker;
 
         public FactoryResultTypeGenerator(IFactoryResultExistChecker resultExistChecker, IFactoryResultTypeProvider resultTypeProvider, IMemberDeclarationTypeProvider declarationTypeProvider, IAssignableChecker assignableChecker)
         {
@@ -20,6 +23,7 @@ namespace Spencer.NET
         public Type GenerateResultType(IMember member)
         {
             Type returnType = DeclarationTypeProvider.ProvideDeclarartionType(member);
+            IEnumerable<Attribute> attributes = AttributesFinder.FindAttributes<Attribute>(member);
 
             if (ResultExistChecker.Check(member))
             {
@@ -29,6 +33,11 @@ namespace Spencer.NET
                 {
                     return resultType;
                 }
+            }
+            
+            else if (TypedFactoryExistChecker.CheckExist(attributes))
+            {
+                
             }
 
             return returnType;
