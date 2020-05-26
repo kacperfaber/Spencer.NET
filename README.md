@@ -24,6 +24,17 @@ Kacper Faber, Poland
 
 * 1.0 (29.04.2020)
 * 1.0.1 (30.04.2020)
+<<<<<<< HEAD
+=======
+* 1.0.2 (26.05.2020)
+
+### Changelog
+
+Instead `FactoryResult(Type)` attribute you can use `Factory(Type)`.
+
+
+FactoryResult class is Obsolete now.
+>>>>>>> Changed README.md
 
 <br>
 
@@ -178,8 +189,12 @@ if any constructor will be find automatically
 
 * `Factory` 
 pointing to static method, which 
-will be used to instantiate new instance of class
+will be used to instantiate new instance of a class
 <br>
+
+* `Factory (Type)` pointing to static method, which
+will be used to instantiate new instance of a class.
+Using Type argument to set real return type e.g factory returns `System.String` as `System.Object`
 
 * `FactoryResult (Type)` 
 expanding factory method for good type 
@@ -324,9 +339,9 @@ interface ITest
 class Test : ITest
 {
     Test() {}
-        
-    [Factory]
-    [FactoryResult(typeof(Test))
+       
+    // Use it instead FactoryResult
+    [Factory(typeof(Test))]
     public static ITest FactoryMethod() => new Test();
 }
 ```
