@@ -24,8 +24,6 @@ Kacper Faber, Poland
 
 * 1.0 (29.04.2020)
 * 1.0.1 (30.04.2020)
-<<<<<<< HEAD
-=======
 * 1.0.2 (26.05.2020)
 
 ### Changelog
@@ -34,7 +32,7 @@ Instead `FactoryResult(Type)` attribute you can use `Factory(Type)`.
 
 
 FactoryResult class is Obsolete now.
->>>>>>> Changed README.md
+> Changed README.md
 
 <br>
 
