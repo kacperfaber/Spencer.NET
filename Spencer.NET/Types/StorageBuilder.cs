@@ -42,6 +42,8 @@ namespace Spencer.NET
                         new ParametersValuesExtractor())), new ServiceIsAutoValueChecker()), new ServiceInstanceChecker(), new RegistratedServicesFilter());
 
             AssemblyRegistrar = new AssemblyRegistrar(new AssemblyListAdder(), new AssemblyListContainsChecker());
+            
+            ConstructorParametersGenerator = new ConstructorParametersByObjectsGenerator(new TypeGetter());
         }
 
         public StorageBuilder Register(Type type)
