@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Spencer.NET
 {
@@ -16,13 +17,16 @@ namespace Spencer.NET
 
         public IEnumerable<IInterface> GenerateInterfaces(ServiceFlags flags, Type type)
         {
-            IEnumerable<Type> interfaces = Filter.Filter(type.GetInterfaces());
-
-            foreach (Type i in interfaces)
+            if (flags.HasFlag(ServiceFlagConstants.AsImplementedInterfaces))
             {
-                if (!flags.HasFlag(ServiceFlagConstants.ExcludeType, i))
+                IEnumerable<Type> interfaces = Filter.Filter(type.GetInterfaces());
+
+                foreach (Type i in interfaces)
                 {
-                    yield return InterfaceGenerator.GenerateInterface(i);
+                    if (!flags.HasFlag(ServiceFlagConstants.ExcludeType, i))
+                    {
+                        yield return InterfaceGenerator.GenerateInterface(i);
+                    }
                 }
             }
         }

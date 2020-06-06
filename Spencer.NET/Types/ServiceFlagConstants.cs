@@ -2,6 +2,8 @@
 {
     public class ServiceFlagConstants
     {
+        public const string AsBaseType = "as_base_type";
+        public const string AsImplementedInterfaces = "as_implemented_interfaces";
         public const string TryInject = "try_inject";
         public const string Auto = "auto";
         public const string Instance = "singleton_instance";
