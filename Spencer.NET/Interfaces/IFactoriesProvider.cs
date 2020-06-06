@@ -4,6 +4,6 @@ namespace Spencer.NET
 {
     public interface IFactoriesProvider
     {
-        IEnumerable<IFactory> ProvideFactories(IService service);
+        IEnumerable<IFactory> ProvideFactories(ServiceFlags flags);
     }
 }

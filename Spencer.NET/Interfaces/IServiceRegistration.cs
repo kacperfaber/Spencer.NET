@@ -5,14 +5,8 @@ namespace Spencer.NET
 {
     public interface IServiceRegistration
     {
-        Type TargetType { get; set; }
-        
-        Type BaseType { get; set; }
-        
-        List<IInterface> Interfaces { get; set; }
+        public Type TargetType { get; set; }
 
-        IServiceGenericRegistration GenericRegistration { get; set; }
-
-        IConstructorParameters ConstructorParameter { get; set; }
+        public List<ServiceRegistrationFlag> RegistrationFlags { get; set; }
     }
 }

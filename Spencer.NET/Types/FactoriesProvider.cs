@@ -11,11 +11,11 @@ namespace Spencer.NET
             Generator = generator;
         }
 
-        public IEnumerable<IFactory> ProvideFactories(IService service)
+        public IEnumerable<IFactory> ProvideFactories(ServiceFlags flags)
         {
-            IEnumerable<ServiceFlag> factoriesFlags = service.Flags.GetFlags(ServiceFlagConstants.ServiceFactory);
+            IEnumerable<ServiceFlag> factories = flags.GetFlags(ServiceFlagConstants.ServiceFactory);
 
-            foreach (ServiceFlag flag in factoriesFlags)
+            foreach (ServiceFlag flag in factories)
             {
                 yield return Generator.GenerateFactory(flag.Member);
             }
