@@ -30,6 +30,15 @@ Kacper Faber, Poland
 
 <br>
 
+### Previews
+
+* 1.1 (07.2020)
+     * Advanced `ContainerBuilder`
+     * Object initialization process optymalization
+
+
+<br>
+
 
 ### Changelog
 
