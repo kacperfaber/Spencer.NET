@@ -18,7 +18,7 @@ namespace Spencer.NET
                 return MethodInstanceCreator.CreateInstance(factory, readOnlyContainer);
             }
             
-            throw new NotImplementedException("Factory implements only .StaticMethod [0x0]");
+            throw new NotImplementedException("Sorry, but factory implements only .StaticMethod [0x0]");
         }
     }
 }
