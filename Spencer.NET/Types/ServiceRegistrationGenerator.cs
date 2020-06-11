@@ -11,7 +11,8 @@ namespace Spencer.NET
         public IServiceGenericRegistrationGenerator ServiceGenericRegistrationGenerator;
         public IServiceRegistrationFlagGenerator RegistrationFlagsGenerator;
 
-        public ServiceRegistrationGenerator(IServiceRegistrationBaseTypeProvider baseTypeProvider, IServiceRegistrationInterfacesGenerator interfacesGenerator, IServiceGenericRegistrationGenerator serviceGenericRegistrationGenerator)
+        public ServiceRegistrationGenerator(IServiceRegistrationBaseTypeProvider baseTypeProvider, IServiceRegistrationInterfacesGenerator interfacesGenerator,
+            IServiceGenericRegistrationGenerator serviceGenericRegistrationGenerator)
         {
             InterfacesGenerator = interfacesGenerator;
             ServiceGenericRegistrationGenerator = serviceGenericRegistrationGenerator;
@@ -20,7 +21,11 @@ namespace Spencer.NET
 
         public IServiceRegistration Generate(ServiceFlags flags, Type type, object instance = null, IConstructorParameters constructorParameters = null)
         {
-            
+            return new ServiceRegistration()
+            {
+                TargetType = type,
+                RegistrationFlags = RegistrationFlagsGenerator.GenerateFlags(flags, type, instance, constructorParameters)
+            };
         }
     }
 }

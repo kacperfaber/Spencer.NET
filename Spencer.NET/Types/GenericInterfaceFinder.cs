@@ -18,7 +18,7 @@ namespace Spencer.NET
         {
             List<IService> services = list.GetServices();
 
-            
+            throw new NotImplementedException();
         }
 
         public IEnumerable<IService> FindInterfaces(IServiceList list, Type @interface)

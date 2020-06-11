@@ -2,6 +2,7 @@
 {
     public class RegistrationFlagConstants
     {
+        public const int ConstructorParameters = 0x8241;
         public const int AsInterface = 0x0124521;
         public const int AsClass = 0x0829512;
         public const int HasConstructorParameters = 0x01252155;

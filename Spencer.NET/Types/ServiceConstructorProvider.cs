@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Spencer.NET.Extensions;
 
 namespace Spencer.NET
 {
@@ -28,7 +29,7 @@ namespace Spencer.NET
             {
                 ConstructorInfo[] constructorInfos = InfoListGenerator.GenerateList(service.Registration.TargetType);
                 IEnumerable<IConstructor> constructors = ListGenerator.GenerateList(constructorInfos);
-                IConstructor constructor = ConstructorFinder.FindBy(constructors, service.Registration.ConstructorParameter);
+                IConstructor constructor = ConstructorFinder.FindBy(constructors, service.Registration.RegistrationFlags.SelectValue<IConstructorParameters>(RegistrationFlagConstants.ConstructorParameters));
 
                 return constructor;
             }

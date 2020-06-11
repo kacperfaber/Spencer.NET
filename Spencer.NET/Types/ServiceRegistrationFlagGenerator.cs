@@ -24,18 +24,22 @@ namespace Spencer.NET
 
             if (baseType != null)
             {
-                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.AsBaseClass, baseType);
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.AsClass, baseType);
             }
 
-            if (InterfacesGenerator.GenerateInterfaces(flags, type).Any())
+            IEnumerable<IInterface> interfaces = InterfacesGenerator.GenerateInterfaces(flags, type);
+            if (interfaces.Any())
             {
-                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.AsImplementedInterfaces, null);
+                foreach (IInterface @interface in interfaces)
+                {
+                    yield return new ServiceRegistrationFlag(RegistrationFlagConstants.AsInterface, @interface);
+                }
             }
 
             // TODO change to IConstructor
             ConstructorInfo[] constructors = type.GetConstructors();
             ConstructorInfo defaultConstructor = constructors.Where(x => x.GetParameters().Length == 0).FirstOrDefault();
-            
+
             if (defaultConstructor != null)
             {
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.DefaultConstructor, defaultConstructor);
@@ -45,14 +49,9 @@ namespace Spencer.NET
             {
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.Constructor, constructor);
             }
-
-            foreach (IFactory factory in FactoriesProvider.ProvideFactories(TODO))
-            {
-                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.Factory, factory);
-            }
-
-            Type[] genericArguments = type.GetGenericArguments();
             
+            Type[] genericArguments = type.GetGenericArguments();
+
             if (genericArguments.Any())
             {
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.HasGenericParameters, null);

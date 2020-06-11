@@ -7,6 +7,6 @@ namespace Spencer.NET
     {
         public Type TargetType { get; set; }
 
-        public List<ServiceRegistrationFlag> RegistrationFlags { get; set; }
+        public IEnumerable<ServiceRegistrationFlag> RegistrationFlags { get; set; }
     }
 }
