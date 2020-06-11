@@ -11,5 +11,7 @@
         public int Code { get; set; }
 
         public object Value { get; set; }
+        
+        public IMember Member { get; set; }
     }
 }

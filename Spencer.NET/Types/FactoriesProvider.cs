@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Spencer.NET
 {
@@ -11,11 +12,13 @@ namespace Spencer.NET
             Generator = generator;
         }
 
-        public IEnumerable<IFactory> ProvideFactories(ServiceFlags flags)
+        public IEnumerable<IFactory> ProvideFactories(IEnumerable<ServiceRegistrationFlag> registrationFlags)
         {
-            IEnumerable<ServiceFlag> factories = flags.GetFlags(ServiceFlagConstants.ServiceFactory);
+            IEnumerable<ServiceRegistrationFlag> factories = registrationFlags
+                .Where(x => x.Code == RegistrationFlagConstants.Factory)
+                .Where(x => x.Member != null);
 
-            foreach (ServiceFlag flag in factories)
+            foreach (ServiceRegistrationFlag flag in factories)
             {
                 yield return Generator.GenerateFactory(flag.Member);
             }

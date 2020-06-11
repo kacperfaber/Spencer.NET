@@ -9,9 +9,9 @@ namespace Spencer.NET
         {
         }
 
-        public ServiceRegistrationBuilder AddFlag(string name, object value)
+        public ServiceRegistrationBuilder AddFlag(int name, object value)
         {
-            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag {Code = name, Value = value}));
+            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag (name, value)));
         }
     }
 }

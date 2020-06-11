@@ -46,7 +46,7 @@ namespace Spencer.NET
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.Constructor, constructor);
             }
 
-            foreach (IFactory factory in FactoriesProvider.ProvideFactories(flags))
+            foreach (IFactory factory in FactoriesProvider.ProvideFactories(TODO))
             {
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.Factory, factory);
             }

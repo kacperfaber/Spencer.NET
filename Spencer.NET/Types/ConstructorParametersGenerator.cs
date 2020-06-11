@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Spencer.NET
 {
@@ -64,7 +65,8 @@ namespace Spencer.NET
 
             if (ServiceHasConstructorParametersChecker.Check(service))
             {
-                return GenerateParameters(constructor, service.Registration.ConstructorParameter);
+                return GenerateParameters(constructor,
+                    service.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.HasConstructorParameters).Value as IConstructorParameters);
             }
 
             else

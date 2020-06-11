@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Spencer.NET.Extensions;
 
 namespace Spencer.NET
 {
@@ -19,9 +20,9 @@ namespace Spencer.NET
 
             return list
                 .GetServices()
-                .Where(x => x.Registration.GenericRegistration.HasGenericParameters)
-                .Where(x => x.Registration.GenericRegistration.GenericParameters.Count() == keyParameters.Count())
-                .Where(x => x.Registration.GenericRegistration.GenericParameters.SequenceEqual(keyParameters))
+                .Where(x => x.Registration.RegistrationFlags.Has(RegistrationFlagConstants.HasGenericParameters))
+                .Where(x => x.Registration.RegistrationFlags.SelectValue<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).Count() == keyParameters.Count())
+                .Where(x => x.Registration.RegistrationFlags.SelectValue<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).SequenceEqual(keyParameters))
                 .FirstOrDefault();
         }
 
@@ -31,9 +32,9 @@ namespace Spencer.NET
 
             return list
                 .GetServices()
-                .Where(x => x.Registration.GenericRegistration.HasGenericParameters)
-                .Where(x => x.Registration.GenericRegistration.GenericParameters.Count() == keyParameters.Count())
-                .Where(x => x.Registration.GenericRegistration.GenericParameters.SequenceEqual(keyParameters));
+                .Where(x => x.Registration.RegistrationFlags.Has(RegistrationFlagConstants.HasGenericParameters))
+                .Where(x => x.Registration.RegistrationFlags.SelectValue<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).Count() == keyParameters.Count())
+                .Where(x => x.Registration.RegistrationFlags.SelectValue<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).SequenceEqual(keyParameters))
         }
     }
 }
