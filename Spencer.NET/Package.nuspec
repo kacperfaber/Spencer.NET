@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>Spencer.NET</id>
-        <version>1.0.2.2</version>
+        <version>1.0.5</version>
         <authors>Kacper Faber</authors>
         <owners>kacpiitoziomal</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -17,7 +17,7 @@
         <license type="expression">MIT</license>
         <summary>Smart IoC Container</summary>
         <releaseNotes>
-            Fixing issue with constructor parameters feature in StorageBuilder.
+            Architecture optymalization at service registration process.
         </releaseNotes>
     </metadata>
 </package>
