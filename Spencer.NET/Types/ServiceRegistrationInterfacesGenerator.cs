@@ -17,16 +17,13 @@ namespace Spencer.NET
 
         public IEnumerable<IInterface> GenerateInterfaces(ServiceFlags flags, Type type)
         {
-            if (flags.HasFlag(ServiceFlagConstants.AsImplementedInterfaces))
-            {
-                IEnumerable<Type> interfaces = Filter.Filter(type.GetInterfaces());
+            IEnumerable<Type> interfaces = Filter.Filter(type.GetInterfaces());
 
-                foreach (Type i in interfaces)
+            foreach (Type i in interfaces)
+            {
+                if (!flags.HasFlag(ServiceFlagConstants.ExcludeType, i))
                 {
-                    if (!flags.HasFlag(ServiceFlagConstants.ExcludeType, i))
-                    {
-                        yield return InterfaceGenerator.GenerateInterface(i);
-                    }
+                    yield return InterfaceGenerator.GenerateInterface(i);
                 }
             }
         }

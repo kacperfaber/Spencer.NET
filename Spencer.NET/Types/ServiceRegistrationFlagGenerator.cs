@@ -36,12 +36,10 @@ namespace Spencer.NET
             }
 
             IEnumerable<IInterface> interfaces = InterfacesGenerator.GenerateInterfaces(flags, type);
-            if (interfaces.Any())
+
+            foreach (IInterface @interface in interfaces)
             {
-                foreach (IInterface @interface in interfaces)
-                {
-                    yield return new ServiceRegistrationFlag(RegistrationFlagConstants.AsInterface, @interface);
-                }
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.AsInterface, @interface);
             }
 
             // TODO change to IConstructor

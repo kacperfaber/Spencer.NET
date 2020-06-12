@@ -22,7 +22,7 @@ namespace Spencer.NET
                 IEnumerable<IInterface> interfaces = InterfacesExtractor.ExtractInterfaces(service.Registration);
 
                 IEnumerable<IInterface> matchingInterfaces = interfaces
-                    .Where(x => x.HasGenericArguments)
+                    .Where(x => !x.HasGenericArguments)
                     .Where(x => Comparer.Compare(@interface, x.Type));
 
                 if (matchingInterfaces.Any())
@@ -31,7 +31,7 @@ namespace Spencer.NET
                 }
             }
 
-            throw new InvalidOperationException();
+            return null;
         }
 
         public IEnumerable<IService> FindManyByInterface(IServiceList list, Type @interface)
@@ -41,7 +41,7 @@ namespace Spencer.NET
                 IEnumerable<IInterface> interfaces = InterfacesExtractor.ExtractInterfaces(service.Registration);
 
                 IEnumerable<IInterface> matchingInterfaces = interfaces
-                    .Where(x => x.HasGenericArguments)
+                    .Where(x => !x.HasGenericArguments)
                     .Where(x => Comparer.Compare(@interface, x.Type));
 
                 if (matchingInterfaces.Any())
