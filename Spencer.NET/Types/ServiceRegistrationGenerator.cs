@@ -5,20 +5,13 @@ namespace Spencer.NET
 {
     public class ServiceRegistrationGenerator : IServiceRegistrationGenerator
     {
-        public IServiceRegistrationInterfacesGenerator InterfacesGenerator;
-        public IServiceRegistrationBaseTypeProvider BaseTypeProvider;
-        public IInstanceCreator InstanceCreator;
-        public IServiceGenericRegistrationGenerator ServiceGenericRegistrationGenerator;
         public IServiceRegistrationFlagGenerator RegistrationFlagsGenerator;
 
-        public ServiceRegistrationGenerator(IServiceRegistrationBaseTypeProvider baseTypeProvider, IServiceRegistrationInterfacesGenerator interfacesGenerator,
-            IServiceGenericRegistrationGenerator serviceGenericRegistrationGenerator)
+        public ServiceRegistrationGenerator(IServiceRegistrationFlagGenerator registrationFlagsGenerator)
         {
-            InterfacesGenerator = interfacesGenerator;
-            ServiceGenericRegistrationGenerator = serviceGenericRegistrationGenerator;
-            BaseTypeProvider = baseTypeProvider;
+            RegistrationFlagsGenerator = registrationFlagsGenerator;
         }
-
+        
         public IServiceRegistration Generate(ServiceFlags flags, Type type, object instance = null, IConstructorParameters constructorParameters = null)
         {
             return new ServiceRegistration()

@@ -76,7 +76,7 @@ namespace Spencer.NET.Tests
 
             IService service = container.Storage.Services.GetServices().FirstOrDefault(x => x.Registration.TargetType == typeof(AutoValue));
             
-            Assert.IsNotEmpty(service.Registration.Interfaces);
+            Assert.IsNotEmpty(service.Registration.RegistrationFlags.Where(x => x.Code == RegistrationFlagConstants.AsInterface));
         }
 
         [Test]

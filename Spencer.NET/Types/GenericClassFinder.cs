@@ -34,7 +34,8 @@ namespace Spencer.NET
                 .GetServices()
                 .Where(x => x.Registration.RegistrationFlags.Has(RegistrationFlagConstants.HasGenericParameters))
                 .Where(x => x.Registration.RegistrationFlags.SelectValue<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).Count() == keyParameters.Count())
-                .Where(x => x.Registration.RegistrationFlags.SelectValue<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).SequenceEqual(keyParameters))
+                .Where(x => x.Registration.RegistrationFlags.SelectValue<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).SequenceEqual(keyParameters));
+
         }
     }
 }

@@ -32,8 +32,6 @@ namespace Spencer.NET.Tests
         {
             IServiceRegistration serviceRegistration = new ServiceRegistrationBuilder()
                 .AddType(typeof(T))
-                .AddBaseType(typeof(T).BaseType)
-                .AddGenericRegistration(new ServiceGenericRegistration() {HasGenericParameters = false})
                 .Build();
 
             ServiceFlags flags = new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())).ProvideFlags(typeof(T));

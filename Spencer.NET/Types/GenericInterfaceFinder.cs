@@ -10,14 +10,29 @@ namespace Spencer.NET
         public IGenericTypesComparer Comparer;
         public IInterfacesExtractor InterfacesExtractor;
 
-        public GenericInterfaceFinder(IGenericTypesComparer comparer)
+        public GenericInterfaceFinder(IGenericTypesComparer comparer, IInterfacesExtractor interfacesExtractor)
         {
             Comparer = comparer;
+            InterfacesExtractor = interfacesExtractor;
         }
 
         public IService FindInterface(IServiceList list, Type @interface)
         {
-            
+            foreach (IService service in list.GetServices())
+            {
+                IEnumerable<IInterface> interfaces = InterfacesExtractor.ExtractInterfaces(service.Registration);
+
+                IEnumerable<IInterface> matchingInterfaces = interfaces
+                    .Where(x => x.HasGenericArguments)
+                    .Where(x => Comparer.Compare(@interface, x.Type));
+
+                if (matchingInterfaces.Any())
+                {
+                    return service;
+                }
+            }
+
+            throw new InvalidOperationException();
         }
 
         public IEnumerable<IService> FindInterfaces(IServiceList list, Type @interface)

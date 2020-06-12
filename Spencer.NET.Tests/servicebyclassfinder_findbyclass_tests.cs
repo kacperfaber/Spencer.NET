@@ -25,7 +25,7 @@ namespace Spencer.NET.Tests
         IService exec<T>()
         {
             ServiceList list = new ServiceList();
-            ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()), new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(),new MemberGenerator(new MemberFlagsGenerator())), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new ServiceInfoGenerator(),new ClassHasServiceFactoryChecker(), new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(new TypedMemberValueProvider(),new ConstructorParameterByTypeFinder(), new ServiceHasConstructorParametersChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ParametersValuesExtractor()))), new ServiceFactoryInvoker()));
+            ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()), new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(),new MemberGenerator(new MemberFlagsGenerator())), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new ServiceRegistrationFlagGenerator()), new ServiceInfoGenerator(),new ClassHasServiceFactoryChecker(), new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(new TypedMemberValueProvider(),new ConstructorParameterByTypeFinder(), new ServiceHasConstructorParametersChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ParametersValuesExtractor()))), new ServiceFactoryInvoker()));
 
             IEnumerable<IService> services1 = generator.GenerateServices(typeof(Test1), new AssemblyList(), null);
             IEnumerable<IService> services2 = generator.GenerateServices(typeof(Test2), new AssemblyList(), null);
@@ -59,13 +59,13 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_service_interfaces_count_equals_to_1_if_gived_type_is_test1()
         {
-            Assert.IsTrue(exec<Test1>().Registration.Interfaces.Count() == 1);
+            Assert.IsTrue(exec<Test1>().Registration.RegistrationFlags.Where(x => x.Code == RegistrationFlagConstants.AsInterface).Count() == 1);
         }
         
         [Test]
         public void returns_service_interfaces_count_equals_to_0_if_gived_type_is_test2()
         {
-            Assert.IsTrue(!exec<Test2>().Registration.Interfaces.Any());
+            Assert.IsTrue(!exec<Test2>().Registration.RegistrationFlags.Where(x => x.Code == RegistrationFlagConstants.AsInterface).Any());
         }
 
         [Test]

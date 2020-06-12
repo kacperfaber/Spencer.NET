@@ -17,11 +17,7 @@ namespace Spencer.NET
                 new ServiceGenerator(
                     new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())),
                         new ServiceFlagsIssuesResolver()),
-                    new ServiceRegistrationGenerator(new BaseTypeFinder(),
-                        new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),
-                            new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),
-                            new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
-                        new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
+                    new ServiceRegistrationGenerator(new ServiceRegistrationFlagGenerator()),
                     new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                         new ConstructorParametersGenerator(new TypedMemberValueProvider(), new ConstructorParameterByTypeFinder(),

@@ -25,9 +25,7 @@ namespace Spencer.NET.Tests
         {
             ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
                 new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(),new MemberGenerator(new MemberFlagsGenerator())), new ServiceFlagsIssuesResolver()),
-                    new ServiceRegistrationGenerator(new BaseTypeFinder(),
-                        new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
-                        new ServiceGenericRegistrationGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
+                    new ServiceRegistrationGenerator(new ServiceRegistrationFlagGenerator()),
                     new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                         new ConstructorParametersGenerator(new TypedMemberValueProvider(), new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker()), 
@@ -40,8 +38,8 @@ namespace Spencer.NET.Tests
             ServiceList list = new ServiceList();
             list.AddServices(test1, test2);
 
-            ServiceFinder finder = new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()), new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()))),
-                new ServiceByInterfaceFinder(), new ServiceByClassFinder(), new TypeIsClassValidator());
+            ServiceFinder finder = new ServiceFinder(new TypeContainsGenericParametersChecker(), new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()), new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()), new InterfacesExtractor())),
+                new ServiceByInterfaceFinder(new InterfacesExtractor(), new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer())), new ServiceByClassFinder(), new TypeIsClassValidator());
             
             return finder.Find(list, typeof(TKey));
         }
