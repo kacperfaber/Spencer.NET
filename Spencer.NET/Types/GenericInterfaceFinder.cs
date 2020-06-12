@@ -32,7 +32,7 @@ namespace Spencer.NET
                 }
             }
 
-            throw new InvalidOperationException();
+            return null;
         }
 
         public IEnumerable<IService> FindInterfaces(IServiceList list, Type @interface)

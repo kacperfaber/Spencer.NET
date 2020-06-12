@@ -63,6 +63,11 @@ namespace Spencer.NET
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.HasGenericParameters, null);
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.GenericParameters, genericArguments);
             }
+
+            foreach (ServiceFlag factoryFlag in flags.GetFlags(ServiceFlagConstants.ServiceFactory))
+            {
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.Factory, null) {Member = factoryFlag.Member};
+            }
         }
     }
 }
