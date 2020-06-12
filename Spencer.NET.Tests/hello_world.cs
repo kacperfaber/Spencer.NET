@@ -11,7 +11,6 @@ namespace Spencer.NET.Tests
             public string Name = "not-assigned";
 
             [Factory]
-            [FactoryResult(typeof(Odie))]
             public static Odie FactoryMethod(hello_world world)
             {
                 Console.WriteLine(world);
@@ -24,7 +23,6 @@ namespace Spencer.NET.Tests
         {
 #pragma warning disable
             [Factory]
-            [FactoryResult(typeof(HelloWorld))]
             public static HelloWorld GetWorld()
             {
                 return new HelloWorld()
@@ -67,6 +65,46 @@ namespace Spencer.NET.Tests
                 .Register<hello_world>()
                 .Register<Factory>()
                 .Build();
+        }
+
+        interface IFlorka
+        {
+        }
+
+        class Florka : IFlorka
+        {
+            [Inject]
+            public Tobi Tobi { get; set; }
+
+            public string Name { get; set; }
+
+            public Florka(string name)
+            {
+                Name = name;
+            }
+        }
+
+        class Tobi
+        {
+            public Tobi(string name)
+            {
+                Name = name;
+            }
+
+            public string Name { get; set; }
+        }
+
+        [Test]
+        public void another_test()
+        {
+            IStorage storage = new StorageBuilder()
+                .Register<Tobi>("Tobisiek")
+                .Register<Florka>("Florka potworka")
+                .Build();
+
+            IContainer container = ContainerFactory.Container(storage);
+
+            IFlorka florka = container.Resolve<IFlorka>();
         }
     }
 
