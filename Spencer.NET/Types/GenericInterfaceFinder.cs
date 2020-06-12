@@ -8,6 +8,7 @@ namespace Spencer.NET
     public class GenericInterfaceFinder : IGenericInterfaceFinder
     {
         public IGenericTypesComparer Comparer;
+        public IInterfacesExtractor InterfacesExtractor;
 
         public GenericInterfaceFinder(IGenericTypesComparer comparer)
         {
@@ -16,17 +17,31 @@ namespace Spencer.NET
 
         public IService FindInterface(IServiceList list, Type @interface)
         {
-            List<IService> services = list.GetServices();
-
-            throw new NotImplementedException();
+            
         }
 
         public IEnumerable<IService> FindInterfaces(IServiceList list, Type @interface)
         {
-            return list.GetServices()
-                .Where(x => x.Registration.Interfaces.Count > 0)
-                .Where(x => x.Registration.Interfaces.Where(x => x.HasGenericArguments).Any())
-                .Where(x => x.Registration.Interfaces.Where(x => Comparer.Compare(@interface, x.Type)).Any());
+            // return list.GetServices()
+            //     .Where(x => x.Registration.Interfaces.Count > 0)
+            //     .Where(x => x.Registration.Interfaces.Where(x => x.HasGenericArguments).Any())
+            //     .Where(x => x.Registration.Interfaces.Where(x => Comparer.Compare(@interface, x.Type)).Any());
+
+
+            // TODO provizory
+            foreach (IService service in list.GetServices())
+            {
+                IEnumerable<IInterface> interfaces = InterfacesExtractor.ExtractInterfaces(service.Registration);
+
+                IEnumerable<IInterface> matchingInterfaces = interfaces
+                    .Where(x => x.HasGenericArguments)
+                    .Where(x => Comparer.Compare(@interface, x.Type));
+
+                if (matchingInterfaces.Any())
+                {
+                    yield return service;
+                }
+            }
         }
     }
 }
