@@ -10,7 +10,12 @@ namespace Spencer.NET
     {
         public IBaseTypeFinder BaseTypeFinder;
         public IServiceRegistrationInterfacesGenerator InterfacesGenerator;
-        public IFactoriesProvider FactoriesProvider;
+
+        public ServiceRegistrationFlagGenerator(IBaseTypeFinder baseTypeFinder, IServiceRegistrationInterfacesGenerator interfacesGenerator)
+        {
+            BaseTypeFinder = baseTypeFinder;
+            InterfacesGenerator = interfacesGenerator;
+        }
 
         public IEnumerable<ServiceRegistrationFlag> GenerateFlags(ServiceFlags flags, Type type, object instance, IConstructorParameters constructorParameters)
         {
@@ -18,7 +23,10 @@ namespace Spencer.NET
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.HasInstance, instance);
 
             if (constructorParameters != null)
-                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.HasConstructorParameters, constructorParameters);
+            {
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.HasConstructorParameters, true);
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.ConstructorParameters, constructorParameters);
+            }
 
             Type baseType = BaseTypeFinder.GetBaseTypeAnotherOf(type, null, typeof(object));
 
@@ -49,7 +57,7 @@ namespace Spencer.NET
             {
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.Constructor, constructor);
             }
-            
+
             Type[] genericArguments = type.GetGenericArguments();
 
             if (genericArguments.Any())

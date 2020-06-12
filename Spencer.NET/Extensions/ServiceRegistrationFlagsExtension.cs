@@ -15,9 +15,9 @@ namespace Spencer.NET.Extensions
             return flags.SingleOrDefault(x => x.Code == code);
         }
         
-        public static T SelectValue<T>(this IEnumerable<ServiceRegistrationFlag> flags, int code)
+        public static T SelectValueOrNull<T>(this IEnumerable<ServiceRegistrationFlag> flags, int code) where T : class
         {
-            return (T) flags.SingleOrDefault(x => x.Code == code).Value;
+            return flags.SingleOrDefault(x => x.Code == code).Value as T;
         }
     }
 }

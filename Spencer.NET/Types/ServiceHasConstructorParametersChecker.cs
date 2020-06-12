@@ -7,7 +7,7 @@ namespace Spencer.NET
         public bool Check(IService service)
         {
             return service.Registration.RegistrationFlags.Has(RegistrationFlagConstants.HasConstructorParameters)
-                   && service.Registration.RegistrationFlags.SelectValue<IConstructorParameters>(RegistrationFlagConstants.ConstructorParameters) != null;
+                   && service.Registration.RegistrationFlags.SelectValueOrNull<IConstructorParameters>(RegistrationFlagConstants.ConstructorParameters) != null;
         }
     }
 }

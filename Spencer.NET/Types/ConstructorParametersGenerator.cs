@@ -65,8 +65,10 @@ namespace Spencer.NET
 
             if (ServiceHasConstructorParametersChecker.Check(service))
             {
-                return GenerateParameters(constructor,
-                    service.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.HasConstructorParameters).Value as IConstructorParameters);
+                object constructorParameters = service.Registration.RegistrationFlags
+                    .SingleOrDefault(x => x.Code == RegistrationFlagConstants.ConstructorParameters).Value;
+
+                return GenerateParameters(constructor, constructorParameters as IConstructorParameters);
             }
 
             else

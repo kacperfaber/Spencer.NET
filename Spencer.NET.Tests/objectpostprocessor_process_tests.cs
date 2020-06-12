@@ -92,7 +92,8 @@ namespace Spencer.NET.Tests
             IContainer container = ContainerFactory.Container();
             container.Register<Pet>();
 
-            Assert.IsTrue(exec<TestClass>(container).Pet is Pet);
+            TestClass test = exec<TestClass>(container);
+            Assert.IsTrue(test.Pet is Pet);
         }
 
         [Test]

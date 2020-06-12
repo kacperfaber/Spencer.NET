@@ -29,7 +29,7 @@ namespace Spencer.NET
             {
                 ConstructorInfo[] constructorInfos = InfoListGenerator.GenerateList(service.Registration.TargetType);
                 IEnumerable<IConstructor> constructors = ListGenerator.GenerateList(constructorInfos);
-                IConstructor constructor = ConstructorFinder.FindBy(constructors, service.Registration.RegistrationFlags.SelectValue<IConstructorParameters>(RegistrationFlagConstants.ConstructorParameters));
+                IConstructor constructor = ConstructorFinder.FindBy(constructors, service.Registration.RegistrationFlags.SelectValueOrNull<IConstructorParameters>(RegistrationFlagConstants.ConstructorParameters));
 
                 return constructor;
             }
