@@ -28,6 +28,7 @@ Kacper Faber, Poland
 * 1.0.2.1 (26.05.2020)
 * 1.0.2.2 (27.05.2020)
 * 1.0.5 (12.06.2020)
+* 1.0.6 (13.06.2020)
 
 <br>
 
@@ -43,8 +44,7 @@ Kacper Faber, Poland
 
 ### Changelog
 
-Code optymalization focused on service registration process.
-Fixed bug at `ContainerFactory.Container(IStorage)` method.
+Optymalized constructor choosing process.
 
 <br>
 

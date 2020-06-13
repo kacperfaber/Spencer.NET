@@ -10,11 +10,19 @@ namespace Spencer.NET
     {
         public IBaseTypeFinder BaseTypeFinder;
         public IServiceRegistrationInterfacesGenerator InterfacesGenerator;
+        public IConstructorGenerator ConstructorGenerator;
+        public IConstructorInfoListGenerator ConstructorInfoListGenerator;
+        public IDefaultConstructorInfoProvider DefaultConstructorInfoProvider;
 
-        public ServiceRegistrationFlagGenerator(IBaseTypeFinder baseTypeFinder, IServiceRegistrationInterfacesGenerator interfacesGenerator)
+        public ServiceRegistrationFlagGenerator(IBaseTypeFinder baseTypeFinder, IServiceRegistrationInterfacesGenerator interfacesGenerator,
+            IConstructorGenerator constructorGenerator, IConstructorInfoListGenerator constructorInfoListGenerator,
+            IDefaultConstructorInfoProvider defaultConstructorInfoProvider)
         {
             BaseTypeFinder = baseTypeFinder;
             InterfacesGenerator = interfacesGenerator;
+            ConstructorGenerator = constructorGenerator;
+            ConstructorInfoListGenerator = constructorInfoListGenerator;
+            DefaultConstructorInfoProvider = defaultConstructorInfoProvider;
         }
 
         public IEnumerable<ServiceRegistrationFlag> GenerateFlags(ServiceFlags flags, Type type, object instance, IConstructorParameters constructorParameters)
@@ -42,18 +50,32 @@ namespace Spencer.NET
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.AsInterface, @interface);
             }
 
-            // TODO change to IConstructor
-            ConstructorInfo[] constructors = type.GetConstructors();
-            ConstructorInfo defaultConstructor = constructors.Where(x => x.GetParameters().Length == 0).FirstOrDefault();
+            ConstructorInfo[] constructors = ConstructorInfoListGenerator.GenerateList(type);
 
-            if (defaultConstructor != null)
+            if (flags.HasFlag(ServiceFlagConstants.ServiceCtor))
             {
-                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.DefaultConstructor, defaultConstructor);
+                ServiceFlag flag = flags.GetFlag(ServiceFlagConstants.ServiceCtor);
+                IMember member = flag.Member;
+                IConstructor serviceConstructor = ConstructorGenerator.GenerateConstructor((ConstructorInfo) member.Instance);
+
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.DefaultConstructor, serviceConstructor);
+            }
+
+            else
+            {
+                ConstructorInfo defaultConstructorInfo = DefaultConstructorInfoProvider.ProvideDefaultConstructor(constructors);
+                IConstructor defaultConstructor = ConstructorGenerator.GenerateConstructor(defaultConstructorInfo);
+
+                if (defaultConstructor != null)
+                {
+                    yield return new ServiceRegistrationFlag(RegistrationFlagConstants.DefaultConstructor, defaultConstructor);
+                }
             }
 
             foreach (ConstructorInfo constructor in constructors)
             {
-                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.Constructor, constructor);
+                IConstructor ctor = ConstructorGenerator.GenerateConstructor(constructor);
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.Constructor, ctor);
             }
 
             Type[] genericArguments = type.GetGenericArguments();

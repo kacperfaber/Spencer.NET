@@ -6,13 +6,9 @@ namespace Spencer.NET
 {
     public class DefaultConstructorProvider : IDefaultConstructorProvider
     {
-        public ConstructorInfo ProvideDefaultConstructor(Type type)
+        public IConstructor ProvideDefaultConstructor(IService service)
         {
-            return type
-                .GetConstructors()
-                .Where(x => x.IsPublic)
-                .OrderBy(x => x.GetParameters().Length)
-                .First();
+            return (IConstructor) service.Registration.RegistrationFlags.First(x => x.Code == RegistrationFlagConstants.DefaultConstructor).Value;
         }
     }
 }

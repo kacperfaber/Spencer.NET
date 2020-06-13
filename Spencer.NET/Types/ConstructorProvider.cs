@@ -30,8 +30,7 @@ namespace Spencer.NET
                 }
             }
 
-            ConstructorInfo constructorInfo = DefaultConstructorProvider.ProvideDefaultConstructor(service.Registration.TargetType);
-            return ConstructorGenerator.GenerateConstructor(constructorInfo);
+            return DefaultConstructorProvider.ProvideDefaultConstructor(service);
         }
 
         public IConstructor ProvideConstructor(Type type)
