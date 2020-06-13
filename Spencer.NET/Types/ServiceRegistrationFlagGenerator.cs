@@ -14,10 +14,15 @@ namespace Spencer.NET
         public IConstructorInfoListGenerator ConstructorInfoListGenerator;
         public IDefaultConstructorInfoProvider DefaultConstructorInfoProvider;
 
-        public ServiceRegistrationFlagGenerator(IBaseTypeFinder baseTypeFinder, IServiceRegistrationInterfacesGenerator interfacesGenerator)
+        public ServiceRegistrationFlagGenerator(IBaseTypeFinder baseTypeFinder, IServiceRegistrationInterfacesGenerator interfacesGenerator,
+            IConstructorGenerator constructorGenerator, IConstructorInfoListGenerator constructorInfoListGenerator,
+            IDefaultConstructorInfoProvider defaultConstructorInfoProvider)
         {
             BaseTypeFinder = baseTypeFinder;
             InterfacesGenerator = interfacesGenerator;
+            ConstructorGenerator = constructorGenerator;
+            ConstructorInfoListGenerator = constructorInfoListGenerator;
+            DefaultConstructorInfoProvider = defaultConstructorInfoProvider;
         }
 
         public IEnumerable<ServiceRegistrationFlag> GenerateFlags(ServiceFlags flags, Type type, object instance, IConstructorParameters constructorParameters)
@@ -46,12 +51,25 @@ namespace Spencer.NET
             }
 
             ConstructorInfo[] constructors = ConstructorInfoListGenerator.GenerateList(type);
-            ConstructorInfo defaultConstructorInfo = DefaultConstructorInfoProvider.ProvideDefaultConstructor(constructors);
-            IConstructor defaultConstructor = ConstructorGenerator.GenerateConstructor(defaultConstructorInfo);
 
-            if (defaultConstructor != null)
+            if (flags.HasFlag(ServiceFlagConstants.ServiceCtor))
             {
-                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.DefaultConstructor, defaultConstructor);
+                ServiceFlag flag = flags.GetFlag(ServiceFlagConstants.ServiceCtor);
+                IMember member = flag.Member;
+                IConstructor serviceConstructor = ConstructorGenerator.GenerateConstructor((ConstructorInfo) member.Instance);
+
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.DefaultConstructor, serviceConstructor);
+            }
+
+            else
+            {
+                ConstructorInfo defaultConstructorInfo = DefaultConstructorInfoProvider.ProvideDefaultConstructor(constructors);
+                IConstructor defaultConstructor = ConstructorGenerator.GenerateConstructor(defaultConstructorInfo);
+
+                if (defaultConstructor != null)
+                {
+                    yield return new ServiceRegistrationFlag(RegistrationFlagConstants.DefaultConstructor, defaultConstructor);
+                }
             }
 
             foreach (ConstructorInfo constructor in constructors)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using NUnit.Framework;
 
 namespace Spencer.NET.Tests
@@ -71,40 +72,37 @@ namespace Spencer.NET.Tests
         {
         }
 
-        class Florka : IFlorka
+        interface ITobi
         {
-            [Inject]
-            public Tobi Tobi { get; set; }
-
-            public string Name { get; set; }
-
-            public Florka(string name)
-            {
-                Name = name;
-            }
         }
 
-        class Tobi
+        class Tobi : ITobi
         {
-            public Tobi(string name)
+        }
+
+        class Florka : IFlorka
+        {
+            [ServiceConstructor]
+            public Florka(ITobi tobi)
             {
-                Name = name;
             }
 
-            public string Name { get; set; }
+            public Florka()
+            {
+            }
         }
 
         [Test]
         public void another_test()
         {
             IStorage storage = new StorageBuilder()
-                .Register<Tobi>("Tobisiek")
-                .Register<Florka>("Florka potworka")
+                .Register<Tobi>()
+                .Register<IFlorka>()
                 .Build();
 
             IContainer container = ContainerFactory.Container(storage);
 
-            IFlorka florka = container.Resolve<IFlorka>();
+            Florka florka = container.Resolve<Florka>();
         }
     }
 
