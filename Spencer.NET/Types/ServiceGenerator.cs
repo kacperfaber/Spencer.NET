@@ -42,7 +42,12 @@ namespace Spencer.NET
                 .AddRegistration(registration)
                 .Build(); 
         }
-        
+
+        public IService GenerateService(IServiceRegistration registration)
+        {
+            
+        }
+
         public IService GenerateService(Type @class, IReadOnlyContainer container, object instance = null, IConstructorParameters constructorParameters = null)
         {
             if (ClassHasFactoryChecker.HasFactory(@class))
