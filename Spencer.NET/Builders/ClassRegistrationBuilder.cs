@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Spencer.NET
 {
     public class ClassRegistrationBuilder : Builder<ClassRegistration, ClassRegistrationBuilder, ClassRegistration>
     {
         public IServiceRegistrationInterfacesGenerator InterfacesGenerator;
-        
+        public IConstructorParametersByObjectsGenerator ParametersGenerator;
+
         public ClassRegistrationBuilder(ClassRegistration model) : base(model)
         {
         }
@@ -36,6 +39,37 @@ namespace Spencer.NET
                 {
                     x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.AsInterface, @interface));
                 }
+            });
+        }
+
+        public ClassRegistrationBuilder AsSingleInstance()
+        {
+            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null)));
+        }
+        
+        public ClassRegistrationBuilder AsMultiInstance()
+        {
+            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.IsMultiInstance, null)));
+        }
+
+        public ClassRegistrationBuilder WithInstance(object instance)
+        {
+            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.HasInstance, instance)));
+        }
+        
+        public ClassRegistrationBuilder WithInstance<T>(T instance)
+        {
+            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.HasInstance, instance)));
+        }
+
+        public ClassRegistrationBuilder WithConstructorParameters(params object[] args)
+        {
+            IConstructorParameters parameters = ParametersGenerator.GenerateParameters(args);
+            
+            return Update(x =>
+            {
+                x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.ConstructorParameters, parameters));
+                x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.HasConstructorParameters, true));
             });
         }
     }

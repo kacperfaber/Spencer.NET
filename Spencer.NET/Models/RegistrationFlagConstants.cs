@@ -12,5 +12,7 @@
         public const int Factory = 0x00512521;
         public const int HasInstance = 0x05125;
         public const int DefaultConstructor = 0x125921;
+        public const int IsSingleInstance = 0x018501;
+        public const int IsMultiInstance = 0x02152135;
     }
 }
