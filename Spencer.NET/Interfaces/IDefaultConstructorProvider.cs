@@ -5,6 +5,6 @@ namespace Spencer.NET
 {
     public interface IDefaultConstructorProvider
     {
-        ConstructorInfo ProvideDefaultConstructor(Type type);
+        IConstructor ProvideDefaultConstructor(IService service);
     }
 }

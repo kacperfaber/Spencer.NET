@@ -12,7 +12,7 @@ namespace Spencer.NET.Tests
         ConstructorInfo exec<T>()
         {
             DefaultConstructorProvider d = new DefaultConstructorProvider();
-            return d.ProvideDefaultConstructor(typeof(T));
+            return d.ProvideDefaultConstructor(TODO);
         }
 
         [Test]
