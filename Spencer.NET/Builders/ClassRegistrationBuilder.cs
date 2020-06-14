@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -9,9 +10,13 @@ namespace Spencer.NET
     {
         public IServiceRegistrationInterfacesGenerator InterfacesGenerator;
         public IConstructorParametersByObjectsGenerator ParametersGenerator;
+        public IMemberGenerator MemberGenerator;
 
-        public ClassRegistrationBuilder(ClassRegistration model) : base(model)
+        public ClassRegistrationBuilder(ClassRegistration model, IConstructorParametersByObjectsGenerator parametersGenerator,
+            IServiceRegistrationInterfacesGenerator interfacesGenerator) : base(model)
         {
+            ParametersGenerator = parametersGenerator;
+            InterfacesGenerator = interfacesGenerator;
         }
 
         public ClassRegistrationBuilder AsClass(Type @class)
@@ -42,11 +47,25 @@ namespace Spencer.NET
             });
         }
 
+        public ClassRegistrationBuilder AsImplementedInterfaces(Predicate<Type> predicate)
+        {
+            IEnumerable<IInterface> interfaces = InterfacesGenerator.GenerateInterfaces(new ServiceFlags(), Object.Type);
+
+            return Update(x =>
+            {
+                foreach (IInterface @interface in interfaces)
+                {
+                    if (predicate(@interface.Type))
+                        x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.AsInterface, @interface));
+                }
+            });
+        }
+
         public ClassRegistrationBuilder AsSingleInstance()
         {
             return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null)));
         }
-        
+
         public ClassRegistrationBuilder AsMultiInstance()
         {
             return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.IsMultiInstance, null)));
@@ -56,7 +75,7 @@ namespace Spencer.NET
         {
             return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.HasInstance, instance)));
         }
-        
+
         public ClassRegistrationBuilder WithInstance<T>(T instance)
         {
             return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.HasInstance, instance)));
@@ -65,12 +84,28 @@ namespace Spencer.NET
         public ClassRegistrationBuilder WithConstructorParameters(params object[] args)
         {
             IConstructorParameters parameters = ParametersGenerator.GenerateParameters(args);
-            
+
             return Update(x =>
             {
                 x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.ConstructorParameters, parameters));
                 x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.HasConstructorParameters, true));
             });
+        }
+
+        public ClassRegistrationBuilder WithFactory<T>(Expression<Func<T, T>> expression)
+        {
+            MethodInfo method = ((MethodCallExpression) expression.Body).Method;
+            IMember member = MemberGenerator.GenerateMember(method);
+
+            return Update(x => { x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.Factory, null) {Member = member}); });
+        }
+
+        public ClassRegistrationBuilder WithFactory(string methodName)
+        {
+            MethodInfo method = Object.Type.GetMethods().FirstOrDefault(x => x.Name == methodName);
+            IMember member = MemberGenerator.GenerateMember(method);
+
+            return Update(x => { x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.Factory, null) {Member = member}); });
         }
     }
 }
