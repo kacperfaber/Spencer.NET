@@ -13,12 +13,13 @@ namespace Spencer.NET
         public IMemberGenerator MemberGenerator;
 
         public ClassRegistrationBuilder(ClassRegistration model, IConstructorParametersByObjectsGenerator parametersGenerator,
-            IServiceRegistrationInterfacesGenerator interfacesGenerator) : base(model)
+            IServiceRegistrationInterfacesGenerator interfacesGenerator, IMemberGenerator memberGenerator) : base(model)
         {
             ParametersGenerator = parametersGenerator;
             InterfacesGenerator = interfacesGenerator;
+            MemberGenerator = memberGenerator;
         }
-
+        
         public ClassRegistrationBuilder AsClass(Type @class)
         {
             return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.AsClass, @class))); // Type or IClass TODO

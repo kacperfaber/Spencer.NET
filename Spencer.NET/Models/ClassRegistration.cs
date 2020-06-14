@@ -1,6 +1,6 @@
 ﻿namespace Spencer.NET
 {
-    public class ClassRegistration : TypeRegistration
+    public class ClassRegistration : TypeRegistration, IContainerRegistration
     {
     }
 }

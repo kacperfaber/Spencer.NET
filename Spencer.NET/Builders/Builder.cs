@@ -8,7 +8,7 @@
 
         private TBuilder NewBuilder(TOut o)
         {
-            return (TBuilder) Activator.CreateInstance(typeof(TBuilder), o);
+            return (TBuilder) (this as object);
         }
 
         private TOut NewOut()
