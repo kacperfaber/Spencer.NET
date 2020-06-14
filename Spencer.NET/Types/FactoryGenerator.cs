@@ -1,4 +1,6 @@
-﻿namespace Spencer.NET
+﻿using System.Reflection;
+
+namespace Spencer.NET
 {
     public class FactoryGenerator : IFactoryGenerator
     {
@@ -23,6 +25,7 @@
                 .AddType(type)
                 .AddResultType(ResultTypeGenerator.GenerateResultType(member))
                 .AddMember(member)
+                .AddParentType((member.Instance as MethodInfo).DeclaringType)
                 .If(type == FactoryType.StaticMethod, x => x.AddParameters(MethodParametersGenerator.GenerateParameters(member)))
                 .Build();
         }
