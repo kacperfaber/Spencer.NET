@@ -29,6 +29,11 @@ namespace Spencer.NET
             return Update(x => x.MethodParameters = parameters);
         }
 
+        public FactoryBuilder AddParentType(Type type)
+        {
+            return Update(x => x.ParentType = type);
+        }
+
         public void Dispose()
         {
         }

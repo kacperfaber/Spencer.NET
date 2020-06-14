@@ -13,12 +13,7 @@ namespace Spencer.NET
 
         public object CreateInstance(IFactory factory, IService service, IReadOnlyContainer readOnlyContainer)
         {
-            if (factory.Type == FactoryType.StaticMethod)
-            {
-                return MethodInstanceCreator.CreateInstance(factory, readOnlyContainer);
-            }
-            
-            throw new NotImplementedException("Sorry, but factory implements only .StaticMethod [0x0]");
+            return MethodInstanceCreator.CreateInstance(factory, readOnlyContainer);
         }
     }
 }

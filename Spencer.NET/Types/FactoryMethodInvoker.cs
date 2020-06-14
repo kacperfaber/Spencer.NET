@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 namespace Spencer.NET
 {
@@ -14,8 +15,14 @@ namespace Spencer.NET
         public object InvokeMethod(IFactory factory)
         {
             object[] values = ValuesExtractor.ExtractValues(factory.MethodParameters);
-            
 
+            if (factory.Type == FactoryType.PublicMethod)
+            {
+                object instance = Activator.CreateInstance(factory.ParentType); // TODO Activator :<
+                
+                return (factory.Member.Instance as MethodInfo).Invoke(instance, values);
+            }
+            
             return (factory.Member.Instance as MethodInfo).Invoke(null, values);
         }
     }

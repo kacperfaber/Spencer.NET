@@ -18,7 +18,7 @@ namespace Spencer.NET
         {
             IEnumerable<IFactory> factories = FactoriesProvider.ProvideFactories(service.Registration.RegistrationFlags);
             IEnumerable<IFactory> byTypeFiltered = ByTypeFilter.Filter(service.Registration.TargetType, factories);
-            IEnumerable<IFactory> orderedByMethodFirsts = byTypeFiltered.OrderBy(x => x.Type == FactoryType.StaticMethod).AsEnumerable();
+            IEnumerable<IFactory> orderedByMethodFirsts = byTypeFiltered.OrderBy(x => x.Type == FactoryType.StaticMethod);
 
             return orderedByMethodFirsts.First();
         }

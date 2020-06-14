@@ -7,10 +7,13 @@ namespace Spencer.NET
     {
         public int Generate(IMember member)
         {
+            if (member.Instance.MemberType == MemberTypes.Method && (member.Instance as MethodInfo).IsPublic)
+            {
+                return FactoryType.PublicMethod;
+            }
+            
             return member.Instance.MemberType switch
             {
-                MemberTypes.Field => FactoryType.StaticField,
-                MemberTypes.Property => FactoryType.StaticProperty,
                 MemberTypes.Method => FactoryType.StaticMethod,
                 _ => throw new NotImplementedException()
             };

@@ -10,5 +10,7 @@ namespace Spencer.NET
         public Type ResultType { get; set; }
         
         public IEnumerable<IParameter> MethodParameters { get; set; }
+        
+        public Type ParentType { get; set; }
     }
 }
