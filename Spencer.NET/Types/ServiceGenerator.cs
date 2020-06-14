@@ -11,9 +11,10 @@ namespace Spencer.NET
         public IClassHasServiceFactoryChecker ClassHasFactoryChecker;
         public IServiceFactoryProvider FactoryProvider;
         public IServiceFactoryInvoker FactoryInvoker;
+        public IServiceDataGenerator DataGenerator;
 
         public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator,
-            IServiceInfoGenerator infoGenerator, IClassHasServiceFactoryChecker classHasFactoryChecker, IServiceFactoryProvider factoryProvider, IServiceFactoryInvoker factoryInvoker)
+            IServiceInfoGenerator infoGenerator, IClassHasServiceFactoryChecker classHasFactoryChecker, IServiceFactoryProvider factoryProvider, IServiceFactoryInvoker factoryInvoker, IServiceDataGenerator dataGenerator)
         {
             FlagsGenerator = flagsGenerator;
             RegistrationGenerator = registrationGenerator;
@@ -21,6 +22,7 @@ namespace Spencer.NET
             ClassHasFactoryChecker = classHasFactoryChecker;
             FactoryProvider = factoryProvider;
             FactoryInvoker = factoryInvoker;
+            DataGenerator = dataGenerator;
         }
 
         public IService GenerateService(Type @class, object instance = null, IConstructorParameters constructorParameters = null)
@@ -38,14 +40,23 @@ namespace Spencer.NET
             return new ServiceBuilder()
                 .AddFlags(flags)
                 .AddInfo(info)
-                .AddData(new ServiceData() {Instance = instance})
+                .AddData(DataGenerator.GenerateData(registration))
                 .AddRegistration(registration)
                 .Build(); 
         }
 
         public IService GenerateService(IServiceRegistration registration)
         {
-            
+            ServiceFlags emptyFlags = FlagsGenerator.GenerateEmpty();
+            ServiceInfo info = InfoGenerator.Generate(registration.TargetType);
+            IServiceData data = DataGenerator.GenerateData(registration);
+
+            return new ServiceBuilder()
+                .AddFlags(emptyFlags)
+                .AddRegistration(registration)
+                .AddInfo(info)
+                .AddData(data)
+                .Build();
         }
 
         public IService GenerateService(Type @class, IReadOnlyContainer container, object instance = null, IConstructorParameters constructorParameters = null)
@@ -63,7 +74,7 @@ namespace Spencer.NET
             return new ServiceBuilder()
                 .AddFlags(flags)
                 .AddInfo(info)
-                .AddData(new ServiceData() {Instance = instance})
+                .AddData(DataGenerator.GenerateData(registration))
                 .AddRegistration(registration)
                 .Build();
         }

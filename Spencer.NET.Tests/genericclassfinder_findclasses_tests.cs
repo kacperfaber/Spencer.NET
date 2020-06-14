@@ -29,7 +29,7 @@ namespace Spencer.NET.Tests
                             new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(),
                         new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
                         new ParametersValuesExtractor()))),
-                    new ServiceFactoryInvoker()
+                    new ServiceFactoryInvoker(),new ServiceDataGenerator()
                 ));
 
             IEnumerable<IService> services = generator.GenerateServices(registerType, new AssemblyList());

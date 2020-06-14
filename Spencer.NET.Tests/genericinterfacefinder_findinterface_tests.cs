@@ -35,7 +35,7 @@ namespace Spencer.NET.Tests
                             new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
                         new ConstructorInfoListGenerator(), new ConstructorFinder(),
                         new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
-                        new ParametersValuesExtractor()))), new ServiceFactoryInvoker()));
+                        new ParametersValuesExtractor()))), new ServiceFactoryInvoker(),new ServiceDataGenerator()));
             IService[] services = generator.GenerateServices(typeof(TestClass), new AssemblyList(), null).ToArray();
 
             ServiceList list = new ServiceList();

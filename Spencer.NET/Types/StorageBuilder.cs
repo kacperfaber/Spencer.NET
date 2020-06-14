@@ -25,7 +25,7 @@ namespace Spencer.NET
                         new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
                             new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(),
                         new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
-                        new ParametersValuesExtractor()))), new ServiceFactoryInvoker()));
+                        new ParametersValuesExtractor()))), new ServiceFactoryInvoker(),new ServiceDataGenerator()));
 
             ServiceRegistrar = new ServiceRegistrar(
                 new ServiceInstanceProvider(

@@ -20,5 +20,10 @@ namespace Spencer.NET
 
             return flags;
         }
+
+        public ServiceFlags GenerateEmpty()
+        {
+            return new ServiceFlags();
+        }
     }
 }
