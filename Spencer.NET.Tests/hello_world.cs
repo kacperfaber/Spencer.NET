@@ -82,13 +82,10 @@ namespace Spencer.NET.Tests
 
         class Florka : IFlorka
         {
-            [ServiceConstructor]
-            public Florka(ITobi tobi)
+            [Factory]
+            public Florka MakeInstance()
             {
-            }
-
-            public Florka()
-            {
+                return new Florka();
             }
         }
 

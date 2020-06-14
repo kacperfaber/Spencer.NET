@@ -14,6 +14,7 @@ namespace Spencer.NET
         public object InvokeMethod(IFactory factory)
         {
             object[] values = ValuesExtractor.ExtractValues(factory.MethodParameters);
+            
 
             return (factory.Member.Instance as MethodInfo).Invoke(null, values);
         }
