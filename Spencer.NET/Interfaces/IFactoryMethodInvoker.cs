@@ -2,6 +2,6 @@
 {
     public interface IFactoryMethodInvoker
     {
-        object InvokeMethod(IFactory factory);
+        object InvokeMethod(IFactory factory, IReadOnlyContainer container);
     }
 }

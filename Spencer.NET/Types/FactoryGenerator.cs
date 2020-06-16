@@ -26,7 +26,7 @@ namespace Spencer.NET
                 .AddResultType(ResultTypeGenerator.GenerateResultType(member))
                 .AddMember(member)
                 .AddParentType((member.Instance as MethodInfo).DeclaringType)
-                .If(type == FactoryType.StaticMethod, x => x.AddParameters(MethodParametersGenerator.GenerateParameters(member)))
+                .AddParameters(MethodParametersGenerator.GenerateParameters(member))
                 .Build();
         }
     }

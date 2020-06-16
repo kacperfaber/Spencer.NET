@@ -1,20 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Spencer.NET
 {
     public class FactoryMethodInvoker : IFactoryMethodInvoker
     {
+        public IParametersValuesGenerator ValuesGenerator;
         public IParametersValuesExtractor ValuesExtractor;
 
-        public FactoryMethodInvoker(IParametersValuesExtractor valuesExtractor)
+        public FactoryMethodInvoker(IParametersValuesExtractor valuesExtractor, IParametersValuesGenerator valuesGenerator)
         {
             ValuesExtractor = valuesExtractor;
+            ValuesGenerator = valuesGenerator;
         }
 
-        public object InvokeMethod(IFactory factory)
+        public object InvokeMethod(IFactory factory, IReadOnlyContainer container)
         {
-            object[] values = ValuesExtractor.ExtractValues(factory.MethodParameters);
+            IEnumerable<IParameter> parameters = ValuesGenerator.Generate(factory.MethodParameters, container);
+            object[] values = ValuesExtractor.ExtractValues(parameters);
 
             if (factory.Type == FactoryType.PublicMethod)
             {
