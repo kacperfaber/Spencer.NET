@@ -7,7 +7,7 @@ namespace Spencer.NET
     public class ContainerBuilder
     {
         private List<IContainerRegistration> Registrations { get; set; } = new List<IContainerRegistration>();
-        
+
         public ClassRegistrationBuilder RegisterClass<T>() where T : class
         {
             ClassRegistration registration = new ClassRegistration()
@@ -16,8 +16,12 @@ namespace Spencer.NET
             };
 
             Registrations.Add(registration);
-            
-            return new ClassRegistrationBuilder(registration, new ConstructorParametersByObjectsGenerator(new TypeGetter()), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()), new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(), new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())), new MemberGenerator(new MemberFlagsGenerator()));
+
+            InterfaceGenerator interfaceGenerator = new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker());
+            return new ClassRegistrationBuilder(registration, new ConstructorParametersByObjectsGenerator(new TypeGetter()),
+                new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),
+                    new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(), interfaceGenerator),
+                new MemberGenerator(new MemberFlagsGenerator()), interfaceGenerator);
         }
 
         public void RegisterInterface<T>()
@@ -30,10 +34,12 @@ namespace Spencer.NET
 
         public void Register(Type type)
         {
+            // that is registering type or interfaces without builders.
         }
 
         public void Register<T>()
         {
+            // that is registering type or interfaces without builders.
         }
     }
 }

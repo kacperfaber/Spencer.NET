@@ -11,13 +11,15 @@ namespace Spencer.NET
         public IServiceRegistrationInterfacesGenerator InterfacesGenerator;
         public IConstructorParametersByObjectsGenerator ParametersGenerator;
         public IMemberGenerator MemberGenerator;
+        public IInterfaceGenerator InterfaceGenerator;
 
         public ClassRegistrationBuilder(ClassRegistration model, IConstructorParametersByObjectsGenerator parametersGenerator,
-            IServiceRegistrationInterfacesGenerator interfacesGenerator, IMemberGenerator memberGenerator) : base(model)
+            IServiceRegistrationInterfacesGenerator interfacesGenerator, IMemberGenerator memberGenerator, IInterfaceGenerator interfaceGenerator) : base(model)
         {
             ParametersGenerator = parametersGenerator;
             InterfacesGenerator = interfacesGenerator;
             MemberGenerator = memberGenerator;
+            InterfaceGenerator = interfaceGenerator;
         }
         
         public ClassRegistrationBuilder AsClass(Type @class)
@@ -62,6 +64,13 @@ namespace Spencer.NET
             });
         }
 
+        public ClassRegistrationBuilder AsInterface<TInterface>()
+        {
+            IInterface @interface = InterfaceGenerator.GenerateInterface(typeof(TInterface));
+
+            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.AsInterface, @interface)));
+        }
+
         public ClassRegistrationBuilder AsSingleInstance()
         {
             return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null)));
@@ -70,6 +79,11 @@ namespace Spencer.NET
         public ClassRegistrationBuilder AsMultiInstance()
         {
             return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.IsMultiInstance, null)));
+        }
+
+        public ClassRegistrationBuilder AsAutoInstance()
+        {
+            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.IsAutoValue, null)));
         }
 
         public ClassRegistrationBuilder WithInstance(object instance)

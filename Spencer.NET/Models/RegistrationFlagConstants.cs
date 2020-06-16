@@ -2,6 +2,7 @@
 {
     public class RegistrationFlagConstants
     {
+        public const int IsAutoValue = 0x7241;
         public const int ConstructorParameters = 0x8241;
         public const int AsInterface = 0x0124521;
         public const int AsClass = 0x0829512;

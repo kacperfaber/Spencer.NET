@@ -90,6 +90,11 @@ namespace Spencer.NET
             {
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.Factory, null) {Member = factoryFlag.Member};
             }
+
+            if (flags.HasFlag(ServiceFlagConstants.AutoValue))
+            {
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsAutoValue, null);
+            }
         }
     }
 }
