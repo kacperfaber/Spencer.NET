@@ -29,6 +29,7 @@ Kacper Faber, Poland
 * 1.0.2.2 (27.05.2020)
 * 1.0.5 (12.06.2020)
 * 1.0.6 (13.06.2020)
+* 1.0.75 (16.06.2020)
 
 <br>
 
@@ -42,9 +43,10 @@ Kacper Faber, Poland
 <br>
 
 
-### Changelog
+### Changelog [1.0.75]
 
-Optymalized constructor choosing process.
+Factory methods can take parameters.
+If container is assignable to `IContainer` parameter could not to be registered.
 
 <br>
 
@@ -206,9 +208,9 @@ will be used to instantiate new instance of a class
 will be used to instantiate new instance of a class.
 Using Type argument to set real return type e.g factory returns `System.String` as `System.Object`
 
-* `FactoryResult (Type)` 
+* `[Obsolete] FactoryResult (Type)` 
 expanding factory method for good type 
-which actually is producing in this method
+which actually is producing in this method. Is Obsolete, instead use `FactoryAttribute (Type)`
 <br>
 
 <br>
@@ -331,6 +333,9 @@ Factories is a static methods generating instance of a class.
 
 > They can take dependencies as their parameters
 
+> Version 1.1 provides factories as `Public Methods`
+
+
 ```
 class Test 
 {
@@ -354,6 +359,25 @@ class Test : ITest
     [Factory(typeof(Test))]
     public static ITest FactoryMethod() => new Test();
 }
+```
+
+```
+class TestManager
+{
+    public Test CreateInstance() => new Test();
+}
+
+class Test
+{
+    [Factory]
+    public static Test MakeTest(TestManager testManager)
+    {
+        return testManager.CreateInstance();
+    }
+}
+
+// Parameters are in
+// Version 1.0.75
 ```
 
 <br>

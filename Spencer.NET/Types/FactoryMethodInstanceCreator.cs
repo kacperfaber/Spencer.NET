@@ -14,7 +14,7 @@
         public object CreateInstance(IFactory factory, IReadOnlyContainer container)
         {
             factory.MethodParameters = ValuesGenerator.Generate(factory.MethodParameters, container);
-            return MethodInvoker.InvokeMethod(factory);
+            return MethodInvoker.InvokeMethod(factory, container);
         }
     }
 }
