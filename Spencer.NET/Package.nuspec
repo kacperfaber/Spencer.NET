@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>Spencer.NET</id>
-        <version>1.0.6</version>
+        <version>1.0.75</version>
         <authors>Kacper Faber</authors>
         <owners>kacpiitoziomal</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -17,7 +17,7 @@
         <license type="expression">MIT</license>
         <summary>Smart IoC Container</summary>
         <releaseNotes>
-            Constructor choose process was optymalized
+            (Static) Factory methods can take parameters. ReadOnlyContainer - registered, Container - havent be registered.
         </releaseNotes>
     </metadata>
 </package>
