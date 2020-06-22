@@ -15,5 +15,6 @@
         public const int DefaultConstructor = 0x125921;
         public const int IsSingleInstance = 0x018501;
         public const int IsMultiInstance = 0x02152135;
+        public const int IncludeClass = 0x89124;
     }
 }
