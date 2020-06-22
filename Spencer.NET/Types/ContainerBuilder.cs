@@ -24,8 +24,9 @@ namespace Spencer.NET
                 new MemberGenerator(new MemberFlagsGenerator()), interfaceGenerator);
         }
 
-        public void RegisterInterface<T>()
+        public InterfaceRegistration RegisterInterface<T>()
         {
+            InterfaceRegistration registration
         }
 
         public void RegisterAssembly(Assembly assembly)
@@ -37,9 +38,13 @@ namespace Spencer.NET
             // that is registering type or interfaces without builders.
         }
 
-        public void Register<T>()
+        public void Register<T>() where T : class
         {
             // that is registering type or interfaces without builders.
+        }
+
+        public void RegisterObject<T>(T instance)
+        {
         }
     }
 }
