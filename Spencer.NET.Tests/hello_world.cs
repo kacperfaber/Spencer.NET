@@ -101,6 +101,11 @@ namespace Spencer.NET.Tests
 
             Florka florka = container.Resolve<Florka>();
         }
+        
+        private hello_world New()
+        {
+            return new hello_world();
+        }
     }
 
     [MultiInstance]

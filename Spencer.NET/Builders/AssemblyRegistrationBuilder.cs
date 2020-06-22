@@ -88,12 +88,22 @@ namespace Spencer.NET
                 new MemberGenerator(new MemberFlagsGenerator()), interfaceGenerator);
         }
 
-        public ClassesRegistrationBuilder SelectClasses(Func<Type, bool> func)
-        {
-        }
-
         public ClassesRegistrationBuilder SelectClasses()
         {
+            IEnumerable<ServiceRegistrationFlag> flags = Object.RegistrationFlags
+                .Where(x => x.Code == RegistrationFlagConstants.IncludeClass)
+                .Where(x => x.Value is ClassRegistration);
+
+            ClassesRegistration registration = new ClassesRegistration()
+            {
+                ClassRegistrations = Array.ConvertAll(flags.ToArray(), x => x.Value as ClassRegistration).ToList()
+            };
+
+            return new ClassesRegistrationBuilder(registration,
+                new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),
+                    new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),
+                    new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
+                new ConstructorParametersByObjectsGenerator(new TypeGetter()), new MemberGenerator(new MemberFlagsGenerator()));
         }
     }
 }

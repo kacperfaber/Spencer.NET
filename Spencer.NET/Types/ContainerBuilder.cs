@@ -19,6 +19,7 @@ namespace Spencer.NET
             Registrations.Add(registration);
 
             InterfaceGenerator interfaceGenerator = new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker());
+            
             return new ClassRegistrationBuilder(registration, new ConstructorParametersByObjectsGenerator(new TypeGetter()),
                 new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),
                     new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(), interfaceGenerator),
