@@ -56,7 +56,7 @@ namespace Spencer.NET.Tests
 
             ClassRegistrationBuilder builder = (ClassRegistrationBuilder) genericMethod.Invoke(this, new[] {containerBuilder});
 
-            Assert.IsTrue(builder.Object.Type == registrationType);
+            Assert.IsTrue(builder.Object.Class == registrationType);
         }
     }
 }

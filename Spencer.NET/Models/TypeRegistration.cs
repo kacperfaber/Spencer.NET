@@ -5,8 +5,6 @@ namespace Spencer.NET
 {
     public class TypeRegistration
     {
-        public Type Type { get; set; }
-
         public List<ServiceRegistrationFlag> RegistrationFlags { get; set; }
 
         public TypeRegistration()

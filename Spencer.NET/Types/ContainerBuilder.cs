@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Spencer.NET
@@ -12,7 +13,7 @@ namespace Spencer.NET
         {
             ClassRegistration registration = new ClassRegistration()
             {
-                Type = typeof(T)
+                Class = typeof(T)
             };
 
             Registrations.Add(registration);
@@ -24,8 +25,16 @@ namespace Spencer.NET
                 new MemberGenerator(new MemberFlagsGenerator()), interfaceGenerator);
         }
         
-        public void RegisterAssembly(Assembly assembly)
+        public AssemblyRegistrationBuilder RegisterAssembly(Assembly assembly)
         {
+            AssemblyRegistration registration = new AssemblyRegistration()
+            {
+                Assembly = assembly
+            };
+            
+            Registrations.Add(registration);
+
+            return new AssemblyRegistrationBuilder(registration);
         }
 
         public void Register(Type type)

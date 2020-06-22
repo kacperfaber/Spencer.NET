@@ -34,12 +34,12 @@ namespace Spencer.NET
 
         public ClassRegistrationBuilder AsBaseClass()
         {
-            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.AsClass, Object.Type.BaseType)));
+            return Update(x => x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.AsClass, Object.Class.BaseType)));
         }
 
         public ClassRegistrationBuilder AsImplementedInterfaces()
         {
-            IEnumerable<IInterface> interfaces = InterfacesGenerator.GenerateInterfaces(new ServiceFlags(), Object.Type);
+            IEnumerable<IInterface> interfaces = InterfacesGenerator.GenerateInterfaces(new ServiceFlags(), Object.Class);
 
             return Update(x =>
             {
@@ -52,7 +52,7 @@ namespace Spencer.NET
 
         public ClassRegistrationBuilder AsImplementedInterfaces(Predicate<Type> predicate)
         {
-            IEnumerable<IInterface> interfaces = InterfacesGenerator.GenerateInterfaces(new ServiceFlags(), Object.Type);
+            IEnumerable<IInterface> interfaces = InterfacesGenerator.GenerateInterfaces(new ServiceFlags(), Object.Class);
 
             return Update(x =>
             {
@@ -117,7 +117,7 @@ namespace Spencer.NET
 
         public ClassRegistrationBuilder WithFactory(string methodName)
         {
-            MethodInfo method = Object.Type.GetMethods().FirstOrDefault(x => x.Name == methodName);
+            MethodInfo method = Object.Class.GetMethods().FirstOrDefault(x => x.Name == methodName);
             IMember member = MemberGenerator.GenerateMember(method);
 
             return Update(x => { x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.Factory, null) {Member = member}); });
