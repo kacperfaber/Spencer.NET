@@ -23,12 +23,7 @@ namespace Spencer.NET
                     new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(), interfaceGenerator),
                 new MemberGenerator(new MemberFlagsGenerator()), interfaceGenerator);
         }
-
-        public InterfaceRegistration RegisterInterface<T>()
-        {
-            InterfaceRegistration registration
-        }
-
+        
         public void RegisterAssembly(Assembly assembly)
         {
         }
