@@ -120,9 +120,45 @@ namespace Spencer.NET.Tests
             return new hello_world();
         }
 
-        class Kacper
+        interface IKacpii
         {
-            public Kacper New() => new Kacper();
+        }
+
+        interface IZiomal
+        {
+        }
+
+        interface IKacperCreator
+        {
+            Kacper Make();
+        }
+
+        class KacperCreator : IKacperCreator
+        {
+            public Kacper Make()
+            {
+                return new Kacper(null);
+            }
+        }
+
+        class Kacper : IKacpii, IZiomal
+        {
+            public IKacperCreator Creator;
+
+            public Kacper(int x, int y)
+            {
+            }
+
+            public Kacper(IKacperCreator creator)
+            {
+                Creator = creator;
+            }
+
+            public Kacper New()
+            {
+                Console.WriteLine("used Factory public-method - New()");
+                return new Kacper(null);
+            }
         }
 
         [Test]
@@ -130,12 +166,16 @@ namespace Spencer.NET.Tests
         {
             ContainerBuilder builder = new ContainerBuilder();
 
+            KacperCreator creator = new KacperCreator();
+
             builder
+                .RegisterObject(creator)
                 .RegisterClass<Kacper>()
-                .WithFactory<Kacper>(x => x.New())
-                .AsSingleInstance();
+                .AsSingleInstance()
+                .WithConstructorParameters(0, 5);
 
             IContainer c = builder.Container();
+            Kacper kacper = c.Resolve<Kacper>();
         }
     }
 

@@ -38,7 +38,7 @@ namespace Spencer.NET.Tests
 
             ServiceFlags flags = flagsGenerator.GenerateFlags(@class);
 
-            ConstructorProvider provider = new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(), new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())));
+            ConstructorProvider provider = new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorInfoProvider(), new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())));
 
             return provider.ProvideConstructor(@class).Instance;
         }

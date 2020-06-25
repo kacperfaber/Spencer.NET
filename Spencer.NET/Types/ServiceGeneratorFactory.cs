@@ -17,7 +17,7 @@
                 new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                     new ConstructorParametersGenerator(new TypedMemberValueProvider(), new ConstructorParameterByTypeFinder(),
                         new ServiceHasConstructorParametersChecker()),
-                    new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
+                    new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorInfoProvider(),
                         new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
                     new ConstructorInfoListGenerator(), new ConstructorFinder(),
                     new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),

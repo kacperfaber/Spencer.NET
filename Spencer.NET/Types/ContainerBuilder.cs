@@ -55,19 +55,25 @@ namespace Spencer.NET
             return new AssemblyRegistrationBuilder(registration);
         }
 
-        public void Register(Type type)
+        public ContainerBuilder Register(Type type)
         {
             StorageBuilder.Register(type);
+
+            return this;
         }
 
-        public void Register<T>() where T : class
+        public ContainerBuilder Register<T>() where T : class
         {
             StorageBuilder.Register<T>();
+
+            return this;
         }
 
-        public void RegisterObject<T>(T instance)
+        public ContainerBuilder RegisterObject<T>(T instance)
         {
             StorageBuilder.RegisterObject<T>(instance);
+
+            return this;
         }
 
         public IContainer Container()

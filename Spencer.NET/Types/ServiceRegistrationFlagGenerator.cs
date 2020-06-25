@@ -95,6 +95,27 @@ namespace Spencer.NET
             {
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsAutoValue, null);
             }
+            
+            if (!flags.HasFlag(ServiceFlagConstants.SingleInstance) && !flags.HasFlag(ServiceFlagConstants.MultiInstance))
+            {
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null);
+            }
+
+            if (flags.HasFlag(ServiceFlagConstants.SingleInstance) && flags.HasFlag(ServiceFlagConstants.MultiInstance))
+            {
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null);
+            }
+            
+            else if (flags.HasFlag(ServiceFlagConstants.SingleInstance))
+            {
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null);
+            }
+
+            else if (flags.HasFlag(ServiceFlagConstants.MultiInstance))
+            {
+                yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsMultiInstance, null);
+            }
+
         }
     }
 }

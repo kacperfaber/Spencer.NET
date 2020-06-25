@@ -1,4 +1,5 @@
 ﻿using System;
+using Spencer.NET.Extensions;
 
 namespace Spencer.NET
 {
@@ -27,12 +28,12 @@ namespace Spencer.NET
 
             else
             {
-                if (service.Flags.HasFlag(ServiceFlagConstants.MultiInstance))
+                if (service.Registration.RegistrationFlags.Has(RegistrationFlagConstants.IsMultiInstance))
                 {
                     return ObjectProducer.ProduceObject(service, container);
                 }
                 
-                else if (service.Flags.HasFlag(ServiceFlagConstants.SingleInstance))
+                else if (service.Registration.RegistrationFlags.Has(RegistrationFlagConstants.IsSingleInstance))
                 {
                     return service.Data.Instance;
                 }

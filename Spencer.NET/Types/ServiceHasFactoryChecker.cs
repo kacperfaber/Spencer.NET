@@ -1,10 +1,12 @@
-﻿namespace Spencer.NET
+﻿using System.Linq;
+
+namespace Spencer.NET
 {
     public class ServiceHasFactoryChecker : IServiceHasFactoryChecker
     {
         public bool Check(IService service)
         {
-            return service.Flags.HasFlag(ServiceFlagConstants.ServiceFactory);
+            return service.Registration.RegistrationFlags.Any(x => x.Code == RegistrationFlagConstants.Factory);
         }
     }
 }

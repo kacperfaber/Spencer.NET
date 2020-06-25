@@ -9,7 +9,7 @@ namespace Spencer.NET
         public IEnumerable<IService> UseConverter(IContainerRegistration registration, List<IContainerRegistrationConverter> converters)
         {
             Type genericConverterType = typeof(IContainerRegistrationConverter<>).MakeGenericType(registration.GetType());
-            object converter = converters.FirstOrDefault(x => x.GetType().IsAssignableFrom(genericConverterType));
+            object converter = converters.FirstOrDefault(x=>genericConverterType.IsAssignableFrom(x.GetType()));
 
             return (IEnumerable<IService>) genericConverterType
                 .GetMethods()

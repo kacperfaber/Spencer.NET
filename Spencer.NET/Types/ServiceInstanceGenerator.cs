@@ -25,7 +25,9 @@ namespace Spencer.NET
 
         public object GenerateInstance(IService service, IReadOnlyContainer container)
         {
-            if (HasServiceFactoryChecker.Check(service))
+            bool hasFactory = HasServiceFactoryChecker.Check(service);
+            
+            if (hasFactory)
             {
                 IFactory factory = FactoryProvider.ProvideFactory(service);
                 return FactoryInstanceCreator.CreateInstance(factory, service, container);

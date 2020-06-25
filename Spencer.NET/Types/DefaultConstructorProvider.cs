@@ -8,7 +8,7 @@ namespace Spencer.NET
     {
         public IConstructor ProvideDefaultConstructor(IService service)
         {
-            return (IConstructor) service.Registration.RegistrationFlags.First(x => x.Code == RegistrationFlagConstants.DefaultConstructor).Value;
+            return (IConstructor) service.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.DefaultConstructor).Value;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Spencer.NET.Tests
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                         new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),
                             new ServiceHasConstructorParametersChecker()),
-                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorProvider(),
+                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorInfoProvider(),
                             new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
                         new ConstructorInfoListGenerator(), new ConstructorFinder(),
                         new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
