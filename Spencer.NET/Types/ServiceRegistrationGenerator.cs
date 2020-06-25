@@ -20,5 +20,14 @@ namespace Spencer.NET
                 RegistrationFlags = RegistrationFlagsGenerator.GenerateFlags(flags, type, instance, constructorParameters)
             };
         }
+
+        public IServiceRegistration Generate(Type type, IEnumerable<ServiceRegistrationFlag> flags)
+        {
+            return new ServiceRegistration()
+            {
+                TargetType = type,
+                RegistrationFlags = flags
+            };
+        }
     }
 }
