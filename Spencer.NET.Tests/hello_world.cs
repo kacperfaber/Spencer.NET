@@ -114,10 +114,28 @@ namespace Spencer.NET.Tests
                 .AsImplementedInterfaces()
                 .WithInstance(new Florka());
         }
-        
+
         private hello_world New()
         {
             return new hello_world();
+        }
+
+        class Kacper
+        {
+            public Kacper New() => new Kacper();
+        }
+
+        [Test]
+        public void builder()
+        {
+            ContainerBuilder builder = new ContainerBuilder();
+
+            builder
+                .RegisterClass<Kacper>()
+                .WithFactory<Kacper>(x => x.New())
+                .AsSingleInstance();
+
+            IContainer c = builder.Container();
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Spencer.NET
@@ -172,6 +173,16 @@ namespace Spencer.NET
                 IEnumerable<IService> services = ServicesGenerator.GenerateServices(typeof(T), Object.Assemblies, instance: instance);
                 ServiceRegistrar.Register(Object.Services, services);
             });
+        }
+
+        public StorageBuilder RegisterServices(params IService[] services)
+        {
+            return Update(x => ServiceRegistrar.Register(Object.Services, services));
+        }
+
+        public StorageBuilder RegisterServices(IEnumerable<IService> services)
+        {
+            return Update(x => ServiceRegistrar.Register(Object.Services, services));
         }
 
         public void Dispose()
