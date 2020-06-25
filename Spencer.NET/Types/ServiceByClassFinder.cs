@@ -10,7 +10,8 @@ namespace Spencer.NET
         {
             return list
                 .GetServices()
-                .Where(x => x.Registration.TargetType.IsAssignableFrom(@class))
+                .Where(x => (x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value as Type) == @class)
+                // .Where(x => x.Registration.TargetType.IsAssignableFrom(@class))
                 .FirstOrDefault();
         }
 

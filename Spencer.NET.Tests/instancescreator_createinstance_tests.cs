@@ -19,7 +19,7 @@ namespace Spencer.NET.Tests
         class TestClass
         {
             public Dep1 test;
-            
+
             public TestClass(Dep1 test1)
             {
                 test = test1;
@@ -55,7 +55,7 @@ namespace Spencer.NET.Tests
 
             public T ResolveOrDefault<T>()
             {
-                throw new NotImplementedException();   
+                throw new NotImplementedException();
             }
 
             public object ResolveOrDefault(Type type)
@@ -137,18 +137,41 @@ namespace Spencer.NET.Tests
             {
                 throw new NotImplementedException();
             }
-            
+
             public IStorage Storage { get; set; }
         }
 
         object exec<T>()
         {
             TypedMemberValueProvider typedMemberValueProvider = new TypedMemberValueProvider();
-            
-            ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()), new ServiceGenerator(new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(),new MemberGenerator(new MemberFlagsGenerator())), new ServiceFlagsIssuesResolver()), new ServiceRegistrationGenerator(new ServiceRegistrationFlagGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()), new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(), new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())), new ConstructorInfoListGenerator(), new DefaultConstructorInfoProvider())), new ServiceInfoGenerator(),new ClassHasServiceFactoryChecker(), new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(typedMemberValueProvider,new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorInfoProvider(),new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ConstructorInfoListGenerator(), new ConstructorFinder(),new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ParametersValuesExtractor()))), new ServiceFactoryInvoker(),new ServiceDataGenerator()));
+
+            ServicesGenerator generator = new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
+                new ServiceGenerator(
+                    new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())),
+                        new ServiceFlagsIssuesResolver()),
+                    new ServiceRegistrationGenerator(
+                        new ServiceRegistrationFlagGenerator(new BaseTypeFinder(),
+                            new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),
+                                new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),
+                                new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
+                            new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())), new ConstructorInfoListGenerator(),
+                            new DefaultConstructorInfoProvider()), new ServiceRegistrationFlagOptymalizer()), new ServiceInfoGenerator(),
+                    new ClassHasServiceFactoryChecker(),
+                    new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
+                        new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),
+                            new ServiceHasConstructorParametersChecker()),
+                        new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorInfoProvider(),
+                            new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(),
+                        new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
+                        new ParametersValuesExtractor()))), new ServiceFactoryInvoker(), new ServiceDataGenerator()));
             IEnumerable<IService> service = generator.GenerateServices(typeof(T), new AssemblyList(), null, null);
 
-            InstancesCreator creator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(), new ConstructorParametersGenerator(typedMemberValueProvider,new ConstructorParameterByTypeFinder(),new ServiceHasConstructorParametersChecker()), new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorInfoProvider(), new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),new ParametersValuesExtractor()));
+            InstancesCreator creator = new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
+                new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),
+                    new ServiceHasConstructorParametersChecker()),
+                new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorInfoProvider(),
+                    new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(), new ConstructorFinder(),
+                new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ParametersValuesExtractor()));
 
             IContainer container = ContainerFactory.Container();
             container.Register<T>();
@@ -175,7 +198,7 @@ namespace Spencer.NET.Tests
         [Test]
         public void returns_TestClass_dot_test_not_null()
         {
-            Assert.NotNull(((TestClass)exec<TestClass>()).test);
+            Assert.NotNull(((TestClass) exec<TestClass>()).test);
         }
     }
 }

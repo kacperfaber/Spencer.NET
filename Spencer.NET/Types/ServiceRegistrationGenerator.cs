@@ -6,18 +6,20 @@ namespace Spencer.NET
     public class ServiceRegistrationGenerator : IServiceRegistrationGenerator
     {
         public IServiceRegistrationFlagGenerator RegistrationFlagsGenerator;
+        public IServiceRegistrationFlagOptymalizer FlagsOptymalizer;
 
-        public ServiceRegistrationGenerator(IServiceRegistrationFlagGenerator registrationFlagsGenerator)
+        public ServiceRegistrationGenerator(IServiceRegistrationFlagGenerator registrationFlagsGenerator, IServiceRegistrationFlagOptymalizer flagsOptymalizer)
         {
             RegistrationFlagsGenerator = registrationFlagsGenerator;
+            FlagsOptymalizer = flagsOptymalizer;
         }
-        
+
         public IServiceRegistration Generate(ServiceFlags flags, Type type, object instance = null, IConstructorParameters constructorParameters = null)
         {
             return new ServiceRegistration()
             {
                 TargetType = type,
-                RegistrationFlags = RegistrationFlagsGenerator.GenerateFlags(flags, type, instance, constructorParameters)
+                RegistrationFlags = FlagsOptymalizer.Optymalize(RegistrationFlagsGenerator.GenerateFlags(flags, type, instance, constructorParameters))
             };
         }
 
@@ -26,7 +28,7 @@ namespace Spencer.NET
             return new ServiceRegistration()
             {
                 TargetType = type,
-                RegistrationFlags = flags
+                RegistrationFlags = FlagsOptymalizer.Optymalize(flags)
             };
         }
     }

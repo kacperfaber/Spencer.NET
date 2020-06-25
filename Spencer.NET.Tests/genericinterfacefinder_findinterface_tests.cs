@@ -26,7 +26,7 @@ namespace Spencer.NET.Tests
                             new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),
                             new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                         new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())), new ConstructorInfoListGenerator(),
-                        new DefaultConstructorInfoProvider())),
+                        new DefaultConstructorInfoProvider()),new ServiceRegistrationFlagOptymalizer()),
                     new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                         new ConstructorParametersGenerator(typedMemberValueProvider, new ConstructorParameterByTypeFinder(),

@@ -18,7 +18,13 @@ namespace Spencer.NET
                 new ServiceGenerator(
                     new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())),
                         new ServiceFlagsIssuesResolver()),
-                    new ServiceRegistrationGenerator(new ServiceRegistrationFlagGenerator(new BaseTypeFinder(), new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()), new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(), new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())), new ConstructorInfoListGenerator(), new DefaultConstructorInfoProvider())),
+                    new ServiceRegistrationGenerator(
+                        new ServiceRegistrationFlagGenerator(new BaseTypeFinder(),
+                            new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),
+                                new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),
+                                new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
+                            new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())), new ConstructorInfoListGenerator(),
+                            new DefaultConstructorInfoProvider()), new ServiceRegistrationFlagOptymalizer()),
                     new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                         new ConstructorParametersGenerator(new TypedMemberValueProvider(), new ConstructorParameterByTypeFinder(),
@@ -26,7 +32,7 @@ namespace Spencer.NET
                         new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorInfoProvider(),
                             new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(),
                         new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
-                        new ParametersValuesExtractor()))), new ServiceFactoryInvoker(),new ServiceDataGenerator()));
+                        new ParametersValuesExtractor()))), new ServiceFactoryInvoker(), new ServiceDataGenerator()));
 
             ServiceRegistrar = new ServiceRegistrar(
                 new ServiceInstanceProvider(
@@ -39,7 +45,7 @@ namespace Spencer.NET
                         new ParametersValuesExtractor())), new ServiceIsAutoValueChecker()), new ServiceInstanceChecker(), new RegistratedServicesFilter());
 
             AssemblyRegistrar = new AssemblyRegistrar(new AssemblyListAdder(), new AssemblyListContainsChecker());
-            
+
             ConstructorParametersGenerator = new ConstructorParametersByObjectsGenerator(new TypeGetter());
         }
 
@@ -80,7 +86,7 @@ namespace Spencer.NET
         public StorageBuilder Register(Type type, params object[] constructorParameters)
         {
             IConstructorParameters parameters = ConstructorParametersGenerator.GenerateParameters(constructorParameters);
-            
+
             return Update(x =>
             {
                 AssemblyRegistrar.RegisterIfNotExist(x.Assemblies, type.Assembly);

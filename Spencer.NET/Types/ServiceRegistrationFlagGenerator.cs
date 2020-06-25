@@ -115,7 +115,6 @@ namespace Spencer.NET
             {
                 yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsMultiInstance, null);
             }
-
         }
     }
 }
