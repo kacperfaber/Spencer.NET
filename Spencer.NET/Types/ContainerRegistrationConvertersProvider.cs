@@ -16,9 +16,9 @@ namespace Spencer.NET
             ConvertersCreator = convertersCreator;
         }
 
-        public List<IContainerRegistrationConverter> ProvideConverters()
+        public List<IContainerRegistrationConverter> ProvideConverters(Assembly assembly)
         {
-            IEnumerable<Type> converterTypes = TypesProvider.ProvideTypes(GetType().Assembly);
+            IEnumerable<Type> converterTypes = TypesProvider.ProvideTypes(assembly);
 
             return ConvertersCreator.CreateConverters(converterTypes);
         }
