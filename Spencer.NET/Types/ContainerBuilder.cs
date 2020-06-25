@@ -8,7 +8,7 @@ namespace Spencer.NET
     public class ContainerBuilder
     {
         private List<IContainerRegistration> Registrations { get; set; } = new List<IContainerRegistration>();
-        
+        private List<IContainerRegistrationConverter> Converters { get; set; } = new List<IContainerRegistrationConverter>();
 
         public ClassRegistrationBuilder RegisterClass<T>() where T : class
         {
@@ -42,6 +42,7 @@ namespace Spencer.NET
         public void Register(Type type)
         {
             // that is registering type or interfaces without builders.
+            // and with using of original ServiceFlags.
         }
 
         public void Register<T>() where T : class

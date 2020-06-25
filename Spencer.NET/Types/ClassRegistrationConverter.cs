@@ -5,17 +5,20 @@ namespace Spencer.NET
     public class ClassRegistrationConverter : IContainerRegistrationConverter<ClassRegistration>
     {
         public IServiceGenerator ServiceGenerator;
-        public IServiceRegistrationGenerator RegistrationGenerator;
 
-        public ClassRegistrationConverter(IServiceRegistrationGenerator registrationGenerator, IServiceGenerator serviceGenerator)
+        public ClassRegistrationConverter(IServiceGenerator serviceGenerator)
         {
-            RegistrationGenerator = registrationGenerator;
             ServiceGenerator = serviceGenerator;
+        }
+
+        public ClassRegistrationConverter()
+        {
+            ServiceGenerator = ServiceGeneratorFactory.MakeInstance();
         }
 
         public IEnumerable<IService> Convert(ClassRegistration registration)
         {
-            IService service = ServiceGenerator.GenerateService(RegistrationGenerator.Generate(registration.Class, registration.RegistrationFlags));
+            IService service = ServiceGenerator.GenerateService(registration.Class, registration.RegistrationFlags);
             yield return service;
         }
     }

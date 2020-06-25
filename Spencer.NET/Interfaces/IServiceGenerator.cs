@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Spencer.NET
 {
@@ -9,5 +10,7 @@ namespace Spencer.NET
         IService GenerateService(Type @class, object instance = null, IConstructorParameters constructorParameters = null);
 
         IService GenerateService(IServiceRegistration registration);
+
+        IService GenerateService(Type @class, IEnumerable<ServiceRegistrationFlag> flags);
     }
 }

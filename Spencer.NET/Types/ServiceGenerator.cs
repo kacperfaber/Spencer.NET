@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Spencer.NET
 {
@@ -7,7 +8,6 @@ namespace Spencer.NET
         public IServiceFlagsGenerator FlagsGenerator;
         public IServiceRegistrationGenerator RegistrationGenerator;
         public IServiceInfoGenerator InfoGenerator;
-
         public IClassHasServiceFactoryChecker ClassHasFactoryChecker;
         public IServiceFactoryProvider FactoryProvider;
         public IServiceFactoryInvoker FactoryInvoker;
@@ -47,6 +47,21 @@ namespace Spencer.NET
 
         public IService GenerateService(IServiceRegistration registration)
         {
+            ServiceFlags emptyFlags = FlagsGenerator.GenerateEmpty();
+            ServiceInfo info = InfoGenerator.Generate(registration.TargetType);
+            IServiceData data = DataGenerator.GenerateData(registration);
+
+            return new ServiceBuilder()
+                .AddFlags(emptyFlags)
+                .AddRegistration(registration)
+                .AddInfo(info)
+                .AddData(data)
+                .Build();
+        }
+
+        public IService GenerateService(Type @class, IEnumerable<ServiceRegistrationFlag> flags)
+        {
+            IServiceRegistration registration = RegistrationGenerator.Generate(@class, flags);
             ServiceFlags emptyFlags = FlagsGenerator.GenerateEmpty();
             ServiceInfo info = InfoGenerator.Generate(registration.TargetType);
             IServiceData data = DataGenerator.GenerateData(registration);

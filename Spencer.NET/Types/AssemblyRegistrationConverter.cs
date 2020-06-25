@@ -6,13 +6,16 @@ namespace Spencer.NET
 {
     public class AssemblyRegistrationConverter : IContainerRegistrationConverter<AssemblyRegistration>
     {
-        public IServiceRegistrationGenerator ServiceRegistrationGenerator;
         public IServiceGenerator ServiceGenerator;
 
-        public AssemblyRegistrationConverter(IServiceRegistrationGenerator serviceRegistrationGenerator, IServiceGenerator serviceGenerator)
+        public AssemblyRegistrationConverter(IServiceGenerator serviceGenerator)
         {
-            ServiceRegistrationGenerator = serviceRegistrationGenerator;
             ServiceGenerator = serviceGenerator;
+        }
+
+        public AssemblyRegistrationConverter()
+        {
+            ServiceGenerator = ServiceGeneratorFactory.MakeInstance();
         }
 
         public IEnumerable<IService> Convert(AssemblyRegistration registration)
@@ -21,8 +24,7 @@ namespace Spencer.NET
             {
                 ClassRegistration classRegistration = (ClassRegistration) flag.Value;
 
-                IServiceRegistration classServiceRegistration = ServiceRegistrationGenerator.Generate(classRegistration.Class, classRegistration.RegistrationFlags);
-                IService service = ServiceGenerator.GenerateService(classServiceRegistration);
+                IService service = ServiceGenerator.GenerateService(classRegistration.Class, classRegistration.RegistrationFlags);
 
                 yield return service;
             }
