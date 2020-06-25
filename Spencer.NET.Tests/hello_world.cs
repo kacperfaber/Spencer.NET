@@ -101,6 +101,19 @@ namespace Spencer.NET.Tests
 
             Florka florka = container.Resolve<Florka>();
         }
+
+        [Test]
+        public void xxx()
+        {
+            AssemblyRegistrationBuilder builder = new ContainerBuilder()
+                .RegisterAssembly(GetType().Assembly);
+
+            builder
+                .IncludeClass<Florka>()
+                .SelectClass<Florka>()
+                .AsImplementedInterfaces()
+                .WithInstance(new Florka());
+        }
         
         private hello_world New()
         {

@@ -39,21 +39,5 @@ namespace Spencer.NET.Tests
             
             Assert.IsTrue(i == FactoryType.StaticMethod);
         }
-        
-        [Test]
-        public void returns_equals_to_factorytype_staticproperty_if_target_was_method()
-        {
-            int i = exec(typeof(TestClass).GetMembers().First(x => x.Name == "Hello"));
-            
-            Assert.IsTrue(i == FactoryType.StaticProperty);
-        }
-        
-        [Test]
-        public void returns_equals_to_factorytype_staticfield_if_target_was_method()
-        {
-            int i = exec(typeof(TestClass).GetMembers().First(x => x.Name == "World"));
-            
-            Assert.IsTrue(i == FactoryType.StaticField);
-        }
     }
 }

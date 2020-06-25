@@ -8,6 +8,7 @@ namespace Spencer.NET
     public class ContainerBuilder
     {
         private List<IContainerRegistration> Registrations { get; set; } = new List<IContainerRegistration>();
+        
 
         public ClassRegistrationBuilder RegisterClass<T>() where T : class
         {
