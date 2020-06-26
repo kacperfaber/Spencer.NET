@@ -168,19 +168,22 @@ namespace Spencer.NET.Tests
             }
         }
 
+        class GenericClass<T>
+        {
+            public T Id;
+        }
+
         [Test]
         public void builder()
         {
             ContainerBuilder builder = new ContainerBuilder();
 
             builder
-                .RegisterClass<Kacper>()
-                .AsImplementedInterfaces()
-                .AsSingleInstance()
-                .WithFactory("CreateInstance");
+                .RegisterClass<GenericClass<int>>()
+                .AsSingleInstance();
 
             IContainer c = builder.Container();
-            IGenericInterface<int> k = c.Resolve<IGenericInterface<int>>();
+            GenericClass<int> g = c.Resolve<GenericClass<int>>();
         }
     }
 
