@@ -22,7 +22,7 @@ namespace Spencer.NET
         {
             if (service.Registration.RegistrationFlags.Has(RegistrationFlagConstants.Constructor))
             {
-                ServiceRegistrationFlag flag = service.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.Constructor);
+                ServiceRegistrationFlag flag = service.Registration.RegistrationFlags.FirstOrDefault(x => x.Code == RegistrationFlagConstants.Constructor);
                 IMember memberParent = flag.Member;
 
                 if (ConstructorChecker.Check(memberParent))

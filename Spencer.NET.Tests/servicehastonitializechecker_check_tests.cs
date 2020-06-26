@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace Spencer.NET.Tests
 {
@@ -13,7 +14,13 @@ namespace Spencer.NET.Tests
             IService service = new ServiceBuilder()
                 .AddData(serviceDataBuilder)
                 .AddFlag(singleInstance ? ServiceFlagConstants.SingleInstance : ServiceFlagConstants.MultiInstance, null)
-                .AddRegistration(null)
+                .AddRegistration(new ServiceRegistration()
+                {
+                    RegistrationFlags = new List<ServiceRegistrationFlag>()
+                    {
+                        new ServiceRegistrationFlag(singleInstance ? RegistrationFlagConstants.IsSingleInstance : RegistrationFlagConstants.IsMultiInstance, null)
+                    }
+                })
                 .Build();
 
             ServiceHasToInitializeChecker checker = new ServiceHasToInitializeChecker(new AlwaysNewChecker());

@@ -7,7 +7,7 @@ namespace Spencer.NET.Extensions
     {
         public static bool Has(this IEnumerable<ServiceRegistrationFlag> flags, int code)
         {
-            return flags.SingleOrDefault(x => x.Code == code) != null;
+            return flags.Any(x => x.Code == code);
         }
 
         public static ServiceRegistrationFlag SelectFlag(this IEnumerable<ServiceRegistrationFlag> flags, int code)

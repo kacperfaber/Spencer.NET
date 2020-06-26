@@ -4,14 +4,17 @@ namespace Spencer.NET.Tests
 {
     public class servicehasfactorychecker_check_tests
     {
-        bool exec(string flagName)
+        bool exec()
         {
-            ServiceFlags flags = new ServiceFlags();
-            flags.AddFlag(flagName, null);
-
             Service service = new Service()
             {
-                Flags = flags
+                Registration = new ServiceRegistration()
+                {
+                    RegistrationFlags = new ServiceRegistrationFlag[1]
+                    {
+                        new ServiceRegistrationFlag(RegistrationFlagConstants.Factory, null)
+                    }
+                }
             };
             
             return new ServiceHasFactoryChecker().Check(service);
@@ -20,23 +23,18 @@ namespace Spencer.NET.Tests
         [Test]
         public void dont_throws_exceptions()
         {
-            Assert.DoesNotThrow(() => exec(ServiceFlagConstants.ServiceFactory));
+            Assert.DoesNotThrow(() => exec());
         }
 
-        [TestCase("hello")]
-        [TestCase("pozdrowienia")]
-        [TestCase("do")]
-        [TestCase("wiezienia")]
-        public void returns_false_if_registered_flags_wasnt_servicefactory(string name)
+        public void returns_false_if_registered_flags_wasnt_servicefactory()
         {
-            Assert.IsFalse(exec(name));
+            Assert.IsFalse(exec());
         }
         
         
-        [TestCase(ServiceFlagConstants.ServiceFactory)]
-        public void returns_true_if_registered_flags_wasnt_servicefactory(string name)
+        public void returns_true_if_registered_flags_wasnt_servicefactory()
         {
-            Assert.IsTrue(exec(name));
+            Assert.IsTrue(exec());
         }
     }
 }
