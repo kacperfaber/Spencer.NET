@@ -8,18 +8,20 @@ namespace Spencer.NET
     {
         public IService FindByClass(IServiceList list, Type @class)
         {
-            return list
-                .GetServices()
-                .Where(x => (x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value as Type) == @class)
-                // .Where(x => x.Registration.TargetType.IsAssignableFrom(@class))
-                .FirstOrDefault();
+            IEnumerable<IService> assignable = list.GetServices()
+                .Where(x => @class.IsAssignableFrom(x.Registration.TargetType) || x.Registration.RegistrationFlags
+                    .Where(x => x.Code == RegistrationFlagConstants.AsClass).Any(x => x.Value as Type == @class));
+
+            return assignable.FirstOrDefault();
         }
 
         public IEnumerable<IService> FindManyByClass(IServiceList list, Type @class)
         {
-            return list
-                .GetServices()
-                .Where(x => x.Registration.TargetType.IsAssignableFrom(@class));
+            IEnumerable<IService> assignable = list.GetServices()
+                .Where(x => @class.IsAssignableFrom(x.Registration.TargetType) || x.Registration.RegistrationFlags
+                    .Where(x => x.Code == RegistrationFlagConstants.AsClass).Any(x => x.Value as Type == @class));
+
+            return assignable;
         }
     }
 }
