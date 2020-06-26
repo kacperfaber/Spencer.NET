@@ -8,19 +8,25 @@ namespace Spencer.NET
     {
         public IEnumerable<ServiceRegistrationFlag> Optymalize(IEnumerable<ServiceRegistrationFlag> flags)
         {
-            ICollection<ServiceRegistrationFlag> collection = (ICollection<ServiceRegistrationFlag>) flags;
-
-            if (!collection.Has(RegistrationFlagConstants.IsMultiInstance) && !collection.Has(RegistrationFlagConstants.IsSingleInstance))
+            foreach (ServiceRegistrationFlag flag in flags)
             {
-                collection.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null));
-            }
+                if (flag.Code == RegistrationFlagConstants.IsSingleInstance || flag.Code == RegistrationFlagConstants.IsMultiInstance)
+                {
+                    if (flags.Has(RegistrationFlagConstants.IsSingleInstance) || flags.Has(RegistrationFlagConstants.IsMultiInstance))
+                    {
+                        yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null);
+                        continue;
+                    }
 
-            if (collection.Has(RegistrationFlagConstants.IsMultiInstance) && collection.Has(RegistrationFlagConstants.IsSingleInstance))
-            {
-                collection.Remove(collection.SingleOrDefault(x => x.Code == RegistrationFlagConstants.IsMultiInstance));
-            }
+                    if (flags.Has(RegistrationFlagConstants.IsSingleInstance) || flags.Has(RegistrationFlagConstants.IsMultiInstance))
+                    {
+                        yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsMultiInstance, null);
+                        continue;
+                    }
+                }
 
-            return collection;
+                yield return flag;
+            }
         }
     }
 }

@@ -148,7 +148,7 @@ namespace Spencer.NET.Tests
                 .AsSingleInstance();
 
             IContainer c = builder.Container();
-            Person<int> obj = c.Resolve<Person<int>>();
+            Kacper k = c.Resolve<Kacper>();
         }
     }
 

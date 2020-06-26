@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Spencer.NET.Extensions;
@@ -16,26 +16,21 @@ namespace Spencer.NET
 
         public IService FindClass(IServiceList list, Type @class)
         {
-            IEnumerable<Type> keyParameters = GenericParametersProvider.ProvideGenericTypes(@class);
+            IEnumerable<IService> assignableServices = list.GetServices().Where(x => @class.IsAssignableFrom(x.Registration.TargetType));
 
-            return list
-                .GetServices()
-                .Where(x => x.Registration.RegistrationFlags.Has(RegistrationFlagConstants.HasGenericParameters))
-                .Where(x => x.Registration.RegistrationFlags.SelectValueOrNull<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).Count() == keyParameters.Count())
-                .Where(x => x.Registration.RegistrationFlags.SelectValueOrNull<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).SequenceEqual(keyParameters))
+            return assignableServices
+                .Where(x => x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value != null)
+                .Where(x => (Type) x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value == @class)
                 .FirstOrDefault();
         }
 
         public IEnumerable<IService> FindClasses(IServiceList list, Type @class)
         {
-            IEnumerable<Type> keyParameters = GenericParametersProvider.ProvideGenericTypes(@class);
+            IEnumerable<IService> assignableServices = list.GetServices().Where(x => @class.IsAssignableFrom(x.Registration.TargetType));
 
-            return list
-                .GetServices()
-                .Where(x => x.Registration.RegistrationFlags.Has(RegistrationFlagConstants.HasGenericParameters))
-                .Where(x => x.Registration.RegistrationFlags.SelectValueOrNull<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).Count() == keyParameters.Count())
-                .Where(x => x.Registration.RegistrationFlags.SelectValueOrNull<IEnumerable<Type>>(RegistrationFlagConstants.GenericParameters).SequenceEqual(keyParameters));
-
+            return assignableServices
+                .Where(x => x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value != null)
+                .Where(x => (Type) x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value == @class);
         }
     }
 }
