@@ -122,5 +122,14 @@ namespace Spencer.NET
 
             return Update(x => { x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.Factory, null) {Member = member}); });
         }
+
+        public ClassRegistrationBuilder IsGeneric()
+        {
+            return Update(x =>
+            {
+                x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.HasGenericParameters, true));
+                x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.GenericParameters, Object.Class.GetGenericArguments()));
+            });
+        }
     }
 }

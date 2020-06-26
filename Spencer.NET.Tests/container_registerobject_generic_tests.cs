@@ -30,7 +30,7 @@ namespace Spencer.NET.Tests
         public void dont_throws_exceptions()
         {
             IContainerRegistrar container = ContainerFactory.Container();
-            Assert.DoesNotThrow(() => exec<TestClass>(container, new TestClass()));
+            Assert.DoesNotThrow(() => exec(container, new TestClass()));
         }
 
         [Test]

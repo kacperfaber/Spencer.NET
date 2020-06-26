@@ -17,20 +17,19 @@ namespace Spencer.NET
         public IService FindClass(IServiceList list, Type @class)
         {
             IEnumerable<IService> assignableServices = list.GetServices().Where(x => @class.IsAssignableFrom(x.Registration.TargetType));
+            IEnumerable<Type> genericParameters = GenericParametersProvider.ProvideGenericTypes(@class);
 
-            return assignableServices
-                .Where(x => x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value != null)
-                .Where(x => (Type) x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value == @class)
+            return assignableServices.Where(x => x.Registration.TargetType.GetGenericArguments().SequenceEqual(genericParameters))
                 .FirstOrDefault();
         }
 
         public IEnumerable<IService> FindClasses(IServiceList list, Type @class)
         {
             IEnumerable<IService> assignableServices = list.GetServices().Where(x => @class.IsAssignableFrom(x.Registration.TargetType));
+            IEnumerable<Type> genericParameters = GenericParametersProvider.ProvideGenericTypes(@class);
 
-            return assignableServices
-                .Where(x => x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value != null)
-                .Where(x => (Type) x.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.AsClass).Value == @class);
+            return assignableServices.Where(x =>
+                x.Registration.TargetType.GetGenericArguments().SequenceEqual(genericParameters));
         }
     }
 }

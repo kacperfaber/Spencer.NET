@@ -18,8 +18,23 @@ namespace Spencer.NET
 
         public IEnumerable<IService> Convert(ClassRegistration registration)
         {
-            IService service = ServiceGenerator.GenerateService(registration.Class, registration.RegistrationFlags);
-            yield return service;
+            if (registration.Class.ContainsGenericParameters)
+            {
+                List<ServiceRegistrationFlag> flags = new List<ServiceRegistrationFlag>(registration.RegistrationFlags)
+                {
+                    new ServiceRegistrationFlag(RegistrationFlagConstants.GenericParameters, registration.Class.GetGenericArguments()),
+                    new ServiceRegistrationFlag(RegistrationFlagConstants.HasGenericParameters, null)
+                };
+
+                IService service = ServiceGenerator.GenerateService(registration.Class, flags);
+                yield return service;
+            }
+
+            else
+            {
+                IService service = ServiceGenerator.GenerateService(registration.Class, registration.RegistrationFlags);
+                yield return service;
+            }
         }
     }
 }
