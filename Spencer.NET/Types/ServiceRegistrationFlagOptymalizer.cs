@@ -12,15 +12,15 @@ namespace Spencer.NET
             {
                 if (flag.Code == RegistrationFlagConstants.IsSingleInstance || flag.Code == RegistrationFlagConstants.IsMultiInstance)
                 {
-                    if (flags.Has(RegistrationFlagConstants.IsSingleInstance) || flags.Has(RegistrationFlagConstants.IsMultiInstance))
+                    if (flags.Has(RegistrationFlagConstants.IsSingleInstance) && flags.Has(RegistrationFlagConstants.IsMultiInstance))
                     {
                         yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null);
                         continue;
                     }
 
-                    if (flags.Has(RegistrationFlagConstants.IsSingleInstance) || flags.Has(RegistrationFlagConstants.IsMultiInstance))
+                    if (!flags.Has(RegistrationFlagConstants.IsSingleInstance) && !flags.Has(RegistrationFlagConstants.IsMultiInstance))
                     {
-                        yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsMultiInstance, null);
+                        yield return new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null);
                         continue;
                     }
                 }
