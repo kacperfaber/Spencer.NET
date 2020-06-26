@@ -133,8 +133,39 @@ namespace Spencer.NET.Tests
             public T Id { get; set; }
         }
 
-        class Kacper : Person<int>
+        interface ISimpleInterface
         {
+            string Simple { get; set; }
+        }
+
+        interface IGenericInterface<T>
+        {
+            T Object { get; set; }
+        }
+
+        interface IPersonManager
+        {
+            T CreateInstance<T>();
+        }
+
+        class PersonManager : IPersonManager
+        {
+            public T CreateInstance<T>()
+            {
+                return Activator.CreateInstance<T>();
+            }
+        }
+
+        class Kacper : Person<int>, IGenericInterface<int>, ISimpleInterface
+        {
+            public string Simple { get; set; }
+
+            public int Object { get; set; }
+
+            public static Kacper CreateInstance(IPersonManager manager)
+            {
+                return manager.CreateInstance<Kacper>();
+            }
         }
 
         [Test]
@@ -144,11 +175,12 @@ namespace Spencer.NET.Tests
 
             builder
                 .RegisterClass<Kacper>()
-                .AsClass<Person<int>>()
-                .AsSingleInstance();
+                .AsImplementedInterfaces()
+                .AsSingleInstance()
+                .WithFactory("CreateInstance");
 
             IContainer c = builder.Container();
-            Person<int> person = c.Resolve<Person<int>>();
+            IGenericInterface<int> k = c.Resolve<IGenericInterface<int>>();
         }
     }
 
