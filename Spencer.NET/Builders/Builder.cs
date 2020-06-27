@@ -28,31 +28,6 @@
             return NewBuilder(Object);
         }
 
-        public TBuilder Clear()
-        {
-            return NewBuilder(NewOut());
-        }
-
-        public TBuilder If(bool condition, Action<TOut> action)
-        {
-            if (condition)
-            {
-                return Update(action);
-            }
-
-            return Update(x => { });
-        }
-
-        public TBuilder If(bool condition, Func<TBuilder, TBuilder> func)
-        {
-            if (condition)
-            {
-                return func(NewBuilder(Object));
-            }
-
-            return Update(_ => { });
-        }
-
         public virtual TBuildOutput Build()
         {
             return Object;

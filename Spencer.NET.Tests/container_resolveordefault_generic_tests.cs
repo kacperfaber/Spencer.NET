@@ -86,5 +86,11 @@ namespace Spencer.NET.Tests
             
             Assert.AreNotEqual(multiInstance, resolved);
         }
+
+        [Test]
+        public void METHOD()
+        {
+            
+        }
     }
 }

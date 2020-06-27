@@ -30,6 +30,17 @@ namespace Spencer.NET.Tests
             public Pet Pet { get; set; }
         }
 
+        [AutoValue]
+        class AutoClass
+        {
+            public static int Instances = 0;
+
+            public AutoClass()
+            {
+                Instances++;
+            }
+        }
+
         void exec(IContainerRegistrar registrar, Type type)
         {
             registrar.Register(type);
@@ -177,6 +188,24 @@ namespace Spencer.NET.Tests
             exec(container, type);
 
             Assert.AreEqual(animal, container.Resolve<TestClass>().Animal);
+        }
+
+        [Test]
+        public void dont_throws_exceptions_if_registering_class_is_AutoValue_class()
+        {
+            IContainerRegistrar container = ContainerFactory.Container();
+
+            Assert.DoesNotThrow(delegate { exec(container, typeof(AutoClass)); });
+        }
+
+        [Test]
+        public void AutoClass_Instances_is_1_after_registering_AutoClass_to_Container()
+        {
+            IContainer container = ContainerFactory.Container();
+            
+            exec(container, typeof(AutoClass));
+            
+            Assert.IsTrue(AutoClass.Instances == 1);
         }
     }
 }
