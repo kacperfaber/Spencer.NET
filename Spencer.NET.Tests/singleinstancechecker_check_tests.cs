@@ -7,7 +7,7 @@ namespace Spencer.NET.Tests
     {
         bool exec(Action<ServiceBuilder> action)
         {
-            using ServiceBuilder builder = new ServiceBuilder();
+            ServiceBuilder builder = new ServiceBuilder();
             action(builder);
 
             return new SingleInstanceChecker()

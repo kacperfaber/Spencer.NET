@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Spencer.NET
 {
-    public class InterfaceBuilder : Builder<Interface, InterfaceBuilder, IInterface>, IDisposable
+    public class InterfaceBuilder : Builder<Interface, InterfaceBuilder, IInterface>
     {
         public InterfaceBuilder(Interface o = default) : base(o)
         {
@@ -22,10 +22,6 @@ namespace Spencer.NET
         public InterfaceBuilder AddGenericParameters(IEnumerable<Type> parameters)
         {
             return Update(x => x.GenericParameters = parameters);
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

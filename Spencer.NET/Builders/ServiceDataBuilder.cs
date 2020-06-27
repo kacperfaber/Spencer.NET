@@ -2,7 +2,7 @@
 
 namespace Spencer.NET
 {
-    public class ServiceDataBuilder : Builder<ServiceData, ServiceDataBuilder, IServiceData>, IDisposable
+    public class ServiceDataBuilder : Builder<ServiceData, ServiceDataBuilder, IServiceData>
     {
         public ServiceDataBuilder(ServiceData model = null) : base(model)
         {
@@ -16,10 +16,6 @@ namespace Spencer.NET
         public ServiceDataBuilder Initialized(bool initialized)
         {
             return Update(x => x.Initialized = initialized);
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

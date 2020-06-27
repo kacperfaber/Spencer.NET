@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Spencer.NET
 {
-    public class MemberBuilder : Builder<Member, MemberBuilder, IMember>, IDisposable
+    public class MemberBuilder : Builder<Member, MemberBuilder, IMember>
     {
         public MemberBuilder(Member model = null) : base(model)
         {
@@ -26,11 +26,5 @@ namespace Spencer.NET
             List<int> list = flags.ToList();
             return Update(x => x.MemberFlags.AddRange(flags));
         }
-
-        public void Dispose()
-        {
-        }
-
-        
     }
 }

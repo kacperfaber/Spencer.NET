@@ -17,7 +17,7 @@ namespace Spencer.NET
 
         public IFactory GenerateFactory(IMember member)
         {
-            using FactoryBuilder builder = new FactoryBuilder();
+            FactoryBuilder builder = new FactoryBuilder();
 
             int type = TypeGenerator.Generate(member);
 

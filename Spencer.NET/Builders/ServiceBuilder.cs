@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Spencer.NET
 {
-    public class ServiceBuilder : Builder<Service, ServiceBuilder, IService>, IDisposable
+    public class ServiceBuilder : Builder<Service, ServiceBuilder, IService>
     {
         public ServiceBuilder(Service o = null) : base(o)
         {
@@ -52,10 +52,6 @@ namespace Spencer.NET
         public ServiceBuilder FromType(Type type)
         {
             throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

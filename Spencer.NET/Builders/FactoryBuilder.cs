@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Spencer.NET
 {
-    public class FactoryBuilder : Builder<Factory, FactoryBuilder, IFactory>, IDisposable
+    public class FactoryBuilder : Builder<Factory, FactoryBuilder, IFactory>
     {
         public FactoryBuilder(Factory model = null) : base(model)
         {
@@ -32,10 +32,6 @@ namespace Spencer.NET
         public FactoryBuilder AddParentType(Type type)
         {
             return Update(x => x.ParentType = type);
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

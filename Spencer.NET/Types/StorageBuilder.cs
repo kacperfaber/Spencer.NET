@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Spencer.NET
 {
-    public class StorageBuilder : Builder<Storage, StorageBuilder, IStorage>, IDisposable
+    public class StorageBuilder : Builder<Storage, StorageBuilder, IStorage>
     {
         private IServicesGenerator ServicesGenerator;
         private IServiceRegistrar ServiceRegistrar;
@@ -189,10 +189,6 @@ namespace Spencer.NET
         public StorageBuilder RegisterServices(IEnumerable<IService> services)
         {
             return Update(x => ServiceRegistrar.Register(Object.Services, services));
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

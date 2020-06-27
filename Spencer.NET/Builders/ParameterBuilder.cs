@@ -2,7 +2,7 @@
 
 namespace Spencer.NET
 {
-    public class ParameterBuilder : Builder<Parameter, ParameterBuilder, IParameter>, IDisposable
+    public class ParameterBuilder : Builder<Parameter, ParameterBuilder, IParameter>
     {
         public ParameterBuilder(Parameter model = null) : base(model)
         {
@@ -26,10 +26,6 @@ namespace Spencer.NET
         public ParameterBuilder AddDefaultValue(object value)
         {
             return Update(x => x.DefaultValue = value);
-        }
-        
-        public void Dispose()
-        {
         }
     }
 }
