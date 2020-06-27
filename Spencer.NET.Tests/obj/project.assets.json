@@ -1226,7 +1226,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "Spencer.NET/1.0.0": {
+      "Spencer.NET/1.1.2175": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "compile": {
@@ -4617,7 +4617,7 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "Spencer.NET/1.0.0": {
+    "Spencer.NET/1.1.2175": {
       "type": "project",
       "path": "../Spencer.NET/Spencer.NET.csproj",
       "msbuildProject": "../Spencer.NET/Spencer.NET.csproj"
@@ -4627,7 +4627,7 @@
     ".NETCoreApp,Version=v3.1": [
       "Microsoft.NET.Test.Sdk >= 16.5.0",
       "NUnit3TestAdapter >= 3.15.1",
-      "Spencer.NET >= 1.0.0",
+      "Spencer.NET >= 1.1.2175",
       "nunit >= 3.12.0"
     ]
   },

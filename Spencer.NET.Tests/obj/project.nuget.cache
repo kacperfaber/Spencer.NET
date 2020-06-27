@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "F0UHGoEPUJojeWXKOazGertr0vHhnuVl/WMFTppKOiadvjw19+nuMAYrjJl6CY4kcQHcLc2ehR1c696RqC6gig==",
+  "dgSpecHash": "8lboX2SbSj7zdD49AteZZ7hhcAdcjUntOxFIIvBrVzezshjmjrt3xPjYfWnZEmiCH3M7aJs5fguAkEd3jw82yg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Kacpii\\Desktop\\Spencer.NET\\Spencer.NET.Tests\\Spencer.NET.Tests.csproj",
   "expectedPackageFiles": [
@@ -66,8 +66,7 @@
     "C:\\Users\\Kacpii\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Kacpii\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
-    "C:\\Users\\Kacpii\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Kacpii\\.nuget\\packages\\spencer.net\\1.0.0\\spencer.net.1.0.0.nupkg.sha512"
+    "C:\\Users\\Kacpii\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }
