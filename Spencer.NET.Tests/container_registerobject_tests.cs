@@ -212,13 +212,13 @@ namespace Spencer.NET.Tests
         }
 
         [Test]
-        public void container_storage_services_will_be_have_one_null_service_after_registration_class_with_servicefactory_throws_nullreference()
+        public void container_storage_services_will_be_have_one_null_service_after_registration_class_with_servicefactory()
         {
             IContainer container = ContainerFactory.Container();
 
             exec(container, new Factory());
             
-            Assert.IsEmpty(container.Storage.Services.GetServices().Where(x => x == null));
+            Assert.IsNotEmpty(container.Storage.Services.GetServices().Where(x => x == null));
         }
     }
 }
