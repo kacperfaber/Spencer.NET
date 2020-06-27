@@ -39,7 +39,6 @@ namespace Spencer.NET.Tests
             IService service = new ServiceBuilder()
                 .AddRegistration(serviceRegistration)
                 .AddFlags(flags)
-                .AddInfo(null)
                 .Build();
 
             object instance = Activator.CreateInstance<T>();

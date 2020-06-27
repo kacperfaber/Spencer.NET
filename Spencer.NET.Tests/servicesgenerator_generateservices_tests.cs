@@ -25,7 +25,7 @@ namespace Spencer.NET.Tests
         IEnumerable<IService> exec<T>(IReadOnlyContainer readOnlyContainer, IConstructorParameters parameters, object instance)
         {
             IServicesGenerator servicesGenerator = new ServicesGenerator(new TypeIsClassValidator(),
-                new ImplementationsFinder(new TypeImplementsInterfaceValidator()),
+                new ImplementationsFinder(),
                 new ServiceGenerator(
                     new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())),
                         new ServiceFlagsIssuesResolver()),
@@ -35,8 +35,7 @@ namespace Spencer.NET.Tests
                                 new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),
                                 new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
                             new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())), new ConstructorInfoListGenerator(),
-                            new DefaultConstructorInfoProvider()), new ServiceRegistrationFlagOptymalizer()),
-                    new ServiceInfoGenerator(), new ClassHasServiceFactoryChecker(),
+                            new DefaultConstructorInfoProvider()), new ServiceRegistrationFlagOptymalizer()), new ClassHasServiceFactoryChecker(),
                     new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
                         new ConstructorParametersGenerator(new TypedMemberValueProvider(), new ConstructorParameterByTypeFinder(),
                             new ServiceHasConstructorParametersChecker()),

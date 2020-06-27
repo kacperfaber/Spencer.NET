@@ -44,7 +44,8 @@ namespace Spencer.NET
             return Update(x => x.Registration = registration);
         }
 
-        public ServiceBuilder AddInfo(IServiceInfo serviceInfo)
+        [Obsolete]
+        public ServiceBuilder AddInfo(object serviceInfo = null)
         {
             return Update(x => { });
         }

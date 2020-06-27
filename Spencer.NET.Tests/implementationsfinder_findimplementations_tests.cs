@@ -20,7 +20,7 @@ namespace Spencer.NET.Tests
             AssemblyList list = new AssemblyList();
             list.AddAssemblies(GetType().Assembly);
 
-            ImplementationsFinder finder = new ImplementationsFinder(new TypeImplementsInterfaceValidator());
+            ImplementationsFinder finder = new ImplementationsFinder();
             IEnumerable<Type> implementations = finder.FindImplementations(list, typeof(T));
 
             return implementations.ToArray();

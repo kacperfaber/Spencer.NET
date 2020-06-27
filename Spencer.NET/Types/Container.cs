@@ -11,7 +11,7 @@ namespace Spencer.NET
         public IConstructorParametersByObjectsGenerator ConstructorParametersByObjectsGenerator;
 
         public Container(IStorage storage, IServiceRegistrar serviceRegistrar, IServicesGenerator servicesGenerator, IServiceFinder serviceFinder,
-            IServiceInitializer serviceInitializer, ITypeExisterChecker typeExisterChecker, IServiceIsAutoValueChecker serviceIsAutoValueChecker,
+            IServiceInitializer serviceInitializer, IServiceIsAutoValueChecker serviceIsAutoValueChecker,
             ITypeGetter typeGetter, IAssemblyRegistrar assemblyRegistrar, IConstructorParametersByObjectsGenerator constructorParametersByObjectsGenerator,
             IServiceInstanceResolver serviceInstanceResolver) : base(storage, serviceFinder, typeGetter, serviceInstanceResolver, assemblyRegistrar, serviceRegistrar, servicesGenerator)
         {

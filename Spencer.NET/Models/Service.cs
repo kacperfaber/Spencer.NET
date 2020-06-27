@@ -8,8 +8,6 @@
         
         public IServiceData Data { get; set; }
 
-        public IServiceInfo Info { get; set; }
-
         public Service()
         {
             Flags = new ServiceFlags();

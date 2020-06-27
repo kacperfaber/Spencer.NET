@@ -7,18 +7,15 @@ namespace Spencer.NET
     {
         public IServiceFlagsGenerator FlagsGenerator;
         public IServiceRegistrationGenerator RegistrationGenerator;
-        public IServiceInfoGenerator InfoGenerator;
         public IClassHasServiceFactoryChecker ClassHasFactoryChecker;
         public IServiceFactoryProvider FactoryProvider;
         public IServiceFactoryInvoker FactoryInvoker;
         public IServiceDataGenerator DataGenerator;
 
-        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator,
-            IServiceInfoGenerator infoGenerator, IClassHasServiceFactoryChecker classHasFactoryChecker, IServiceFactoryProvider factoryProvider, IServiceFactoryInvoker factoryInvoker, IServiceDataGenerator dataGenerator)
+        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator, IClassHasServiceFactoryChecker classHasFactoryChecker, IServiceFactoryProvider factoryProvider, IServiceFactoryInvoker factoryInvoker, IServiceDataGenerator dataGenerator)
         {
             FlagsGenerator = flagsGenerator;
             RegistrationGenerator = registrationGenerator;
-            InfoGenerator = infoGenerator;
             ClassHasFactoryChecker = classHasFactoryChecker;
             FactoryProvider = factoryProvider;
             FactoryInvoker = factoryInvoker;
@@ -34,12 +31,10 @@ namespace Spencer.NET
             }
             
             ServiceFlags flags = FlagsGenerator.GenerateFlags(@class);
-            ServiceInfo info = InfoGenerator.Generate(@class);
             IServiceRegistration registration = RegistrationGenerator.Generate(flags, @class, instance, constructorParameters);
             
             return new ServiceBuilder()
                 .AddFlags(flags)
-                .AddInfo(info)
                 .AddData(DataGenerator.GenerateData(registration))
                 .AddRegistration(registration)
                 .Build(); 
@@ -48,13 +43,11 @@ namespace Spencer.NET
         public IService GenerateService(IServiceRegistration registration)
         {
             ServiceFlags emptyFlags = FlagsGenerator.GenerateEmpty();
-            ServiceInfo info = InfoGenerator.Generate(registration.TargetType);
             IServiceData data = DataGenerator.GenerateData(registration);
 
             return new ServiceBuilder()
                 .AddFlags(emptyFlags)
                 .AddRegistration(registration)
-                .AddInfo(info)
                 .AddData(data)
                 .Build();
         }
@@ -63,13 +56,11 @@ namespace Spencer.NET
         {
             IServiceRegistration registration = RegistrationGenerator.Generate(@class, flags);
             ServiceFlags emptyFlags = FlagsGenerator.GenerateEmpty();
-            ServiceInfo info = InfoGenerator.Generate(registration.TargetType);
             IServiceData data = DataGenerator.GenerateData(registration);
 
             return new ServiceBuilder()
                 .AddFlags(emptyFlags)
                 .AddRegistration(registration)
-                .AddInfo(info)
                 .AddData(data)
                 .Build();
         }
@@ -83,12 +74,10 @@ namespace Spencer.NET
             }
             
             ServiceFlags flags = FlagsGenerator.GenerateFlags(@class);
-            ServiceInfo info = InfoGenerator.Generate(@class);
             IServiceRegistration registration = RegistrationGenerator.Generate(flags, @class, instance, constructorParameters);
             
             return new ServiceBuilder()
                 .AddFlags(flags)
-                .AddInfo(info)
                 .AddData(DataGenerator.GenerateData(registration))
                 .AddRegistration(registration)
                 .Build();

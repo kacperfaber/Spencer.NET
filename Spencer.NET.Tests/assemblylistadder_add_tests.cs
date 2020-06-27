@@ -43,7 +43,6 @@ namespace Spencer.NET.Tests
         }
 
         [TestCase(typeof(assemblylistadder_add_tests), typeof(assemblylistcontainschecker_contains_tests))]
-        [TestCase(typeof(genericparametersprovider_provide_tests), typeof(registrationinterfacesfilter_filter_tests))]
         public void returns_two_if_gived_was_two_types(Type t1, Type t2)
         {
             AssemblyList list = exec(new List<Type>() {t1, t2}.ToArray());

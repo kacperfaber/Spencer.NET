@@ -9,13 +9,6 @@ namespace Spencer.NET
     {
         public List<Type> RegisteredTypes = new List<Type>(); // TODO
 
-        public ITypeImplementsInterfaceValidator Validator;
-
-        public ImplementationsFinder(ITypeImplementsInterfaceValidator validator)
-        {
-            Validator = validator;
-        }
-
         public IEnumerable<Type> FindImplementations(IAssemblyList assemblies, Type @interface)
         {
             foreach (Assembly assembly in assemblies.GetAssemblies())
