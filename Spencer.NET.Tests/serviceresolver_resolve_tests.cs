@@ -1,68 +1,183 @@
-﻿#pragma warning disable
-using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
+
+#pragma warning disable CS0612
 
 namespace Spencer.NET.Tests
 {
     public class serviceresolver_resolve_tests
     {
-        [Test]
-        public void is_IServiceResolver()
+        interface ITestClass
         {
-            Assert.IsTrue(typeof(IServiceResolver).IsAssignableFrom(typeof(ServiceResolver)));
+        }
+
+        class TestClass : ITestClass
+        {
+        }
+
+        object exec(IContainer container, IService service)
+        {
+            ServiceResolver resolver = new ServiceResolver((container as Container).ServiceInstanceResolver);
+            return resolver.Resolve(service, container);
         }
 
         [Test]
-        public void is_Obsolete()
+        public void dont_throws_exceptions()
         {
-            Assert.NotNull(typeof(ServiceResolver).GetCustomAttribute(typeof(ObsoleteAttribute)));
+            IContainer c = ContainerFactory.Container();
+            IService service = new Service
+            {
+                Registration = new ServiceRegistration
+                {
+                    TargetType = typeof(TestClass),
+                    RegistrationFlags = new List<ServiceRegistrationFlag>()
+                    {
+                        new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null)
+                    }
+                },
+                Data = new ServiceData
+                {
+                    Instance = null
+                }
+            };
+
+            Assert.DoesNotThrow(() => exec(c, service));
         }
 
         [Test]
-        public void has_Resolve_method()
+        public void returns_Service_Data_Instance_if_she_was_not_null_and_service_is_SingleInstance()
         {
-            Assert.NotNull(typeof(ServiceResolver).GetMethods().Where(x => x.Name == "Resolve"));
+            object excepted = new object();
+
+            IContainer c = ContainerFactory.Container();
+
+            IService service = new Service
+            {
+                Data = new ServiceData
+                {
+                    Instance = excepted
+                },
+                Registration = new ServiceRegistration()
+                {
+                    TargetType = typeof(TestClass),
+                    RegistrationFlags = new List<ServiceRegistrationFlag>()
+                    {
+                        new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null)
+                    }
+                }
+            };
+
+            object o = exec(c, service);
+
+            Assert.AreEqual(service.Data.Instance, o);
         }
 
         [Test]
-        public void Resolve_method_returns_object()
+        public void returns_new_instance_of_target_object_if_Service_Data_Instance_was_null_and_service_is_SingleInstance()
         {
-            MethodInfo method = typeof(ServiceResolver).GetMethods().SingleOrDefault(x => x.Name == "Resolve");
+            object excepted = new object();
 
-            Assert.IsTrue(method.ReturnType == typeof(object));
+            IContainer c = ContainerFactory.Container();
+
+            IService service = new Service
+            {
+                Data = new ServiceData(),
+                Registration = new ServiceRegistration()
+                {
+                    TargetType = typeof(TestClass),
+                    RegistrationFlags = new List<ServiceRegistrationFlag>()
+                    {
+                        new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null)
+                    }
+                }
+            };
+
+            object o = exec(c, service);
+
+            Assert.AreNotEqual(excepted, o);
         }
 
         [Test]
-        public void Resolve_method_takes_IService_and_IContainer()
+        public void returns_new_instance_if_Service_Data_Instance_is_setted_and_service_is_MultiInstance()
         {
-            MethodInfo method = typeof(ServiceResolver).GetMethods().SingleOrDefault(x => x.Name == "Resolve");
+            object excepted = new TestClass();
 
-            ParameterInfo[] parameters = method.GetParameters();
-            Type[] types = Array.ConvertAll(parameters, x => x.ParameterType);
+            IContainer c = ContainerFactory.Container();
             
-            Assert.IsTrue(types.SequenceEqual(new [] {typeof(IService), typeof(IContainer)}));
+            IService service = new Service
+            {
+                Data = new ServiceData
+                {
+                    Instance = excepted
+                },
+                Registration = new ServiceRegistration
+                {
+                    TargetType = typeof(TestClass),
+                    RegistrationFlags = new List<ServiceRegistrationFlag>
+                    {
+                        new ServiceRegistrationFlag(RegistrationFlagConstants.IsMultiInstance, null)
+                    }
+                }
+            };
+
+            object o = exec(c, service);
+            
+            Assert.AreNotEqual(excepted, o);
         }
 
         [Test]
-        public void Resolve_method_is_Obsolete()
+        public void returns_two_same_instances_if_Service_Data_Instance_was_null_and_service_was_SingleInstance()
         {
-            MethodInfo method = typeof(ServiceResolver).GetMethods().SingleOrDefault(x => x.Name == "Resolve");
+            IContainer c = ContainerFactory.Container();
+            
+            IService service = new Service
+            {
+                Data = new ServiceData
+                {
+                    Instance = null
+                },
+                Registration = new ServiceRegistration()
+                {
+                    TargetType = typeof(TestClass),
+                    RegistrationFlags = new List<ServiceRegistrationFlag>()
+                    {
+                        new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null)
+                    }
+                }
+            };
 
-            Assert.NotNull(method.GetCustomAttribute(typeof(ObsoleteAttribute)));
+            object res1 = exec(c, service);
+            object res2 = exec(c, service);
+            
+            Assert.AreEqual(res1, res2);
         }
 
         [Test]
-        public void has_public_constructor()
+        public void returning_new_instance_and_sets_it_to_Service_Data_Instance_if_Service_Data_Instance_was_null_and_service_was_SingleInstance()
         {
-            Assert.IsTrue(typeof(ServiceResolver).GetConstructors().Where(x => x.IsPublic).Any());
-        }
+            object excepted = new object();
 
-        [Test]
-        public void has_constructor_with_IServiceInstanceResolver_parameter()
-        {
-            Assert.IsTrue(typeof(ServiceResolver).GetConstructors().Where(x => x.GetParameters().FirstOrDefault().ParameterType == typeof(IServiceInstanceResolver)).Any());
+            IContainer c = ContainerFactory.Container();
+            
+            IService service = new Service
+            {
+                Data = new ServiceData
+                {
+                    Instance = null
+                },
+                Registration = new ServiceRegistration
+                {
+                    TargetType = typeof(TestClass),
+                    RegistrationFlags = new List<ServiceRegistrationFlag>
+                    {
+                        new ServiceRegistrationFlag(RegistrationFlagConstants.IsSingleInstance, null)
+                    }
+                }
+            };
+
+            object o = exec(c, service);
+            
+            Assert.AreEqual(service.Data.Instance, o);
         }
     }
 }

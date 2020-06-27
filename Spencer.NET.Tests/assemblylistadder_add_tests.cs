@@ -32,6 +32,7 @@ namespace Spencer.NET.Tests
             Assert.NotNull(exec(GetType()));
         }
 
+        #pragma warning disable CS0612
         [TestCase(typeof(assemblylistadder_add_tests), typeof(ServiceResolver), typeof(object))]
         [TestCase(typeof(assemblylistadder_add_tests))]
         public void returns_params_types_len(params Type[] types)
