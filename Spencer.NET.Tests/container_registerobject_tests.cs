@@ -216,7 +216,9 @@ namespace Spencer.NET.Tests
         {
             IContainer container = ContainerFactory.Container();
 
-            Assert.That(() => exec(container, new Factory()), Throws.TypeOf<NullReferenceException>());
+            exec(container, new Factory());
+            
+            Assert.IsEmpty(container.Storage.Services.GetServices().Where(x => x == null));
         }
     }
 }

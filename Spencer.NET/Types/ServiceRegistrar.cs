@@ -22,9 +22,6 @@ namespace Spencer.NET
 
             foreach (IService service in filteredList)
             {
-                if (!InstanceChecker.Check(service))
-                    InstanceProvider.ProvideInstance(service);
-
                 list.AddService(service);
             }
         }
