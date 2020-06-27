@@ -24,29 +24,16 @@ Kacper Faber, Poland
 
 * 1.0 (29.04.2020)
 * 1.0.1 (30.04.2020)
-* 1.0.2 (26.05.2020)
-* 1.0.2.1 (26.05.2020)
-* 1.0.2.2 (27.05.2020)
-* 1.0.5 (12.06.2020)
-* 1.0.6 (13.06.2020)
 * 1.0.75 (16.06.2020)
-
-<br>
-
-### Previews
-
-* 1.1 (07.2020)
-     * Advanced `ContainerBuilder`
-     * Object initialization process optymalization
+* 1.1.2453 (02.07.2020)
 
 
 <br>
 
 
-### Changelog [1.0.75]
+### Changelog (v1.1)
 
-Factory methods can take parameters.
-If container is assignable to `IContainer` parameter could not to be registered.
+* Added `ContainerBuilder` allowing to make strongly-configured registrations using builder. Services creates using this way will not pay attention for attributes (without `Inject`, `TryInject` and `Auto`)
 
 <br>
 
@@ -176,6 +163,21 @@ Prefered way is using `StorageBuilder` class.
 >Registering assembly types
 
 <br>
+
+#### ContainerBuilder (v1.1)
+Allow you to create strongly-configured registrations and build `Container` or `ReadOnlyContainer`
+>`ContainerBuilder.RegisterClass<T>():ClassRegistrationBuilder`
+> Making instance of ClassRegistrationBuilder, there you can configure your class.
+
+>`ContainerBuilder.RegisterAssembly(Assembly):AssemblyRegistrationBuilder`
+> Making instance of AssemblyRegistrationBuilder, there you can configure your assembly.
+
+>`ContainerBuilder.Container():IContainer`
+> Building Container of your registrations.
+
+>`ContainerBuilder.ReadOnlyContainer():IReadOnlyContainer`
+> Building ReadOnlyContainer of your registrations.
+
 
 #### Attributes
 * `SingleInstance` 
