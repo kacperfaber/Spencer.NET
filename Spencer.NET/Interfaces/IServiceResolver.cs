@@ -1,4 +1,6 @@
-﻿namespace Spencer.NET
+﻿using System;
+
+namespace Spencer.NET
 {
     public interface IServiceResolver
     {

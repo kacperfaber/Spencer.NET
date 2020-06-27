@@ -4,15 +4,10 @@ namespace Spencer.NET
 {
     public class ServiceRegistrar : IServiceRegistrar
     {
-        public IServiceInstanceProvider InstanceProvider;
-        public IServiceInstanceChecker InstanceChecker;
         public IRegistratedServicesFilter RegistratedServicesFilter;
 
-        public ServiceRegistrar(IServiceInstanceProvider instanceProvider, IServiceInstanceChecker instanceChecker,
-            IRegistratedServicesFilter registratedServicesFilter)
+        public ServiceRegistrar(IRegistratedServicesFilter registratedServicesFilter)
         {
-            InstanceProvider = instanceProvider;
-            InstanceChecker = instanceChecker;
             RegistratedServicesFilter = registratedServicesFilter;
         }
 

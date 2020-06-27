@@ -1,6 +1,6 @@
 ﻿namespace Spencer.NET
 {
-    public interface IServiceHaveToCreateInstanceChecker
+    public interface eServiceHaveToCreateInstanceChecker
     {
         bool Check(IService service);
     }
