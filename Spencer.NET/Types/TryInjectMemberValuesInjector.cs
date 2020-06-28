@@ -26,6 +26,11 @@ namespace Spencer.NET
             {
                 Type declarationType = DeclarationTypeProvider.ProvideDeclarartionType(flag.Member);
                 object value = InjectValueProvider.ProvideValue(declarationType, container);
+
+                if (value == null)
+                {
+                    continue;
+                }
                 
                 ValueSetter.SetValue(flag.Member, instance, value);
             }

@@ -56,17 +56,6 @@ namespace Spencer.NET.Tests
             public Odie Odie { get; set; }
         }
 
-        [Test]
-        public void rrr()
-        {
-            ContainerBuilder b = new ContainerBuilder();
-            b.RegisterClass<KacpisMis>();
-            
-            IContainer container = b.Container();
-            KacpisMis mis = container.Resolve<KacpisMis>();
-
-            Console.WriteLine(HelloWorld.Instance.Name);
-        }
 
         [Test]
         public void storage_builder()
