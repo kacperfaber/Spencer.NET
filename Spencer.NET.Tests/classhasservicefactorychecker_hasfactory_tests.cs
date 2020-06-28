@@ -8,7 +8,7 @@ namespace Spencer.NET.Tests
         {
             public IService CreateService()
             {
-                throw new System.NotImplementedException();
+                return null;
             }
         }
 
