@@ -280,6 +280,9 @@ class Test
 
 <br>
 
+#### Exceptions
+- `ResolveException` throwing when resolved `IService` finded by gived **Type** is **null**.
+
 #### Parametrized Constructors
 
 Mechanism for finding constructor always will be picking accessible and 

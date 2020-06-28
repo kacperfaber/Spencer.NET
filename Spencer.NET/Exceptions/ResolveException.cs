@@ -5,8 +5,9 @@ namespace Spencer.NET
 {
     public class ResolveException : Exception
     {
-        public ResolveException(MemberInfo t) : base($"Cannot resolve servive of type {t.Name}")
+        public ResolveException(Type type) : base($"Could not resolve service of type {type.FullName}")
         {
+            HelpLink = "https://github.com/kacperfaber/Spencer.NET/blob/v1.1/README.md#exceptions";
         }
     }
 }

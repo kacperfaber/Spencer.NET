@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -6,9 +7,9 @@ namespace Spencer.NET
 {
     public class DefaultConstructorProvider : IDefaultConstructorProvider
     {
-        public IConstructor ProvideDefaultConstructor(IService service)
+        public IConstructor ProvideDefaultConstructor(IEnumerable<ServiceRegistrationFlag> flags)
         {
-            return (IConstructor) service.Registration.RegistrationFlags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.DefaultConstructor).Value;
+            return (IConstructor) flags.SingleOrDefault(x => x.Code == RegistrationFlagConstants.DefaultConstructor).Value;
         }
     }
 }
