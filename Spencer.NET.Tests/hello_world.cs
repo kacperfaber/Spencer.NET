@@ -50,11 +50,20 @@ namespace Spencer.NET.Tests
             Odie resolve = container.Resolve<Odie>();
         }
 
+        class KacpisMis
+        {
+            [Inject]
+            public Odie Odie { get; set; }
+        }
+
         [Test]
         public void rrr()
         {
-            IContainer container = ContainerFactory.Container();
-            container.Register<HelloWorld>();
+            ContainerBuilder b = new ContainerBuilder();
+            b.RegisterClass<KacpisMis>();
+            
+            IContainer container = b.Container();
+            KacpisMis mis = container.Resolve<KacpisMis>();
 
             Console.WriteLine(HelloWorld.Instance.Name);
         }
