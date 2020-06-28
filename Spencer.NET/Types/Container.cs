@@ -168,32 +168,5 @@ namespace Spencer.NET
             
             return ServiceInstanceResolver.ResolveInstance(service, this);
         }
-
-        public T ResolveOrDefault<T>()
-        {
-            Type type = TypeGetter.GetType<T>();
-            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
-            IService service = ServiceFinder.Find(Storage.Services, type);
-
-            if (service == null)
-            {
-                return default;
-            }
-            
-            return (T) ServiceInstanceResolver.ResolveInstance(service, this);
-        }
-
-        public object ResolveOrDefault(Type type)
-        {
-            AssemblyRegistrar.RegisterIfNotExist(Storage.Assemblies, type);
-            IService service = ServiceFinder.Find(Storage.Services, type);
-
-            if (service == null)
-            {
-                return default;
-            }
-            
-            return ServiceInstanceResolver.ResolveInstance(service, this);
-        }
     }
 }

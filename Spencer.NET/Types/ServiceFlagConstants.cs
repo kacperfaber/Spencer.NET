@@ -16,7 +16,7 @@
         public const string ServiceFactory = "service_factory";
         public const string Inject = "inject";
 
-        public ServiceFlagConstants()
+        ServiceFlagConstants()
         {
         }
     }

@@ -38,7 +38,7 @@ namespace Spencer.NET
                     return service.Data.Instance;
                 }
 
-                throw new Exception();
+                throw new UnknownPropertyException("service store way");
             }
         }
     }
