@@ -1,8 +1,8 @@
-﻿﻿using System;
+﻿using System;
 
- namespace Spencer.NET
+namespace Spencer.NET
 {
-    public partial class Builder<TOut, TBuilder, TBuildOutput> where TOut : TBuildOutput
+    public class Builder<TOut, TBuilder, TBuildOutput> where TOut : TBuildOutput
     {
         public TOut Object;
 

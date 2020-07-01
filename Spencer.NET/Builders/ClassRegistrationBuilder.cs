@@ -50,20 +50,6 @@ namespace Spencer.NET
             });
         }
 
-        public ClassRegistrationBuilder AsImplementedInterfaces(Predicate<Type> predicate)
-        {
-            IEnumerable<IInterface> interfaces = InterfacesGenerator.GenerateInterfaces(new ServiceFlags(), Object.Class);
-
-            return Update(x =>
-            {
-                foreach (IInterface @interface in interfaces)
-                {
-                    if (predicate(@interface.Type))
-                        x.RegistrationFlags.Add(new ServiceRegistrationFlag(RegistrationFlagConstants.AsInterface, @interface));
-                }
-            });
-        }
-
         public ClassRegistrationBuilder AsInterface<TInterface>()
         {
             IInterface @interface = InterfaceGenerator.GenerateInterface(typeof(TInterface));
