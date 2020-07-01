@@ -6,13 +6,22 @@ namespace Spencer.NET
 {
     public class ServiceFactoryInvoker : IServiceFactoryInvoker
     {
-        public IService Invoke(IServiceFactory factory)
+        public IServiceFactoryResult Invoke(IServiceFactory factory)
         {
-            Type @interface = typeof(IServiceFactory);
-            MethodInfo iMethod = @interface.GetMethods().FirstOrDefault(x => x.ReturnType == typeof(IService));
-            MethodInfo method = factory.GetType().GetMethods().SingleOrDefault(x => x.Name == iMethod.Name);
+            try
+            {
+                Type @interface = typeof(IServiceFactory);
+                MethodInfo iMethod = @interface.GetMethods().FirstOrDefault(x => x.ReturnType == typeof(IService));
+                MethodInfo method = factory.GetType().GetMethods().SingleOrDefault(x => x.Name == iMethod.Name);
+                IService service = (IService) method.Invoke(factory, new object[] { });
+                
+                return new ServiceFactoryResult(service);
+            }
 
-            return (IService) method.Invoke(factory, new object[]{});
+            catch (Exception e)
+            {
+                return new ServiceFactoryResult(null);
+            }
         }
     }
 }

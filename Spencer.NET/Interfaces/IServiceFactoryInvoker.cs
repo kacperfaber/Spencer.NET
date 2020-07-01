@@ -2,6 +2,6 @@
 {
     public interface IServiceFactoryInvoker
     {
-        IService Invoke(IServiceFactory factory);
+        IServiceFactoryResult Invoke(IServiceFactory factory);
     }
 }

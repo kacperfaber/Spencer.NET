@@ -11,6 +11,8 @@ namespace Spencer.NET
         public IServiceFactoryProvider FactoryProvider;
         public IServiceFactoryInvoker FactoryInvoker;
         public IServiceDataGenerator DataGenerator;
+        public IServiceFactoryResultValidator ResultValidator;
+        public IServiceFactoryResultServiceExtractor ServiceFactoryResultServiceExtractor;
 
         public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator, IClassHasServiceFactoryChecker classHasFactoryChecker, IServiceFactoryProvider factoryProvider, IServiceFactoryInvoker factoryInvoker, IServiceDataGenerator dataGenerator)
         {
@@ -27,7 +29,12 @@ namespace Spencer.NET
             if (ClassHasFactoryChecker.HasFactory(@class))
             {
                 IServiceFactory factory = FactoryProvider.ProvideServiceFactory(@class);
-                return FactoryInvoker.Invoke(factory);
+                IServiceFactoryResult factoryResult = FactoryInvoker.Invoke(factory);
+                
+                if (ResultValidator.Validate(factoryResult))
+                {
+                    return ServiceFactoryResultServiceExtractor.ExtractService(factoryResult);
+                }
             }
             
             ServiceFlags flags = FlagsGenerator.GenerateFlags(@class);
@@ -70,7 +77,12 @@ namespace Spencer.NET
             if (ClassHasFactoryChecker.HasFactory(@class))
             {
                 IServiceFactory factory = FactoryProvider.ProvideServiceFactory(@class, container);
-                return FactoryInvoker.Invoke(factory);
+                IServiceFactoryResult factoryResult = FactoryInvoker.Invoke(factory);
+
+                if (ResultValidator.Validate(factoryResult))
+                {
+                    return ServiceFactoryResultServiceExtractor.ExtractService(factoryResult);
+                }
             }
             
             ServiceFlags flags = FlagsGenerator.GenerateFlags(@class);
