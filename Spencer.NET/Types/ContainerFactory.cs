@@ -55,24 +55,7 @@ namespace Spencer.NET
                 new AssemblyRegistrar(new AssemblyListAdder(), new AssemblyListContainsChecker()),
                 new ServiceRegistrar(new RegistratedServicesFilter()),
                 new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(),
-                    new ServiceGenerator(
-                        new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())),
-                            new ServiceFlagsIssuesResolver()),
-                        new ServiceRegistrationGenerator(
-                            new ServiceRegistrationFlagGenerator(new BaseTypeFinder(),
-                                new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),
-                                    new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),
-                                    new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
-                                new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())), new ConstructorInfoListGenerator(),
-                                new DefaultConstructorInfoProvider()), new ServiceRegistrationFlagOptymalizer()),
-                        new ClassHasServiceFactoryChecker(),
-                        new ServiceFactoryProvider(new InstancesCreator(new ConstructorInstanceCreator(new ConstructorInvoker(),
-                            new ConstructorParametersGenerator(new TypedMemberValueProvider(), new ConstructorParameterByTypeFinder(),
-                                new ServiceHasConstructorParametersChecker()),
-                            new ConstructorProvider(new ConstructorChecker(), new DefaultConstructorInfoProvider(),
-                                new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))), new ConstructorInfoListGenerator(),
-                            new ConstructorFinder(), new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
-                            new ParametersValuesExtractor()))), new ServiceFactoryInvoker(), new ServiceDataGenerator())));
+                    ServiceGeneratorFactory.MakeInstance()));
         }
 
         public static IContainer Container() => Container(new Storage());
@@ -91,17 +74,7 @@ namespace Spencer.NET
             return new Container(storage ?? new Storage(),
                 new ServiceRegistrar(new RegistratedServicesFilter()),
                 new ServicesGenerator(new TypeIsClassValidator(), new ImplementationsFinder(),
-                    new ServiceGenerator(
-                        new ServiceFlagsGenerator(new ServiceFlagsProvider(new AttributesFinder(), new MemberGenerator(new MemberFlagsGenerator())),
-                            new ServiceFlagsIssuesResolver()),
-                        new ServiceRegistrationGenerator(new ServiceRegistrationFlagGenerator(new BaseTypeFinder(),
-                            new ServiceRegistrationInterfacesGenerator(new RegistrationInterfacesFilter(new NamespaceInterfaceValidator()),
-                                new TypeContainsGenericParametersChecker(), new TypeGenericParametersProvider(),
-                                new InterfaceGenerator(new TypeGenericParametersProvider(), new TypeContainsGenericParametersChecker())),
-                            new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator())), new ConstructorInfoListGenerator(),
-                            new DefaultConstructorInfoProvider()), new ServiceRegistrationFlagOptymalizer()), new ClassHasServiceFactoryChecker(),
-                        new ServiceFactoryProvider(instancesCreator),
-                        new ServiceFactoryInvoker(), new ServiceDataGenerator())),
+                    ServiceGeneratorFactory.MakeInstance()),
                 new ServiceFinder(new TypeContainsGenericParametersChecker(),
                     new GenericServiceFinder(new TypeIsClassValidator(), new GenericClassFinder(new TypeGenericParametersProvider()),
                         new GenericInterfaceFinder(new GenericTypesComparer(new TypeGenericParametersProvider(), new GenericArgumentsComparer()),

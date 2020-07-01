@@ -11,10 +11,10 @@ namespace Spencer.NET
         public IServiceFactoryProvider FactoryProvider;
         public IServiceFactoryInvoker FactoryInvoker;
         public IServiceDataGenerator DataGenerator;
-        public IServiceFactoryResultValidator ResultValidator;
+        public IServiceFactoryResultValidator ServiceFactoryResultValidator;
         public IServiceFactoryResultServiceExtractor ServiceFactoryResultServiceExtractor;
 
-        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator, IClassHasServiceFactoryChecker classHasFactoryChecker, IServiceFactoryProvider factoryProvider, IServiceFactoryInvoker factoryInvoker, IServiceDataGenerator dataGenerator)
+        public ServiceGenerator(IServiceFlagsGenerator flagsGenerator, IServiceRegistrationGenerator registrationGenerator, IClassHasServiceFactoryChecker classHasFactoryChecker, IServiceFactoryProvider factoryProvider, IServiceFactoryInvoker factoryInvoker, IServiceDataGenerator dataGenerator, IServiceFactoryResultServiceExtractor serviceFactoryResultServiceExtractor, IServiceFactoryResultValidator serviceFactoryResultValidator)
         {
             FlagsGenerator = flagsGenerator;
             RegistrationGenerator = registrationGenerator;
@@ -22,6 +22,8 @@ namespace Spencer.NET
             FactoryProvider = factoryProvider;
             FactoryInvoker = factoryInvoker;
             DataGenerator = dataGenerator;
+            ServiceFactoryResultServiceExtractor = serviceFactoryResultServiceExtractor;
+            ServiceFactoryResultValidator = serviceFactoryResultValidator;
         }
 
         public IService GenerateService(Type @class, object instance = null, IConstructorParameters constructorParameters = null)
@@ -31,7 +33,7 @@ namespace Spencer.NET
                 IServiceFactory factory = FactoryProvider.ProvideServiceFactory(@class);
                 IServiceFactoryResult factoryResult = FactoryInvoker.Invoke(factory);
                 
-                if (ResultValidator.Validate(factoryResult))
+                if (ServiceFactoryResultValidator.Validate(factoryResult))
                 {
                     return ServiceFactoryResultServiceExtractor.ExtractService(factoryResult);
                 }
@@ -79,7 +81,7 @@ namespace Spencer.NET
                 IServiceFactory factory = FactoryProvider.ProvideServiceFactory(@class, container);
                 IServiceFactoryResult factoryResult = FactoryInvoker.Invoke(factory);
 
-                if (ResultValidator.Validate(factoryResult))
+                if (ServiceFactoryResultValidator.Validate(factoryResult))
                 {
                     return ServiceFactoryResultServiceExtractor.ExtractService(factoryResult);
                 }

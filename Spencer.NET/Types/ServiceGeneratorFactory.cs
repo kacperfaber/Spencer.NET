@@ -20,7 +20,7 @@
                         new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
                     new ConstructorInfoListGenerator(), new ConstructorFinder(),
                     new ConstructorListGenerator(new ConstructorGenerator(new ParametersGenerator(new ParameterGenerator()))),
-                    new ParametersValuesExtractor()))), new ServiceFactoryInvoker(), new ServiceDataGenerator());
+                    new ParametersValuesExtractor()))), new ServiceFactoryInvoker(), new ServiceDataGenerator(),new ServiceFactoryResultServiceExtractor(), new ServiceFactoryResultValidator());
         }
     }
 }

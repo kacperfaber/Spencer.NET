@@ -26,23 +26,15 @@ namespace Spencer.NET.Tests
         }
 
         [Test]
-        public void returns_not_null()
-        {
-            Assert.NotNull(exec<Test>());
-        }
-
-        [Test]
         public void dont_throws_exceptions()
         {
             Assert.DoesNotThrow(() => exec<Test>());
         }
 
         [Test]
-        public void throws_notimplementedexception_if_invoked_createservice_of_result()
+        public void returns_not_null()
         {
-            Exception exception = Assert.Catch(() => exec<Test>().CreateService());
-
-            Assert.AreEqual(typeof(NotImplementedException), exception.GetType());
+            Assert.NotNull(exec<Test>());
         }
     }
 }

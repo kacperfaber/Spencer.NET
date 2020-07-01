@@ -5,17 +5,19 @@ namespace Spencer.NET.Tests
 {
     public class servicefactoryinvoker_invoke_tests
     {
-        class Factory : IServiceFactory
+        class IntFactory : IServiceFactory
         {
+            public static IService Service = new Service
+            {
+                Registration = new ServiceRegistration()
+                {
+                    TargetType = typeof(int)
+                }
+            };
+
             public IService CreateService()
             {
-                return new Service()
-                {
-                    Registration = new ServiceRegistration()
-                    {
-                        TargetType = typeof(int)
-                    }
-                };
+                return Service;
             }
         }
 
@@ -27,39 +29,68 @@ namespace Spencer.NET.Tests
             }
         }
 
-        object exec<T>() where T : IServiceFactory
+        class NullFactory : IServiceFactory
+        {
+            public IService CreateService() => null;
+        }
+
+        IServiceFactoryResult exec<T>() where T : IServiceFactory
         {
             IServiceFactory factory = (IServiceFactory) Activator.CreateInstance(typeof(T));
 
             ServiceFactoryInvoker invoker = new ServiceFactoryInvoker();
             object res = invoker.Invoke(factory);
 
-            return res;
+            return (IServiceFactoryResult) res;
         }
 
         [Test]
         public void dont_throws_exceptions_when_gived_type_is_factory()
         {
-            Assert.DoesNotThrow(() => exec<Factory>());
+            Assert.DoesNotThrow(() => exec<IntFactory>());
         }
 
         [Test]
-        public void throws_exception_when_type_is_throwfactory()
+        public void returns_ServiceFactoryResult_equals_to_null_if_factory_was_throw_something()
         {
-            Assert.That(exec<ThrowFactory>, Throws.Exception);
+            Assert.Null(exec<ThrowFactory>().Service);
         }
 
         [Test]
-        public void returns_typeof_Service_if_gived_type_is_factory()
+        public void dont_throws_exceptions_if_factory_throwed_exception()
         {
-            Assert.AreEqual(typeof(Service), exec<Factory>().GetType());
+            Assert.That(exec<ThrowFactory>, Throws.Nothing);
+        }
+
+        [Test]
+        public void returns_typeof_ServiceFactoryResult_if_gived_type_is_factory()
+        {
+            Assert.AreEqual(typeof(ServiceFactoryResult), exec<IntFactory>().GetType());
+        }
+
+        [Test]
+        public void returns_ServiceFactoryResult_Service_is_not_null_if_gived_was_IntFactory()
+        {
+            Assert.NotNull(exec<IntFactory>().Service);
+        }
+
+        [Test]
+        public void returns_ServiceFactoryResult_Service_equals_to_IntFactory_Service_field()
+        {
+            Assert.AreEqual(IntFactory.Service, exec<IntFactory>().Service);
+        }
+
+        [Test]
+        public void returns_ServiceFactoryResult_null_if_factory_was_NullFactory()
+        {
+            Assert.Null(exec<NullFactory>().Service);
         }
 
         [Test]
         public void returns_targettype_int_if_gived_type_is_factory()
         {
-            IService service = (IService) exec<Factory>();
-            
+            IService service = exec<IntFactory>().Service;
+
             Assert.AreEqual(typeof(int), service.Registration.TargetType);
         }
     }
