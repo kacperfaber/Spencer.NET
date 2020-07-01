@@ -28,7 +28,7 @@ namespace Spencer.NET.Tests
             exec(container);
             int after = container.Storage.Services.GetServices().Count;
             
-            Assert.IsTrue(after > before);
+            Assert.IsTrue(before < after);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 namespace Spencer.NET
 {
@@ -13,10 +14,18 @@ namespace Spencer.NET
 
         public IConstructor GenerateConstructor(ConstructorInfo constructor)
         {
-            return new ConstructorBuilder()
-                .AddInstance(constructor)
-                .AddParameters(ParametersGenerator.GenerateParameters(constructor.GetParameters()))
-                .Build();
+            try
+            {
+                return new ConstructorBuilder()
+                    .AddInstance(constructor)
+                    .AddParameters(ParametersGenerator.GenerateParameters(constructor.GetParameters()))
+                    .Build();
+            }
+
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

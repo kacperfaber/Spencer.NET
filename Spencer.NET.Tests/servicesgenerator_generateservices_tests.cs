@@ -27,8 +27,7 @@ namespace Spencer.NET.Tests
         {
             public IService CreateService()
             {
-                Assert.Fail();
-                return null;
+                throw new Exception();
             }
         }
 

@@ -13,16 +13,18 @@ namespace Spencer.NET
         public IConstructorGenerator ConstructorGenerator;
         public IConstructorInfoListGenerator ConstructorInfoListGenerator;
         public IDefaultConstructorInfoProvider DefaultConstructorInfoProvider;
+        public IConstructorInfoValidator ConstructorInfoValidator;
 
         public ServiceRegistrationFlagGenerator(IBaseTypeFinder baseTypeFinder, IServiceRegistrationInterfacesGenerator interfacesGenerator,
             IConstructorGenerator constructorGenerator, IConstructorInfoListGenerator constructorInfoListGenerator,
-            IDefaultConstructorInfoProvider defaultConstructorInfoProvider)
+            IDefaultConstructorInfoProvider defaultConstructorInfoProvider, IConstructorInfoValidator constructorInfoValidator)
         {
             BaseTypeFinder = baseTypeFinder;
             InterfacesGenerator = interfacesGenerator;
             ConstructorGenerator = constructorGenerator;
             ConstructorInfoListGenerator = constructorInfoListGenerator;
             DefaultConstructorInfoProvider = defaultConstructorInfoProvider;
+            ConstructorInfoValidator = constructorInfoValidator;
         }
 
         public IEnumerable<ServiceRegistrationFlag> GenerateFlags(ServiceFlags flags, Type type, object instance, IConstructorParameters constructorParameters)
@@ -64,10 +66,11 @@ namespace Spencer.NET
             else
             {
                 ConstructorInfo defaultConstructorInfo = DefaultConstructorInfoProvider.ProvideDefaultConstructor(constructors);
-                IConstructor defaultConstructor = ConstructorGenerator.GenerateConstructor(defaultConstructorInfo);
 
-                if (defaultConstructor != null)
+                if (ConstructorInfoValidator.Validate(defaultConstructorInfo))
                 {
+                    IConstructor defaultConstructor = ConstructorGenerator.GenerateConstructor(defaultConstructorInfo);
+
                     yield return new ServiceRegistrationFlag(RegistrationFlagConstants.DefaultConstructor, defaultConstructor);
                 }
             }
