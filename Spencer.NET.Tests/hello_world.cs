@@ -174,13 +174,6 @@ namespace Spencer.NET.Tests
         [Test]
         public void builder()
         {
-            ContainerBuilder builder = new ContainerBuilder();
-            AssemblyRegistrationBuilder assemblyBuilder = builder.RegisterAssembly(GetType().Assembly);
-
-            ClassRegistrationBuilder genericClass = assemblyBuilder
-                .IncludeClasses(x => true)
-                .IncludeClass<GenericClass<int>>()
-                .SelectClass<GenericClass<int>>();
         }
     }
 
