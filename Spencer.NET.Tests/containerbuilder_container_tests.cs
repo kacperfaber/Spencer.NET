@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using NUnit.Framework;
-using Spencer.NET.Tests.Extensions;
 
 namespace Spencer.NET.Tests
 {

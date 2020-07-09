@@ -7,7 +7,7 @@ namespace Spencer.NET
 {
     public class ContainerBuilder
     {
-        private List<IContainerRegistration> Registrations { get; set; } = new List<IContainerRegistration>();
+        public List<IContainerRegistration> Registrations { get; set; } = new List<IContainerRegistration>();
 
         public IContainerRegistrationConvertersProvider ContainerRegistrationConvertersProvider;
         public IContainerRegistrationConverterUser ContainerRegistrationConverterUser;
