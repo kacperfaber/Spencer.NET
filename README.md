@@ -33,6 +33,13 @@ Kacper Faber, Poland
 
 <br>
 
+### Warnings
+Please, ensure your interfaces have reachable implementations.
+<br>
+If they will not, program will throw `System.NullReferenceException`.
+<br>
+I'm working for fix this issue.
+
 ### Previews
 
 * 1.1 (07.2020)
