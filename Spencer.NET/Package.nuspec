@@ -2,12 +2,11 @@
 <package>
     <metadata>
         <id>Spencer.NET</id>
-        <version>1.0.75</version>
+        <version>1.2</version>
         <authors>Kacper Faber</authors>
-        <owners>kacpiitoziomal</owners>
+        <owners>kacperfaber</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Spencer.NET is open-source IoC container for .NET made for frameworks and class libraries.</description>
-        <copyright>Copyright 2020</copyright>
         <repository type="git" url="https://github.com/kacperfaber/Spencer.NET"/>
         <title>Spencer.NET</title>
         <tags>
@@ -17,7 +16,7 @@
         <license type="expression">MIT</license>
         <summary>Smart IoC Container</summary>
         <releaseNotes>
-            (Static) Factory methods can take parameters. ReadOnlyContainer - registered, Container - havent be registered.
+           Issues have been fixed
         </releaseNotes>
     </metadata>
 </package>

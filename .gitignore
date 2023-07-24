@@ -1,1 +1,13 @@
 .idea/
+**/*.user
+
+# vim 
+*.swp
+*.un~
+*.*~
+
+# build
+**/obj/*
+**/bin/*
+
+

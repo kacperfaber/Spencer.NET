@@ -30,6 +30,7 @@ Kacper Faber, Poland
 * 1.0.5 (12.06.2020)
 * 1.0.6 (13.06.2020)
 * 1.0.75 (16.06.2020)
+* 1.2 (24.07.2023)
 
 <br>
 
@@ -40,20 +41,9 @@ If they will not, program will throw `System.NullReferenceException`.
 <br>
 I'm working for fix this issue.
 
-### Previews
+### Changelog [1.2]
 
-* 1.1 (07.2020)
-     * Advanced `ContainerBuilder`
-     * Object initialization process optymalization
-
-
-<br>
-
-
-### Changelog [1.0.75]
-
-Factory methods can take parameters.
-If container is assignable to `IContainer` parameter could not to be registered.
+NamespaceInterfaceValidator class accepts null '@interface', then returns null.
 
 <br>
 
@@ -72,7 +62,7 @@ If container is assignable to `IContainer` parameter could not to be registered.
 <br>
 
 #### Installing package
-Spencer.NET is avaible on nuget.org.
+Spencer.NET is available on nuget.org.
 <br>
 You can use one of follow commands.
 > dotnet add package Spencer.NET
