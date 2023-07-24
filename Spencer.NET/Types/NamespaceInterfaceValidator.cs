@@ -6,7 +6,7 @@ namespace Spencer.NET
     {
         public bool Validate(Type @interface)
         {
-            return !@interface.FullName.StartsWith("System");
+            return (!@interface?.FullName?.StartsWith("System")) ?? false;
         }
     }
 }
