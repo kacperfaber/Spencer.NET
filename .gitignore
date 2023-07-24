@@ -1,5 +1,6 @@
 .idea/
-**/*.user
+*.user
+*.DotSettings
 
 # vim 
 *.swp
