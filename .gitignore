@@ -10,5 +10,7 @@
 # build
 **/obj
 **/bin
+**/lib
 
-
+# nuget
+Spencer.NET/*.nupkg
